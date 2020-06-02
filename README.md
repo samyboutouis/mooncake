@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Rails application that will ease the course permission number granting
+process for students and faculty. In order to properly run this application,
+make sure the following steps are completed.
 
-Things you may want to cover:
+* Set Ruby version to 2.7.0
 
-* Ruby version
+* Run the command "bundle install"
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Run "rails s" to start the server
