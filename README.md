@@ -8,6 +8,13 @@ make sure the following steps are completed.
 
 `rvm use 2.7.0`
 
-* Run the command "bundle install"
+* Install bundle "/n"
+`bundle install`
 
-* Run "rails s" to start the server
+*  Check files with yarn "/n"
+`yarn install --check-files`
+
+* Start the server "/n"
+`rails server`
+`rails s`
+
