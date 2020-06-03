@@ -20,5 +20,7 @@ make sure the following steps are completed.
 
 `rails server`
 
+or
+
 `rails s`
 
