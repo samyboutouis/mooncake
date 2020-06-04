@@ -8,3 +8,5 @@ services:
     stdin_open: true
     tty: true
     container_name: mooncake
+    volumes:
+      - .:/webapp
