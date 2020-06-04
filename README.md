@@ -24,3 +24,7 @@ or
 
 `rails s`
 
+### App Setup up
+
+1. 
+
