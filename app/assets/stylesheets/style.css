@@ -1,0 +1,29 @@
+body {
+    background: #012169;
+    color: white;
+    text-align: center;
+    font-family: Arial;
+  }
+
+h1 {
+    font-family: Arial;
+    font-size: large;
+}
+
+main h2 {
+    font-size: 40px;
+    margin-top: 40px;
+}
+
+p {
+    font-family: Helvetica;
+    font-size: 30px;
+}
+
+footer h2 {
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+img {
+}
