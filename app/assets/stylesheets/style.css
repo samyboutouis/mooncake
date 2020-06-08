@@ -5,9 +5,16 @@ body {
     font-family: Arial;
   }
 
+.background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 h1 {
     font-family: Arial;
-    font-size: large;
+    font-size: 60px;
+    font-weight: bold;
 }
 
 main h2 {
@@ -22,8 +29,12 @@ p {
 
 footer h2 {
     font-size: 30px;
-    margin-top: 40px;
+}
+
+footer a {
+    font-size: 30px;
 }
 
 img {
+    align-items: flex-start;
 }
