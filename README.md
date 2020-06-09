@@ -50,9 +50,9 @@ or
 * Push code to development branch only
 
 
-'git fetch && git checkout development'
+`'git fetch && git checkout development'`
 
-'git push origin development'
+`'git push origin development'`
 
 
 
