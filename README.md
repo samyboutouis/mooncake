@@ -43,3 +43,22 @@ or
 * Stop docker container and server
 
 `docker-compose down`
+
+
+### Git housekeeping
+
+* Push code to development branch only
+
+```
+'git fetch && git checkout development'
+
+'git push origin development'
+```
+
+
+### DB
+
+* Migrate the database
+
+`'rails db:migrate'`
+
