@@ -44,15 +44,19 @@ or
 
 `docker-compose down`
 
+* Work in the container
+ 
+`docker-compose exec app bash`
+
 
 ### Git housekeeping
 
 * Push code to development branch only
 
 
-`'git fetch && git checkout development'`
+`'git fetch && git checkout <branch>'`
 
-`'git push origin development'`
+`'git push origin <branch>'`
 
 
 
@@ -60,5 +64,9 @@ or
 
 * Migrate the database
 
-`'rails db:migrate'`
+`rails db:migrate`
+
+* Seed data
+
+`rails db:seed`
 
