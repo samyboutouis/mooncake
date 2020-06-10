@@ -26,5 +26,39 @@ or
 
 ### App Setup up
 
-1. 
+* Install docker
+
+* Build docker container
+
+`docker-compose build`
+
+* Start docker container and server
+
+`docker-compose up`
+
+* Open web application on browser
+
+`localhost:3000` in web browser
+
+* Stop docker container and server
+
+`docker-compose down`
+
+
+### Git housekeeping
+
+* Push code to development branch only
+
+
+`'git fetch && git checkout development'`
+
+`'git push origin development'`
+
+
+
+### DB
+
+* Migrate the database
+
+`'rails db:migrate'`
 
