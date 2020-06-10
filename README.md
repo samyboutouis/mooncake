@@ -43,3 +43,30 @@ or
 * Stop docker container and server
 
 `docker-compose down`
+
+* Work in the container
+ 
+`docker-compose exec app bash`
+
+
+### Git housekeeping
+
+* Push code to development branch only
+
+
+`'git fetch && git checkout <branch>'`
+
+`'git push origin <branch>'`
+
+
+
+### DB
+
+* Migrate the database
+
+`rails db:migrate`
+
+* Seed data
+
+`rails db:seed`
+
