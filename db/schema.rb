@@ -10,12 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_161318) do
+ActiveRecord::Schema.define(version: 2020_06_10_164139) do
 
   create_table "courserequests", force: :cascade do |t|
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.index ["course_id"], name: "index_courserequests_on_course_id"
+    t.index ["user_id"], name: "index_courserequests_on_user_id"
   end
 
   create_table "courserequests_questions", id: false, force: :cascade do |t|
@@ -45,6 +49,10 @@ ActiveRecord::Schema.define(version: 2020_06_10_161318) do
     t.string "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_id", null: false
+    t.integer "courserequest_id", null: false
+    t.index ["course_id"], name: "index_permissionnums_on_course_id"
+    t.index ["courserequest_id"], name: "index_permissionnums_on_courserequest_id"
   end
 
   create_table "prereqs", force: :cascade do |t|
@@ -70,4 +78,8 @@ ActiveRecord::Schema.define(version: 2020_06_10_161318) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "courserequests", "courses"
+  add_foreign_key "courserequests", "users"
+  add_foreign_key "permissionnums", "courserequests"
+  add_foreign_key "permissionnums", "courses"
 end
