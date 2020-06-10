@@ -12,12 +12,12 @@ RUN gem install bundler
 ADD Gemfile .
 ADD Gemfile.lock .
 RUN bundle install --without development test
-RUN yarn install --check-files
 
 #add app to container
 ADD . /webapp
 
 # precomplie assets, these get synced over to the nginx container in a post container command
+RUN yarn install --check-files
 RUN rails assets:precompile
 
 #fix openshift permissions
