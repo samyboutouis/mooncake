@@ -1,3 +1,3 @@
 class Question < ApplicationRecord
-    has_and_belongs_to_many :courserequests
+    has_and_belongs_to_many :course_requests
 end

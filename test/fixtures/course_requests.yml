@@ -2,6 +2,10 @@
 
 one:
   status: MyString
+  user: one
+  course: one
 
 two:
   status: MyString
+  user: two
+  course: two

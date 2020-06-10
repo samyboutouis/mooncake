@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  expire_date: MyString
+  course: one
   number: MyString
+  expire_date: MyString
+  course_request: one
 
 two:
-  expire_date: MyString
+  course: two
   number: MyString
+  expire_date: MyString
+  course_request: two
