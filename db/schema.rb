@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_161226) do
+ActiveRecord::Schema.define(version: 2020_06_10_195958) do
+
+  create_table "course_requests", force: :cascade do |t|
+    t.string "status"
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_requests_on_course_id"
+    t.index ["user_id"], name: "index_course_requests_on_user_id"
+  end
+
+  create_table "course_requests_questions", id: false, force: :cascade do |t|
+    t.integer "course_request_id", null: false
+    t.integer "question_id", null: false
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -27,6 +42,17 @@ ActiveRecord::Schema.define(version: 2020_06_10_161226) do
   create_table "courses_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_id", null: false
+  end
+
+  create_table "permission_numbers", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.string "number"
+    t.string "expire_date"
+    t.integer "course_request_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_permission_numbers_on_course_id"
+    t.index ["course_request_id"], name: "index_permission_numbers_on_course_request_id"
   end
 
   create_table "prereqs", force: :cascade do |t|
@@ -52,4 +78,8 @@ ActiveRecord::Schema.define(version: 2020_06_10_161226) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "course_requests", "courses"
+  add_foreign_key "course_requests", "users"
+  add_foreign_key "permission_numbers", "course_requests"
+  add_foreign_key "permission_numbers", "courses"
 end
