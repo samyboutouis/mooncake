@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,400i,700');
 
+
 @font-face {
     font-family: Chalk;
-    src: url(NeatChalk.ttf);
+    src: url("NeatChalk.ttf");
   }
+
 body {
     background: #012169;
     color: white;
