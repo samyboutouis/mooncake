@@ -13,6 +13,10 @@
 
 `docker-compose up`
 
+* Start docker container and run server in the background
+
+`docker-compose up -d`
+
 * Open web application on browser
 
 `localhost:3000` in web browser
@@ -21,8 +25,8 @@
 
 `docker-compose down`
 
-* Work in the container
- 
+* Run terminal to work in the container
+
 `docker-compose exec app bash`
 
 
@@ -30,22 +34,25 @@
 
 * Push code to development branch only
 
+`git fetch && git checkout development`
 
-`'git fetch && git checkout <branch>'`
+`git push origin development`
 
-`'git push origin <branch>'`
+* Switch to specific branch
 
+`git checkout [branch_name]`
+
+* Push to specific branch 
+
+`git push origin [branch_name]`
 
 
 ### DB
+* Drop existing the database
+
+`rails db:drop`
 
 * Migrate the database
-
-`rails db:migrate`
-
-* Seed data
-
-`rails db:seed`
 
 
 
