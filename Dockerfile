@@ -11,5 +11,6 @@ RUN gem install bundler
 ADD Gemfile .
 ADD Gemfile.lock .
 RUN bundle
-RUN yarn install --check-files
 ADD . /webapp
+RUN yarn install --check-files
+
