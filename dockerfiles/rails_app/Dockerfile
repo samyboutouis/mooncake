@@ -21,8 +21,8 @@ RUN yarn install --check-files
 RUN rails assets:precompile
 
 #fix openshift permissions
-RUN chgrp -R 0 /src \
-  && chmod -R g+rwX /src
+RUN chgrp -R 0 /webapp \
+  && chmod -R g+rwX /webapp
 
 #run migrations
 RUN rails db:migrate
