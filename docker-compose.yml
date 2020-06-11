@@ -8,5 +8,8 @@ services:
     stdin_open: true
     tty: true
     container_name: mooncake
+    environment:
+      RAILS_MASTER_KEY: 6a7d9fb5be62958a8321974b3dfeed1d
     volumes:
       - .:/webapp
+      
