@@ -5,56 +5,69 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i,700|Open+Sans:400,400i,700" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Amiri', serif;
+    }
     .rails-default-error-page {
-      background-image: linear-gradient(to bottom right, #012169, #012169, #0577B1);
-      background-size: 100vw 100vh;
-      color: #262626;
+      background: url("/assets/404image1.png");
+      height: 100vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
       text-align: center;
-      font-family:'Open Sans', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;;
       margin: 0;
     }
-
-    .dialog {
-      position: absolute;
-      width: 50vw;
-      height: 40vw;
-      min-width: 300px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #F3F2F1;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 48px;
-      font-size: 1.5vw;
-      padding: 0 2%;
-    }
-
     h1 {
       font-size: 3vw;
     }
-    
-    .dialog div {
-      height: 53%;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-      margin: 0 -4%;
-      padding: 7% 0 10% 0;
-      text-align: center;
-      }
-
     .owner {
-      padding: 5% 0;
+      color: white;
+
+    }
+
+
+    .error__title {
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      font-family: 'Cabin', sans-serif;
+      position: relative;
+      font-size: 10em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+
+    }
+
+    .error__subtitle {
+      font-size: 2em;
+      color: white;
+      position: absolute;
+      bottom: 20px;
+      left:50%;
+
+    }
+
+    .error__description {
+      color: white;
+      position: absolute;
+      bottom:0;
+      left:60%;
     }
   </style>
 </head>
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/404.html -->
+
   <div class="dialog">
-    <div>
-      <h1>Error 404:</h1>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
-    </div>
+      <div class="error__title">404</div>
+      <div class="error__subtitle">The page you were looking for doesn't exist.</div>
+      <div class="error__description">You may have mistyped the address or the page may have moved.</div>
     <p class="owner">If you are the application owner check the logs for more information.</p>
   </div>
 </body>
