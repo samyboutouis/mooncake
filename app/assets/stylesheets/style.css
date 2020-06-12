@@ -20,10 +20,10 @@ body {
     box-sizing: border-box;
 }
 
-box{
+/* box {
     position: relative;
-    display: inline-block; /* Make the width of box same as image */
-}
+    display: inline-block;  Make the width of box same as image 
+} */
 
 .background {
     width: 100%;
@@ -47,7 +47,7 @@ h1 {
     font-weight: bold;
     margin: 0;
     padding: 0;
-    top: 40%
+    top: 33%
 
 }
 
@@ -62,29 +62,29 @@ h1:hover {
 } */
 h2 {
     font-family: Chalk;
-    color:  #6d6e70;
+    color: lightblue;
     font-size: 100%;
-    top: 30%
+    top: 20%
 }
 
 p {
     font-family: Chalk;
     color: lightblue;
-    font-size: 50%;
-    top: 75%;
+    font-size: 80%;
+    top: 63%;
 }
 
 footer h2 {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: rgb(78, 47, 47);
+    font-family: Chalk;
+    color: rgb(214, 189, 255);
     width: 60vh;
-    font-size: 3vmin;
-    top: 88%;
+    font-size: 70%;
+    top: 80%;
 }
 
 footer a {
     text-decoration: none;
-
+    color: lightcoral;
 }
 
 img {
