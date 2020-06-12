@@ -38,6 +38,7 @@ body {
     right: 0;        
     text-align: center;
     width: 70vmin; /* Set the width of the positioned div */
+    line-height: normal;
 }
 
 
