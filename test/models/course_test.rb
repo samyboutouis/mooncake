@@ -23,37 +23,18 @@ class CourseTest < ActiveSupport::TestCase
     pn1 = PermissionNumber.create(number: "010115", expire_date: "09/30/2020", course: course, course_request: req)
     pn2 = PermissionNumber.create(number: "999999", expire_date: "09/30/2020", course: course, course_request: req)
     
-    assert course.permission_numbers = [pn1, pn2]
+    assert course.permission_numbers == [pn1, pn2]
   end  
 
-  test "course has many users" do
+  test "course has and belongs many users" do
     user1 = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
     user2 = User.create(first_name: "Danai", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
-    course = Course.create(name: "cs 101")
-    assert course.users == [user1, user2]
-  end  
-
-  test "course belongs to many users" do
-    user1 = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
-    user2 = User.create(first_name: "Danai", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
-    course = Course.create(name: "cs 101")
-    assert user1.course == course
-    assert user2.course == course
-  end  
-
-  test "course has many prereqs" do
-    course = Course.create(name: "cs 101", capacity: 100)
-    prereq1 = Prereq.create(name: "cs 2000")
-    prereq2 = Prereq.create(name: "cs 3000")
-    assert course.prereqs == [prereq1, prereq2]
-  end  
-
-  test "course belongs to many prereqs" do
-    course = Course.create(name: "cs 101", capacity: 100)
-    prereq1 = Prereq.create(name: "cs 2000")
-    prereq2 = Prereq.create(name: "cs 3000")
-    assert prereq1.course == course
-    assert prereq2.course == course
+    course1 = Course.create(name: "cs 101")
+    course2 = Course.create(name: "cs 201")
+    user1.courses << [course1, course2]
+    course1.users << user2
+    assert course1.users == [user1, user2]
+    assert user1.courses == [course1, course2]
   end  
 
 end

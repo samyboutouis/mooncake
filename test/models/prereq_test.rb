@@ -7,19 +7,18 @@ class PrereqTest < ActiveSupport::TestCase
     assert prereq.name == "math 101"
   end
 
-  test "prereq has many courses" do
-    course1 = Course.create(name: "cs 101", capacity: 100)
-    course2 = Course.create(name: "cs 201", capacity: 100)
-    prereq = Prereq.create(name: "cs 250")
-    assert prereq.courses == [course1, course2]
-  end
-
-  test "prereq belongs to many courses" do
+  test "prereq has and belongs to many courses" do
     course1 = Course.create(name: "cs 250", capacity: 100)
     course2 = Course.create(name: "cs 201", capacity: 100)
-    prereq = Prereq.create(name: "cs 101")
-    assert course1.prereq == prereq 
-    assert course2.prereq == prereq
+    prereq1 = Prereq.create(name: "cs 101")
+    prereq2 = Prereq.create(name: "cs 216")
+    course1.prereqs << prereq1
+    course2.prereqs << prereq1
+    prereq2.courses << course1
+    prereq2.courses << course2
+    assert course1.prereqs.first == prereq1
+    assert course2.prereqs.first == prereq1
+    assert prereq2.courses == [course1, course2]
   end
 
 end

@@ -9,24 +9,17 @@ class QuestionTest < ActiveSupport::TestCase
   end
 
   test "question has many course requests" do
-    question = Question.create(question_text: "why are you a good boi", question_type: "short answer")
+    question1 = Question.create(question_text: "why are you a good boi", question_type: "short answer")
+    question2 = Question.create(question_text: "do you like mooncakes", question_type: "multiple choice")
     course = Course.create(name: "cs 201", capacity: 100)
     user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
     req1 = CourseRequest.create(status: "under review", user: user, course: course)
     req2 = CourseRequest.create(status: "rejected", user: user, course: course)
+    req1.questions << [question1, question2]
+    question1.course_requests << req2
 
-    assert question.requests == [req1, req2]
-  end  
-
-  test "question belongs to many course requests" do
-    question = Question.create(question_text: "why are you a good boi", question_type: "short answer")
-    course = Course.create(name: "cs 201", capacity: 100)
-    user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
-    req1 = CourseRequest.create(status: "under review", user: user, course: course)
-    req2 = CourseRequest.create(status: "rejected", user: user, course: course)
-
-    assert req1.question == question 
-    assert req2.question == question;
+    assert question1.course_requests == [req1, req2]
+    assert req1.questions == [question1, question2]
   end  
 
 end

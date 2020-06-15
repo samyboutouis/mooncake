@@ -15,26 +15,18 @@ class CourseRequestTest < ActiveSupport::TestCase
     assert req.course == course
     assert req.user == user
   end
-  
-  test "course_request belongs to many questions" do
+
+  test "course request has and belongs to many questions" do
     user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
     course = Course.create(name: "cs 101")
     req = CourseRequest.create(status: "under review", user: user, course: course)
+    req2 = CourseRequest.create(status: "rejected", user: user, course: course)
     question1 = Question.create(question_type: "multiple choice", question_text: "do you like mooncake?")
     question2 = Question.create(question_type: "multiple choice", question_text: "do you like Danai?")
-    
-    assert question1.course_request == req;
-    assert question2.course_request == req;
-  end  
-
-  test "course request has many questions" do
-    user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
-    course = Course.create(name: "cs 101")
-    req = CourseRequest.create(status: "under review", user: user, course: course)
-    question1 = Question.create(question_type: "multiple choice", question_text: "do you like mooncake?")
-    question2 = Question.create(question_type: "multiple choice", question_text: "do you like Danai?")
-
+    req.questions << [question1, question2]
+    question1.course_requests << req2
     assert req.questions == [question1, question2]
+    assert question1.course_requests == [req, req2]
   end
 
   
