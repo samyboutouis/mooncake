@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  
   test "creating user" do
     assert user = User.create(first_name: "Mapple", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
     assert user.first_name == "Mapple"
@@ -21,4 +22,22 @@ class UserTest < ActiveSupport::TestCase
     assert course2.course_requests << req2
     assert user.course_requests == [req, req2]
   end
+
+  test "user has many courses" do
+    user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
+    course = Course.create(name: "cs 101")
+    course2 = Course.create(name: "cs 201")
+
+    assert user.course == [course, course2]
+  end
+  
+  test "user belongs to many courses" do
+    user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
+    course = Course.create(name: "cs 101")
+    course2 = Course.create(name: "cs 201")
+
+    assert course.user == user
+    assert course2.user == user
+  end
+
 end
