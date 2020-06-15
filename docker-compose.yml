@@ -2,7 +2,7 @@ version: "3.2"
 services:
   app:
     build: .
-    command: /webapp/bin/start_app
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     ports:
       - 3000:3000
     stdin_open: true
@@ -12,3 +12,6 @@ services:
       RAILS_MASTER_KEY: ${MOONCAKE_MASTER_KEY}
     volumes:
       - .:/webapp
+      - /webapp/node_modules
+      - type: tmpfs
+        target: /webapp/tmp
