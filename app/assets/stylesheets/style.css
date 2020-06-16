@@ -5,14 +5,13 @@ body {
 }
 
 .box {
-    margin-left: 3em;
+    margin: 0 auto;
     margin-top: 2em;
     padding: 2em;
     width: 90%;
     background: #E2E6ED;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 35px;
-    top: 5em;
 }
 
 .title {
@@ -21,7 +20,6 @@ body {
     font-weight: bold;
     font-size: 30px;
     line-height: 35px;
-
 }
 
 .request-box {
@@ -38,21 +36,17 @@ body {
 }
 
 .course-box{
-    margin-left:10px;
     margin-bottom:50px;
-    padding-left:24%;
-    padding-top:3.5%;
-    width: 60%;
-    height: 61px;
-    left: 817px;
     margin-top:20px;
-    
     background: #FFFFFF;
     border-radius: 20px;
+    text-align: center;
+    line-height: 61px;
 }
 
 .home {
-    float:right;
+    margin-bottom:50px;
+    margin-top:20px;
 }
 
 .circle{
@@ -76,12 +70,26 @@ body {
     background: #A1B70D;
 }
 
+.logo {
+    height: 12vh
+}
+
+.search {
+    height: 20px;
+}
+
+.course-row {
+    white-space: nowrap;
+}
+
+/* Desktop only */
 @media only screen and (min-width: 1000px){
     .navbar {
         height: 12vh;
     }
+}
 
-    .home {
-
-    }
+/* Mobile only */
+@media only screen and (max-width: 1000px){
+    
 }
