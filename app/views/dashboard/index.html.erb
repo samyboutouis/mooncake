@@ -2,32 +2,24 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="box">
-        <h1 class="title">Active Requests</h1>
+        <h1 class="title">Active Requests - <%= @user.first_name %></h1>
         <div class="container">
-          <div class="row">
-            <div class="col">
-              <div class="request-box">
-                <div class="circle persimmon"></div>
-                <p>CS 101-Example Professor</p>
+          <% for request in @user.course_requests do %>
+            <div class="row">
+              <div class="col">
+                <div class="request-box">
+                  <% if request.status == 'Under Review'%>
+                    <div class="circle persimmon"></div>
+                  <% elsif request.status == 'Denied'%>
+                    <div class="circle red"></div>
+                  <% else %>
+                    <div class="circle green"></div>
+                  <% end %>
+                  <p><%= request.course.department %> <%= request.course.course_number%></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="request-box">
-                <div class="circle red"></div>
-                <p>CS 201-Example Professor</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="request-box">
-                <div class="circle green"></div>
-                <p>CS 301-Example Professor</p>
-              </div>
-            </div>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>

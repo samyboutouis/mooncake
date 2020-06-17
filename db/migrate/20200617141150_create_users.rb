@@ -4,9 +4,9 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :first_name
       t.string :last_name
       t.string :major
-      t.integer :grad_year
+      t.string :grad_year
       t.string :user_type
-      t.integer :unique_id
+      t.string :unique_id
       t.string :net_id
       t.string :email
 
