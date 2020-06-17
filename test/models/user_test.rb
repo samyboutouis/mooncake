@@ -13,8 +13,8 @@ class UserTest < ActiveSupport::TestCase
 
   test "user has many course_requests" do
     user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
-    course = Course.create(name: "cs 101")
-    course2 = Course.create(name: "cs 201")
+    course = Course.create(course_number: "101")
+    course2 = Course.create(course_number: "201")
     req = CourseRequest.create(status: "under review", user: user, course: course)
     req2 = CourseRequest.create(status: "rejected", user: user)
 
