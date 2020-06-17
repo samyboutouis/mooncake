@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_195958) do
+ActiveRecord::Schema.define(version: 2020_06_17_151235) do
 
   create_table "course_requests", force: :cascade do |t|
     t.string "status"
@@ -25,11 +25,14 @@ ActiveRecord::Schema.define(version: 2020_06_10_195958) do
   create_table "course_requests_questions", id: false, force: :cascade do |t|
     t.integer "course_request_id", null: false
     t.integer "question_id", null: false
+    t.string "answer"
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string "name"
+    t.string "course_number"
     t.integer "capacity"
+    t.string "department"
+    t.integer "seats_taken"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -39,15 +42,21 @@ ActiveRecord::Schema.define(version: 2020_06_10_195958) do
     t.integer "prereq_id", null: false
   end
 
+  create_table "courses_questions", id: false, force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "question_id", null: false
+  end
+
   create_table "courses_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_id", null: false
   end
 
   create_table "permission_numbers", force: :cascade do |t|
+    t.integer "number"
+    t.datetime "expire_date"
+    t.boolean "used"
     t.integer "course_id", null: false
-    t.string "number"
-    t.string "expire_date"
     t.integer "course_request_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -74,6 +83,9 @@ ActiveRecord::Schema.define(version: 2020_06_10_195958) do
     t.string "major"
     t.integer "grad_year"
     t.string "user_type"
+    t.integer "unique_id"
+    t.string "net_id"
+    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

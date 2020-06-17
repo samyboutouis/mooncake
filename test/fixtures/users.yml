@@ -6,6 +6,9 @@ one:
   major: MyString
   grad_year: 1
   user_type: MyString
+  unique_id: 1
+  net_id: MyString
+  email: MyString
 
 two:
   first_name: MyString
@@ -13,3 +16,6 @@ two:
   major: MyString
   grad_year: 1
   user_type: MyString
+  unique_id: 1
+  net_id: MyString
+  email: MyString
