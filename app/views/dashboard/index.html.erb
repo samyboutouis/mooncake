@@ -8,13 +8,7 @@
             <div class="row">
               <div class="col">
                 <div class="request-box">
-                  <% if request.status == 'Under Review'%>
-                    <div class="circle persimmon"></div>
-                  <% elsif request.status == 'Denied'%>
-                    <div class="circle red"></div>
-                  <% else %>
-                    <div class="circle green"></div>
-                  <% end %>
+                  <%= active_request(request) %>
                   <img class="trash" src="/assets/trash.png">
                   <p><%= request.course.department %> <%= request.course.course_number%></p>
                 </div>
