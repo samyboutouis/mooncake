@@ -11,7 +11,7 @@
       <a class="nav-item nav-link active" href="<%= root_path %>">Home<span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="<%= student_show_path %>">Account</a>
       <a class="nav-item nav-link" href="#">FAQ</a>
-      <a class="nav-item nav-link" href="#">Logout</a>
+      <a class="nav-item nav-link" <%= link_to 'Log Out', logout_path, method: :delete %></a>
     </div>
   </div>
 </nav>
