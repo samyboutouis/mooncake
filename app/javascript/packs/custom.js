@@ -1,23 +1,38 @@
 console.log('hello');
+window.onload = () => {
 
-function handleClick(e){
-  console.log('clicked');
-  var info = "hello world"; //find a way to load info
-  console.log(info)
-  $.ajax('/', {
-    type: 'POST',
-    data: info
-    
-  }); //perform asyn action
+
+
+
+
+  function handleResponse(data){
+    console.log("got" + info)
+  }
+
+
+  function handleClick(e){
+    console.log('clicked');
+    var info = "hello world ";
+    console.log(info)
+    $('.infoo').append(info);
+    $.ajax('/', {
+      type: 'POST',
+      data: {
+        text: info
+        },
+      success: handleResponse
+
+
+    });
+  }
+
+
+
+  $(document).ready(function () {
+    $(".circle").click(handleClick);
+
+  })
 }
-
-
-
-$(document).ready(function () {
-  $(".circle").click(handleClick);
-
-})
-
 /*
 
 $(document).ready(function(){
