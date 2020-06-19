@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @user = User.find(1)
+    @user = User.first
   end
 end
