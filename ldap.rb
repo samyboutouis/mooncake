@@ -15,7 +15,7 @@ end
         end
         puts "enter netid: "
         netid = gets.chomp()
-        filter = Net::LDAP::Filter.eq( "cn", netid )
+        filter = Net::LDAP::Filter.eq( "uid", netid )
 
         result = ldap.search( :base => base, :filter => filter ) do |entry|
             puts "DN: #{entry.dn}"
@@ -28,7 +28,7 @@ end
         ldap.get_operation_result
 
         puts "****************************"
-        puts "*****Authorizaing.......****"
+        puts "*****Authorizing.......****"
         puts "****************************"
         
         information = result.pop
