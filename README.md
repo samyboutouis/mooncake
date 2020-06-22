@@ -69,7 +69,7 @@
 `chown -R :username .`
 
 ### Docker ###
-* shortcuts to add in .bashrc *
+* shortcuts to add in .bashrc 
 
 `alias dcom="docker-compose"`
 
