@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="box">
+        <h1 class="title">Active Requests - INSTRUCTOR </h1>
+        <div class="container">
+          <% for request in @user.course_requests do %>
+            <div class="row">
+              <div class="col">
+                <div class="request-box">
+                  <%= active_request(request) %>
+                  <img class="trash" src="/assets/trash.png">
+                  <p><%= request.course.department %> <%= request.course.course_number%></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="box">
+        <h1 class="title">Find Courses</h1>
+        <div class="input-group">
+          <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+            <option selected>Choose Department</option>
+            <option value="1">CEE - Civil & Environmental EGR</option>
+            <option value="2">CHEM - Chemistry</option>
+            <option value="3">COMPSCI - Computer Science</option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+          </div>
+        </div>
+        <div class = "container">
+          <div class="row">
+            <div class="col">
+              <div class="course-box">
+                <p>CS 101</p>
+              </div>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-lg btn-primary home" style="background: linear-gradient(217deg, #000428, #004e92)">View Section</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="course-box">
+                <p>CS 201</p>
+              </div>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-lg btn-primary home" style="background: linear-gradient(217deg, #000428, #004e92)">View Section</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="course-box">
+                <p>CS 301</p>
+              </div>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-lg btn-primary home" style="background: linear-gradient(217deg, #000428, #004e92)">View Section</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="course-box">
+                <p>CS 401</p>
+              </div>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-lg btn-primary home" style="background: linear-gradient(217deg, #000428, #004e92)">View Section</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

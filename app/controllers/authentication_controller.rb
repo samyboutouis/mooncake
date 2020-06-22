@@ -64,12 +64,10 @@ class AuthenticationController < ApplicationController
 
       if affiliation.include? 'staff'
         $current_user.user_type = 'staff'
+        redirect_to 'http://localhost:3000/faculty'
       else
         $current_user.user_type = 'student'
+        redirect_to root_url
       end
-      #byebug
-      redirect_to root_url
-    end
- 
-
+  end
 end
