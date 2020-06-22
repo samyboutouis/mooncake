@@ -70,7 +70,7 @@
 
 ### Docker ###
 * shortcuts to add in .bashrc *
-* 
+
 `alias dcom="docker-compose"`
 
 `alias dkstat="docker ps -a"`
