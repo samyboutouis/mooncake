@@ -60,3 +60,8 @@
 ### Deployment
 * Generate new secret file(only use as last resort)
 `EDITOR="vim" bin/rails encrypted:edit config/new.cred.yml --key master.key.new`
+
+### Permission Denied
+* give access to user
+`chown -R username .`
+`chown -R :username .`
