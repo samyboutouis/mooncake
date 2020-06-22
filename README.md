@@ -67,3 +67,15 @@
 `chown -R username .`
 
 `chown -R :username .`
+
+### Docker ###
+* shortcuts to add in .bashrc *
+* 
+`alias dcom="docker-compose"`
+
+`alias dkstat="docker ps -a"`
+
+`alias killpid="sudo rm -rf ./tmp/pids/server.pid"`
+
+`alias dkperm="sudo chown -R $USER:$USER ."`
+            
