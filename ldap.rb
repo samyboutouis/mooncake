@@ -17,30 +17,33 @@ end
         netid = gets.chomp()
         filter = Net::LDAP::Filter.eq( "uid", netid )
 
-        result = ldap.search( :base => base, :filter => filter ) do |entry|
-            puts "DN: #{entry.dn}"
-            entry.each do |attribute, values|
-              values.each do |value|
-                puts " #{attribute} --->#{value}"
-              end
+        result = ldap.search( :base => base, :filter => filter )
+        if result.empty?
+            puts 'NO USER FOUND'
+        else
+            ldap.search( :base => base, :filter => filter ) do |entry|
+                puts "DN: #{entry.dn}"
+                entry.each do |attribute, values|
+                values.each do |value|
+                    puts " #{attribute} --->#{value}"
+                end
+                end
+            end
+
+            puts "****************************"
+            puts "*****Authorizing.......*****"
+            puts "****************************"
+            
+            information = result.pop
+            affiliation = information["edupersonprimaryaffiliation"]
+
+
+            if affiliation.include? 'staff'
+                puts "You are authorized!"
+            else
+                puts "Not Authorized!"
             end
         end
-        ldap.get_operation_result
-
-        puts "****************************"
-        puts "*****Authorizing.......****"
-        puts "****************************"
-        
-        information = result.pop
-        affiliation = information["edupersonprimaryaffiliation"]
-
-
-        if affiliation[0] == "staff"
-            puts "You are authorized"
-        else
-            puts "Not Authorized!"
-        end
-
     end
 
     authorize
