@@ -27,11 +27,10 @@ class AuthenticationController < ApplicationController
       user_info = token.get("/oidc/userinfo")
       user_info = JSON.parse(user_info.body)
       session[:user_id] = user_info['dukeNetID']
-      if User.exists?(net_id: session[:user_id])
-        $current_user = User.find_by(net_id: session[:user_id])
-      else
-        $current_user = User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'])
-      end
+      unless User.exists?(net_id: session[:user_id])
+        User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'])
+      end  
+      $current_user = User.find_by(net_id: session[:user_id])
       redirect_to ldap_path_url
       #redirect_to root_url
       # redirect_to 'http://localhost:3000/oauth/logout' 
