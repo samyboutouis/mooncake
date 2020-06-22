@@ -1,9 +1,9 @@
 class DashboardController < ApplicationController
   def index
-    @user = User.find(14)
+    @user = $current_user
   end
 
   def faculty_index
-    @user = User.find(14)
+    @user = $current_user
   end
 end

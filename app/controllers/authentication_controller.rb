@@ -56,7 +56,6 @@ class AuthenticationController < ApplicationController
 
       result = ldap.search( :base => base, :filter => filter )
       
-      ldap.search( :base => base, :filter => filter )
       ldap.get_operation_result
           
       information = result.pop
@@ -69,5 +68,6 @@ class AuthenticationController < ApplicationController
         $current_user.user_type = 'student'
         redirect_to root_url
       end
+      $current_user.grad_year = information["dupsexpgradtermc1"]
   end
 end

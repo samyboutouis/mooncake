@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
   get '/ldap' => 'authentication#authorize', as: 'ldap_path'
+
+  get '/form'=> 'form#form'
+  get '/data'=> 'form#data'
 end

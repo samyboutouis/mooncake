@@ -29,7 +29,6 @@ end
                 end
                 end
             end
-            ldap.get_operation_result
 
             puts "****************************"
             puts "*****Authorizing.......*****"
