@@ -1,37 +1,27 @@
 console.log('hello');
-window.onload = () => {
 
-
-
-
-
-  function handleResponse(data){
-    console.log("got" + info)
-  }
-
-
-  function handleClick(e){
+$(document).ready(function () {
+  $(".course").on('click', function() {
     console.log('clicked');
-    var info = "hello world ";
-    console.log(info)
-    $('.infoo').append(info);
-    $.ajax('/', {
-      type: 'POST',
+  
+    let course = $(this).text();
+    let department = course.split(" ")[0];
+    let number = course.split(" ")[1];
+    console.log(`${department} + ${number}`);
+    $.ajax('/request', {
+      type: 'GET',
+      dataType: 'json',
       data: {
-        text: info
-        },
+        department: department, number: number
+      },
       success: handleResponse
-
-
     });
-  }
+  });
+})
 
 
-
-  $(document).ready(function () {
-    $(".circle").click(handleClick);
-
-  })
+function handleResponse(data){
+  
 }
 /*
 

@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/oauth/login' => 'authentication#login' 
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
+  get '/request' => 'course_request#display' 
 end

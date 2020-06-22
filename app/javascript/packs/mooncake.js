@@ -1,10 +1,10 @@
-window.onload = () => {
-    let circle = document.getElementById("circle");
-    circle.addEventListener("click", function() {
-        let requestBox = circle.parentElement;
-        requestBox.style.background = "purple";
-    });
-}
+// window.onload = () => {
+//     let circle = document.getElementById("circle");
+//     circle.addEventListener("click", function() {
+//         let requestBox = circle.parentElement;
+//         requestBox.style.background = "purple";
+//     });
+// }
 
 // $(document).ready(function(){
 //     $(".circle").click(function(){
