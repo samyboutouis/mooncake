@@ -1,5 +1,3 @@
-console.log('hello');
-
 $(document).ready(function () {
   $(".course").on('click', function() {
     console.log('clicked');
@@ -7,22 +5,21 @@ $(document).ready(function () {
     let course = $(this).text();
     let department = course.split(" ")[0];
     let number = course.split(" ")[1];
-    console.log(`${department} + ${number}`);
+    console.log(`${department} ${number}`);
     $.ajax('/request', {
       type: 'GET',
       dataType: 'json',
-      data: {
-        department: department, number: number
+      data: {department: department, number: number},
+      success: function(result) {
+        console.log('Success');
+        $('.infoo').append(result[0].status)
       },
-      success: handleResponse
+      error: function() {
+        console.log('Error');
+      }
     });
   });
 })
-
-
-function handleResponse(data){
-  
-}
 /*
 
 $(document).ready(function(){
