@@ -11,13 +11,42 @@
 <body>
 
 <div class="container">
-  <h2>Vertical (basic) form</h2>
+  <h2> Request Permission for CS201</h2>
   <form action="/data">
+
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <label for="major"> Please enter your majors/minors, seperated by a comma:</label>
+      <input type="text" class="form-control" id="major" placeholder="Ex: CS, Math, Physics" name="major">
     </div>
-    
+
+    <div class="form-group">
+      <label for="reasons"> Why do you want to take this course?</label>
+      <input type="text" class="form-control" id="reasons"  name="reasons"> 
+    </div>
+
+    <div class="form-group">
+      <label for="background"> What is your background in the subject?</label>
+      <input type="text" class="form-control" id="background"  name="background"> 
+    </div>
+
+
+    <div class="form-group">
+        <label for="prereq[]">Which courses have you taken</label> 
+        <div>
+          <input type="checkbox" name="prereq[]" id="CS101" value="CS101" id = "cb"/> CS101 
+        </div>
+        <div>
+          <input type="checkbox" name="prereq[]" id ="MATH122" value="MATH122" id = "cb"/> MATH122
+        </div>
+        <div>
+          <input type="checkbox" name="prereq[]" id= ="CS99" value="CS99" id = "cb"/> CS99 
+        </div>
+    </div>
+
+    <script type="text/javascript">
+      document.getElementById('cb').value = 'no';
+    </script>
+
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>

@@ -7,15 +7,15 @@ end
         ldap = Net::LDAP.new
         ldap.host = "ldap.duke.edu"
         base = "dc=duke,dc=edu"
-        ldap.port = 389
+        ldap.port = 389 #632
         if ldap.bind
             puts "authentication succeeded"
         else
             puts "authentication failed"
         end
-        puts "enter netid: "
-        netid = gets.chomp()
-        filter = Net::LDAP::Filter.eq( "uid", netid )
+        # puts "enter netid: "
+        # netid = gets.chomp()
+        filter = Net::LDAP::Filter.eq( "uid", "mkm16" )
 
         result = ldap.search( :base => base, :filter => filter )
         if result.empty?

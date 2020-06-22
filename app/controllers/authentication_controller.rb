@@ -69,5 +69,7 @@ class AuthenticationController < ApplicationController
         redirect_to root_url
       end
       $current_user.grad_year = information["dupsexpgradtermc1"]
+      puts "***********"
+      puts $current_user.grad_year[0].split()
   end
 end
