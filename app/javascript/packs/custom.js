@@ -1,8 +1,8 @@
 $(document).ready(function () {
-  $(".course").on('click', function() {
+  $(".request-box").on('click', function() {
     console.log('clicked');
-  
-    let course = $(this).text();
+    let box = $(this);
+    let course = $(this).children(".course").text();
     let department = course.split(" ")[0];
     let number = course.split(" ")[1];
     console.log(`${department} ${number}`);
@@ -12,7 +12,7 @@ $(document).ready(function () {
       data: {department: department, number: number},
       success: function(result) {
         console.log('Success');
-        $('.infoo').append(result[0].status)
+        $(box).append(result[0].status)
       },
       error: function() {
         console.log('Error');
