@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
     def login
       client = OAuth2::Client.new(
         'mooncake',
-        ENV["MOONCAKE_OAUTH_KEY"],
+        'B8VCqtKGHRqBqZhwEWjJVoij1wWiXpGCYZjfx7olYUXRxcw_mN6ivhHehYu-jyDMWbnsuBEqSrYcCOF6X0G5qA',
         :site => "https://oauth.oit.duke.edu/oidc",
         :authorize_url =>  "/oidc/authorize",
         :token_url =>  "/oidc/token"
@@ -18,7 +18,7 @@ class AuthenticationController < ApplicationController
       auth_code = params["code"] 
       client = OAuth2::Client.new(
         'mooncake',
-        ENV["MOONCAKE_OAUTH_KEY"],
+        'B8VCqtKGHRqBqZhwEWjJVoij1wWiXpGCYZjfx7olYUXRxcw_mN6ivhHehYu-jyDMWbnsuBEqSrYcCOF6X0G5qA',
         :site => "https://oauth.oit.duke.edu/oidc",
         :authorize_url =>  "/oidc/authorize",
         :token_url =>  "/oidc/token"
