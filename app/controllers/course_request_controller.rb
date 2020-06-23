@@ -12,4 +12,12 @@ class CourseRequestController < ApplicationController
     def search
         @courses = Course.all
     end
+
+    def department
+        department = params[:department]
+        @courses = Course.where(department: department)
+        respond_to do |format|
+            format.json {render json: @courses}
+        end
+    end
 end

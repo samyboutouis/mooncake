@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   #student requests a permission number
   get '/search' => 'course_request#search', as: "search"
+  get '/department' => 'course_request#department'
 
   #create course routes
   get '/courses' => "courses#index"
