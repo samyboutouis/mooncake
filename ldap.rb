@@ -13,9 +13,9 @@ end
         else
             puts "authentication failed"
         end
-        # puts "enter netid: "
-        # netid = gets.chomp()
-        filter = Net::LDAP::Filter.eq( "uid", "mkm16" )
+        puts "enter netid: "
+        netid = gets.chomp()
+        filter = Net::LDAP::Filter.eq( "uid", netid )
 
         result = ldap.search( :base => base, :filter => filter )
         if result.empty?

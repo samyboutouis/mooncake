@@ -58,8 +58,9 @@ class AuthenticationController < ApplicationController
       ldap.get_operation_result
           
       information = result.pop
-      affiliation = information["edupersonprimaryaffiliation"]
-
+      affiliation = information["edupersonprimaryaffiliation"].join(' ')
+      $current_user.grad_year = information["dupsexpgradtermc1"].join(' ')
+      $current_user.email = information["edupersonprincipalname"].join(' ')
       if affiliation.include? 'staff'
         $current_user.user_type = 'staff'
         redirect_to 'http://localhost:3000/faculty'
@@ -67,8 +68,5 @@ class AuthenticationController < ApplicationController
         $current_user.user_type = 'student'
         redirect_to root_url
       end
-      $current_user.grad_year = information["dupsexpgradtermc1"]
-      puts "***********"
-      puts $current_user.grad_year[0].split()
   end
 end
