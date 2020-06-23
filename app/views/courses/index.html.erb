@@ -1,2 +1,20 @@
-<h1>Courses#index</h1>
-<p>Find me in app/views/courses/index.html.erb</p>
+<h1>Your Courses</h1>
+<%= link_to "Create New Course", new_course_path_url %>
+ <table>
+    <thead>
+      <th>Department</th>
+      <th>Course Number</th>
+      <th>Section Number</th>
+      <th>Capacity</th>
+    </thead>
+    <tbody>
+      <% @course.each do |course| %>
+        <tr>
+          <td><%= course.department %></td>
+          <td><%= course.course_number %></td>
+          <td><%= course.section_number %></td>
+          <td><%= course.capacity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

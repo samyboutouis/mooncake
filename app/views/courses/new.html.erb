@@ -1,10 +1,17 @@
 <h1>Create A Course</h1>
- <%= form_for(@course) do |f| %>
-    <%= f.label :course_number %>
-    <%= f.text_field :number %>
+<%= form_for @course do |f| %>
+    <%= f.label :department, "Department: " %>
+    <%= f.select :department, options_for_select([["Select One", ""], "COMPSCI", "ECON", "MATH", "ARTSVIS", "VMS"])%>
 
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.label :course_number, "Course Number: " %>
+    <%= f.text_field :course_number, placeholder: "Ex: 101L"%>
 
+    <%= f.label :section_number, "Section Number: " %>
+    <%= f.text_field :section_number, placeholder: "Ex: 001-LAB" %>
+
+    <%= f.label :capacity, "Course Capacity: " %>
+    <%= f.text_field :capacity, placeholder: "Ex: 30" %>
+
+    <%= f.submit "Create" %>
     <!--... -->
   <% end %>

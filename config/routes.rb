@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   get '/data'=> 'form#data'
 
   #create course routes
-  get '/courses' => "courses#index"
-  get '/courses/new' => "courses#new"
+  get '/courses' => "courses#index", as: "course"
+  get '/courses/new' => "courses#new", as: "new_course_path"
   post '/courses' => "courses#create"
-  get '/courses/:id' => "courses#show"
+  # get '/courses/:id' => "courses#show"
 end
