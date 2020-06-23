@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  course_name: MyString
+  department: MyString
+  course_number: MyString
   section_number: MyString
-  meeting_time: MyString
   capacity: 1
 
 two:
-  course_name: MyString
+  department: MyString
+  course_number: MyString
   section_number: MyString
-  meeting_time: MyString
   capacity: 1
