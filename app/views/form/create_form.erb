@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>More form fields</title>
+        <script type="text/javascript">
+            FUNCTION addRowToTable()
+            {
+            VAR tbl = document.getElementById('tblAddress');
+                    VAR lastRow = tbl.rows.length;
+
+                    VAR iteration = lastRow;
+                    //  var iteration = lastRow + 1;
+                    VAR row = tbl.insertRow(lastRow);
+                    //  cell 0
+                    VAR cell0 = row.insertCell(0);
+                    VAR el = document.createElement('input');
+                    el.type = 'text';
+                    el.NAME = 'Address[]';
+                    el.size = 30;
+                    cell0.appendChild(el);
+                    //cell 1
+                    VAR cell1 = row.insertCell(1);
+                    VAR el = document.createElement('input');
+                    el.type = 'text';
+                    el.NAME = 'City[]';
+                    el.size = 10;
+                    cell1.appendChild(el);
+                    //cell 2
+                    VAR cell2 = row.insertCell(2);
+                    VAR el = document.createElement('input');
+                    el.type = 'text';
+                    el.NAME = 'State[]';
+                    el.size = 2;
+                    cell2.appendChild(el);
+                    //cell 3
+                    VAR cell3 = row.insertCell(3);
+                    VAR el = document.createElement('input');
+                    el.type = 'text';
+                    el.NAME = 'Zip[]';
+                    el.size = 5;
+                    cell3.appendChild(el);
+            }
+        </script>
+
+        
+    </head>
+
+    <body>
+        <h3>Dynamic add form fields</h3>
+
+        <form action="/data">
+            <table id="tblAddress">
+                <tr>
+                    <td class="txtBase">Address</td>
+                    <td class="txtBase">City</td>
+                    <td class="txtBase">State</td>
+                    <td class="txtBase">Zip</td>
+                </tr>
+                <tr>
+                    <td><input name="Address[]" type="text" size="30" maxlength="255"></td>
+                    <td><input name="City[]" type="text" size="10" maxlength="255"></td>
+                    <td><input name="State[]" type="text" size="2" maxlength="10"></td>
+                    <td><input name="Zip[]" type="text" size="5" maxlength="25"></td>
+                </tr>
+            </table>
+            <input type="button" name="Add" value="Add" onClick="addRowToTable();"/>
+            <input type="submit" name="Submit" value="Submit" />
+        </form>
+    </body>
+</html>
