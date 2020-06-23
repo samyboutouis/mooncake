@@ -7,7 +7,7 @@ end
         ldap = Net::LDAP.new
         ldap.host = "ldap.duke.edu"
         base = "dc=duke,dc=edu"
-        ldap.port = 389
+        ldap.port = 389 #632
         if ldap.bind
             puts "authentication succeeded"
         else
