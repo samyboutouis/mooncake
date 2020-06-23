@@ -8,8 +8,8 @@ class PrereqTest < ActiveSupport::TestCase
   end
 
   test "prereq has and belongs to many courses" do
-    course1 = Course.create(course_number: "250", capacity: 100)
-    course2 = Course.create(course_number: "201", capacity: 100)
+    course1 = Course.create(course_name: "COMPSCI250", capacity: 100)
+    course2 = Course.create(course_name: "COMPSCI201", capacity: 100)
     prereq1 = Prereq.create(name: "cs 101")
     prereq2 = Prereq.create(name: "cs 216")
     course1.prereqs << prereq1
