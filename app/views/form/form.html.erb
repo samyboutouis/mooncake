@@ -20,7 +20,7 @@
     </div>
 
     <script type="text/javascript">
-      document.getElementById('name').value = @user;
+      document.getElementById('name').value = "<%= @user.first_name %>" + " " + "<%= @user.last_name %>";
     </script>
 
     <div class="form-group">
