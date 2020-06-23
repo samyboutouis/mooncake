@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get '/form'=> 'form#form'
   get '/data'=> 'form#data'
 
+  #student requests a permission number
+  get '/search' => 'course_request#search', as: "search"
+
   #create course routes
   get '/courses' => "courses#index"
   get '/courses/new' => "courses#new"

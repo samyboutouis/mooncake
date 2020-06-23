@@ -8,4 +8,8 @@ class CourseRequestController < ApplicationController
             format.json {render json: @course_request}
         end
     end
+
+    def search
+        @courses = Course.all
+    end
 end
