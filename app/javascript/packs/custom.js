@@ -21,22 +21,27 @@ $(document).ready(function () {
   });
 
   $(".department").on('change', function() {
+    getNumber($(this));
+  });
+
+  $(".number").on('change', function() {
     getSection($(this));
   });
+  
 });
 
-function getSection(element) {
+function getNumber(element) {
   let selected = element.val();
-  $(".section").empty();
+  $(".number").empty();
   $.ajax('/department', {
     type: 'GET',
     dataType: 'json',
     data: {department: selected},
     success: function(result) {
       console.log('Success');
-      $(".section").append("<option>Choose Course Number</option>");
+      $(".number").append("<option>Choose Course Number</option>");
       for (var i = 0; i < result.length; i++) {
-        $(".section").append("<option>" + result[i].course_number + "</option>");
+        $(".number").append("<option>" + result[i].course_number + "</option>");
       }
     },
     error: function() {
@@ -44,6 +49,31 @@ function getSection(element) {
     }
   });
 }
+
+function getSection(element) {
+  let course_number = element.val();
+  let department = $(".department").val();
+  console.log(course_number);
+  $(".section").empty();
+  $.ajax('/department', {
+    type: 'GET',
+    dataType: 'json',
+    data: {course_number: course_number, department: department},
+    success: function(result) {
+      console.log('Success');
+      $(".section").append("<option>Choose Section Number</option>");
+      for (var i = 0; i < result.length; i++) {
+        $(".section").append("<option>" + result[i].section_number + "</option>");
+      }
+    },
+    error: function() {
+      console.log('Error');
+    }
+  });
+}
+
+
+
 /*
 
 $(document).ready(function(){
