@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="box">
-        <h1 class="title">Active Requests - <%= @user.first_name %></h1>
+        <h1 class="title">Active Requests - INSTRUCTOR </h1>
         <div class="container">
           <% for request in @user.course_requests do %>
             <div class="row">
@@ -10,7 +10,7 @@
                 <div class="request-box">
                   <%= active_request(request) %>
                   <img class="trash" src="/assets/trash.png">
-                  <p class="course"><%= request.course.department %> <%= request.course.course_number%></p>
+                  <p><%= request.course.department %> <%= request.course.course_number%></p>
                 </div>
               </div>
             </div>
