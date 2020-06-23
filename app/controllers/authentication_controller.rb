@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
     def login
       client = OAuth2::Client.new(
         'mooncake',
-        'B8VCqtKGHRqBqZhwEWjJVoij1wWiXpGCYZjfx7olYUXRxcw_mN6ivhHehYu-jyDMWbnsuBEqSrYcCOF6X0G5qA',
+        ENV["MOONCAKE_OAUTH_KEY"],
         :site => "https://oauth.oit.duke.edu/oidc",
         :authorize_url =>  "/oidc/authorize",
         :token_url =>  "/oidc/token"
@@ -18,7 +18,7 @@ class AuthenticationController < ApplicationController
       auth_code = params["code"] 
       client = OAuth2::Client.new(
         'mooncake',
-        'B8VCqtKGHRqBqZhwEWjJVoij1wWiXpGCYZjfx7olYUXRxcw_mN6ivhHehYu-jyDMWbnsuBEqSrYcCOF6X0G5qA',
+        ENV["MOONCAKE_OAUTH_KEY"],
         :site => "https://oauth.oit.duke.edu/oidc",
         :authorize_url =>  "/oidc/authorize",
         :token_url =>  "/oidc/token"
@@ -27,11 +27,10 @@ class AuthenticationController < ApplicationController
       user_info = token.get("/oidc/userinfo")
       user_info = JSON.parse(user_info.body)
       session[:user_id] = user_info['dukeNetID']
-      if User.exists?(net_id: session[:user_id])
-        $current_user = User.find_by(net_id: session[:user_id])
-      else
-        $current_user = User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'])
-      end
+      unless User.exists?(net_id: session[:user_id])
+        User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'])
+      end  
+      $current_user = User.find_by(net_id: session[:user_id])
       redirect_to ldap_path_url
       #redirect_to root_url
       # redirect_to 'http://localhost:3000/oauth/logout' 
@@ -59,8 +58,9 @@ class AuthenticationController < ApplicationController
       ldap.get_operation_result
           
       information = result.pop
-      affiliation = information["edupersonprimaryaffiliation"]
-
+      affiliation = information["edupersonprimaryaffiliation"].join(' ')
+      $current_user.grad_year = information["dupsexpgradtermc1"].join(' ')
+      $current_user.email = information["edupersonprincipalname"].join(' ')
       if affiliation.include? 'staff'
         $current_user.user_type = 'staff'
         redirect_to 'http://localhost:3000/faculty'
@@ -68,6 +68,5 @@ class AuthenticationController < ApplicationController
         $current_user.user_type = 'student'
         redirect_to root_url
       end
-      $current_user.grad_year = information["dupsexpgradtermc1"]
   end
 end
