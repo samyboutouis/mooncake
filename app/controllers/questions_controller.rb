@@ -10,17 +10,13 @@ class QuestionsController < ApplicationController
     end
 
     def create_form
-        @question = Question.all
-        $course.questions << @question
+        $course.questions = Course.find($course.id).questions
+        @question = $course.questions
     end
 
     def create
-        @question = Question.new(question_params)
-        if @question.save
-            redirect_to @question
-        else
-            redirect_to new_question_path
-        end
+        $course.questions.create(question_params)
+        redirect_to question_path
     end
 
     def new
@@ -28,8 +24,8 @@ class QuestionsController < ApplicationController
     end
 
     def delete
-        @question = Question.find(params[:id])
-        @question.destroy
-        redirect_to @question
+        $course.questions.destroy(Question.find(params[:id]))
+        Question.destroy(Question.find(params[:id]))
+        redirect_to question_path
     end
 end

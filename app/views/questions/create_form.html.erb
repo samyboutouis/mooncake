@@ -1,6 +1,6 @@
 <div class="container">
 <h1> Create Form for <%= $course.department %> </h1>
-<% @question.each do |question| %>
+<% $course.questions.each do |question| %>
     
     <div class="form-group">
     <p><%= question.question_text %></p>
@@ -13,6 +13,9 @@
 <div>
 
 <a href= "<%= new_question_path %>"> Add</a>
+
+
+<%= link_to "Complete form", course_path %>
 
 
 
