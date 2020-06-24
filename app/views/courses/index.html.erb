@@ -1,20 +1,38 @@
-<h1>Your Courses</h1>
-<%= link_to "Create New Course", new_course_path_url %>
- <table>
-    <thead>
-      <th>Department</th>
-      <th>Course Number</th>
-      <th>Section Number</th>
-      <th>Capacity</th>
-    </thead>
-    <tbody>
-      <% @course.each do |course| %>
-        <tr>
-          <td><%= course.department %></td>
-          <td><%= course.course_number %></td>
-          <td><%= course.section_number %></td>
-          <td><%= course.capacity %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create a New Course</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+  <body>
+    <div class="col">
+      <div class="box">
+        <h1 class="title">Your Courses</h1>
+        <%= link_to "Create New Course", new_course_path_url, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
+        <div class="table-responsive">
+          <table class="table table-striped", style="background-color:white;">
+            <thead>
+              <th scope="col">ID</th>
+              <th scope="col">Department</th>
+              <th scope="col">Course Number</th>
+              <th scope="col">Section Number</th>
+              <th scope="col">Capacity</th>
+            </thead>
+            <tbody>
+              <% @course.each do |course| %>
+                <tr>
+                  <th scope="row"><%= course.id %></th>
+                  <td><%= course.department %></td>
+                  <td><%= course.course_number %></td>
+                  <td><%= course.section_number %></td>
+                  <td><%= course.capacity %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
