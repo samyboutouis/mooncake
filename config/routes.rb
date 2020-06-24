@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "dashboard#index"
   get "/faculty" => "dashboard#faculty_index"
@@ -19,5 +21,16 @@ Rails.application.routes.draw do
   get '/questions/new' => 'questions#new', as: "new_question_path"
   delete '/questions/:id' => 'questions#delete', as: "delete_question_path"
 
+  #student requests a permission number
+  get '/search' => 'course_request#search', as: "search"
+  get '/department' => 'course_request#department'
+  get '/section' => 'course_request#section'
+  get '/data_request' => 'course_request#data_request'
+
+  #create course routes
+  get '/courses' => "courses#index", as: "course"
+  get '/courses/new' => "courses#new", as: "new_course_path"
+  post '/courses' => "courses#create"
+  # get '/courses/:id' => "courses#show"
 end
 
