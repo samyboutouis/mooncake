@@ -24,7 +24,7 @@ class CourseRequestController < ApplicationController
     def section
         department = params[:department]
         course_number = params[:course_number]
-        @courses = Course.where(course_number: course_number, department: department)
+        @courses = Course.where(course_number: course_number)
         respond_to do |format|
             format.json {render json: @courses}
         end

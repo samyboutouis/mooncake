@@ -51,14 +51,13 @@ function getNumber(element) {
 }
 
 function getSection(element) {
-  let course_number = element.val();
+  let courseNumber = element.val();
   let department = $(".department").val();
-  console.log(course_number);
   $(".section").empty();
-  $.ajax('/department', {
+  $.ajax('/section', {
     type: 'GET',
     dataType: 'json',
-    data: {course_number: course_number, department: department},
+    data: {course_number: courseNumber, department: department},
     success: function(result) {
       console.log('Success');
       $(".section").append("<option>Choose Section Number</option>");
