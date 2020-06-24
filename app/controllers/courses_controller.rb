@@ -1,14 +1,16 @@
 class CoursesController < ApplicationController
   def course_params
-    params.require(:course).permit(:department, :course_number, :section_number, :capacity)
+    params.require(:course).permit(:department, :course_number, :section_number, :capacity, prereqs_attributes: [:name])
   end
   
   def index
     @course = Course.all
+    #byebug
   end
 
   def new
     @course = Course.new
+    @prereqs = @course.prereqs.build
   end
 
   def create

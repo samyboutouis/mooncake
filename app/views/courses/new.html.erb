@@ -12,22 +12,34 @@
         <%= form_for @course do |f| %>
           <div class="form-group row" style="padding: 10px 20px 0px">
             <%= f.label :department, "Department: ", for: "formGroupExampleInput" %>
-            <%= f.select :department, options_for_select([["Select One", ""], "COMPSCI", "ECON", "MATH", "ARTSVIS", "VMS"]), {}, class:"form-control", id:"exampleFormControlSelect1" %>
+            <%= f.select :department, options_for_select([["Select One", ""], "COMPSCI", "ECON", "MATH", "ARTSVIS", "VMS"]), {}, class:"form-control", id:"exampleFormControlSelect1 department" %>
           </div>
 
           <div class="form-group row" style="padding: 10px 20px 0px">
             <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
-            <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput" %>
+            <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number" %>
           </div>
           
           <div class="form-group row" style="padding: 10px 20px 0px">
             <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
-            <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput" %>
+            <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number" %>
           </div>
           
           <div class="form-group row" style="padding: 10px 20px 0px">
             <%= f.label :capacity, "Course Capacity: ", for: "formGroupExampleInput" %>
-            <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput" %>
+            <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity" %>
+          </div>
+          
+          <%= submit_tag "Add Prerequisite", :type => 'button', :id => 'addAddress', 
+          :onclick => 'addAddressField()' %> 
+
+          <div class="form-group row", style="padding: 10px 20px 0px">
+            <%= f.fields_for :prereqs do |prereqs_form| %>
+                <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
+                <div class="addNew">
+                <%= prereqs_form.text_field :name, placeholder: "Ex: MATH 221", class:"form-control prereq_field", id:"formGroupExampleInput prereq" %>
+                </div>
+            <% end %>
           </div>
 
           <div class="form-group row" style="padding: 10px 6px 0px">

@@ -28,6 +28,10 @@ $(document).ready(function () {
     getSection($(this));
   });
   
+  $("#prereq").on('click', function() {
+    createField($(this));
+  });
+
 });
 
 function getNumber(element) {
@@ -71,6 +75,20 @@ function getSection(element) {
   });
 }
 
+
+function createField(element) {
+  
+  $.ajax('/courses/new', {
+    success: function(result) {
+      console.log('Success');
+      // $(".addNew").append(".prereq_field");
+      $(".prereq_field").clone().appendTo(".addNew");
+    },
+    error: function() {
+      console.log('Error');
+    }
+  });
+}
 
 
 /*
