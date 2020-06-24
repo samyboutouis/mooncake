@@ -1,0 +1,16 @@
+<div class="container">
+<h1> Create Form for CS201 </h1>
+<% @question.each do |question| %>
+    
+    <p><%= question.question_type %></p>
+    <p><%= question.question_text %></p>
+
+    <%= link_to "Delete Question", delete_question_path_url(question), method: :delete %>
+    <div>
+<% end %>
+<div>
+
+<%= link_to "Add Question", new_question_path_url %>
+
+
+
