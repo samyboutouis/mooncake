@@ -3,23 +3,27 @@ class QuestionsController < ApplicationController
         params.require(:question).permit(:question_type, :question_text)
     end
 
-    
-    def create_form
+    def course
+        $course = nil
         $course = Course.find(params[:course])
+        redirect_to question_path
+    end
+
+    def create_form
         @question = Question.all
+        $course.questions << @question
     end
 
     def create
         @question = Question.new(question_params)
         if @question.save
-            redirect_to question_path
+            redirect_to @question
         else
             redirect_to new_question_path
         end
     end
 
     def new
-        puts "**********"
         @question = Question.new
     end
 

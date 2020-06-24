@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   get '/data'=> 'form#data'
 
   #faculty creating questions routes
-  get '/questions/:course'=> 'questions#create_form', as: "question"
+  get '/questionsc/:course'=> 'questions#course', as: "questioncourse"
+  get '/questions'=> 'questions#create_form', as: "question"
   post '/questions' => 'questions#create'
   get '/questions/new' => 'questions#new', as: "new_question"
   delete '/questions/:id' => 'questions#delete', as: "delete_question_path"
