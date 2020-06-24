@@ -20,26 +20,30 @@ $(document).ready(function () {
     });
   });
 
-  $(".department").change(function() {
-    let selected = $(this).val();
-    $(".section").empty();
-    $.ajax('/department', {
-      type: 'GET',
-      dataType: 'json',
-      data: {department: selected},
-      success: function(result) {
-        console.log('Success');
-        $(".section").append("<option>Choose Course Number</option>");
-        for (var i = 0; i < result.length; i++) {
-          $(".section").append("<option>" + result[i].course_number + "</option>");
-        }
-      },
-      error: function() {
-        console.log('Error');
+  $(".department").on('change', function() {
+    getSection($(this));
+  });
+});
+
+function getSection(element) {
+  let selected = element.val();
+  $(".section").empty();
+  $.ajax('/department', {
+    type: 'GET',
+    dataType: 'json',
+    data: {department: selected},
+    success: function(result) {
+      console.log('Success');
+      $(".section").append("<option>Choose Course Number</option>");
+      for (var i = 0; i < result.length; i++) {
+        $(".section").append("<option>" + result[i].course_number + "</option>");
       }
-    });
-  }) 
-})
+    },
+    error: function() {
+      console.log('Error');
+    }
+  });
+}
 /*
 
 $(document).ready(function(){
