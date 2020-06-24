@@ -30,14 +30,13 @@
             <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity" %>
           </div>
           
-          <%= submit_tag "Add Prerequisite", :type => 'button', :id => 'addAddress', 
-          :onclick => 'addAddressField()' %> 
+          <a class="btn btn-dark add", id="prereq"> Add new prereq </a>
 
           <div class="form-group row", style="padding: 10px 20px 0px">
             <%= f.fields_for :prereqs do |prereqs_form| %>
                 <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
                 <div class="addNew">
-                <%= prereqs_form.text_field :name, placeholder: "Ex: MATH 221", class:"form-control prereq_field", id:"formGroupExampleInput prereq" %>
+                  <%= prereqs_form.text_field :name, placeholder: "Ex: MATH 221", class:"form-control prereq_field", id:"formGroupExampleInput prereq" %>
                 </div>
             <% end %>
           </div>
