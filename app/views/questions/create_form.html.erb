@@ -5,7 +5,23 @@
     
     <div class="form-group">
     <p><%= question.question_text %></p>
-    <input type="text" class="form-control" id="reasons"  name="reasons"> 
+    <% if question.question_type == "Checkbox" %>
+        <% question.option.each do |option| %>
+            <div>
+                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
+            </div>
+        <% end %>
+    <% elsif question.question_type == "Radio" %>
+        <% question.option.each do |option| %>
+            <div>
+                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
+            </div>
+        <% end %>
+    <% else %>
+        <input type= "text" class="form-control" id="reasons"  name="reasons"> 
+    <% end %>
+
+
     <%= link_to "Delete", delete_question_path_url(question), method: :delete , class:"btn btn-light btn-sm", style:"margin:10px 0px 10px"%>
     </div>
     

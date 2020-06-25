@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
     def question_params
-        params.require(:question).permit(:question_type, :question_text)
+        params.require(:question).permit(:question_type, :question_text, :option)
     end
 
     # initializing the course
@@ -20,7 +20,11 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        $course.questions.create(question_params)
+        text = question_params["question_text"]
+        type = question_params["question_type"]
+        option = params[:option]
+        puts option
+        $course.questions.create(question_type: type, question_text: text, option: option)
         redirect_to question_path
     end
 
@@ -31,8 +35,9 @@ class QuestionsController < ApplicationController
 
     # delete question
     def delete
-        $course.questions.destroy(Question.find(params[:id]))
-        Question.destroy(Question.find(params[:id]))
+        id = params[:id]
+        $course.questions.destroy(Question.find(id))
+        Question.destroy(id)
         redirect_to question_path
     end
 
@@ -44,3 +49,4 @@ class QuestionsController < ApplicationController
     #     end
     # end
 end
+
