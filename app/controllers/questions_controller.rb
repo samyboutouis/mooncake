@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
     def question_params
-        params.require(:question).permit(:question_type, :question_text, :option)
+        params.require(:question).permit(:question_type, :question_text, :option => [])
     end
 
     # initializing the course
@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
         redirect_to question_path
     end
 
-    # main page for creating form
+    # main page for creating form with default questions
     def create_form
         $course.questions = Course.find($course.id).questions
         # if $course.questions.count == 0
@@ -20,11 +20,7 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        text = question_params["question_text"]
-        type = question_params["question_type"]
-        option = params[:option]
-        puts option
-        $course.questions.create(question_type: type, question_text: text, option: option)
+        $course.questions.create(question_params)
         redirect_to question_path
     end
 

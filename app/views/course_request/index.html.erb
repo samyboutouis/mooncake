@@ -7,7 +7,7 @@
                 <option selected>Choose Department</option>
                 <% departments = @course.distinct.pluck(:department) %>
                 <% for department in departments do %>
-                    <option><%= department %></option>
+                    <option name = 'department'><%= department %></option>
                 <% end %>
             </select>
         </div>
