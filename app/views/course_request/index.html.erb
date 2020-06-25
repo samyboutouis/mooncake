@@ -1,24 +1,23 @@
 <div class="col">
     <div class="box">
         <h1 class="title">Find Courses</h1>
-        <form action= '/data_request' >
+        <form action= '/courserequests' method="get" id="courseform">
         <div class="form-group row">
-            <select class="custom-select my-1 mr-sm-2 department" id="inlineFormCustomSelectPref">
+            <select class="custom-select my-1 mr-sm-2 department" id="inlineFormCustomSelectPref" form="courseform" name="department">
                 <option selected>Choose Department</option>
-                <% departments = @courses.distinct.pluck(:department) %>
+                <% departments = @course.distinct.pluck(:department) %>
                 <% for department in departments do %>
                     <option><%= department %></option>
                 <% end %>
             </select>
         </div>
         <div class="form-group row">
-            <select class="custom-select my-1 mr-sm-2 number" id="inlineFormCustomSelectPref">
+            <select class="custom-select my-1 mr-sm-2 number" id="inlineFormCustomSelectPref" form="courseform" name="course_number">
                 <option selected>Choose Course Number</option>
-                
             </select>
         </div>
         <div class="form-group row">
-            <select class="custom-select my-1 mr-sm-2 section" id="inlineFormCustomSelectPref">
+            <select class="custom-select my-1 mr-sm-2 section" id="inlineFormCustomSelectPref" form="courseform" name="section_number">
                 <option selected>Choose Section Number</option>
             </select>
         </div>

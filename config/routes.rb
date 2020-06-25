@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   get '/request' => 'course_request#show' 
   get '/ldap' => 'authentication#authorize', as: 'ldap_path'
 
-  #form routes
-  get '/form'=> 'form#form'
-  get '/data'=> 'form#data'
+  #answer routes
+  get '/form'=> 'answer#form', as: "answer"
+  get '/data'=> 'answer#data'
 
   #faculty creating questions routes
   get '/questionsc/:course'=> 'questions#course', as: "questioncourse"
@@ -24,10 +24,11 @@ Rails.application.routes.draw do
   get '/options' => 'questions#options'
 
   #student requests a permission number
-  get '/search' => 'course_request#search', as: "search"
+  get '/search' => 'course_request#index', as: "search"
   get '/department' => 'course_request#department'
   get '/section' => 'course_request#section'
-  get '/data_request' => 'course_request#data_request'
+  get '/courserequests' => 'course_request#create'
+  get '/courserequests/new' => "course_request#new", as: "new_course_request_path"
 
   #create course routes
   get '/courses' => "courses#index", as: "course"
