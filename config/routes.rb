@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post '/questions' => 'questions#create'
   get '/questions/new' => 'questions#new', as: "new_question"
   delete '/questions/:id' => 'questions#delete', as: "delete_question_path"
+  get '/options' => 'questions#options'
 
   #student requests a permission number
   get '/search' => 'course_request#search', as: "search"

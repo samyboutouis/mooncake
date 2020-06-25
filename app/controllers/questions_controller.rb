@@ -13,9 +13,9 @@ class QuestionsController < ApplicationController
     # main page for creating form
     def create_form
         $course.questions = Course.find($course.id).questions
-        if $course.questions.count == 0
-            $course.questions << Question.find(42,43,44)
-        end
+        # if $course.questions.count == 0
+        #     $course.questions << Question.find(42,43,44)
+        # end
         @question = $course.questions
     end
 
@@ -35,4 +35,12 @@ class QuestionsController < ApplicationController
         Question.destroy(Question.find(params[:id]))
         redirect_to question_path
     end
+
+    # generate options for question
+    # def options
+    #     question_type = params[:question_type]
+    #     respond_to do |format|
+    #         format.json {render json: {question_type: question_type}}
+    #     end
+    # end
 end
