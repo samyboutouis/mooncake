@@ -1,4 +1,8 @@
 class CourseRequestController < ApplicationController
+    def course_params
+        params.require(:course).permit(:department, :course_number, :section_number, :capacity)
+    end
+    
     def show
         department = params[:department]
         number = params[:number]
@@ -31,12 +35,16 @@ class CourseRequestController < ApplicationController
     end
 
     def data_request
-        # user = $current_user
-        # department = params["department"]
-        # course_number = params["course_number"]
-        # section_number = params["section_number"]
-        # course = Course.where(department: department, course_number: course_number, section_number: section_number)
+        puts "*****"
+        user = $current_user
+        department = params["department"]
+        course_number = params["course_number"]
+        section_number = params["section_number"]
+        puts department
+        puts course_number
+        puts section_number
+        course = Course.where(department: department, course_number: course_number, section_number: section_number)
         # request = CourseRequest.create(course: course, user: user, status: "under review")
-        # puts request
+        puts request
     end
 end

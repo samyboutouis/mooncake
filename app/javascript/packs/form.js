@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $("#question_question_type").on('change', function() {
+  $("#question_question_type").on('input', function() {
     getQuestion($(this));
     $("#number-choice").on('input', function() {
       getOptions($(this));
@@ -24,8 +24,8 @@ $(document).ready(function(){
     let selected = element.val();
     $("#question-options").empty();
     for(let i = 0; i < selected; i++) {
-      $("#question-options").append("<label for= 'option[]'>Option " + (i + 1) + ":</label>");
-      $("#question-options").append('<input name="option[]" type="text" id="option-text"><br>');
+      $("#question-options").append("<label for= 'question_option[]'>Option " + (i + 1) + ":</label>");
+      $("#question-options").append('<input name= "question[option][]" type="text" id="question_option"><br>');
     }
   }
 });

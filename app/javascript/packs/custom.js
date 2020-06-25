@@ -39,9 +39,9 @@ function getNumber(element) {
     data: {department: selected},
     success: function(result) {
       console.log('Success');
-      $(".number").append("<option>Choose Course Number</option>");
+      $(".number").append("<option name = 'course_number'>Choose Course Number</option>");
       for (var i = 0; i < result.length; i++) {
-        $(".number").append("<option>" + result[i].course_number + "</option>");
+        $(".number").append("<option name = 'course_number'>" + result[i].course_number + "</option>");
       }
     },
     error: function() {
@@ -60,9 +60,9 @@ function getSection(element) {
     data: {course_number: courseNumber, department: department},
     success: function(result) {
       console.log('Success');
-      $(".section").append("<option>Choose Section Number</option>");
+      $(".section").append("<option name='section_number'>Choose Section Number</option>");
       for (var i = 0; i < result.length; i++) {
-        $(".section").append("<option>" + result[i].section_number + "</option>");
+        $(".section").append("<option name='section_number' >" + result[i].section_number + "</option>");
       }
     },
     error: function() {
