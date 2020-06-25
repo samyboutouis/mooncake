@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   get '/oauth/login' => 'authentication#login' 
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
-  get '/request' => 'course_request#show' 
+  get '/request' => 'course_request#expand' 
   get '/ldap' => 'authentication#authorize', as: 'ldap_path'
 
   #answer routes
-  get '/form'=> 'answer#form', as: "answer"
+  get '/form/:course_request'=> 'answer#form', as: "answer"
   get '/data'=> 'answer#data'
 
   #faculty creating questions routes

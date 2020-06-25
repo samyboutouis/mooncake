@@ -70,14 +70,3 @@ function getSection(element) {
     }
   });
 }
-
-
-
-/*
-
-$(document).ready(function(){
-  $("button").click(function(){
-    $("#div1").load("demotext.txt");
-  });
-});
-*/
