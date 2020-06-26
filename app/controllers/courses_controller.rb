@@ -35,10 +35,13 @@ class CoursesController < ApplicationController
 
   def delete
     id = params[:id]
-    $current_user.courses.destroy(Course.find(id))
+    course = Course.find(id)
+    course.prereqs.each do |prereq|
+      prereq.destroy
+    end
+    $current_user.courses.destroy(course)
     Course.destroy(id)
-
-    redirect_to course_url
+    redirect_to faculty_url
   end
 
 end
