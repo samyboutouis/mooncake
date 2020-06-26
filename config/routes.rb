@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "dashboard#index"
   get "/faculty" => "dashboard#faculty_index"
+  # delete "/delete/:request" => "dashboard#delete" , as: "delete_request"
   get "/student" => "user#show", as: "student_show"
   get '/oauth/login' => 'authentication#login' 
   get '/oauth/callback' => 'authentication#callback'
