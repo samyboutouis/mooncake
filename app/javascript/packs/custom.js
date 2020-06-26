@@ -30,7 +30,6 @@ $(document).ready(function () {
   });
 
   $("#add-prereq").on('click', function() {
-    alert("hi")
     createField();
   });
 
@@ -81,7 +80,6 @@ function getSection(element) {
 function createField() {
     count++;
     var clonedField = $(".prereqfield:first").clone();
-    console.log(clonedField);
     clonedField.attr("name", "prereq_attributes["+ count + "]name" );
     clonedField.appendTo(".addNew");
 }
