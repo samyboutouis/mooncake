@@ -1,3 +1,4 @@
+var count = 0;
 $(document).ready(function () {
   $(".request-box").on('click', function() {
     console.log('clicked');
@@ -27,7 +28,11 @@ $(document).ready(function () {
   $(".number").on('change', function() {
     getSection($(this));
   });
-  
+
+  $("#add-prereq").on('click', function() {
+    createField();
+  });
+
 });
 
 function getNumber(element) {
@@ -71,6 +76,13 @@ function getSection(element) {
   });
 }
 
+
+function createField() {
+    count++;
+    var clonedField = $(".prereqfield:first").clone();
+    clonedField.attr("name", "prereq_attributes["+ count + "]name" );
+    clonedField.appendTo(".addNew");
+}
 
 
 /*

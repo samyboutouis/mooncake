@@ -1,16 +1,39 @@
 <div class="container">
-<h1> Create Form for CS201 </h1>
-<% @question.each do |question| %>
+<h1> Create Form for <%= $course.department + $course.course_number %> </h1>
+<h2> Questions: </h2>
+<% $course.questions.each do |question| %>
     
-    <p><%= question.question_type %></p>
+    <div class="form-group">
     <p><%= question.question_text %></p>
+    <% if question.question_type == "Checkbox" %>
+        <% question.option.each do |option| %>
+            <div>
+                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
+            </div>
+        <% end %>
+    <% elsif question.question_type == "Radio" %>
+        <% question.option.each do |option| %>
+            <div>
+                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
+            </div>
+        <% end %>
+    <% else %>
+        <input type= "text" class="form-control" id="reasons"  name="reasons"> 
+    <% end %>
 
-    <%= link_to "Delete Question", delete_question_path_url(question), method: :delete %>
+
+    <%= link_to "Delete", delete_question_path_url(question), method: :delete , class:"btn btn-light btn-sm", style:"margin:10px 0px 10px"%>
+    </div>
+    
     <div>
 <% end %>
 <div>
 
-<%= link_to "Add Question", new_question_path_url %>
+<%= link_to "Add Question", new_question_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
+
+
+<%= link_to "Complete form", course_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
+
 
 
 

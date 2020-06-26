@@ -8,24 +8,27 @@ Rails.application.routes.draw do
   get '/oauth/login' => 'authentication#login' 
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
-  get '/request' => 'course_request#show' 
+  get '/request' => 'course_request#expand' 
   get '/ldap' => 'authentication#authorize', as: 'ldap_path'
 
-  #form routes
-  get '/form'=> 'form#form'
-  get '/data'=> 'form#data'
+  #answer routes
+  get '/form/:course_request'=> 'answer#form', as: "answer"
+  get '/data'=> 'answer#data'
 
   #faculty creating questions routes
+  get '/questionsc/:course'=> 'questions#course', as: "questioncourse"
   get '/questions'=> 'questions#create_form', as: "question"
   post '/questions' => 'questions#create'
-  get '/questions/new' => 'questions#new', as: "new_question_path"
+  get '/questions/new' => 'questions#new', as: "new_question"
   delete '/questions/:id' => 'questions#delete', as: "delete_question_path"
+  get '/options' => 'questions#options'
 
   #student requests a permission number
-  get '/search' => 'course_request#search', as: "search"
+  get '/search' => 'course_request#index', as: "search"
   get '/department' => 'course_request#department'
   get '/section' => 'course_request#section'
-  get '/data_request' => 'course_request#data_request'
+  get '/courserequests' => 'course_request#create'
+  get '/courserequests/new' => "course_request#new", as: "new_course_request_path"
 
   #create course routes
   get '/courses' => "courses#index", as: "course"
