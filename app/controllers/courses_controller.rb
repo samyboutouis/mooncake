@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   
   def index
     @user = $current_user
-    @course = @user.courses.all
+    @course = @user.courses
     #byebug
   end
 
@@ -29,8 +29,17 @@ class CoursesController < ApplicationController
 
   end
 
-  # def show
-  #   @course = Course.find(params[:id])
-  # end
+  def show
+    @course = Course.find(params[:id])
+  end
+
+  def delete
+    id = params[:id]
+    $current_user.courses.destroy(Course.find(id))
+    Course.destroy(id)
+
+    redirect_to course_url
+  end
+
 end
 

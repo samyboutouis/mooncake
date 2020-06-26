@@ -32,8 +32,8 @@ Rails.application.routes.draw do
 
   #create course routes
   get '/courses' => "courses#index", as: "course"
-  get '/courses/new' => "courses#new", as: "new_course_path"
+  get '/courses/new' => "courses#new", as: "new_course"
   post '/courses' => "courses#create"
-  # get '/courses/:id' => "courses#show"
+  delete '/courses/:id' => 'courses#delete', as: "delete_course"
 end
 

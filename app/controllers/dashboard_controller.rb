@@ -5,5 +5,6 @@ class DashboardController < ApplicationController
 
   def faculty_index
     @user = $current_user
+    @courses = @user.courses.all
   end
 end

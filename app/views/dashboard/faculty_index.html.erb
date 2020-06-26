@@ -5,7 +5,7 @@
         <h1 class="title">My Courses - <%= @user.first_name %> INSTRUCTOR </h1>
         <%= no_course(@user)%>
         <div class="container">
-          <% for course in @user.courses do %>
+          <% @courses.each do |course| %>
             <div class="row">
               <div class="col">
                 <div class="request-box">
