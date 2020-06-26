@@ -39,8 +39,18 @@ class CoursesController < ApplicationController
     course.prereqs.each do |prereq|
       prereq.destroy
     end
+    course.questions.each do |question|
+      question.destroy
+    end
+    course.course_requests.each do |request|
+      request.destroy
+    end
+    course.permission_numbers.each do |number|
+      number.destroy
+    end
     $current_user.courses.destroy(course)
     Course.destroy(id)
+    byebug
     redirect_to faculty_url
   end
 
