@@ -10,14 +10,12 @@ class AnswerController < ApplicationController
         # retrieve data using param
         @user = $current_user
         for question in $course_request.course.questions
-            # if question.question_type == "Checkbox"
-            #     a = params[question.question_text]
-                
-            #     answer = eval(params[question.question_text]).join("~")
-            # else
-            #     answer = params[question.question_text]
-            # end
-            $course_request.answers.create(answer_text: params[question.question_text], question: question)
+            if question.question_type == "Checkbox"
+                answer = params[question.question_text].join("~")
+            else
+                answer = params[question.question_text]
+            end
+            $course_request.answers.create(answer_text: answer, question: question)
             # Answer.last << Question.find_by(question_text: question.question_text)
         end
         puts params["major"]
