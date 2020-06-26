@@ -10,17 +10,16 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
-
     @prereqs = @course.prereqs.build
   end
 
   def create
-    # "prereqs_attributes"=>{"0"=>{"name"=>"a"}, "1"=>{"name"=>"b"}}
     if course = Course.create(course_params)
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
         prereqs = course.prereqs.create(name: name[1]["name"])
       end
+      $current_user.courses << course
       redirect_to course, alert: "Course created successfully."
     else
       redirect_to new_course_path, alert: "Error creating course."

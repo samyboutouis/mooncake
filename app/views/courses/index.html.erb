@@ -13,7 +13,6 @@
         <div class="table-responsive">
           <table class="table table-striped", style="background-color:white;">
             <thead>
-              <th scope="col">ID</th>
               <th scope="col">Department</th>
               <th scope="col">Course Number</th>
               <th scope="col">Section Number</th>
@@ -24,18 +23,19 @@
               <% @course.each do |course| %>
                 
                 <tr>
-                  <th scope="row"><%= course.id %></th>
                   <td><%= course.department %></td>
                   <td><%= course.course_number %></td>
                   <td><%= course.section_number %></td>
                   <td><%= course.capacity %></td>
-                  <% if course.prereqs.empty? %>
-                    <td> N/A </td>
-                  <% else %>
+                  <td>
                     <% course.prereqs.each do |prereq| %>
-                      <td><%= prereq.name %></td>
-                    <% end %>
-                  <% end %>
+                      <% if course.prereqs.last == prereq%>
+                        <%= prereq.name %>
+                      <% else %>
+                        <%= prereq.name %>, 
+                      <%end%> 
+                    <%end%>
+                  </td>
                 </tr>
 
               <% end %>

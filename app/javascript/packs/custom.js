@@ -29,7 +29,7 @@ $(document).ready(function () {
     getSection($(this));
   });
 
-  $(document).on('click', "#add-prereq", function() {
+  $("#add-prereq").on('click', function() {
     createField();
   });
 
