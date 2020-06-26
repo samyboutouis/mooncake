@@ -1,7 +1,7 @@
 class AnswerController < ApplicationController
     def form 
         @user = $current_user
-        @course_request = CourseRequest.find(params[:course_request])
+        @course_request = CourseRequest.find(params["course_request"])
     end
 
     def data

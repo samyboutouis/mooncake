@@ -34,13 +34,13 @@
         <% if question.question_type == "Checkbox" %>
             <% question.option.each do |option| %>
                 <div>
-                    <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
+                    <input type="checkbox" name= "<%=question.question_text%>[]"" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
                 </div>
             <% end %>
         <% elsif question.question_type == "Radio" %>
             <% question.option.each do |option| %>
                 <div>
-                    <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
+                    <input type="radio" name= "<%=question.question_text%>" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
                 </div>
             <% end %>
         <% else %>
