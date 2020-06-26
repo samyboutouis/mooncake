@@ -31,7 +31,7 @@ class AuthenticationController < ApplicationController
         User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'])
       end  
       $current_user = User.find_by(net_id: session[:user_id])
-      redirect_to ldap_path_url
+      redirect_to ldap_path
       #redirect_to root_url
       # redirect_to 'http://localhost:3000/oauth/logout' 
     end

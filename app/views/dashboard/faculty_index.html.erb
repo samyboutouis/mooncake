@@ -9,14 +9,14 @@
             <div class="row">
               <div class="col">
                 <div class="request-box">
-                  <img class="trash" src="/assets/trash.png">
+                  <a data-confirm="Are you sure?" data-method="Delete" href="<%= delete_course_path(course) %>"> <img class="trash" src="/assets/trash.png"> </a>
                   <p> <%= course.department%> <%= course.course_number%> - <%= course.section_number%> </p>
                 </div>
               </div>
             </div>
           <% end %>
         </div>
-        <a href="<%= new_course_path_url %>"><button class="btn btn-outline-primary" type="button">Create a Course</button></a>
+        <a href="<%= new_course_path %>"><button class="btn btn-outline-primary" type="button">Create a Course</button></a>
         <a href="<%= course_path %>"><button class="btn btn-outline-primary" type="button">View All Course Details</button></a>
       </div>
     </div>

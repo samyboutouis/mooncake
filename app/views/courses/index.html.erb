@@ -37,8 +37,9 @@
                       <%end%> 
                     <%end%>
                   </td>
-                  <td><%= link_to 'Delete', delete_course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </td>
+                  <td>
+                    <%= link_to 'Delete', delete_course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </td>
                 </tr>
 
               <% end %>
