@@ -20,7 +20,9 @@
 
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
                     <div >
-                      Status: <%= request.status %>
+                      Status: <%= request.status %> <br>
+                      <%= link_to "View request form", request_form_path(request), method: :get%> <br>
+                      <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}%>
                     </div>
                   </div>
 

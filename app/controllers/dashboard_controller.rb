@@ -8,7 +8,13 @@ class DashboardController < ApplicationController
     @user = $current_user
   end
 
-  # def delete
-  #   puts params[:request]
-  # end
+  def withdraw
+    # Answer.destroy(Answer.where(course_request: params[:request]))
+    CourseRequest.destroy(params[:request])
+    redirect_to root_path
+  end
+
+  def view 
+    @course_request = CourseRequest.find(params[:request])
+  end
 end
