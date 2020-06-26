@@ -4,7 +4,8 @@ class CoursesController < ApplicationController
   end
   
   def index
-    @course = Course.all
+    @user = $current_user
+    @course = @user.courses.all
     #byebug
   end
 
@@ -14,6 +15,7 @@ class CoursesController < ApplicationController
   end
 
   def create
+
     if course = Course.create(course_params)
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
