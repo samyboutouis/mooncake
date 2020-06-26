@@ -27,7 +27,11 @@ $(document).ready(function () {
   $(".number").on('change', function() {
     getSection($(this));
   });
-  
+
+  $("#prereq").on('click', function() {
+    createField($(this));
+  });
+
 });
 
 function getNumber(element) {
@@ -70,3 +74,28 @@ function getSection(element) {
     }
   });
 }
+
+
+function createField(element) {
+
+  $.ajax('/courses/new', {
+    success: function(result) {
+      console.log('Success');
+      // $(".addNew").append(".prereq_field");
+      $('.prereqfield:first').clone().appendTo(".addNew");
+    },
+    error: function() {
+      console.log('Error');
+    }
+  });
+}
+
+
+/*
+
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#div1").load("demotext.txt");
+  });
+});
+*/
