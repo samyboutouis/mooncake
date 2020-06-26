@@ -12,10 +12,13 @@
               <div class="col">
                 <div class="request-box">
                   <%= active_request(request) %>
-                  <img class="trash" src="/assets/trash.png", delete_request_path(request), method: :delete>
-                  
-                  <a data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
-                    <p class="course"><%= request.course.department %> <%= request.course.course_number%> <%= request.course.section_number %> </p>
+
+                  <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
+                    <p class="course">
+                      <%= request.course.department %> <%= request.course.course_number%> <%= request.course.section_number %>
+                      <span class="fa fa-chevron-right pull-right expand-icon"> + </span>
+                      <span class = "fa fa-chevron-down pull-right expand-icon"> - </span>
+                    </p>
                   </a>
 
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">

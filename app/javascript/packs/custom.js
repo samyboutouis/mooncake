@@ -1,6 +1,5 @@
 var count = 0;
 $(document).ready(function () {
-
   $(".department").on('change', function() {
     getNumber($(this));
   });
@@ -12,7 +11,6 @@ $(document).ready(function () {
   $("#add-prereq").on('click', function() {
     createField();
   });
-
 });
 
 function getNumber(element) {
