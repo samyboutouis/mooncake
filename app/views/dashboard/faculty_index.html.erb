@@ -2,15 +2,15 @@
   <div class="row">
     <div class="col">
       <div class="box">
-        <h1 class="title">Active Requests - <%= @user.first_name %> INSTRUCTOR </h1>
+        <h1 class="title">My Courses - <%= @user.first_name %> INSTRUCTOR </h1>
+        <%= no_course(@user)%>
         <div class="container">
-          <% for request in @user.course_requests do %>
+          <% for course in @user.courses do %>
             <div class="row">
               <div class="col">
                 <div class="request-box">
-                  <%= active_request(request) %>
                   <img class="trash" src="/assets/trash.png">
-                  <p><%= request.course.department %> <%= request.course.course_number%></p>
+                  <p> <%= course.department%> <%= course.course_number%></p>
                 </div>
               </div>
             </div>
