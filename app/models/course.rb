@@ -6,7 +6,7 @@ class Course < ApplicationRecord
     end
     has_and_belongs_to_many :questions
     before_destroy do
-        questions.each { |question| question.destroy if question.id>6 }
+        questions.each { |question| question.destroy if question.id>5 }
     end
     has_many :course_requests
     before_destroy do

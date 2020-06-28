@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
     def course
         $course = nil
         $course = Course.find(params[:course])
-        Question.find_by(question_text: "Which courses have you taken:").update(option: $course.prereqs.pluck(:name))
         redirect_to question_path
     end
 
@@ -15,7 +14,11 @@ class QuestionsController < ApplicationController
     def create_form
         $course.questions = Course.find($course.id).questions
         if $course.questions.count == 0
-            $course.questions << Question.find(1,2,3,4,5,6)
+            $course.questions << Question.find(1,2,3,4,5)
+        end
+        if $course.questions.pluck(:question_text).include? "Which courses have you taken:"
+        else
+            $course.questions.create(question_type:  "Checkbox", question_text: "Which courses have you taken:", option: $course.prereqs.pluck(:name))
         end
         @question = $course.questions
     end
@@ -34,7 +37,7 @@ class QuestionsController < ApplicationController
     def delete
         id = params[:id]
         $course.questions.destroy(Question.find(id))
-        if id.to_i > 6
+        if id.to_i > 5
             Question.destroy(id)
         end
         redirect_to question_path

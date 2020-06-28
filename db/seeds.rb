@@ -5,4 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-questions = Question.create([{question_type:  "text", question_text: "Full name:"}, {question_type:  "text", question_text: "Email:"}, {question_type:  "text", question_text: "Graduation year:"}, {question_type:  "text", question_text: "Please enter your majors, separated by comma:"}, {question_type:  "text", question_text: "Please enter your minors, separated by comma:"}, {question_type:  "Checkbox", question_text: "Which courses have you taken:"}])
+questions = Question.create([{question_type:  "text", question_text: "Full name:"}, {question_type:  "text", question_text: "Email:"}, {question_type:  "text", question_text: "Graduation year:"}, {question_type:  "text", question_text: "Please enter your majors, separated by comma:"}, {question_type:  "text", question_text: "Please enter your minors, separated by comma:"}])
