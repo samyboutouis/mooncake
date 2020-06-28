@@ -18,5 +18,6 @@ RUN bundle install
 ADD yarn.lock .
 ADD package.json .
 RUN yarn install --check-files
+RUN yarn add datatables.net-dt
 
 ADD  . .
