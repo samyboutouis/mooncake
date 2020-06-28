@@ -25,4 +25,8 @@ class DashboardController < ApplicationController
     @course = Course.find(params[:course])
   end
 
+  def deny
+    
+  end
+
 end

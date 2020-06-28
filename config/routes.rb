@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
 
+  #Accept/Deny
+  get "/deny" => "dashboard#deny", as: "deny"
+  
+
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
   get "/requestform/:request" => "dashboard#view" , as: "request_form"
   get "/student" => "user#show", as: "student_show"

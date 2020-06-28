@@ -6,23 +6,35 @@
     <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
       <thead>
         <tr>
-        <% @course.questions.each do |question| %>
-        <th> <%= question.question_text %> </th>
-        <% end %>
+          <% @course.questions.each do |question| %>
+            <th> <%= question.question_text %> </th>
+          <% end %>
+          <th> Accept/Deny Request </th>
         </tr>
       </thead>
       <tbody>
         <% @course.course_requests.each do |request| %>
-        <tr>
-          <% request.answers.each do |answer| %>
-          <% if answer.question.question_type == "Checkbox"%>
-            <td><%= answer.answer_text.gsub("~", ", ") %></td>
-          <% else %>
-            <td><%= answer.answer_text %></td>
-          <% end %>
-          <% end %>
-        </tr>
+          <tr>
+            <% request.answers.each do |answer| %>
+              <% if answer.question.question_type == "Checkbox"%>
+                <td><%= answer.answer_text.gsub("~", ", ") %></td>
+              <% else %>
+                <td><%= answer.answer_text %></td>
+              <% end %>
+              
+            <% end %>
+            <td>
+
+              
+              <%= link_to "Deny", {:controller => :dashboard, :action => :deny}, {class: "btn btn-primary btn-sm"}%>
+              <button type="button" class="btn btn-success btn-sm accept">Accept</button>
+              <button type="button" class="btn btn-danger btn-sm deny">Deny</button>
+            </td>
+            
+          </tr>
         <% end %>
+        
+            
       </tbody>
   </table>
 </div>
