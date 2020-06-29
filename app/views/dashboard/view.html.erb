@@ -1,0 +1,16 @@
+<div class = "container">
+<h1> Request form for <%= @course_request.course.department + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h1>
+
+<% for answer in @course_request.answers %>
+
+    <p><%= answer.question.question_text %></p>
+    <% if answer.question.question_type == "Checkbox" %>
+        <% for option in answer.answer_text.split("~") do %>
+            <p><%= option %></p>
+        <% end %>
+    <% else %>
+        <p><%= answer.answer_text %></p>
+    <% end %>
+    
+<% end %>
+
