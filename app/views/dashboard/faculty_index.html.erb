@@ -14,7 +14,7 @@
 
                   <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
                     <p class="course">
-                      <p> <%= course.department%> <%= course.course_number%> - <%= course.section_number%> </p>
+                      <%= course.department%> <%= course.course_number%> - <%= course.section_number%>
                       <span class="fa fa-chevron-right pull-right expand-icon"> + </span>
                       <span class="fa fa-chevron-down pull-right expand-icon"> - </span>
                     </p>
@@ -23,8 +23,8 @@
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
                     <div >
                       Course Capacity: <%= course.capacity %> <br>
-                      Number of Requests: <%= course.capacity %> <br>
-                      Permission Numbers: <%= course.capacity %> <br>
+                      Number of Requests: <%= course.course_requests.length %> <br>
+                      Permission Numbers: <%= course.permission_numbers %> <br>
                       <%= link_to "View requests", request_form_path(request), method: :get%> <br>
                       <%= link_to "Delete Course", delete_course_path(request), method: :delete, data: {confirm: "Are you sure?"}%>
                     </div>
