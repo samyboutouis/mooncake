@@ -1,5 +1,5 @@
 <div class="container">
-  <h2> Request Permission for <%= @course_request.course.department + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h2>
+  <h2> Request Permission for <%= @course_request.course.department.split("-").first + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h2>
   <form action="/data">
     <div class="form-group">
       <label for="name"> Full name: </label>

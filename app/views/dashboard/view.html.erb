@@ -1,5 +1,5 @@
 <div class = "container">
-<h1> Request form for <%= @course_request.course.department + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h1>
+<h1> Request form for <%= @course_request.course.department.split("-").first + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h1>
 
 <% for answer in @course_request.answers %>
 

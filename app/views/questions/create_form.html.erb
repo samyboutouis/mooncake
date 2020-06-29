@@ -1,5 +1,5 @@
 <div class="container">
-<h1> Create Form for <%= $course.department %> <%= $course.course_number %> </h1>
+<h1> Create Form for <%= $course.department.split("-").first %> <%= $course.course_number %> <%= $course.section_number %> </h1>
 <h2> Questions: </h2>
 
 <div class="form-group">

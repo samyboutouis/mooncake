@@ -14,7 +14,7 @@
 
                   <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
                     <p class="course">
-                      <%= course.department%> <%= course.course_number%> - <%= course.section_number%>
+                      <%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%>
                       <span class="fa fa-chevron-right pull-right expand-icon"> + </span>
                       <span class="fa fa-chevron-down pull-right expand-icon"> - </span>
                     </p>
