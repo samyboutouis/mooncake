@@ -1,3 +1,5 @@
+require "csv"
+
 class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:department, :course_number, :section_number, :capacity, prereqs_attributes: [:name])
@@ -10,6 +12,12 @@ class CoursesController < ApplicationController
 
   def create
     if course = Course.create(course_params)
+      file = params[:course][:file]
+      CSV.foreach(file, :headers => true) do |row|
+        puts row[0]
+        puts row[7]
+        course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+      end      
       course.seats_taken = 0
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
