@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_154418) do
     t.string "course_number"
     t.string "section_number"
     t.integer "capacity"
+    t.integer "seats_taken"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

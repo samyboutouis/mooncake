@@ -2,11 +2,6 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:department, :course_number, :section_number, :capacity, prereqs_attributes: [:name])
   end
-  
-  def index
-    @user = $current_user
-    @course = @user.courses
-  end
 
   def new
     @course = Course.new
@@ -14,8 +9,8 @@ class CoursesController < ApplicationController
   end
 
   def create
-
     if course = Course.create(course_params)
+      course.seats_taken = 0
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
         prereqs = course.prereqs.create(name: name[1]["name"])
@@ -23,13 +18,8 @@ class CoursesController < ApplicationController
       $current_user.courses << course
       redirect_to questioncourse_path(course), alert: "Course created successfully."
     else
-      redirect_to new_course_path, alert: "Error creating course."
+      redirect_to faculty_url, alert: "Error creating course."
     end
-
-  end
-
-  def show
-    @course = Course.find(params[:id])
   end
 
   def delete

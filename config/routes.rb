@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   get '/courserequests/new' => "course_request#new", as: "new_course_request"
 
   #create course routes
-  get '/courses' => "courses#index", as: "course"
   get '/courses/new' => "courses#new", as: "new_course"
   post '/courses' => "courses#create"
   delete '/courses/:id' => 'courses#delete', as: "delete_course"

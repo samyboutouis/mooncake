@@ -5,6 +5,7 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.string :course_number
       t.string :section_number
       t.integer :capacity
+      t.integer :seats_taken
 
       t.timestamps
     end

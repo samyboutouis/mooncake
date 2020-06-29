@@ -10,6 +10,8 @@
             <div class="row">
               <div class="col">
                 <div class="request-box">
+                  <%= course_status(course) %>
+
                   <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
                     <p class="course">
                       <%= course.department%> <%= course.course_number%> - <%= course.section_number%>
@@ -20,7 +22,7 @@
 
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
                     <div >
-                      Course Capacity: <%= course.capacity %> <br>
+                      Permission Numbers Granted: <%= course.seats_taken %> / <%= course.capacity %> <br>
                       Number of Requests: <%= course.course_requests.length %> <br>
                       <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
                       <% if course.prereqs.first.name == "" %>
@@ -47,7 +49,6 @@
           <% end %>
         </div>
         <a href="<%= new_course_path %>"><button class="btn btn-dark" type="button">Create a Course</button></a>
-        <a href="<%= course_path %>"><button class="btn btn-dark" type="button">View All Course Details</button></a>
       </div>
     </div>
   </div>
