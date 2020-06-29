@@ -91,7 +91,7 @@ a[aria-expanded=true] .fa-chevron-right {
 
 a[aria-expanded=false] .fa-chevron-down {
     display: none;
-} 
+}
 
 /* Desktop only */
 @media only screen and (min-width: 1000px){
