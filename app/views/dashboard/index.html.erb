@@ -24,8 +24,8 @@
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
                     <div >
                       Status: <%= request.status %> <br>
-                      <%= link_to "View request form", request_form_path(request), method: :get%> <br>
-                      <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}%>
+                      <%= link_to "View request form", request_form_path(request), method: :get, class:"btn btn-outline-primary" %> 
+                      <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger"%>
                     </div>
                   </div>
 
@@ -35,7 +35,7 @@
             <% i += 1 %>
           <% end %>
         </div>
-        <a href="<%= search_path %>"><button class="btn btn-outline-primary" type="button">Request a permission number</button></a>
+        <a href="<%= search_path %>"><button class="btn btn-dark" type="button">Request a permission number</button></a>
       </div>
     </div>
   </div>
