@@ -1,59 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Create a New Course</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-  <body>
-    <div class="col">
-      <div class="box">
-        <h1 class="title">Create A Course</h1>
-        <%= form_for @course do |f| %>
-          <div class="form-group row" style="padding: 10px 20px 0px">
-            <%= f.label :department, "Department: ", for: "formGroupExampleInput" %>
-            <%= f.select :department, options_for_select([["Select One", ""], "COMPSCI", "ECON", "MATH", "ARTSVIS", "VMS"]), {}, class:"form-control", id:"exampleFormControlSelect1 department" %>
+<% departments = [["Select One", ""], "AAAS - African & African Amer Studies", "AEROSCI - Aerospace Studies-AFROTC", Aerospace Studies-AFROTC AMES - Asian & Middle Eastern Studies Asian & Middle Eastern Studies AMI - Arts of the Moving Image Arts of the Moving Image ARABIC - Arabic Arabic ARTHIST - Art History Art History ARTS&SCI - Arts and Science IDEAS themes Arts and Science IDEAS themes ARTSVIS - Visual Arts Visual Arts BALTFIN - Balto-Finnic Balto-Finnic BIOCHEM - Biochemistry Biochemistry BIOETHIC - Bioethics and Science Policy Bioethics and Science Policy BIOLOGY - Biology Biology BME - Biomedical Engineering Biomedical Engineering BRAINSOC - Brain & Society Brain & Society CEE - Civil and Environmental Egr Civil and Environmental Egr CELLBIO - Cell Biology Cell Biology CESC - Civic Engagement&Social Change Civic Engagement&Social Change CHEM - Chemistry Chemistry CHILDPOL - Child Policy Child Policy CHINESE - Chinese Chinese CLST - Classical Studies Classical Studies COMPSCI - Computer Science Computer Science CREOLE - Creole Creole CULANTH - Cultural Anthropology Cultural Anthropology DANCE - Dance Dance DECSCI - Decision Sciences Program Decision Sciences Program DOCST - Documentary Studies Documentary Studies ECE - Electrical & Computer Egr Electrical & Computer Egr ECON - Economics Economics EDUC - Education Education EGR - Engineering Engineering EHD - Education and Human Developmnt Education and Human Developmnt ENERGY - Energy Energy ENGLISH - English English ENRGYEGR - Energy Engineering Energy Engineering ENVIRON - Environment Environment EOS - Earth and Ocean Sciences Earth and Ocean Sciences ETHICS - Study of Ethics Study of Ethics EVANTH - Evolutionary Anthropology Evolutionary Anthropology FOCUS - Focus Focus FRENCH - French French GENOME - Genome Sciences and Policy Genome Sciences and Policy GEOADMIN - Global Education Admn Use Only Global Education Admn Use Only GERMAN - German German GLHLTH - Global Health Global Health GREEK - Greek Greek GSF - Gender Sexuality & Feminist St Gender Sexuality & Feminist St HEBREW - Hebrew Hebrew HINDI - Hindi Hindi HISTORY - History History HOUSECS - House Course House Course HUMANDEV - Human Development Human Development I&E - Innovation & Entrepreneurship Innovation & Entrepreneurship ICS - Internatl Comparative Studies Internatl Comparative Studies IDS - Interdisciplinary Data Science Interdisciplinary Data Science IMMUNOL - Immunology Immunology ISS - Information Science + Studies Information Science + Studies ITALIAN - Italian Italian IUSC_AMI - IUSC_AMI (Taught at USC) IUSC_AMI (Taught at USC) IUSC_PPS - IUSC_PPS (Taught at USC) IUSC_PPS (Taught at USC) IUSC_THT - IUSC_THT (Taught at USC) IUSC_THT (Taught at USC) JEWISHST - Jewish Studies Jewish Studies JPN - Japanese Japanese KICHE - K'iche' Maya K'iche' Maya KOREAN - Korean Korean LATAMER - Latin American Studies Latin American Studies LATIN - Latin Latin LINGUIST - Linguistics Linguistics LIT - Literature Literature LSGS - Latino Studies Global South Latino Studies Global South MATH - Mathematics Mathematics ME - Mechanical Engr/Materials Sci Mechanical Engr/Materials Sci MEDREN - Medieval and Renaissance Medieval and Renaissance MGM - Molec Genetics & Microbiology Molec Genetics & Microbiology MILITSCI - Military Science (Army ROTC) Military Science (Army ROTC) MMS - Markets and Management Studies Markets and Management Studies MUSIC - Music Music NAVALSCI - Naval Science (Navy ROTC) Naval Science (Navy ROTC) NEUROBIO - Neurobiology Neurobiology NEUROSCI - Neuroscience Neuroscience PATHOL - Pathology Pathology PERSIAN - Persian Persian PHARM - Pharm and Cancer Biology Pharm and Cancer Biology PHIL - Philosophy Philosophy PHYSEDU - Physical Education Physical Education PHYSICS - Physics Physics PJMS - Policy Journalism and Media St Policy Journalism and Media St POE - Practice-Oriented Education Practice-Oriented Education POLISH - Polish Polish POLSCI - Political Science Political Science PORTUGUE - Portuguese Portuguese PSY - Psychology Psychology PUBPOL - Public Policy Public Policy QUECHUA - Quechua Quechua REG - Registration Registration RELIGION - Religion Religion RIGHTS - Human Rights Human Rights ROMANIAN - Romanian Romanian ROMST - Romance Studies Romance Studies RUSSIAN - Russian Russian SANSKRIT - Sanskrit Sanskrit SCISOC - Science & Society Science & Society SERBCRO - Serbian and Croatian Serbian and Croatian SES - Slavic and Eurasian Studies Slavic and Eurasian Studies SOCIOL - Sociology Sociology SPANISH - Spanish Spanish STA - Statistical Science Statistical Science SUSTAIN - Sustainability Engagement Sustainability Engagement SXL - Study of Sexualities Study of Sexualities THEATRST - Theater Studies Theater Studies TIBETAN - Tibetan Tibetan TURKISH - Turkish Turkish UKRAIN - Ukrainian Ukrainian URDU - Urdu Urdu UZBEK - Uzbek Uzbek VMS - Visual and Media Studies Visual and Media Studies WRITING - Writing Writing]%>
+<div class="col">
+<div class="box">
+  <h1 class="title">Create A Course</h1>
+  <%= form_for @course do |f| %>
+    <div class="form-group row" style="padding: 10px 20px 0px">
+      <%= f.label :department, "Department: ", for: "formGroupExampleInput" %>
+      <%= f.select :department, options_for_select([["Select One", ""], "COMPSCI", "ECON", "MATH", "ARTSVIS", "VMS"]), {}, class:"form-control", id:"exampleFormControlSelect1 department" %>
+    </div>
+
+    <div class="form-group row" style="padding: 10px 20px 0px">
+      <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
+      <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number" %>
+    </div>
+
+    <div class="form-group row" style="padding: 10px 20px 0px">
+      <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
+      <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number" %>
+    </div>
+
+    <div class="form-group row" style="padding: 10px 20px 0px">
+      <%= f.label :capacity, "Course Capacity: ", for: "formGroupExampleInput" %>
+      <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity" %>
+    </div>
+
+    <div class="form row", style="padding: 10px 20px 0px">
+      <%= f.fields_for :prereqs do |prereqs_form| %>
+          <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
+          <div class="form-group form-inline addNew">
+            <input name="prereq_attributes[0]name" type="text" placeholder="Ex: COMPSCI 101" class="form-control prereqfield" id="formGroupExampleInput prereq", style="margin: 0px 0px 10px 5px"/>
           </div>
 
-          <div class="form-group row" style="padding: 10px 20px 0px">
-            <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
-            <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number" %>
-          </div>
-
-          <div class="form-group row" style="padding: 10px 20px 0px">
-            <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
-            <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number" %>
-          </div>
-
-          <div class="form-group row" style="padding: 10px 20px 0px">
-            <%= f.label :capacity, "Course Capacity: ", for: "formGroupExampleInput" %>
-            <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity" %>
-          </div>
-
-          <div class="form row", style="padding: 10px 20px 0px">
-            <%= f.fields_for :prereqs do |prereqs_form| %>
-                <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
-                <div class="form-group form-inline addNew">
-                  <input name="prereq_attributes[0]name" type="text" placeholder="Ex: COMPSCI 101" class="form-control prereqfield" id="formGroupExampleInput prereq", style="margin: 0px 0px 10px 5px"/>
-                </div>
-
-            <% end %>
-          </div>
-          
-          <div class="form-group row" style="padding: 10px 6px 0px">
-            <div class="col-sm-10">
-              <button type="button" class="btn btn-secondary add", id="add-prereq"> Add Another Course Prerequisite </button>
-            </div>
-          </div>
-
-          <div class="form-group row" style="padding: 10px 6px 0px">
-            <div class="col-sm-10">
-              <%= link_to "Cancel", faculty_url, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
-              <%= f.submit "Create", class: "btn btn-dark" %>
-            </div>
-          </div>
-        <% end %>
+      <% end %>
+    </div>
+    
+    <div class="form-group row" style="padding: 10px 6px 0px">
+      <div class="col-sm-10">
+        <button type="button" class="btn btn-secondary add", id="add-prereq"> Add Another Course Prerequisite </button>
       </div>
     </div>
-  </body>
-</html>
+
+    <div class="form-group row" style="padding: 10px 6px 0px">
+      <div class="col-sm-10">
+        <%= link_to "Cancel", faculty_url, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
+        <%= f.submit "Create", class: "btn btn-dark" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+
