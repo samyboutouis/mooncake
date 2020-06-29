@@ -5,15 +5,35 @@
         <h1 class="title">My Courses - <%= @user.first_name %> INSTRUCTOR </h1>
         <%= no_course(@user)%>
         <div class="container">
+          <% i = 0 %>
           <% @courses.each do |course| %>
             <div class="row">
               <div class="col">
                 <div class="request-box">
-                  <a data-confirm="Are you sure?" data-method="Delete" href="<%= delete_course_path(course) %>"> <img class="trash" src="/assets/trash.png"> </a>
-                  <p> <%= course.department%> <%= course.course_number%> - <%= course.section_number%> </p>
+                  <div id="circle" class="circle persimmon"></div>
+
+                  <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
+                    <p class="course">
+                      <p> <%= course.department%> <%= course.course_number%> - <%= course.section_number%> </p>
+                      <span class="fa fa-chevron-right pull-right expand-icon"> + </span>
+                      <span class="fa fa-chevron-down pull-right expand-icon"> - </span>
+                    </p>
+                  </a>
+
+                  <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
+                    <div >
+                      Course Capacity: <%= course.capacity %> <br>
+                      Number of Requests: <%= course.capacity %> <br>
+                      Permission Numbers: <%= course.capacity %> <br>
+                      <%= link_to "View requests", request_form_path(request), method: :get%> <br>
+                      <%= link_to "Delete Course", delete_course_path(request), method: :delete, data: {confirm: "Are you sure?"}%>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
+            <% i += 1 %>
           <% end %>
         </div>
         <a href="<%= new_course_path %>"><button class="btn btn-outline-primary" type="button">Create a Course</button></a>

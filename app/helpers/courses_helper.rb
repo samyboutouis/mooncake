@@ -3,6 +3,7 @@ module CoursesHelper
     return nil
   end
 
+
   def no_course(user)
       if user.courses.length() == 0
           return '<p>You have created no courses for this term</p>'.html_safe
