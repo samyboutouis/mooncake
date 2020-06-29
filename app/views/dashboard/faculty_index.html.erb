@@ -22,7 +22,19 @@
                     <div >
                       Course Capacity: <%= course.capacity %> <br>
                       Number of Requests: <%= course.course_requests.length %> <br>
-                      Permission Numbers: <%= course.permission_numbers %> <br>
+                      <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
+                      <% if course.prereqs.first.name == "" %>
+                        Prerequisites: N/A
+                      <% else%>
+                        Prerequisites: <% course.prereqs.each do |prereq| %>
+                          <% if course.prereqs.last == prereq%>
+                            <%= prereq.name %>
+                          <% else %>
+                            <%= prereq.name %>, 
+                          <%end%> 
+                        <% end %>
+                      <% end %>
+                      <br>
                       <%= link_to "View requests", request_form_path(request), method: :get%> <br>
                       <%= link_to "Delete Course", delete_course_path(request), method: :delete, data: {confirm: "Are you sure?"}%>
                     </div>
