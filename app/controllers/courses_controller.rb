@@ -6,7 +6,6 @@ class CoursesController < ApplicationController
   def index
     @user = $current_user
     @course = @user.courses
-    #byebug
   end
 
   def new
@@ -50,7 +49,6 @@ class CoursesController < ApplicationController
     end
     $current_user.courses.destroy(course)
     Course.destroy(id)
-    byebug
     redirect_to faculty_url
   end
 
