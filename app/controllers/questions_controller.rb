@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
     def create_form
         $course.questions = Course.find($course.id).questions
         # if $course.questions.count == 0
-        #     $course.questions << Question.find(42,43,44)
+        #     $course.questions << Question.find(1,2,3,4,5,6,7)
         # end
         @question = $course.questions
     end
@@ -33,6 +33,9 @@ class QuestionsController < ApplicationController
     def delete
         id = params[:id]
         $course.questions.destroy(Question.find(id))
+        # if id.to_i > 7
+        #     Question.destroy(id)
+        # end
         Question.destroy(id)
         redirect_to question_path
     end
