@@ -4,10 +4,6 @@ $(document).ready(function () {
   $("#add-prereq").on('click', function() {
     createField();
   });
-
-
-
-
 });
 
 

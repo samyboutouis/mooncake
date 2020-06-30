@@ -1,3 +1,4 @@
-$(document).ready(function(){
-    $('#myTable').DataTable();
+$(document).ready(function () {
+    $.noConflict();
+    var table = $('#myTable').DataTable();
 });

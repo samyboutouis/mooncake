@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="app/assets/stylesheets/facreqview.css">
 <h1> Course Requests for <%= @course.department %> <%= @course.course_number %> </h1>
 
 
@@ -16,7 +15,7 @@
         <tr>
           <% request.answers.each do |answer| %>
           <% if answer.question.question_type == "Checkbox"%>
-            <td><%= answer.answer_text.split("~") %></td>
+            <td><%= answer.answer_text.gsub("~", ", ") %></td>
           <% else %>
             <td><%= answer.answer_text %></td>
           <% end %>
@@ -26,5 +25,3 @@
       </tbody>
   </table>
 </div>
-
-

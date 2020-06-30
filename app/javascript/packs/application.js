@@ -5,20 +5,11 @@
 import "bootstrap";
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
-require("channels")
-require( 'jszip' );
-require( 'pdfmake' );
-require( 'datatables.net-bs4' )();
-require( 'datatables.net-buttons-bs4' )();
-require( 'datatables.net-buttons/js/buttons.html5.js' )();
-require( 'datatables.net-responsive-bs4' )();
-require( 'datatables.net-scroller-bs4' )();
-require( 'datatables.net-searchpanes-bs4' )();
-require( 'datatables.net-select-bs4' )();
-require("packs/custom")
-require("packs/form")
-require("packs/courses")
-require("packs/facreqview")
+require("channels");
+require("packs/custom");
+require("packs/form");
+require("packs/courses");
+require("packs/facreqview");
 var $  = require( 'jquery' );
 var dt = require( 'datatables.net' )( window, $ );
 

@@ -37,7 +37,7 @@
                         <% end %>
                       <% end %>
                       <br>
-                      <%= link_to "View requests", request_form_path(course), method: :get, class:"btn btn-outline-primary" %> 
+                      <%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %> 
                       <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
                     </div>
                   </div>
