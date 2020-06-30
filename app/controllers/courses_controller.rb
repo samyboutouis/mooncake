@@ -16,7 +16,9 @@ class CoursesController < ApplicationController
       $current_user.courses << course
       file = params[:course][:file]
       CSV.foreach(file, :headers => true) do |row|
-        course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+        unless row[0] == nil
+          course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+        end
       end      
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
