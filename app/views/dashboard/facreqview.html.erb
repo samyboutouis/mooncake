@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="app/assets/stylesheets/facreqview.css">
-  
+<h1> Course Requests for <%= @course.department %> <%= @course.course_number %> </h1>
+
+
 <div class="table-responsive">
     <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;"> 
       <thead>
@@ -13,7 +15,11 @@
         <% @course.course_requests.each do |request| %>
         <tr>
           <% request.answers.each do |answer| %>
-          <td><%= answer.answer_text %></td>
+          <% if answer.question.question_type == "Checkbox"%>
+            <td><%= answer.answer_text.split("~") %></td>
+          <% else %>
+            <td><%= answer.answer_text %></td>
+          <% end %>
           <% end %>
         </tr>
         <% end %>
