@@ -1,6 +1,3 @@
-<link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
-
-<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
 
 <select class="custom-select my-1 mr-sm-2 question" id="inlineFormCustomSelectPref"  name="question">
     <option selected>Sort by</option>
@@ -17,10 +14,10 @@
         <th> <%= question.question_text %> </th>
         <% end %>
       </thead>
-      <tbody>
-        <% @course_request.each do |request| %>
+      <tbody id= "answers" class = "ans">
+        <% @answer.each do |answer| %>
         <tr>
-          <% request.answers.each do |answer| %>
+          <% answer.course_request.answers.each do |answer| %>
           <td><%= answer.answer_text %></td>
           <% end %>
         </tr>
