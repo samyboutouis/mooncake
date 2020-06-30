@@ -1,23 +1,18 @@
-
-<select class="custom-select my-1 mr-sm-2 question" id="inlineFormCustomSelectPref"  name="question">
-    <option selected>Sort by</option>
-    <% questions = @course.questions.pluck(:question_text) %>
-    <% for question in questions do %>
-        <option name = 'question'><%= question %></option>
-    <% end %>
-</select>
-
+<link rel="stylesheet" type="text/css" href="app/assets/stylesheets/facreqview.css">
+  
 <div class="table-responsive">
-    <table data-toggle="table" class="table table-striped", style="background-color:white;"> 
+    <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;"> 
       <thead>
+        <tr>
         <% @course.questions.each do |question| %>
         <th> <%= question.question_text %> </th>
         <% end %>
+        </tr>
       </thead>
-      <tbody id= "answers" class = "ans">
-        <% @answer.each do |answer| %>
+      <tbody>
+        <% @course.course_requests.each do |request| %>
         <tr>
-          <% answer.course_request.answers.each do |answer| %>
+          <% request.answers.each do |answer| %>
           <td><%= answer.answer_text %></td>
           <% end %>
         </tr>

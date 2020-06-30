@@ -27,18 +27,18 @@ class DashboardController < ApplicationController
 
   def facreqview
     @course = Course.first
-    @course_request = @course.course_requests
-    if params[:question_text].present?
-      @question = Question.find_by(question_text: params[:question_text])
-      @answer = @question.answers.order(:answer_text)
-    else
-      @answer = Question.first.answers
-    end
+    # @course_request = @course.course_requests
+    # if params[:question_text].present?
+    #   @question = Question.find_by(question_text: params[:question_text])
+    #   @answer = @question.answers.order(:answer_text)
+    # else
+    #   @answer = Question.first.answers
+    # end
   end
 
 
   #FAILED ATTEMPTS
-    
+
     # list = []
     # for request in @course_request do
     #   h = {}
