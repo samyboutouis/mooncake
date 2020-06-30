@@ -1,12 +1,10 @@
 class DashboardController < ApplicationController
+
+#Student side 
+
   def index
     @user = User.find_by(net_id: $current_user.net_id)
     $course_request = @user.course_requests
-  end
-
-  def faculty_index
-    @user = $current_user
-    @courses = @user.courses.all
   end
 
   def withdraw
@@ -18,4 +16,17 @@ class DashboardController < ApplicationController
   def view 
     @course_request = CourseRequest.find(params[:request])
   end
+
+
+# Faculty side
+
+  def faculty_index
+    @user = $current_user
+    @courses = @user.courses.all
+  end
+
+  def facreqview
+    @course = Course.first
+  end
+
 end

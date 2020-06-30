@@ -18,13 +18,6 @@ RUN bundle install
 ADD yarn.lock .
 ADD package.json .
 RUN yarn install --check-files
-RUN yarn add jszip
-RUN yarn add pdfmake
-RUN yarn add datatables.net-bs4
-RUN yarn add datatables.net-buttons-bs4
-RUN yarn add datatables.net-responsive-bs4
-RUN yarn add datatables.net-scroller-bs4
-RUN yarn add datatables.net-searchpanes-bs4
-RUN yarn add datatables.net-select-bs4
+RUN yarn add datatables.net-dt
 
 ADD  . .
