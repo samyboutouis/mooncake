@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
     def create_form
         $course.questions = Course.find($course.id).questions
         if $course.questions.count == 0
-            $course.questions << Question.find(1,2,4,5,6)
+            $course.questions << Question.find(1,2,3,4,5,6)
         end
         @question = $course.questions
     end
