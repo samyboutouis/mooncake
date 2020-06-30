@@ -1,5 +1,7 @@
-<h1> Course Requests for <%= @course.department %> <%= @course.course_number %> </h1>
+<link rel="stylesheet" type="text/css" href="app/assets/stylesheets/facreqview.css">
+<a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 5px"> Back to Courses</button></a>
 
+<h1> Course Requests for <%= @course.department.split("-")[0] %> <%= @course.course_number %> </h1>
 
 <div class="table-responsive">
     <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;"> 
