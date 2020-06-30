@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
       end
       redirect_to questioncourse_path(course), alert: "Course created successfully."
     else
-      redirect_to faculty_url, alert: "Error creating course."
+      redirect_to faculty_page_url, alert: "Error creating course."
     end
   end
 
@@ -32,7 +32,7 @@ class CoursesController < ApplicationController
     id = params[:id]
     course = Course.find(id)
     course.destroy
-    redirect_to faculty_url
+    redirect_to faculty_page_url
   end
 
 end
