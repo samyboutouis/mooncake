@@ -21,20 +21,25 @@
               <% else %>
                 <td><%= answer.answer_text %></td>
               <% end %>
-              
+
             <% end %>
             <td>
 
-              
-              <%= link_to "Deny", {:controller => :dashboard, :action => :deny}, {class: "btn btn-primary btn-sm"}%>
+            <% if request.status == "Under Review"%>
               <button type="button" class="btn btn-success btn-sm accept">Accept</button>
               <button type="button" class="btn btn-danger btn-sm deny">Deny</button>
+            <% elsif request.status == "Denied"%>
+              <p> Denied </p>
+            <% else %>
+              <p> Accepted </p>
+
+            <% end %>
             </td>
-            
+
           </tr>
         <% end %>
-        
-            
+
+
       </tbody>
   </table>
 </div>
