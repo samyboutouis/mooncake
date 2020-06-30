@@ -2,21 +2,6 @@
 <h1> Create Form for <%= $course.department.split("-").first %> <%= $course.course_number %> <%= $course.section_number %> </h1>
 <h2> Questions: </h2>
 
-<div class="form-group">
-    <label for="name"> Full name: </label>
-    <input type="text" class="form-control" id="name" name="name">
-</div>
-
-<div class="form-group">
-    <label for="email"> Email: </label>
-    <input type="email" class="form-control" id="email" placeholder="Ex: mp3@duke.edu" name="email">
-</div>
-
-<div class="form-group">
-    <label for="gradyear"> Graduation year: </label>
-    <input type="text" class="form-control" id="gradyear" placeholder="Ex: Maple Adkisson" name="gradyear">
-</div>
-
 <% $course.questions.each do |question| %>
 
     <div class="form-group">

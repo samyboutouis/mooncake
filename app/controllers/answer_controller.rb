@@ -11,7 +11,11 @@ class AnswerController < ApplicationController
         @user = $current_user
         for question in $course_request.course.questions
             if question.question_type == "Checkbox"
-                answer = params[question.question_text].join("~")
+                if params[question.question_text] == nil
+                    answer = ""
+                else
+                    answer = params[question.question_text].join("~")
+                end
             else
                 answer = params[question.question_text]
             end
