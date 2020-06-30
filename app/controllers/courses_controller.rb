@@ -12,18 +12,16 @@ class CoursesController < ApplicationController
 
   def create
     if course = Course.create(course_params)
+      course.seats_taken = 0
+      $current_user.courses << course
       file = params[:course][:file]
       CSV.foreach(file, :headers => true) do |row|
-        puts row[0]
-        puts row[7]
         course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
       end      
-      course.seats_taken = 0
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
         prereqs = course.prereqs.create(name: name[1]["name"])
       end
-      $current_user.courses << course
       redirect_to questioncourse_path(course), alert: "Course created successfully."
     else
       redirect_to faculty_url, alert: "Error creating course."
@@ -33,23 +31,7 @@ class CoursesController < ApplicationController
   def delete
     id = params[:id]
     course = Course.find(id)
-    course.prereqs.each do |prereq|
-      prereq.destroy
-    end
-    course.course_requests.each do |request|
-      request.answers.each do |answer|
-        answer.destroy 
-      end
-      request.destroy
-    end
-    course.questions.each do |question|
-      question.destroy
-    end
-    course.permission_numbers.each do |number|
-      number.destroy
-    end
-    $current_user.courses.destroy(course)
-    Course.destroy(id)
+    course.destroy
     redirect_to faculty_url
   end
 
