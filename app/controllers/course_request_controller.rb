@@ -41,7 +41,7 @@ class CourseRequestController < ApplicationController
         if @course_request.save
             redirect_to answer_path(@course_request), alert: "Course Request created successfully."
         else
-            render :new
+            redirect_to root_path, alert: "Error creating course."
         end
     end
 end
