@@ -40,12 +40,5 @@ class QuestionsController < ApplicationController
         redirect_to question_path
     end
 
-    # generate options for question
-    # def options
-    #     question_type = params[:question_type]
-    #     respond_to do |format|
-    #         format.json {render json: {question_type: question_type}}
-    #     end
-    # end
 end
 
