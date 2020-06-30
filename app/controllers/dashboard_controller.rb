@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
     redirect_to root_path
   end
 
-  def view 
+  def view
     @course_request = CourseRequest.find(params[:request])
   end
 
@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
   end
 
   def facreqview
-    @course = Course.find(params[:course])
+    @course = Course.first
   end
 
 end

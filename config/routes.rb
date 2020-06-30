@@ -4,15 +4,15 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "dashboard#index"
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
-  get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
+  get "/facreqview/" => "dashboard#facreqview", as: "requests_page"
 
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
   get "/requestform/:request" => "dashboard#view" , as: "request_form"
   get "/student" => "user#show", as: "student_show"
-  get '/oauth/login' => 'authentication#login' 
+  get '/oauth/login' => 'authentication#login'
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
-  get '/request' => 'course_request#expand' 
+  get '/request' => 'course_request#expand'
   get '/ldap' => 'authentication#authorize', as: 'ldap'
 
   #answer routes
@@ -39,4 +39,3 @@ Rails.application.routes.draw do
   post '/courses' => "courses#create"
   delete '/courses/:id' => 'courses#delete', as: "delete_course"
 end
-

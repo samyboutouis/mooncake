@@ -18,7 +18,7 @@
 </div>
 
 <% $course.questions.each do |question| %>
-    
+
     <div class="form-group">
     <p><%= question.question_text %></p>
     <% if question.question_type == "Checkbox" %>
@@ -34,13 +34,13 @@
             </div>
         <% end %>
     <% else %>
-        <input type= "text" class="form-control" id="reasons"  name="reasons"> 
+        <input type= "text" class="form-control" id="reasons"  name="reasons">
     <% end %>
 
 
     <%= link_to "Delete", delete_question_path(question), method: :delete , class:"btn btn-light btn-sm", style:"margin:10px 0px 10px"%>
     </div>
-    
+
     <div>
 <% end %>
 <div>
@@ -48,8 +48,4 @@
 <%= link_to "Add Question", new_question_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
 
 
-<%= link_to "Complete form", faculty_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
-
-
-
-
+<%= link_to "Complete form", faculty_page_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
