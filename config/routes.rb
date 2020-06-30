@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "dashboard#index"
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
-  get "/facreqview/" => "dashboard#facreqview", as: "requests_page"
+  get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
 
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
   get "/requestform/:request" => "dashboard#view" , as: "request_form"

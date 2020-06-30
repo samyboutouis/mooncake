@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
   end
 
   def facreqview
-    @course = Course.first
+    @course = Course.find(params[:course])
   end
 
 end

@@ -18,7 +18,6 @@ class AnswerController < ApplicationController
             $course_request.answers.create(answer_text: answer, question: question)
             # Answer.last << Question.find_by(question_text: question.question_text)
         end
-        puts params["major"]
         redirect_to root_url
     end
 
