@@ -26,13 +26,12 @@
             <td>
 
             <% if request.status == "Under Review"%>
-              <button type="button" class="btn btn-success btn-sm accept">Accept</button>
-              <button type="button" class="btn btn-danger btn-sm deny">Deny</button>
+              <a href="<%= accept_path(request) %>"><button type="button" class="btn btn-success btn-sm accept">Accept</button>
+              <a href="<%= deny_path(request) %>"><button type="button" class="btn btn-danger btn-sm deny">Deny</button>
             <% elsif request.status == "Denied"%>
               <p> Denied </p>
             <% else %>
               <p> Accepted </p>
-
             <% end %>
             </td>
 

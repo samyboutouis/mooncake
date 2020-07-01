@@ -26,7 +26,15 @@ class DashboardController < ApplicationController
   end
 
   def deny
-    
+    course = CourseRequest.find(params[:request]).course
+    CourseRequest.find(params[:request]).update(status: "Denied")
+    redirect_to requests_page_path(course)
+  end
+
+  def accept
+    course = CourseRequest.find(params[:request]).course
+    CourseRequest.find(params[:request]).update(status: "Accepted")
+    redirect_to requests_page_path(course)
   end
 
 end

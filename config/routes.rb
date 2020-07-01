@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
 
   #Accept/Deny
-  get "/deny" => "dashboard#deny", as: "deny"
+  get "/deny/:request" => "dashboard#deny", as: "deny"
+  get "/accept/:request" => "dashboard#accept", as: "accept"
   
 
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
