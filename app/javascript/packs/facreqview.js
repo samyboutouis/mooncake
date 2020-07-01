@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    var table = $('#myTable').DataTable();
+    var table = $('#myTable').DataTable( {
+        columnDefs: [ { orderable: false, targets: [0] } ],
+        order: [[ 1, 'asc' ]],
+    } );
 
     $(".accept").on('click', function() {
         var data = table.row( $(this).parents('tr') ).data();
@@ -10,27 +13,33 @@ $(document).ready(function () {
         var data = table.row( $(this).parents('tr') ).data();
         confirm("Are you sure you want to deny "+ data[0] + "'s request?");
     });
+
+    $('#myTable tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+    
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
 });
 
-// function getDeny(element) {
-//     let selected = element.val();
-//     var data = table.row( $(this).parents('tr') ).data();
-//     alert( data[0] );
-//     // $.ajax('/deny', {
-//     //   type: 'GET',
-//     //   dataType: 'json',
-//     //   data: {department: selected},
-//     //   success: function(result) {
-//     //     console.log('Success');
-//     //     $(".number").append("<option>Choose Course Number</option>");
-//     //     for (var i = 0; i < result.length; i++) {
-//     //       $(".number").append("<option>" + result[i].course_number + "</option>");
-//     //     }
-//     //   },
-//     //   error: function() {
-//     //     console.log('Error');
-//     //   }
-//     // });
-//   }
-  
-  
+
+
+function format ( d ) {
+    // `d` is the original data object for the row
+    
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d[0]+'</td>'
+        '</tr>'+
+    '</table>';
+}

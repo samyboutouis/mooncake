@@ -6,8 +6,11 @@
     <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
       <thead>
         <tr>
+          <th class="no sort"></th>
           <% @course.questions.each do |question| %>
-            <th> <%= question.question_text %> </th>
+            <% if (question.question_text != "Short Answer") &&  (question.question_text != "Long Answer")%>
+              <th> <%= question.question_text %> </th>
+            <% end %>
           <% end %>
           <th> Accept/Deny Request </th>
         </tr>
@@ -15,6 +18,7 @@
       <tbody>
         <% @course.course_requests.each do |request| %>
           <tr>
+            <td class="details-control"></td>
             <% request.answers.each do |answer| %>
               <% if answer.question.question_type == "Checkbox"%>
                 <td><%= answer.answer_text.gsub("~", ", ") %></td>
