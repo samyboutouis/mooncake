@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   #answer routes
   get '/form/:course_request'=> 'answer#form', as: "answer"
-  get '/data'=> 'answer#data'
+  get '/data'=> 'answer#data', as: "data"
 
   #faculty creating questions routes
   get '/questionsc/:course'=> 'questions#course', as: "questioncourse"
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   get '/search' => 'course_request#index', as: "search"
   get '/department' => 'course_request#department'
   get '/section' => 'course_request#section'
-  get '/courserequests' => 'course_request#create'
+  get '/courserequests' => 'course_request#submit'
   get '/courserequests/new' => "course_request#new", as: "new_course_request"
 
   #create course routes

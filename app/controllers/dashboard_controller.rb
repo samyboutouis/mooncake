@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   def index
     @user = User.find_by(net_id: $current_user.net_id)
-    $course_request = @user.course_requests
+    @course_request = @user.course_requests
   end
 
   def withdraw
