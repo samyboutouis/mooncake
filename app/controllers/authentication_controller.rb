@@ -26,9 +26,12 @@ class AuthenticationController < ApplicationController
       token = client.auth_code.get_token(auth_code, :redirect_uri => 'http://localhost:3000/oauth/callback')
       user_info = token.get("/oidc/userinfo")
       user_info = JSON.parse(user_info.body)
+      puts "********"
+      puts user_info
       session[:user_id] = user_info['dukeNetID']
       unless User.exists?(net_id: session[:user_id])
-        User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'])
+        User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'], email: user_info["email"])
+        UserMailer.with(email: user_info["email"]).welcome_email.deliver_now
       end  
       $current_user = User.find_by(net_id: session[:user_id])
       redirect_to ldap_path
@@ -61,7 +64,7 @@ class AuthenticationController < ApplicationController
       affiliation = information["edupersonprimaryaffiliation"].join(' ')
       $current_user.grad_year = information["dupsexpgradtermc1"].join(' ')
       $current_user.email = information["edupersonprincipalname"].join(' ')
-      User.find_by(net_id: $current_user.net_id).update(email: $current_user.email)
+      # User.find_by(net_id: $current_user.net_id).update(email: $current_user.email)
       if affiliation.include? 'staff'
         $current_user.user_type = 'staff'
         redirect_to 'http://localhost:3000/faculty'
