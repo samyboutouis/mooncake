@@ -34,6 +34,7 @@ class DashboardController < ApplicationController
   def accept
     course = CourseRequest.find(params[:request]).course
     CourseRequest.find(params[:request]).update(status: "Accepted")
+    course.increment!(:seats_taken)
     redirect_to requests_page_path(course)
   end
 

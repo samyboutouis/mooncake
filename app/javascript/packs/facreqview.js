@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     $(".deny").on('click', function() {
         var data = table.row( $(this).parents('tr') ).data();
-        alert("Deny "+ data[0] + "'s request");
+        confirm("Deny "+ data[0] + "'s request");
         getDeny($(this));
     });
 });
