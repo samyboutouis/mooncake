@@ -1,9 +1,9 @@
 class UserMailer < ApplicationMailer
- default from: 'notifications@example.com'
+ default from: 'ms858@duke.edu'
  
   def welcome_email
-    @user = params[:user]
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    puts "*****-----*****"
+    @user = User.find(1)
+    mail(to: "ms858@duke.edu", subject: 'Welcome to My Awesome Site')
   end
 end

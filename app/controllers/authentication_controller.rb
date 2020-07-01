@@ -61,6 +61,7 @@ class AuthenticationController < ApplicationController
       affiliation = information["edupersonprimaryaffiliation"].join(' ')
       $current_user.grad_year = information["dupsexpgradtermc1"].join(' ')
       $current_user.email = information["edupersonprincipalname"].join(' ')
+      User.find_by(net_id: $current_user.net_id).update(email: $current_user.email)
       if affiliation.include? 'staff'
         $current_user.user_type = 'staff'
         redirect_to 'http://localhost:3000/faculty'
