@@ -7,7 +7,7 @@ $(document).ready(function () {
             }],
         order: [[ 1, 'asc' ]],
     } );
-    let num = table.columns().count()
+    let num = table.columns().count();
     for (let i = 7; i < num - 1; i++){
         table.column(i).visible(false);
     }
