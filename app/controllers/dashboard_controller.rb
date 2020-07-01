@@ -34,14 +34,34 @@ class DashboardController < ApplicationController
   def accept
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
-    req.update(status: "Accepted")
-    course.increment!(:seats_taken)
-    perm = PermissionNumber.where(used: false).last
-    perm.course_request = req
-    perm.update(used: true)
-    redirect_to requests_page_path(course)
+    if course.permission_numbers.where(used: false).count == 0
+      redirect_to add_permnum_path(req)
+    else
+      req.update(status: "Accepted")
+      course.increment!(:seats_taken)
+      perm = course.permission_numbers.where(used: false).last
+      perm.course_request = req
+      perm.update(used: true)
+      redirect_to requests_page_path(course)
+    end
+    
   end
 
-  
+  def addpermnum
+    @request = CourseRequest.find(params[:req])
+    @course = @request.course
+  end
+
+  def add
+    course = CourseRequest.find(params[:request]).course
+    file = params[:file]
+    @request = CourseRequest.find(params[:request])
+    CSV.foreach(file, :headers => true) do |row|
+      unless row[0] == nil
+        course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+      end
+    end  
+    redirect_to accept_path(@request) 
+  end
 
 end
