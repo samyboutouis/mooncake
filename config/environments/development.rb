@@ -41,8 +41,9 @@ Rails.application.configure do
   config.active_support.deprecation = :log
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
+    address:             "smtp.duke.edu",
     port:                 25,
-    domain:               'duke.edu',
+    domain:               'duke.edu'
   }
 
   # Print deprecation notices to the Rails logger.

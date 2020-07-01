@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
- default from: 'ms858@duke.edu'
+ default from: 'noreply@duke.edu'
  
   def welcome_email
     puts "*****-----*****"
