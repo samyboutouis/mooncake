@@ -29,10 +29,10 @@
               <a href="<%= accept_path(request) %>"><button type="button" class="btn btn-success btn-sm accept">Accept</button>
               <a href="<%= deny_path(request) %>"><button type="button" class="btn btn-danger btn-sm deny">Deny</button>
             <% elsif request.status == "Denied"%>
-              <p> Denied </p>
+              <p style="color:red;"> Denied </p>
             <% else %>
-              <p> Accepted </p>
-              <p> Granted: <%= request.permission_number.number %> </p>
+              <p style="color:green;"> Accepted </p>
+              <p style="color:green;"> Granted: <%= request.permission_number.number %> </p>
             <% end %>
             </td>
 
