@@ -13,4 +13,12 @@ class UserMailer < ApplicationMailer
       @url = "http://localhost:3000/facreqview/" + @course.id.to_s
       mail(to: @user.email, subject: 'New Course Created')
   end
+
+  def request_submitted 
+    @user = params[:user]
+    @request = params[:request]
+    @course = @request.course
+    @url = "http://localhost:3000"
+    mail(to: @user.email, subject: 'Submitted Course Request')
+  end
 end
