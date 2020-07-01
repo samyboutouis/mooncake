@@ -1,16 +1,46 @@
-<div class = "container">
-<h1> Request form for <%= @course_request.course.department.split("-").first + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h1>
+<div class = "container-fluid">
+<h1 style = "margin: 20px 0"> Request form for <%= @course_request.course.department.split("-").first + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h1>
 
-<% for answer in @course_request.answers %>
+<div class="container">
+<div class="request-box" style = "padding-left: 0%">
+<table class="table table-striped" style = "margin: 20px 0">
 
-    <p><%= answer.question.question_text %></p>
+  <tbody>
+    <% i = 1%>
+    <% for answer in @course_request.answers %>
+    <tr>
+      <th scope="row"> <%= i%></th>
+      <td style = "font-weight: bold"><%= answer.question.question_text %></td>
+
+    </tr>
+    <% i+=1 %>
     <% if answer.question.question_type == "Checkbox" %>
-        <% for option in answer.answer_text.split("~") do %>
-            <p><%= option %></p>
-        <% end %>
+        
+            <tr>
+            <th scope="row"></th>
+                
+            
+            <td>
+            <% for option in answer.question.option do %>  
+            <% if answer.answer_text.split("~").include? option %>
+                <input type="checkbox" checked><%= option %> <br>
+            <% else%>
+                <input type="checkbox"> <%= option %> <br>
+            <% end %>
+            <% end %>
+            </td>
+            
+            </tr> 
+       
     <% else %>
-        <p><%= answer.answer_text %></p>
+        <tr>
+        <th scope="row"></th>
+        <td><%= answer.answer_text %></td>
+        </tr>
     <% end %>
-    
-<% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
 
