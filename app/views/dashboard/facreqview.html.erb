@@ -30,7 +30,7 @@
             <td>
 
             <% if request.status == "Under Review"%>
-              <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to deny #{request.user.first_name}?"}, class:"btn btn-success btn-sm accept"%>
+              <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to accept #{request.user.first_name}?"}, class:"btn btn-success btn-sm accept"%>
               <%= link_to "Deny", deny_path(request), data: {confirm: "Are you sure you want to deny #{request.user.first_name}?"}, class:"btn btn-danger btn-sm accept"%>
             <% elsif request.status == "Denied"%>
               <p style="color:red;"> Denied </p>
