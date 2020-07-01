@@ -10,28 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_192642) do
-
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
+ActiveRecord::Schema.define(version: 2020_06_23_154418) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer_text"
@@ -83,9 +62,11 @@ ActiveRecord::Schema.define(version: 2020_06_29_192642) do
     t.string "expire_date"
     t.boolean "used"
     t.integer "course_id", null: false
+    t.integer "course_request_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_permission_numbers_on_course_id"
+    t.index ["course_request_id"], name: "index_permission_numbers_on_course_request_id"
   end
 
   create_table "prereqs", force: :cascade do |t|
@@ -115,10 +96,10 @@ ActiveRecord::Schema.define(version: 2020_06_29_192642) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "course_requests"
   add_foreign_key "answers", "questions"
   add_foreign_key "course_requests", "courses"
   add_foreign_key "course_requests", "users"
+  add_foreign_key "permission_numbers", "course_requests"
   add_foreign_key "permission_numbers", "courses"
 end
