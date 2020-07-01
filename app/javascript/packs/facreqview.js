@@ -2,13 +2,13 @@ $(document).ready(function () {
     var table = $('#myTable').DataTable();
 
     $(".accept").on('click', function() {
-        getAccept($(this));
+        var data = table.row( $(this).parents('tr') ).data();
+        confirm("Are you sure you want to accept "+ data[0] + "'s request?");
     });
 
     $(".deny").on('click', function() {
         var data = table.row( $(this).parents('tr') ).data();
-        confirm("Deny "+ data[0] + "'s request");
-        getDeny($(this));
+        confirm("Are you sure you want to deny "+ data[0] + "'s request?");
     });
 });
 
