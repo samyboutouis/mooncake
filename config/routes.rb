@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   #Accept/Deny
   get "/deny/:request" => "dashboard#deny", as: "deny"
   get "/accept/:request" => "dashboard#accept", as: "accept"
+  get "/permnum/:req" => "dashboard#addpermnum", as: "add_permnum"
+  post "/add" => "dashboard#add", as: "add"
   
 
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"

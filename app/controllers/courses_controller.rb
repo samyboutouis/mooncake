@@ -15,6 +15,7 @@ class CoursesController < ApplicationController
       course.seats_taken = 0
       $current_user.courses << course
       file = params[:course][:file]
+      puts file
       CSV.foreach(file, :headers => true) do |row|
         unless row[0] == nil
           course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
