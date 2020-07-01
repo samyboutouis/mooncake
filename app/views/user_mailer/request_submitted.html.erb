@@ -9,7 +9,10 @@
         <%= @course.department.split("-").first + @course.course_number + "-" + @course.section_number%>
     </p>
     <p>
-      You can view your request for this course here: <%= @url %>
+      You can view the status for this request here: <%= @url %>
+    </p>
+    <p>
+      And the submitted answers here: <%= @url2 %>
     </p>
     <p> ==============================</p>
     <p> This email was automatically sent by Mooncake</p>

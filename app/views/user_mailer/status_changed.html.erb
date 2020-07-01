@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p> 
+    The status of your request for <%= @course.department.split("-").first + @course.course_number + "-" + @course.section_number%> has changed
+    </p>
+
+    <p>
+      You can view your status for this request here: <%= @url %>
+    </p>
+    <p> ==============================</p>
+    <p> This email was automatically sent by Mooncake</p>
+  </body>
+</html>

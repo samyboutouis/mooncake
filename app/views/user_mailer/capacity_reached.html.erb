@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+        <%= @course.department.split("-").first + @course.course_number + "-" + @course.section_number%> has reached its capacity of <%= @course.capacity %> seats
+    </p>
+    <p>
+      You can still add more students. Please do not delete the course until drop/add ends 
+    </p>
+    <p> ==============================</p>
+    <p> This email was automatically sent by Mooncake</p>
+  </body>
+</html>

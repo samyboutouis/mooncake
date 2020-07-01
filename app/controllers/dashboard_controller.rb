@@ -26,8 +26,10 @@ class DashboardController < ApplicationController
   end
 
   def deny
+    req = CourseRequest.find(params[:request])
     course = CourseRequest.find(params[:request]).course
     CourseRequest.find(params[:request]).update(status: "Denied")
+    UserMailer.with(user: $current_user, request: req).status_changed.deliver_now
     redirect_to requests_page_path(course)
   end
 
@@ -39,9 +41,13 @@ class DashboardController < ApplicationController
     else
       req.update(status: "Accepted")
       course.increment!(:seats_taken)
+      if course.seats_taken >= course.capacity
+        UserMailer.with(user: $current_user, course: course).capacity_reached.deliver_now
+      end
       perm = course.permission_numbers.where(used: false).last
       perm.course_request = req
       perm.update(used: true)
+      UserMailer.with(user: $current_user, request: req).status_changed.deliver_now
       redirect_to requests_page_path(course)
     end
     
