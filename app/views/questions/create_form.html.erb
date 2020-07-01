@@ -18,6 +18,8 @@
                 <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
             </div>
         <% end %>
+    <% elsif question.question_type == "Long Answer" %>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="reasons"></textarea>
     <% else %>
         <input type= "text" class="form-control" id="reasons"  name="reasons">
     <% end %>

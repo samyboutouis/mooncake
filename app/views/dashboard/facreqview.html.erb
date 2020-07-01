@@ -6,23 +6,44 @@
     <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
       <thead>
         <tr>
-        <% @course.questions.each do |question| %>
-        <th> <%= question.question_text %> </th>
-        <% end %>
+          <th class="no sort"></th>
+          <% @course.questions.each do |question| %>
+            <% if (question.question_text != "Short Answer") &&  (question.question_text != "Long Answer")%>
+              <th> <%= question.question_text %> </th>
+            <% end %>
+          <% end %>
+          <th> Accept/Deny Request </th>
         </tr>
       </thead>
       <tbody>
         <% @course.course_requests.each do |request| %>
-        <tr>
-          <% request.answers.each do |answer| %>
-          <% if answer.question.question_type == "Checkbox"%>
-            <td><%= answer.answer_text.gsub("~", ", ") %></td>
-          <% else %>
-            <td><%= answer.answer_text %></td>
-          <% end %>
-          <% end %>
-        </tr>
+          <tr>
+            <td class="details-control"></td>
+            <% request.answers.each do |answer| %>
+              <% if answer.question.question_type == "Checkbox"%>
+                <td><%= answer.answer_text.gsub("~", ", ") %></td>
+              <% else %>
+                <td><%= answer.answer_text %></td>
+              <% end %>
+
+            <% end %>
+            <td>
+
+            <% if request.status == "Under Review"%>
+              <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to accept #{request.user.first_name}?"}, class:"btn btn-success btn-sm accept"%>
+              <%= link_to "Deny", deny_path(request), data: {confirm: "Are you sure you want to deny #{request.user.first_name}?"}, class:"btn btn-danger btn-sm accept"%>
+            <% elsif request.status == "Denied"%>
+              <p style="color:red;"> Denied </p>
+            <% else %>
+              <p style="color:green;"> Accepted </p>
+              <p style="color:green;"> Granted: <%= request.permission_number.number %> </p>
+            <% end %>
+            </td>
+
+          </tr>
         <% end %>
+
+
       </tbody>
   </table>
 </div>

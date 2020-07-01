@@ -1,7 +1,7 @@
 <h1>Create A Question</h1>
 <%= form_for @question do |f| %>
     <%= f.label :question_type, "Question type: " %>
-    <%= id= f.select :question_type, options_for_select([["Select One", ""], "Text", "Checkbox", "Radio"])%>
+    <%= id= f.select :question_type, options_for_select([["Select One", ""], "Short Answer", "Long Answer", "Checkbox", "Radio"])%>
 
     <%= f.label :question_text, "Question: " %>
     <%= f.text_field :question_text %>

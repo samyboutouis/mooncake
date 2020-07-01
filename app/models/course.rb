@@ -14,7 +14,11 @@ class Course < ApplicationRecord
             course_request.answers.each do |answer|
                 answer.destroy
             end
-        course_request.destroy
+            if course_request.permission_number.nil?
+            else
+                course_request.permission_number.destroy
+            end
+            course_request.destroy
         end
     end
     has_many :permission_numbers, :dependent => :delete_all
