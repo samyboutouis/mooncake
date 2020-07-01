@@ -28,7 +28,9 @@
                         PermNo: <%= request.permission_number.number %> <br> 
                       <% end %>
                       <%= link_to "View request form", request_form_path(request), method: :get, class:"btn btn-outline-primary" %> 
-                      <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger"%>
+                      <% if request.status == "Under Review" %>
+                        <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger"%>
+                      <% end %>
                     </div>
                   </div>
 
