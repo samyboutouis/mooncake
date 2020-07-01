@@ -8,7 +8,14 @@ $(document).ready(function () {
         order: [[ 1, 'asc' ]],
     } );
     let num = table.columns().count();
-    for (let i = 7; i < num - 1; i++){
+    let x = -1;
+    if (table.column(6).header().innerText != "Which courses have you taken:") {
+        x = 6;
+    }
+    else {
+        x = 7;
+    }
+    for (let i = x; i < num - 1; i++){
         table.column(i).visible(false);
     }
 
@@ -32,7 +39,14 @@ $(document).ready(function () {
 function format ( d, table ) {
     // `d` is the original data object for the row
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-    for(let i = 7; i < table.columns().count() - 1; i++){
+    let x = -1;
+    if (table.column(6).header().innerText != "Which courses have you taken:") {
+        x = 6;
+    }
+    else {
+        x = 7;
+    }
+    for(let i = x; i < table.columns().count() - 1; i++){
         innards += '<tr>'+ '<td>'+$(table.column(i).header()).html()+'</td>'+ '<td>'+d[i]+'</td>'+'</tr>';
     }
     innards += '</table>';
