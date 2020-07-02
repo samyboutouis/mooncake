@@ -10,10 +10,7 @@ $(document).ready(function(){
 function getQuestion(element) {
   let selected = element.val();
   $("#question-choice").empty();
-  if (selected === "Text") {
-    return;
-  }
-  else if (selected === "Checkbox" || selected === "Radio") {
+  if (selected === "Checkbox" || selected === "Radio") {
     $("#question-choice").append("<label>How many options would you like?</label>");
     $("#question-choice").append('<input type="text" id="number-choice">');
   }

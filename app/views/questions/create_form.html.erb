@@ -1,41 +1,41 @@
-<div class="container">
-<h1 style = "margin: 20px 40px"> Create Form for <%= $course.department.split("-").first %> <%= $course.course_number %> <%= $course.section_number %> </h1>
-<h2> Questions: </h2>
-<div class="box">
-<% $course.questions.each do |question| %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="box">
+        <h1 class="title">Create Form for <%= $course.department.split("-").first %> <%= $course.course_number %> <%= $course.section_number %> </h1>
+        <h1 class="subtitle"> Questions: </h1>
+        <div class="container">
+            <% $course.questions.each do |question| %>
+                <div class="form-group">
+                    <p><%= question.question_text %></p>
+                    <% if question.question_type == "Checkbox" %>
+                        <% question.option.each do |option| %>
+                            <div>
+                                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb" disabled/> <%= option %>
+                            </div>
+                        <% end %>
+                    <% elsif question.question_type == "Radio" %>
+                        <% question.option.each do |option| %>
+                            <div>
+                                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb" disabled/> <%= option %>
+                            </div>
+                        <% end %>
+                    <% elsif question.question_type == "Long Answer" %>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="reasons" disabled></textarea>
+                    <% else %>
+                        <input type= "text" class="form-control" id="reasons"  name="reasons" disabled>
+                    <% end %>
 
-    <div class="form-group">
-    <p><%= question.question_text %></p>
-    <% if question.question_type == "Checkbox" %>
-        <% question.option.each do |option| %>
-            <div>
-                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb" disabled/> <%= option %>
-            </div>
-        <% end %>
-    <% elsif question.question_type == "Radio" %>
-        <% question.option.each do |option| %>
-            <div>
-                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb" disabled/> <%= option %>
-            </div>
-        <% end %>
-    <% elsif question.question_type == "Long Answer" %>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="reasons" disabled></textarea>
-    <% else %>
-        <input type= "text" class="form-control" id="reasons"  name="reasons" disabled>
-    <% end %>
+                    <%if question.id > 5 and question.question_text != "Which course(s) have you taken:" %>
+                        <%= link_to "Delete", delete_question_path(question), method: :delete , class:"btn btn-outline-danger btn-sm", style:"margin:10px 0px 10px"%>
+                    <%end%>
+                </div>
+            <% end %>
 
-
-    <%= link_to "Delete", delete_question_path(question), method: :delete , class:"btn btn-light btn-sm", style:"margin:10px 0px 10px"%>
+            <%= link_to "Add Question", new_question_path, class:"btn btn-outline-dark", style:"margin:10px 0px 10px" %>
+            <%= link_to "Complete form", faculty_page_path, class:"btn btn-dark ", style:"margin:10px 0px 10px;" %>
+        </div>
+      </div>
     </div>
-
-
-
-<% end %>
-
-
-<%= link_to "Add Question", new_question_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
-
-
-<%= link_to "Complete form", faculty_page_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
-</div>
+  </div>
 </div>
