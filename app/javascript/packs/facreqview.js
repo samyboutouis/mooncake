@@ -36,7 +36,7 @@ $(document).ready(function () {
             tr.addClass('shown');
         }
     } );
-    $('#myTable thead').on('click', 'button#hide.btn.btn-dark', function (e) {
+    $('#myTable thead').on('click', 'img#hide', function (e) {
         e.preventDefault();
         var table = $('#myTable').DataTable();
         // Get the column API object

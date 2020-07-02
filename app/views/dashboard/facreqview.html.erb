@@ -10,7 +10,7 @@
                 <tr style="text-align: center; vertical-align: middle;">
                   <th class="no sort"></th>
                   <% @course.questions.each do |question| %>
-                    <th> <%= question.question_text %> <button id = "hide" class="btn btn-dark">hide</button> </th>
+                    <th> <%= question.question_text %><br><img id="hide" src="/assets/eye.png"></th>
                   <% end %>
                   <th> Accept/Deny Request </th>
                 </tr>
