@@ -32,12 +32,12 @@
                           <% if course.prereqs.last == prereq%>
                             <%= prereq.name %>
                           <% else %>
-                            <%= prereq.name %>, 
-                          <%end%> 
+                            <%= prereq.name %>,
+                          <%end%>
                         <% end %>
                       <% end %>
                       <br>
-                      <%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %> 
+                      <%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %>
                       <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
                     </div>
                   </div>
@@ -53,3 +53,4 @@
     </div>
   </div>
 </div>
+<p class="spacer"></p>

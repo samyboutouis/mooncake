@@ -94,7 +94,10 @@ body {
     float: right;
 }
 
-a[aria-expanded=true] .fa-chevron-right { 
+.spacer{
+  height: 20px;
+}
+a[aria-expanded=true] .fa-chevron-right {
     display: none;
 }
 
