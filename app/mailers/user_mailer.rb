@@ -1,9 +1,16 @@
 class UserMailer < ApplicationMailer
- default from: 'notifications@example.com'
+ default from: 'noreply@duke.edu'
  
   def welcome_email
-    @user = params[:user]
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    @email = params[:email]
+    @url = "http://localhost:3000"
+    mail(to: @email, subject: 'Welcome to My Awesome Site')
+  end
+
+  def course_created
+      @user = params[:user]
+      @course = params[:course]
+      @url = "http://localhost:3000/facreqview/" + @course.id.to_s
+      mail(to: @user.email, subject: 'New Course Created')
   end
 end
