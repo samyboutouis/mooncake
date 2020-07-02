@@ -16,7 +16,7 @@ $(document).ready(function () {
         else {
             x = 7;
         }
-        for (let i = x; i < num - 2; i++){
+        for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
         }
     }
@@ -48,7 +48,7 @@ function format ( d, table ) {
     else {
         x = 7;
     }
-    for(let i = x; i < table.columns().count() - 2; i++){
+    for(let i = x; i < table.columns().count() - 1; i++){
         innards += '<tr>'+ '<td>'+$(table.column(i).header()).html()+'</td>'+ '<td>'+d[i]+'</td>'+'</tr>';
     }
     innards += '</table>';
