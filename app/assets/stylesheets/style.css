@@ -123,12 +123,18 @@ body {
 .spacer{
   height: 20px;
 }
+
 a[aria-expanded=true] .fa-chevron-right {
     display: none;
 }
 
 a[aria-expanded=false] .fa-chevron-down {
     display: none;
+}
+
+#hide {
+    height: 20px;
+    width: 20px;
 }
 
 /* Desktop only */

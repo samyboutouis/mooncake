@@ -36,6 +36,14 @@ $(document).ready(function () {
             tr.addClass('shown');
         }
     } );
+    $('#myTable thead').on('click', 'img#hide', function (e) {
+        e.preventDefault();
+        var table = $('#myTable').DataTable();
+        // Get the column API object
+        var column = table.column($(this).closest('th'))[0][0];
+        // Toggle the visibility
+        table.column(column).visible( false );
+    } );
 });
 
 function format ( d, table ) {
