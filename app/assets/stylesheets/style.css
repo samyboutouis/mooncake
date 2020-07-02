@@ -14,12 +14,31 @@ body {
     border-radius: 35px;
 }
 
+.table_box {
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em;
+    width: 99%;
+    background: #E2E6ED;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 35px;
+}
+
 .title {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 30px;
     line-height: 35px;
+}
+
+.subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 35px;
+    margin-left: 15px;
 }
 
 .request-box {
@@ -33,6 +52,18 @@ body {
    margin-bottom: 30px;
 }
 
+.remove-padding {
+    padding-left: 0%;
+}
+
+/* #view-request > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #F3F2F1;
+ } */
+
+#view-request > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: white;
+ }
+
 .course-box{
     margin-bottom:30px;
     margin-top:20px;
@@ -40,6 +71,10 @@ body {
     border-radius: 20px;
     text-align: center;
     line-height: 50px;
+}
+
+.create-question{
+    padding-top: 10px;
 }
 
 .home {
@@ -85,7 +120,10 @@ body {
     float: right;
 }
 
-a[aria-expanded=true] .fa-chevron-right { 
+.spacer{
+  height: 20px;
+}
+a[aria-expanded=true] .fa-chevron-right {
     display: none;
 }
 

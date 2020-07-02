@@ -1,16 +1,30 @@
-<h1>Create A Question</h1>
-<%= form_for @question do |f| %>
-    <%= f.label :question_type, "Question type: " %>
-    <%= id= f.select :question_type, options_for_select([["Select One", ""], "Short Answer", "Long Answer", "Checkbox", "Radio"])%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="box">
+        <h1 class="title">Create a Question</h1>
+        <%= form_for @question do |f| %>
+            <label for="question_question_type">Question type: </label>
+            <select name="question[question_type]" id="question_question_type"><option value="">Select One</option>
+                <option value="Short Answer">Short Answer</option>
+                <option value="Long Answer">Long Answer</option>
+                <option value="Checkbox">Choice: Multiple Answer</option>
+                <option value="Radio">Choice: Single Answer</option>
+            </select>
 
-    <%= f.label :question_text, "Question: " %>
-    <%= f.text_field :question_text %>
+            <%= f.label :question_text, "Question: " %>
+            <%= f.text_field :question_text %>
 
-    <div id="question-choice"></div>
-    <div id="question-options"></div>
-    
-    <%= f.submit "Create" %>
-    <!--... -->
-<% end %>
+            <div id="question-choice"></div>
+            <div id="question-options"></div>
+            <div class="create-question">
+            <%= f.submit class:"btn btn-dark " "Create" %>
+            </div>
+            <!--... -->
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>
 
 
