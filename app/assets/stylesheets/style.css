@@ -14,6 +14,16 @@ body {
     border-radius: 35px;
 }
 
+.table_box {
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em;
+    width: 99%;
+    background: #E2E6ED;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 35px;
+}
+
 .title {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
