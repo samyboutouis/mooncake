@@ -10,7 +10,7 @@ $(document).ready(function () {
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
-        if (table.column(6).header().innerText != "Which courses have you taken:") {
+        if (table.column(6).header().innerText != "Which course(s) have you taken:") {
             x = 6;
         }
         else {
