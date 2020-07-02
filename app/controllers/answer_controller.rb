@@ -24,7 +24,7 @@ class AnswerController < ApplicationController
             @course_request.answers.create(answer_text: answer, question: question)
             # Answer.last << Question.find_by(question_text: question.question_text)
         end
-        UserMailer.with(user: $current_user, request: @course_request).request_submitted.deliver_now
+        # UserMailer.with(user: $current_user, request: @course_request).request_submitted.deliver_now
         redirect_to root_url
     end
 

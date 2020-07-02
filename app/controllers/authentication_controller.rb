@@ -31,7 +31,7 @@ class AuthenticationController < ApplicationController
       session[:user_id] = user_info['dukeNetID']
       unless User.exists?(net_id: session[:user_id])
         User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'], email: user_info["email"])
-        UserMailer.with(email: user_info["email"]).welcome_email.deliver_now
+        # UserMailer.with(email: user_info["email"]).welcome_email.deliver_now
       end  
       $current_user = User.find_by(net_id: session[:user_id])
       redirect_to ldap_path
