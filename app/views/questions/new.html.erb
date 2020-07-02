@@ -1,16 +1,25 @@
-<h1>Create A Question</h1>
-<%= form_for @question do |f| %>
-    <%= f.label :question_type, "Question type: " %>
-    <%= id= f.select :question_type, options_for_select([["Select One", ""], "Short Answer", "Long Answer", "Checkbox", "Radio"])%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="box">
+        <h1 class="title">Create a Question</h1>
+        <%= form_for @question do |f| %>
+            <%= f.label :question_type, "Question type: " %>
+            <%= id= f.select :question_type, options_for_select([["Select One", ""], "Short Answer", "Long Answer", "Checkbox", "Radio"])%>
 
-    <%= f.label :question_text, "Question: " %>
-    <%= f.text_field :question_text %>
+            <%= f.label :question_text, "Question: " %>
+            <%= f.text_field :question_text %>
 
-    <div id="question-choice"></div>
-    <div id="question-options"></div>
-    
-    <%= f.submit "Create" %>
-    <!--... -->
-<% end %>
+            <div id="question-choice"></div>
+            <div id="question-options"></div>
+            <div class="create-question">
+            <%= f.submit class:"btn btn-dark " "Create" %>
+            </div>
+            <!--... -->
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>
 
 

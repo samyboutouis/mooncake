@@ -51,6 +51,10 @@ body {
     line-height: 50px;
 }
 
+.create-question{
+    padding-top: 10px;
+}
+
 .home {
     margin-bottom:50px;
     margin-top:20px;
