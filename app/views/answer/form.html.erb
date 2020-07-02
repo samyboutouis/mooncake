@@ -7,30 +7,30 @@
           <div class="form-group">
 
             <% for question in @course.questions %>
-              <div class="form-group">
-                <p><%= question.question_text %></p>
+              <div class="form-group" style="margin: 15px;">
+                <p style="font-family: 'Roboto', sans-serif;font-size: 18px;"><%= question.question_text %></p>
                 <% if question.question_type == "Checkbox" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
                       </div>
                   <% end %>
                 <% elsif question.question_type == "Radio" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input type="radio" name= "<%=question.question_text%>" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
                       </div>
                   <% end %>
                 <% elsif question.question_type == "Long Answer" %>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" name="<%= question.question_text %>" rows="4"></textarea>
+                  <textarea  style="font-family: 'Roboto', sans-serif;font-size: 15px;" class="form-control" id="exampleFormControlTextarea1" name="<%= question.question_text %>" rows="4"></textarea>
                 <% else %>
-                    <input type= "text" class="form-control" id="reasons"  name="<%= question.question_text %>">
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type= "text" class="form-control" id="reasons"  name="<%= question.question_text %>">
                 <% end %>
               </div>
             <% end %>
             <div class="col-sm-10">
+              <%= link_to "Cancel", root_path, class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
               <button type="submit" class="btn btn-dark">Submit</button>
-              <%= link_to "Cancel", root_path, class:"btn btn-dark", style:"margin:10px 0px 10px" %>
             </div>
           </div>
         </form>
