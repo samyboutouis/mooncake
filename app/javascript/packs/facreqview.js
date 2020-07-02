@@ -1,3 +1,5 @@
+var col = 0;
+
 $(document).ready(function () {
     var table = $('#myTable').DataTable( {
         columnDefs: [ 
@@ -12,9 +14,11 @@ $(document).ready(function () {
         let x = -1;
         if (table.column(7).header().innerText != "Which course(s) have you taken:") {
             x = 7;
+            col = 7;
         }
         else {
             x = 8;
+            col = 8;
         }
         for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
@@ -48,7 +52,7 @@ $(document).ready(function () {
 
     $('#myTable thead').on('click', 'img#unhide', function () {
         var table = $('#myTable').DataTable();
-        for (let i = 1; i < table.columns().count() - 1; i++) {
+        for (let i = 1; i < col; i++) {
             table.column(i).visible( true);
         }
     } );
@@ -59,7 +63,7 @@ function format ( d, table ) {
     // `d` is the original data object for the row
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
     let x = -1;
-    if (table.column(6).header().innerText != "Which course(s) have you taken:") {
+    if (table.column(7).header().innerText != "Which course(s) have you taken:") {
         x = 7;
     }
     else {
