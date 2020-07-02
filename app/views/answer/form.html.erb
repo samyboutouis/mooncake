@@ -1,23 +1,25 @@
 <div class="container">
-  <h2> Request Permission for <%= @course_request.course.department.split("-").first + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h2>
+  <h2> Request Permission for <%= @course.department.split("-").first + " " + @course.course_number + " " + @course.section_number%> </h2>
   <form action="/data">
     <div class="form-group">
 
-    <% for question in @course_request.course.questions %>
+    <% for question in @course.questions %>
       <div class="form-group">
         <p><%= question.question_text %></p>
         <% if question.question_type == "Checkbox" %>
-            <% question.option.each do |option| %>
-                <div>
-                    <input type="checkbox" name= "<%=question.question_text%>[]"" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
-                </div>
-            <% end %>
+          <% question.option.each do |option| %>
+              <div>
+                  <input type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %>" value= "<%= option %>" id = "cb"/> <%= option %>
+              </div>
+          <% end %>
         <% elsif question.question_type == "Radio" %>
-            <% question.option.each do |option| %>
-                <div>
-                    <input type="radio" name= "<%=question.question_text%>" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
-                </div>
-            <% end %>
+          <% question.option.each do |option| %>
+              <div>
+                  <input type="radio" name= "<%=question.question_text%>" id= "<%= option %>" value= "<%= option %>" id = "rb"/> <%= option %>
+              </div>
+          <% end %>
+        <% elsif question.question_type == "Long Answer" %>
+          <textarea class="form-control" id="exampleFormControlTextarea1" name="<%= question.question_text %>" rows="4"></textarea>
         <% else %>
             <input type= "text" class="form-control" id="reasons"  name="<%= question.question_text %>"> 
         <% end %>

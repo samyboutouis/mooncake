@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
 
+  #Accept/Deny
+  get "/deny/:request" => "dashboard#deny", as: "deny"
+  get "/accept/:request" => "dashboard#accept", as: "accept"
+  get "/permnum/:req" => "dashboard#addpermnum", as: "add_permnum"
+  post "/add" => "dashboard#add", as: "add"
+  
+
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
   get "/requestform/:request" => "dashboard#view" , as: "request_form"
   get "/student" => "user#show", as: "student_show"
@@ -17,7 +24,7 @@ Rails.application.routes.draw do
 
   #answer routes
   get '/form/:course_request'=> 'answer#form', as: "answer"
-  get '/data'=> 'answer#data'
+  get '/data'=> 'answer#data', as: "data"
 
   #faculty creating questions routes
   get '/questionsc/:course'=> 'questions#course', as: "questioncourse"
@@ -31,7 +38,7 @@ Rails.application.routes.draw do
   get '/search' => 'course_request#index', as: "search"
   get '/department' => 'course_request#department'
   get '/section' => 'course_request#section'
-  get '/courserequests' => 'course_request#create'
+  get '/courserequests' => 'course_request#submit'
   get '/courserequests/new' => "course_request#new", as: "new_course_request"
 
   #create course routes

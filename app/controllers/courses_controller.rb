@@ -15,6 +15,7 @@ class CoursesController < ApplicationController
       course.seats_taken = 0
       $current_user.courses << course
       file = params[:course][:file]
+      puts file
       CSV.foreach(file, :headers => true) do |row|
         unless row[0] == nil
           course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
@@ -24,7 +25,7 @@ class CoursesController < ApplicationController
       prereqs_attributes.each do |name|
         prereqs = course.prereqs.create(name: name[1]["name"])
       end
-      UserMailer.with(user: $current_user, course: course).course_created.deliver_now
+      # UserMailer.with(user: $current_user, course: course).course_created.deliver_now
       redirect_to questioncourse_path(course), alert: "Course created successfully."
     else
       redirect_to faculty_page_url, alert: "Error creating course."

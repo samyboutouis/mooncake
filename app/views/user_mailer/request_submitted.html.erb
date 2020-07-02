@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p> Successfully submitted a permission number request for:</p>
+    <p>
+        <%= @course.department.split("-").first + @course.course_number + "-" + @course.section_number%>
+    </p>
+    <p>
+      You can view the status for this request here: <%= @url %>
+    </p>
+    <p>
+      And the submitted answers here: <%= @url2 %>
+    </p>
+    <p> ==============================</p>
+    <p> This email was automatically sent by Mooncake</p>
+  </body>
+</html>

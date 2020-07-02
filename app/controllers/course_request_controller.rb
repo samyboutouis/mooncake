@@ -24,7 +24,7 @@ class CourseRequestController < ApplicationController
     def section
         department = params[:department]
         course_number = params[:course_number]
-        @course = Course.where(course_number: course_number)
+        @course = Course.where(department: department, course_number: course_number)
         respond_to do |format|
             format.json {render json: @course}
         end
@@ -34,14 +34,9 @@ class CourseRequestController < ApplicationController
         @course_request = CourseRequest.new
     end
 
-    def create
+    def submit
         @course = Course.find_by(department: params[:department], course_number: params[:course_number], section_number: params[:section_number])
         @user = User.find_by(net_id: $current_user.net_id)
-        @course_request = CourseRequest.new(status: "Under Review", course: @course, user: @user)
-        if @course_request.save
-            redirect_to answer_path(@course_request), alert: "Course Request created successfully."
-        else
-            redirect_to root_path, alert: "Error creating course."
-        end
+        redirect_to answer_path(@course)
     end
 end
