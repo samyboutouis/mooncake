@@ -40,7 +40,7 @@ function format ( d, table ) {
     // `d` is the original data object for the row
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
     let x = -1;
-    if (table.column(6).header().innerText != "Which courses have you taken:") {
+    if (table.column(6).header().innerText != "Which course(s) have you taken:") {
         x = 6;
     }
     else {
