@@ -8,7 +8,7 @@
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
-                  <th class="no sort"> <br><img id="unhide" src="/assets/eye.png"></th>
+                  <th class="no sort"> <br><img id="unhide" src="/assets/eye_open.png"></th>
                   <% @course.questions.each do |question| %>
                     <%if question.id <= 5 or question.question_text == "Which course(s) have you taken:" %>
                       <th> <%= question.question_text %><br><img id="hide" src="/assets/eye.png"></th>
