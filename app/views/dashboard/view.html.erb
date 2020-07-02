@@ -17,7 +17,7 @@
                         <% end %>
                       <% end %>   
                 <% elsif answer.question.question_type == "Long Answer" %>
-                  <textarea class="form-control" style = "background: white" disabled><%= answer.answer_text %></textarea>
+                  <textarea class="form-control" style = "background: white" rows=5 disabled><%= answer.answer_text %></textarea>
                 <% else %>
                     <div class="form-control" style="background:white; margin-bottom: 15px"><%= answer.answer_text %></div>
                 <% end %>
