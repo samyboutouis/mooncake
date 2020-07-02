@@ -10,11 +10,11 @@ $(document).ready(function () {
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
-        if (table.column(6).header().innerText != "Which course(s) have you taken:") {
-            x = 6;
+        if (table.column(7).header().innerText != "Which course(s) have you taken:") {
+            x = 7;
         }
         else {
-            x = 7;
+            x = 8;
         }
         for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
@@ -51,10 +51,10 @@ function format ( d, table ) {
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
     let x = -1;
     if (table.column(6).header().innerText != "Which course(s) have you taken:") {
-        x = 6;
+        x = 7;
     }
     else {
-        x = 7;
+        x = 8;
     }
     for(let i = x; i < table.columns().count() - 1; i++){
         innards += '<tr>'+ '<td>'+$(table.column(i).header()).html()+'</td>'+ '<td>'+d[i]+'</td>'+'</tr>';

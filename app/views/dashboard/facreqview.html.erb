@@ -10,7 +10,11 @@
                 <tr style="text-align: center; vertical-align: middle;">
                   <th class="no sort"></th>
                   <% @course.questions.each do |question| %>
-                    <th> <%= question.question_text %><br><img id="hide" src="/assets/eye.png"></th>
+                    <%if question.id <= 5 or question.question_text == "Which course(s) have you taken:" %>
+                      <th> <%= question.question_text %><br><img id="hide" src="/assets/eye.png"></th>
+                    <%else%>
+                      <th> <%= question.question_text %></th>
+                    <%end%>
                   <% end %>
                   <th> Accept/Deny Request </th>
                 </tr>
