@@ -29,6 +29,11 @@
 
 `docker-compose exec app bash`
 
+* Run webpack server in container
+
+`docker-compose exec app bin/webpack-dev-server`
+
+
 
 ### Git housekeeping
 

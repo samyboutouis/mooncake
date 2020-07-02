@@ -137,6 +137,11 @@ a[aria-expanded=false] .fa-chevron-down {
     width: 20px;
 }
 
+#unhide {
+    height: 20px;
+    width: 20px;
+}
+
 /* Desktop only */
 @media only screen and (min-width: 1000px){
     .navbar {
