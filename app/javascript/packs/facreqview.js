@@ -42,8 +42,17 @@ $(document).ready(function () {
         // Get the column API object
         var column = table.column($(this).closest('th'))[0][0];
         // Toggle the visibility
+        // column.visible( ! column.visible() );
         table.column(column).visible( false );
     } );
+
+    $('#myTable thead').on('click', 'img#unhide', function () {
+        var table = $('#myTable').DataTable();
+        for (let i = 1; i < table.columns().count() - 1; i++) {
+            table.column(i).visible( true);
+        }
+    } );
+
 });
 
 function format ( d, table ) {
