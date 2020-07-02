@@ -7,16 +7,18 @@ $(document).ready(function () {
             }],
         order: [[ 1, 'asc' ]],
     } );
-    let num = table.columns().count();
-    let x = -1;
-    if (table.column(6).header().innerText != "Which course(s) have you taken:") {
-        x = 6;
-    }
-    else {
-        x = 7;
-    }
-    for (let i = x; i < num - 1; i++){
-        table.column(i).visible(false);
+    if ($("#myTable").length > 0) {
+        let num = table.columns().count();
+        let x = -1;
+        if (table.column(6).header().innerText != "Which courses have you taken:") {
+            x = 6;
+        }
+        else {
+            x = 7;
+        }
+        for (let i = x; i < num - 1; i++){
+            table.column(i).visible(false);
+        }
     }
 
     $('#myTable tbody').on('click', 'td.details-control', function () {
