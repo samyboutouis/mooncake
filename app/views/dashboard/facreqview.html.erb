@@ -8,9 +8,7 @@
         <tr>
           <th class="no sort"></th>
           <% @course.questions.each do |question| %>
-            <% if (question.question_text != "Short Answer") &&  (question.question_text != "Long Answer")%>
-              <th> <%= question.question_text %> </th>
-            <% end %>
+            <th> <%= question.question_text %> </th>
           <% end %>
           <th> Accept/Deny Request </th>
         </tr>
@@ -25,7 +23,6 @@
               <% else %>
                 <td><%= answer.answer_text %></td>
               <% end %>
-
             <% end %>
             <td>
 

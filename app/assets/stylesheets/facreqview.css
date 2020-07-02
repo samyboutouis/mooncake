@@ -426,6 +426,17 @@
     height: 0;
   }
 
+  td.details-control {
+    background: url('/assets/add.png') no-repeat center center;
+    background-size: 20px;
+    cursor: pointer;
+  }
+
+  tr.shown td.details-control {
+      background: url('/assets/minus.png') no-repeat center center;
+      background-size: 20px;
+  }
+
   @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,
     .dataTables_wrapper .dataTables_paginate {
