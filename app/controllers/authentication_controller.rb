@@ -1,7 +1,8 @@
 class AuthenticationController < ApplicationController
 
     skip_before_action :require_login, only: [:login, :callback]
-    
+    skip_before_action :faculty_check
+    skip_before_action :student_check
     def login
       client = OAuth2::Client.new(
         'mooncake',
