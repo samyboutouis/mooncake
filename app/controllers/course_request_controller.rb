@@ -10,12 +10,12 @@ class CourseRequestController < ApplicationController
     end
 
     def index
-        @course = Course.all
+        @course = Course.where(published: true)
     end
 
     def department
         department = params[:department]
-        @course = Course.where(department: department)
+        @course = Course.where(department: department, published: true))
         respond_to do |format|
             format.json {render json: @course}
         end
@@ -24,7 +24,7 @@ class CourseRequestController < ApplicationController
     def section
         department = params[:department]
         course_number = params[:course_number]
-        @course = Course.where(department: department, course_number: course_number)
+        @course = Course.where(department: department, course_number: course_number, published: true))
         respond_to do |format|
             format.json {render json: @course}
         end

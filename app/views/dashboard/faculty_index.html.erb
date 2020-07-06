@@ -39,8 +39,7 @@
                       <br>
                       <% if course.published == false %>
                           <%= link_to "Edit Questions", question_path(course), method: :get, class:"btn btn-outline-primary" %>
-                          <%= link_to "Publish", publish_page_path(course), method: :get, class:"btn btn-outline-primary" %>
-        
+                          <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>        
                       <% else %>
                           <%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %>
                           <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
