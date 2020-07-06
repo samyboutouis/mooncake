@@ -21,6 +21,11 @@ class DashboardController < ApplicationController
     @courses = @user.courses.all
   end
 
+  def publish
+    Course.last.update(published: true)
+    redirect_to faculty_page_path
+  end
+
   def facreqview
     @course = Course.find(params[:course])
   end

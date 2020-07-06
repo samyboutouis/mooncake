@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "dashboard#index"
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
+  get "/publish/:course" => "dashboard#publish", as: "publish_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
 
   #Accept/Deny

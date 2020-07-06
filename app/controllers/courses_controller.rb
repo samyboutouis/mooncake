@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
 
   def create
     if course = Course.create(course_params)
+      course.published = false
       course.seats_taken = 0
       User.find_by(net_id: session[:current_user]["net_id"]).courses << course  
       file = params[:course][:file]
