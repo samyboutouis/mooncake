@@ -12,7 +12,6 @@ $(document).ready(function () {
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
-        console.log(table.column(6).header().innerText)
         if ((table.column(6).header().innerText).trim() != "Which course(s) have you taken:") {
             x = 6;
             col = 6;
@@ -21,8 +20,6 @@ $(document).ready(function () {
             x = 7;
             col = 7;
         }
-        console.log(x);
-        console.log(num-1);
         for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
         }

@@ -3,13 +3,12 @@ class AnswerController < ApplicationController
     def form 
         @user = $current_user
         @course = Course.find(params[:course_request])
-        @@course_submit = @course
     end
 
     def data
         # retrieve data using param
         @user = User.find_by(net_id: $current_user.net_id)
-        @course = Course.find(@@course_submit.id)
+        @course = Course.find_by(department: params[:department], course_number: params[:course_number], section_number: params[:section_number])
         @course_request = CourseRequest.create(status: "Under Review", course: @course, user: @user)
         for question in @course_request.course.questions
             if question.question_type == "Checkbox"
