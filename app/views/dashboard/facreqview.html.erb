@@ -26,6 +26,8 @@
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
+                      <% elsif answer.question.question_type == "Long Answer"%>
+                        <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div></td>
                       <% else %>
                         <td><%= answer.answer_text %></td>
                       <% end %>
