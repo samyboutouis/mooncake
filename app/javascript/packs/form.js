@@ -12,7 +12,7 @@ function getQuestion(element) {
   $("#question-choice").empty();
   if (selected === "Checkbox" || selected === "Radio") {
     $("#question-choice").append("<label>How many options would you like?</label>");
-    $("#question-choice").append('<input type="text" id="number-choice">');
+    $("#question-choice").append('<input type="text" id="number-choice" maxlength= 2>');
   }
   else {
     return;
