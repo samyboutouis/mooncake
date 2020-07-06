@@ -5,22 +5,22 @@
   <%= form_for @course do |f| %>
     <div class="form-group row" style="padding: 10px 20px 0px">
       <%= f.label :department, "Department: ", for: "formGroupExampleInput" %>
-      <%= f.select :department, options_for_select(departments), {}, class:"form-control", id:"exampleFormControlSelect1 department" %>
+      <%= f.select :department, options_for_select(departments), {}, class:"form-control", id:"exampleFormControlSelect1 department", :required => true%>
     </div>
 
     <div class="form-group row" style="padding: 10px 20px 0px">
       <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
-      <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number" %>
+      <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number", :required => true%>
     </div>
 
     <div class="form-group row" style="padding: 10px 20px 0px">
       <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
-      <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number" %>
+      <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number", :required => true%>
     </div>
 
     <div class="form-group row" style="padding: 10px 20px 0px">
       <%= f.label :capacity, "Course Capacity: ", for: "formGroupExampleInput" %>
-      <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity" %>
+      <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity", :required => true%>
     </div>
 
     <div class="form row", style="padding: 10px 20px 0px">
