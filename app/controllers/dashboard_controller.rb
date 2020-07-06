@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
   end
 
   def publish
-    Course.last.update(published: true)
+    Course.find(params[:course]).update(published: true)
     redirect_to faculty_page_path
   end
 
