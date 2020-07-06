@@ -10,19 +10,19 @@
                     <% if question.question_type == "Checkbox" %>
                         <% question.option.each do |option| %>
                             <div>
-                                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb" /> <%= option %>
+                                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb" disabled/> <%= option %>
                             </div>
                         <% end %>
                     <% elsif question.question_type == "Radio" %>
                         <% question.option.each do |option| %>
                             <div>
-                                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb" /> <%= option %>
+                                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb" disabled/> <%= option %>
                             </div>
                         <% end %>
                     <% elsif question.question_type == "Long Answer" %>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="reasons" style = "background: white" disabled></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="reasons" disabled></textarea>
                     <% else %>
-                        <input type= "text" class="form-control" id="reasons"  name="reasons" style = "background: white" disabled>
+                        <input type= "text" class="form-control" id="reasons"  name="reasons" disabled>
                     <% end %>
 
                     <%if question.id > 5 and question.question_text != "Which course(s) have you taken:" %>
