@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col">
       <div class="box">
-        <h1 class="title" style = "margin: 20px 40px 50px 40px">Create Form for <%= @course3.department.split("-").first %> <%= @course3.course_number %> <%= @course3.section_number %> </h1>
+        <h1 class="title" style = "margin: 20px 40px 50px 40px">Create Form for <%= @course.department.split("-").first %> <%= @course.course_number %> <%= @course.section_number %> </h1>
         <div class="container">
-            <% @course3.questions.each do |question| %>
+            <% @course.questions.each do |question| %>
                 <div class="form-group">
                     <p><%= question.question_text %></p>
                     <% if question.question_type == "Checkbox" %>
