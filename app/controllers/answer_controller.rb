@@ -1,13 +1,13 @@
 class AnswerController < ApplicationController
 
     def form 
-        @user = $current_user
+        @user = User.find_by(net_id: session[:current_user]["net_id"])
         @course = Course.find(params[:course_request])
     end
 
     def data
         # retrieve data using param
-        @user = User.find_by(net_id: $current_user.net_id)
+        @user = User.find_by(net_id: session[:current_user]["net_id"])
         @course = Course.find_by(department: params[:department], course_number: params[:course_number], section_number: params[:section_number])
         @course_request = CourseRequest.create(status: "Under Review", course: @course, user: @user)
         for question in @course_request.course.questions
@@ -23,7 +23,7 @@ class AnswerController < ApplicationController
             @course_request.answers.create(answer_text: answer, question: question)
             # Answer.last << Question.find_by(question_text: question.question_text)
         end
-        # UserMailer.with(user: $current_user, request: @course_request).request_submitted.deliver_now
+        # UserMailer.with(user: session[:current_user], request: @course_request).request_submitted.deliver_now
         redirect_to root_url
     end
 

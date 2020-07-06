@@ -33,7 +33,7 @@ class AuthenticationController < ApplicationController
         User.create(first_name: user_info['given_name'], last_name: user_info['family_name'], net_id: user_info['dukeNetID'], unique_id: user_info['dukeUniqueID'], email: user_info["email"])
         # UserMailer.with(email: user_info["email"]).welcome_email.deliver_now
       end  
-      $current_user = User.find_by(net_id: session[:user_id])
+      session[:current_user] = User.find_by(net_id: session[:user_id])
       redirect_to ldap_path
       #redirect_to root_url
       # redirect_to 'http://localhost:3000/oauth/logout' 
@@ -42,8 +42,6 @@ class AuthenticationController < ApplicationController
     def destroy
       # Resets session
       reset_session
-     
-      $current_user = nil
       redirect_to 'https://oauth.oit.duke.edu/oidc/logout.jsp'
     end
 
@@ -53,23 +51,23 @@ class AuthenticationController < ApplicationController
       base = "dc=duke,dc=edu"
       ldap.port = 389
 
-      netid = $current_user.net_id
+      netid = session[:current_user]["net_id"]
       filter = Net::LDAP::Filter.eq( "uid", netid )
 
       result = ldap.search( :base => base, :filter => filter )
       
       ldap.get_operation_result
-          
+      puts session[:current_user]
       information = result.pop
       affiliation = information["edupersonprimaryaffiliation"].join(' ')
-      $current_user.grad_year = information["dupsexpgradtermc1"].join(' ')
-      $current_user.email = information["edupersonprincipalname"].join(' ')
-      # User.find_by(net_id: $current_user.net_id).update(email: $current_user.email)
+      session[:current_user]["grad_year"] = information["dupsexpgradtermc1"].join(' ')
+      session[:current_user]["email"] = information["edupersonprincipalname"].join(' ')
+      # User.find_by(net_id: session[:current_user]["net_id"]).update(email: session[:current_user]["email"])
       if affiliation.include? 'staff'
-        $current_user.user_type = 'staff'
+        session[:current_user]["user_type"] = 'staff'
         redirect_to 'http://localhost:3000/faculty'
       else
-        $current_user.user_type = 'student'
+        session[:current_user]["user_type"] = 'student'
         redirect_to root_url
       end
   end

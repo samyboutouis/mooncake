@@ -5,25 +5,26 @@ class QuestionsController < ApplicationController
 
     # initializing the course
     def course
-        $course = nil
-        $course = Course.find(params[:course])
+        @course3 = nil
+        @course3 = Course.find(params[:course])
         redirect_to question_path
     end
 
     # main page for creating form with default questions
     def create_form
-        $course.questions = Course.find($course.id).questions
-        if $course.questions.count == 0
-            $course.questions << Question.find(1,2,3,4,5)
-            if $course.prereqs.first.name != ""
-                $course.questions.create(question_type:  "Checkbox", question_text: "Which course(s) have you taken:", option: $course.prereqs.pluck(:name))
+        puts @course3
+        @course3.questions = Course.find(@course3.id).questions
+        if @course3.questions.count == 0
+            @course3.questions << Question.find(1,2,3,4,5)
+            if @course3.prereqs.first.name != ""
+                @course3.questions.create(question_type:  "Checkbox", question_text: "Which course(s) have you taken:", option: @course3.prereqs.pluck(:name))
             end
         end
-        @question = $course.questions
+        @question = @course3.questions
     end
 
     def create
-        $course.questions.create(question_params)
+        @course3.questions.create(question_params)
         redirect_to question_path
     end
 
@@ -35,7 +36,7 @@ class QuestionsController < ApplicationController
     # delete question
     def delete
         id = params[:id]
-        $course.questions.destroy(Question.find(id))
+        @course3.questions.destroy(Question.find(id))
         if id.to_i > 5
             Question.destroy(id)
         end

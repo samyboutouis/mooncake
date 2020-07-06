@@ -3,7 +3,7 @@ class CourseRequestController < ApplicationController
         department = params[:department]
         number = params[:number]
         @course = Course.where(department: department, course_number: number)
-        @course_request = CourseRequest.where(user: $current_user, course: @course)
+        @course_request = CourseRequest.where(user: session[:current_user], course: @course)
         respond_to do |format|
             format.json {render json: @course_request}
         end
@@ -36,7 +36,7 @@ class CourseRequestController < ApplicationController
 
     def submit
         @course = Course.find_by(department: params[:department], course_number: params[:course_number], section_number: params[:section_number])
-        @user = User.find_by(net_id: $current_user.net_id)
+        @user = User.find_by(net_id: session[:current_user]["net_id"])
         redirect_to answer_path(@course)
     end
 end

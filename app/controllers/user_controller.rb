@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   def show
-      @user = $current_user
+      @user = User.find_by(net_id: session[:current_user]["net_id"])
 
       if User.exists?
         # Tell the UserMailer to send a welcome email after save
