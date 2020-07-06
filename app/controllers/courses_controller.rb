@@ -26,7 +26,7 @@ class CoursesController < ApplicationController
         prereqs = course.prereqs.create(name: name[1]["name"])
       end
       # UserMailer.with(user: session[:current_user], course: course).course_created.deliver_now
-      redirect_to questioncourse_path(course), alert: "Course created successfully."
+      redirect_to question_path(course), alert: "Course created successfully."
     else
       redirect_to faculty_page_url, alert: "Error creating course."
     end

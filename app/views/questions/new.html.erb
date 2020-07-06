@@ -3,7 +3,7 @@
     <div class="col">
       <div class="box">
         <h1 class="title">Create a Question</h1>
-        <%= form_for @question do |f| %>
+        <%= form_for @question, url: questions_url(@course), html: { method: :put } do |f| %>
             <label for="question_question_type">Question type: </label>
             <select name="question[question_type]" id="question_question_type"><option value="">Select One</option>
                 <option value="Short Answer">Short Answer</option>

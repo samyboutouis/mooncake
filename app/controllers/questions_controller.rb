@@ -4,15 +4,8 @@ class QuestionsController < ApplicationController
     end
 
     # initializing the course
-    def course
-        session[:course] = Course.find(params[:course])
-        redirect_to question_path
-    end
-
-    # main page for creating form with default questions
     def create_form
-        @course = Course.find(session[:course]["id"])
-        @course.questions = Course.find(@course.id).questions
+        @course = Course.find(params[:course])
         if @course.questions.count == 0
             @course.questions << Question.find(1,2,3,4,5)
             if @course.prereqs.first.name != ""
@@ -23,25 +16,23 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        @course = Course.find(session[:course]["id"])
+        @course = Course.find(params[:course])
         @course.questions.create(question_params)
-        redirect_to question_path
+        redirect_to question_path(@course)
     end
 
     # add new question
     def new
+        @course = params[:course]
         @question = Question.new
     end
 
     # delete question
     def delete
-        id = params[:id]
-        @course = Course.find(session[:course]["id"])
-        @course.questions.destroy(Question.find(id))
-        if id.to_i > 5
-            Question.destroy(id)
-        end
-        redirect_to question_path
+        @question = Question.find(params[:id])
+        @course = @question.courses.first
+        @question.destroy
+        redirect_to question_path(@course)
     end
 
 end
