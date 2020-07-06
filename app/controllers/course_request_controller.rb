@@ -1,5 +1,5 @@
 class CourseRequestController < ApplicationController
-    skip_before_action :faculty_check
+    # skip_before_action :faculty_check
     def expand
         department = params[:department]
         number = params[:number]

@@ -15,7 +15,7 @@
       <% end %>
       <a class="nav-item nav-link" href="<%= student_show_path %>">Account</a>
       <a class="nav-item nav-link" href="faq_path">FAQ</a>
-      <a class="nav-item nav-link" <%= link_to 'Log Out', logout_path, method: :delete %></a>
+      <%= link_to 'Log Out', logout_path, class:"nav-item nav-link", method: :delete %>
     </div>
   </div>
 </nav>

@@ -1,7 +1,7 @@
 require "csv"
 
 class CoursesController < ApplicationController
-  skip_before_action :student_check
+  # skip_before_action :student_check
   def course_params
     params.require(:course).permit(:department, :course_number, :section_number, :capacity, prereqs_attributes: [:name])
   end

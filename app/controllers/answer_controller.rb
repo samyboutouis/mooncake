@@ -1,5 +1,5 @@
 class AnswerController < ApplicationController
-    skip_before_action :faculty_check
+    # skip_before_action :faculty_check
     def form 
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         @course = Course.find(params[:course_request])
