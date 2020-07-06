@@ -15,7 +15,7 @@ class CourseRequestController < ApplicationController
 
     def department
         department = params[:department]
-        @course = Course.where(department: department, published: true))
+        @course = Course.where(department: department, published: true)
         respond_to do |format|
             format.json {render json: @course}
         end
@@ -24,7 +24,7 @@ class CourseRequestController < ApplicationController
     def section
         department = params[:department]
         course_number = params[:course_number]
-        @course = Course.where(department: department, course_number: course_number, published: true))
+        @course = Course.where(department: department, course_number: course_number, published: true)
         respond_to do |format|
             format.json {render json: @course}
         end
@@ -35,7 +35,7 @@ class CourseRequestController < ApplicationController
     end
 
     def submit
-        @course = Course.find_by(department: params[:department], course_number: params[:course_number], section_number: params[:section_number])
+        @course = Course.find_by(department: params[:department], course_number: params[:course_number], section_number: params[:section_number], published: true)
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         redirect_to answer_path(@course)
     end
