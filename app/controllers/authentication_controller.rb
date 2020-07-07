@@ -65,7 +65,7 @@ class AuthenticationController < ApplicationController
       # User.find_by(net_id: session[:current_user]["net_id"]).update(email: session[:current_user]["email"])
       if affiliation.include? 'staff'
         session[:current_user]["user_type"] = 'staff'
-        redirect_to 'http://localhost:3000/faculty'
+        redirect_to faculty_page_path
       else
         session[:current_user]["user_type"] = 'student'
         redirect_to root_url
