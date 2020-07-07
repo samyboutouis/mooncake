@@ -52,6 +52,26 @@ body {
    margin-bottom: 30px;
 }
 
+.faq-box {
+    padding-left: 10%;
+    width: 93%;
+    margin-top: 20px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    line-height: 61px;
+    margin-left: 3.5%;
+    margin-bottom: 30px;
+ }
+
+ .akioi {
+    width: 93%;
+    margin-top: 20px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    line-height: 25px;
+    margin-bottom: 30px;
+ }
+
 .remove-padding {
     padding-left: 0%;
 }

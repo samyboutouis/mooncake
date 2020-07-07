@@ -8,10 +8,14 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="<%= root_path %>">Home<span class="sr-only">(current)</span></a>
+      <% if session[:current_user]["user_type"] == "staff"%>
+        <a class="nav-item nav-link active" href="<%= faculty_page_path %>">Home<span class="sr-only">(current)</span></a>
+      <% else %>  
+        <a class="nav-item nav-link active" href="<%= root_path %>">Home<span class="sr-only">(current)</span></a>
+      <% end %>
       <a class="nav-item nav-link" href="<%= student_show_path %>">Account</a>
-      <a class="nav-item nav-link" href="#">FAQ</a>
-      <a class="nav-item nav-link" <%= link_to 'Log Out', logout_path, method: :delete %></a>
+      <a class="nav-item nav-link" href="<%= faq_path %>">FAQ</a>
+      <%= link_to 'Log Out', logout_path, class:"nav-item nav-link", method: :delete %>
     </div>
   </div>
 </nav>
