@@ -427,7 +427,7 @@
   }
 
   td.details-control {
-    background: url('/assets/add.png') no-repeat center center;
+    background: url('public/assets/add.png') no-repeat center center;
     background-size: 20px;
     cursor: pointer;
   }
