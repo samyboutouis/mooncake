@@ -24,7 +24,9 @@ class CoursesController < ApplicationController
       end      
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
-        prereqs = course.prereqs.create(name: name[1]["name"])
+        if name[1]["name"] != ""
+          prereqs = course.prereqs.create(name: name[1]["name"])
+        end
       end
        UserMailer.with(user: @user, course: course).course_created.deliver_now
       redirect_to question_path(course), alert: "Course created successfully."
