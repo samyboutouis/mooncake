@@ -35,6 +35,7 @@ class DashboardController < ApplicationController
   end
 
   def accept
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
     if course.permission_numbers.where(used: false).count == 0
