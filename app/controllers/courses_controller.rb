@@ -13,6 +13,7 @@ class CoursesController < ApplicationController
   def create
     if course = Course.create(course_params)
       course.seats_taken = 0
+      @user = User.find_by(net_id: session[:current_user]["net_id"])
       User.find_by(net_id: session[:current_user]["net_id"]).courses << course  
       file = params[:course][:file]
       puts file
@@ -25,7 +26,7 @@ class CoursesController < ApplicationController
       prereqs_attributes.each do |name|
         prereqs = course.prereqs.create(name: name[1]["name"])
       end
-       UserMailer.with(user: session[:current_user], course: course).course_created.deliver_now
+       UserMailer.with(user: @user, course: course).course_created.deliver_now
       redirect_to question_path(course), alert: "Course created successfully."
     else
       redirect_to faculty_page_url, alert: "Error creating course."
