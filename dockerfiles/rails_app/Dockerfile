@@ -20,8 +20,9 @@ ADD . /webapp
 RUN yarn install --check-files
 RUN rails assets:precompile
 
-#run migrations
+#run database
 RUN rails db:migrate
+RUN rails db:seed
 
 
 #fix openshift permissions
