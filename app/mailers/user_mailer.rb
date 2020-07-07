@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
  
   def welcome_email
     @email = params[:email]
-    @url = "http://localhost:3000"
+    @url = root_path
     mail(to: @email, subject: 'Welcome to Mooncake')
   end
 
