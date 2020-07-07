@@ -3,14 +3,15 @@ class UserMailer < ApplicationMailer
  
   def welcome_email
     @email = params[:email]
-    @url = root_path
+    
+    @url = root_url
     mail(to: @email, subject: 'Welcome to Mooncake')
   end
 
   def course_created
       @user = params[:user]
       @course = params[:course]
-      @url = "http://localhost:3000/facreqview/" + @course.id.to_s
+      @url = root_url+ "/facreqview/" + @course.id.to_s
       mail(to: @user.email, subject: 'New Course Created')
   end
 
@@ -18,8 +19,8 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @request = params[:request]
     @course = @request.course
-    @url = "http://localhost:3000"
-    @url2 = "http://localhost:3000/requestform/" + @request.id.to_s
+    @url = root_url
+    @url2 = root_url + "/requestform/" + @request.id.to_s
     mail(to: @user.email, subject: 'Submitted Course Request')
   end
 
@@ -27,7 +28,7 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @request = params[:request]
     @course = @request.course
-    @url = "http://localhost:3000"
+    @url = root_url
     mail(to: @user.email, subject: 'Request Status Changed')
   end
 

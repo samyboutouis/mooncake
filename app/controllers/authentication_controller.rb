@@ -62,10 +62,11 @@ class AuthenticationController < ApplicationController
       affiliation = information["edupersonprimaryaffiliation"].join(' ')
       session[:current_user]["grad_year"] = information["dupsexpgradtermc1"].join(' ')
       session[:current_user]["email"] = information["edupersonprincipalname"].join(' ')
+      User.find_by(net_id: netid).update(grad_year: session[:current_user]['grad_year'], user_type: affiliation)
       # User.find_by(net_id: session[:current_user]["net_id"]).update(email: session[:current_user]["email"])
       if affiliation.include? 'staff'
         session[:current_user]["user_type"] = 'staff'
-        redirect_to 'http://localhost:3000/faculty'
+        redirect_to faculty_page_path
       else
         session[:current_user]["user_type"] = 'student'
         redirect_to root_url
