@@ -25,7 +25,7 @@
                       Permission Numbers Granted: <%= course.seats_taken %> / <%= course.capacity %> <br>
                       Number of Requests: <%= course.course_requests.length %> <br>
                       <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
-                      <% if course.prereqs.first.name == "" %>
+                      <% if course.prereqs.first == nil %>
                         Prerequisites: N/A
                       <% else%>
                         Prerequisites: <% course.prereqs.each do |prereq| %>
