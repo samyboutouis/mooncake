@@ -10,7 +10,7 @@ class AuthenticationController < ApplicationController
         :authorize_url =>  "/oidc/authorize",
         :token_url =>  "/oidc/token"
       )
-      redirect_to client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth/callback')
+      redirect_to client.auth_code.authorize_url(:redirect_uri => ENV["MOONCAKE_OAUTH_REDIRECT"])
 
     end
 
@@ -23,7 +23,7 @@ class AuthenticationController < ApplicationController
         :authorize_url =>  "/oidc/authorize",
         :token_url =>  "/oidc/token"
       )      
-      token = client.auth_code.get_token(auth_code, :redirect_uri => 'http://localhost:3000/oauth/callback')
+      token = client.auth_code.get_token(auth_code, :redirect_uri => ENV["MOONCAKE_OAUTH_REDIRECT"])
       user_info = token.get("/oidc/userinfo")
       user_info = JSON.parse(user_info.body)
       puts "********"

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
   get "/requestform/:request" => "dashboard#view" , as: "request_form"
   get "/student" => "user#show", as: "student_show"
-  get '/oauth/login' => 'authentication#login'
+  get '/oauth/login' => 'authentication#login', as: "login_path"
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
   get '/request' => 'course_request#expand'
