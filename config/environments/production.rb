@@ -78,7 +78,7 @@ Rails.application.configure do
     domain:               'duke.edu'
   }
 
-  Rails.application.routes.default_url_options[:host] = 'https://mooncake-dev-colab-sandbox.cloud.duke.edu/'
+  Rails.application.routes.default_url_options[:host] = 'https://dev.mooncake.colab.duke.edu/'
 
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
