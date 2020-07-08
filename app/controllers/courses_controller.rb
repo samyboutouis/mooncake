@@ -48,6 +48,24 @@ class CoursesController < ApplicationController
         i += 1
       end
       course.update(cross_listing: cl)
+
+      j = 1
+      while (j < (params["number-choice-sec"].to_i) +1)
+        sec = "section_number" + j.to_s
+        file = "file" + i.to_s
+        Course.create(department: course.department, course_number: course.course_number,
+        section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [])
+        Course.last.prereqs << course.prereqs
+        User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
+        file = params[file]
+        CSV.foreach(file, :headers => true) do |row|
+          unless row[0] == nil
+            Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+          end
+        end 
+        j += 1
+      end
+      
       redirect_to question_path(course), alert: "Course created successfully."
     else
       redirect_to faculty_page_url, alert: "Error creating course."
