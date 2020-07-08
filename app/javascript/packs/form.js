@@ -33,7 +33,7 @@ function getResponse2(element) {
   let selected = element.val();
   $("#howmanysec").empty();
   if (selected === "Yes") {
-    $("#howmanysec").append("<label for= 'number-choice-sec'>How many sections?</label>");
+    $("#howmanysec").append("<label for= 'number-choice-sec'>How many additional sections?</label>");
     $("#howmanysec").append('<input type="text" name= "number-choice-sec" id="number-choice-sec" class="form-control" maxlength= 2><br>');
   }
   else {
@@ -79,7 +79,7 @@ function getOptions2(element) {
   let selected = element.val();
   $("#othersections").empty();
   for(let i = 0; i < selected; i++) {
-    $("#othersections").append("<h3> Section " + (i+1) + "</h3>");
+    $("#othersections").append("<h3> Section " + (i+2) + "</h3>");
     
     $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
     $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');

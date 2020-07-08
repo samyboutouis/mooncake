@@ -5,7 +5,7 @@
         <div class="form-group row">
             <select class="custom-select my-1 mr-sm-2 department" id="inlineFormCustomSelectPref" form="courseform" name="department" style="margin-left:15px;" required>
                 <option value="">Choose Department</option>
-                <% departments = @course.distinct.pluck(:department) %>
+                <% departments = @course.distinct.pluck(:department).sort %>
                 <% for department in departments do %>
                     <option name = 'department'><%= department %></option>
                 <% end %>

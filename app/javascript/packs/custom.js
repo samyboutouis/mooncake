@@ -18,8 +18,12 @@ function getNumber(element) {
     success: function(result) {
       console.log('Success');
       $(".number").append("<option value=''>Choose Course Number</option>");
+      let used = [];
       for (var i = 0; i < result.length; i++) {
-        $(".number").append("<option>" + result[i].course_number + "</option>");
+        if (!(used.includes(result[i].course_number))) {
+          $(".number").append("<option>" + result[i].course_number + "</option>");
+          used.push(result[i].course_number);
+        }
       }
     },
     error: function() {
@@ -48,16 +52,3 @@ function getSection(element) {
     }
   });
 }
-
-
-
-
-
-/*
-
-$(document).ready(function(){
-  $("button").click(function(){
-    $("#div1").load("demotext.txt");
-  });
-});
-*/
