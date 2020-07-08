@@ -8,9 +8,8 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.integer :seats_taken
       t.string :term
       t.boolean :published
-      t.text :cross_listing, default: [].to_yaml
       t.boolean :primary
-
+      t.text :cross_listing, default: [].to_yaml
       t.timestamps
     end
   end

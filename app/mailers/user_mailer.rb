@@ -18,8 +18,8 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @request = params[:request]
     @course = @request.course
-    @url = "http://localhost:3000"
-    @url2 = "http://localhost:3000/requestform/" + @request.id.to_s
+    @url = root_path
+    @url2 = root_path + "requestform/" + @request.id.to_s
     mail(to: @user.email, subject: 'Submitted Course Request')
   end
 

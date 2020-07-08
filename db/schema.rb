@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_154418) do
     t.integer "seats_taken"
     t.string "term"
     t.boolean "published"
-    t.text "cross_listing", default: "--- []\n"
     t.boolean "primary"
+    t.text "cross_listing", default: "--- []\n"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
