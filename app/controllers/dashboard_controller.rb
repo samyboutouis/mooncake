@@ -42,7 +42,11 @@ class DashboardController < ApplicationController
     course = CourseRequest.find(params[:request]).course
     CourseRequest.find(params[:request]).update(status: "Denied")
     # UserMailer.with(user: session[:current_user], request: req).status_changed.deliver_now
-    redirect_to requests_page_path(course)
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
   end
 
   def accept
@@ -60,7 +64,11 @@ class DashboardController < ApplicationController
       perm.course_request = req
       perm.update(used: true)
       # UserMailer.with(user: session[:current_user], request: req).status_changed.deliver_now
-      redirect_to requests_page_path(course)
+      if course.primary == false
+        redirect_to requests_page_path(course.cross_listing[0])
+      else
+        redirect_to requests_page_path(course)
+      end
     end
     
   end
