@@ -45,7 +45,7 @@
                         <p style="color:red;"> Denied </p>
                       <% else %>
                         <p style="color:green;"> Accepted </p>
-                        <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> </p>
+                        <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
 
@@ -74,7 +74,7 @@
                         <p style="color:red;"> Denied </p>
                       <% else %>
                         <p style="color:green;"> Accepted </p>
-                        <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> </p>
+                        <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
 
