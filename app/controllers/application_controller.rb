@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     private
     
     def require_login
-      redirect_to('http://localhost:3000/oauth/login') unless session[:user_id]
+      redirect_to app_login_path unless session[:user_id]
     end
 
     # def faculty_check

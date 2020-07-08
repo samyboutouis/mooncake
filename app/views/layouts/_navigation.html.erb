@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(180deg, #012169 0%, #0577B1 100%), #0577B1;">
   <a class="navbar-brand" href="#">
     mooncake
-    <img class="logo" src="/assets/mooncake_logo.png">
+    <%= image_tag "mooncake_logo.png", class:"logo"%>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,7 @@
         <a class="nav-item nav-link active" href="<%= root_path %>">Home<span class="sr-only">(current)</span></a>
       <% end %>
       <a class="nav-item nav-link" href="<%= student_show_path %>">Account</a>
-      <a class="nav-item nav-link" href="<%=faq_path%>">FAQ</a>
+      <a class="nav-item nav-link" href="<%= faq_path %>">FAQ</a>
       <%= link_to 'Log Out', logout_path, class:"nav-item nav-link", method: :delete %>
     </div>
   </div>

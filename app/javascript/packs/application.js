@@ -5,7 +5,6 @@
 import "bootstrap";
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
-require("channels");
 require("packs/custom");
 require("packs/form");
 require("packs/courses");

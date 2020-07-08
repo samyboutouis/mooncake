@@ -16,6 +16,7 @@ class CoursesController < ApplicationController
       course.published = false
       course.primary = true
       course.seats_taken = 0
+      @user = User.find_by(net_id: session[:current_user]["net_id"])
       User.find_by(net_id: session[:current_user]["net_id"]).courses << course  
       file = params[:course][:file]
       CSV.foreach(file, :headers => true) do |row|
@@ -25,9 +26,10 @@ class CoursesController < ApplicationController
       end      
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
-        prereqs = course.prereqs.create(name: name[1]["name"])
+        if name[1]["name"] != ""
+          prereqs = course.prereqs.create(name: name[1]["name"])
+        end
       end
-      # UserMailer.with(user: session[:current_user], course: course).course_created.deliver_now
       i = 1
       cl = Array.new
       while (i < (params["number-choice"].to_i) +1)
@@ -48,7 +50,6 @@ class CoursesController < ApplicationController
         i += 1
       end
       course.update(cross_listing: cl)
-
       j = 1
       while (j < (params["number-choice-sec"].to_i) +1)
         sec = "section_number" + j.to_s
@@ -65,7 +66,7 @@ class CoursesController < ApplicationController
         end 
         j += 1
       end
-      
+      # UserMailer.with(user: @user, course: course).course_created.deliver_now
       redirect_to question_path(course), alert: "Course created successfully."
     else
       redirect_to faculty_page_url, alert: "Error creating course."

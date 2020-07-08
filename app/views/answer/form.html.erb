@@ -8,6 +8,7 @@
             <input type="hidden" name="department" value="<%= @course.department %>">
             <input type="hidden" name="course_number" value="<%= @course.course_number %>">
             <input type="hidden" name="section_number" value="<%= @course.section_number %>">
+            
             <% for question in @course.questions %>
               <% z=1000 %>
               <% w=-1000 %>

@@ -11,9 +11,7 @@
               <div class="col">
                 <div class="request-box">
                   <%= course_status(course) %>
-
                   <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
-
                     <p class="course">
                       <% if course.published == false %>
                         <%="UNPUBLISHED:"%>
@@ -32,14 +30,12 @@
                       <span class="fa fa-chevron-down pull-right expand-icon"> - </span>
                     </p>
                   </a>
-
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
                     <div >
-
                       Permission Numbers Granted: <%= course.seats_taken + seats %> / <%= course.capacity %> <br>
                       Number of Requests: <%= course.course_requests.length + requests %> <br>
                       <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
-                      <% if course.prereqs.first.name == "" %>
+                      <% if course.prereqs.first == nil %>
                         Prerequisites: N/A
                       <% else%>
                         Prerequisites: <% course.prereqs.each do |prereq| %>
@@ -58,10 +54,8 @@
                           <%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %>
                           <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
                       <% end %>
-
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>

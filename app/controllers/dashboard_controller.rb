@@ -33,7 +33,9 @@ class DashboardController < ApplicationController
     end
     for course in Course.where(department: course1.department, course_number: course1.course_number) do
       course.update(published: true)
-      course.questions << course1.questions
+      if course.questions.length == 0
+        course.questions << course1.questions
+      end
     end
     redirect_to faculty_page_path
   end
@@ -43,10 +45,11 @@ class DashboardController < ApplicationController
   end
 
   def deny
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
     req = CourseRequest.find(params[:request])
     course = CourseRequest.find(params[:request]).course
     CourseRequest.find(params[:request]).update(status: "Denied")
-    # UserMailer.with(user: session[:current_user], request: req).status_changed.deliver_now
+    # UserMailer.with(user: req.user, request: req).status_changed.deliver_now
     if course.primary == false
       redirect_to requests_page_path(course.cross_listing[0])
     else
@@ -55,6 +58,7 @@ class DashboardController < ApplicationController
   end
 
   def accept
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
     if course.permission_numbers.where(used: false).count == 0
@@ -63,19 +67,18 @@ class DashboardController < ApplicationController
       req.update(status: "Accepted")
       course.increment!(:seats_taken)
       if course.seats_taken >= course.capacity
-        # UserMailer.with(user: session[:current_user], course: course).capacity_reached.deliver_now
+        # UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
       end
       perm = course.permission_numbers.where(used: false).last
       perm.course_request = req
       perm.update(used: true)
-      # UserMailer.with(user: session[:current_user], request: req).status_changed.deliver_now
+      # UserMailer.with(user: req.user, request: req).status_changed.deliver_now
       if course.primary == false
         redirect_to requests_page_path(course.cross_listing[0])
       else
         redirect_to requests_page_path(course)
       end
     end
-    
   end
 
   def addpermnum

@@ -20,12 +20,15 @@ ADD . /webapp
 RUN yarn install --check-files
 RUN rails assets:precompile
 
+#run database
+RUN rails db:migrate
+RUN rails db:seed
+
+
 #fix openshift permissions
 RUN chgrp -R 0 /webapp \
   && chmod -R g+rwX /webapp
 
-#run migrations
-RUN rails db:migrate
 
 EXPOSE 3000
 CMD rails s

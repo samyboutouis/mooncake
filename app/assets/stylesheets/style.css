@@ -52,6 +52,26 @@ body {
    margin-bottom: 30px;
 }
 
+.faq-box {
+    padding-left: 10%;
+    width: 93%;
+    margin-top: 20px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    line-height: 61px;
+    margin-left: 3.5%;
+    margin-bottom: 30px;
+ }
+
+.akioi {
+    width: 93%;
+    margin-top: 20px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    line-height: 25px;
+    margin-bottom: 30px;
+ }
+
 .remove-padding {
     padding-left: 0%;
 }
@@ -144,5 +164,34 @@ a[aria-expanded=false] .fa-chevron-down {
 
 /* Mobile only */
 @media only screen and (max-width: 1000px){
-
+    .request-box {
+        padding-left: 10%;
+        width: 100%;
+        margin-top: 20px;
+        background: #FFFFFF;
+        border-radius: 20px;
+        line-height: 61px;
+        margin-left: 3.5%;
+        margin-bottom: 30px;
+     }
+     
+     .faq-box {
+         padding-left: 10%;
+         width: 100%;
+         margin-top: 20px;
+         background: #FFFFFF;
+         border-radius: 20px;
+         line-height: 61px;
+         margin-left: 3.5%;
+         margin-bottom: 30px;
+      }
+     
+     .akioi {
+         width: 100%;
+         margin-top: 20px;
+         background: #FFFFFF;
+         border-radius: 20px;
+         line-height: 25px;
+         margin-bottom: 30px;
+      }
 }
