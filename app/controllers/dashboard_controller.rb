@@ -25,6 +25,11 @@ class DashboardController < ApplicationController
 
   def publish
     Course.find(params[:course]).update(published: true)
+    for id in Course.find(params[:course]).cross_listing do
+      Course.find(id).update(published: true)
+      Course.find(id).questions << Course.find(params[:course]).questions
+      Course.find(id).prereqs << Course.find(params[:course]).prereqs
+    end
     redirect_to faculty_page_path
   end
 
