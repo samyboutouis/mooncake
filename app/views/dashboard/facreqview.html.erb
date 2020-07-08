@@ -3,7 +3,12 @@
     <div class="col">
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
       <div class="table_box">
-        <h1 class="title"> Course Requests for <%= @course.department.split("-")[0] %> <%= @course.course_number %> </h1>
+      <% info = "" %>
+      <% @course.cross_listing.each do |id| %>
+          <% coursec = Course.find(id) %>
+          <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
+      <% end %>
+        <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
         <div class="table-responsive">
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
               <thead>
@@ -45,6 +50,36 @@
                     </td>
 
                   </tr>
+                <% end %>
+
+
+                <% @course.cross_listing.each do |id| %>
+                  <% Course.find(id).course_requests.each do |request| %>
+                  <tr style="text-align: center; vertical-align: middle;">
+                    <td class="details-control"></td>
+                    <% request.answers.each do |answer| %>
+                      <% if answer.question.question_type == "Checkbox"%>
+                        <td><%= answer.answer_text.gsub("~", ", ") %></td>
+                      <% elsif answer.question.question_type == "Long Answer"%>
+                        <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div></td>
+                      <% else %>
+                        <td><%= answer.answer_text %></td>
+                      <% end %>
+                    <% end %>
+                    <td>
+                      <% if request.status == "Under Review"%>
+                        <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to accept #{request.user.first_name}?"}, class:"btn btn-success btn-sm accept"%>
+                        <%= link_to "Deny", deny_path(request), data: {confirm: "Are you sure you want to deny #{request.user.first_name}?"}, class:"btn btn-danger btn-sm accept"%>
+                      <% elsif request.status == "Denied"%>
+                        <p style="color:red;"> Denied </p>
+                      <% else %>
+                        <p style="color:green;"> Accepted </p>
+                        <p style="color:green;"> Granted: <%= request.permission_number.number %> </p>
+                      <% end %>
+                    </td>
+
+                  </tr>
+                  <% end %>
                 <% end %>
 
 

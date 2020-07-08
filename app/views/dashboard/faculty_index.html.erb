@@ -15,9 +15,13 @@
                   <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
                     <p class="course">
                     <% info = "" %>
+                    <% seats = 0 %>
+                    <% requests = 0 %>
                     <% course.cross_listing.each do |id| %>
                         <% coursec = Course.find(id) %>
                         <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
+                        <% seats += coursec.seats_taken %>
+                        <% requests += coursec.course_requests.length %>
                     <% end %>
                       <%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%> <%= info%>
                       <span class="fa fa-chevron-right pull-right expand-icon"> + </span>
@@ -27,8 +31,10 @@
 
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
                     <div >
-                      Permission Numbers Granted: <%= course.seats_taken %> / <%= course.capacity %> <br>
-                      Number of Requests: <%= course.course_requests.length %> <br>
+                    
+
+                      Permission Numbers Granted: <%= course.seats_taken + seats %> / <%= course.capacity %> <br>
+                      Number of Requests: <%= course.course_requests.length + requests %> <br>
                       <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
                       <% if course.prereqs.first.name == "" %>
                         Prerequisites: N/A
