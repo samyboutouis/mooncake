@@ -54,7 +54,7 @@ class CoursesController < ApplicationController
         sec = "section_number" + j.to_s
         file = "file" + i.to_s
         Course.create(department: course.department, course_number: course.course_number,
-        section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [])
+        section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [], published: false)
         Course.last.prereqs << course.prereqs
         User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
         file = params[file]
