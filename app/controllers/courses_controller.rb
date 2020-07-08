@@ -38,6 +38,7 @@ class CoursesController < ApplicationController
         Course.create(department: params[dep], course_number: params[num],
         section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
         cl.append(Course.last.id)
+        Course.last.prereqs << course.prereqs
         file = params[file]
         CSV.foreach(file, :headers => true) do |row|
           unless row[0] == nil
@@ -56,8 +57,8 @@ class CoursesController < ApplicationController
   def delete
     id = params[:id]
     course = Course.find(id)
-    for id in course.cross_listing do
-      Course.find(id).destroy
+    course.cross_listing.each do |id|
+      Course.destroy(id)
     end
     course.destroy
     redirect_to faculty_page_url
