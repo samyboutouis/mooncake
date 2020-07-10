@@ -2,6 +2,9 @@
     <div class="box">
         <h1 class="title">Find Courses</h1>
         <form action= '/courserequests' method="get" id="courseform">
+        <% if flash[:alert1] %>
+        <div class="alert1", style = "color: red"><%= flash[:alert1] %></div>
+        <% end %>
         <div class="form-group row">
             <select class="custom-select my-1 mr-sm-2 term" id="inlineFormCustomSelectPref" form="courseform" name="term" style="margin-left:15px;" required>
                 <option value="">Choose Term</option>
@@ -12,9 +15,6 @@
             </select>
         </div>
         <div class="form-group row">
-        <% if flash[:alert] %>
-        <div class="alert", style = "color: red"><%= flash[:alert] %></div>
-        <% end %>
             <select class="custom-select my-1 mr-sm-2 department" id="inlineFormCustomSelectPref" form="courseform" name="department" style="margin-left:15px;" required>
                 <option value="">Choose Department</option>
             </select>
