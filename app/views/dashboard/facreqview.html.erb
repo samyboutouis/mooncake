@@ -26,60 +26,60 @@
                 </tr>
               </thead>
               <tbody>
-                
+
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
-                    <td> 
+                    <td>
                       <% if request.priority == nil %>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
-                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
-                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
-                          
+                            <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "no", rank3_path(request), class:"dropdown-item" %>
+
                           </div>
                         </div>
                       <% elsif request.priority == 1 %>
-                        <p style="color:green;"> 1 </p>
+                        <p style="color:green;"> yes </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
-                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
-                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
-                          
+                            <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "no", rank3_path(request), class:"dropdown-item" %>
+
                           </div>
                         </div>
                       <% elsif request.priority == 2 %>
-                        <p style="color:orange;"> 2 </p>
+                        <p style="color:orange;"> maybe </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
-                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
-                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
-                          
+                            <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "no", rank3_path(request), class:"dropdown-item" %>
+
                           </div>
                         </div>
                       <% else %>
-                        <p style="color:red;"> 3 </p>
+                        <p style="color:red;"> no </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
-                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
-                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
-                          
+                            <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "no", rank3_path(request), class:"dropdown-item" %>
+
                           </div>
                         </div>
                       <% end %>
