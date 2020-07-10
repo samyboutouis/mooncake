@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get '/oauth/login' => 'authentication#login', as: "app_login"
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
-  get '/request' => 'course_request#expand'
+  # get '/request' => 'course_request#expand'
   get '/ldap' => 'authentication#authorize', as: 'ldap'
 
   #answer routes
@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   #student requests a permission number
   get '/search' => 'course_request#index', as: "search"
+  get '/term' => 'course_request#term'
   get '/department' => 'course_request#department'
   get '/section' => 'course_request#section'
   get '/courserequests' => 'course_request#submit'

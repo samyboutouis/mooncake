@@ -2,7 +2,7 @@ require "roo"
 class CoursesController < ApplicationController
   # skip_before_action :student_check
   def course_params
-    params.require(:course).permit(:department, :course_number, :section_number, :capacity, prereqs_attributes: [:name])
+    params.require(:course).permit(:term, :department, :course_number, :section_number, :capacity, prereqs_attributes: [:name])
   end
 
   def new
@@ -42,7 +42,7 @@ class CoursesController < ApplicationController
         num = "course_number" + i.to_s
         sec = "section_number" + i.to_s
         file = "file" + i.to_s
-        Course.create(department: params[dep], course_number: params[num],
+        Course.create(term: course.term, department: params[dep], course_number: params[num],
         section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
         cl.append(Course.last.id)
         Course.last.prereqs << course.prereqs
@@ -65,7 +65,7 @@ class CoursesController < ApplicationController
       while (j < (params["number-choice-sec"].to_i) +1)
         sec = "section_number" + j.to_s
         file = "file" + i.to_s
-        Course.create(department: course.department, course_number: course.course_number,
+        Course.create(term: course.term, department: course.department, course_number: course.course_number,
         section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [], published: false)
         Course.last.prereqs << course.prereqs
         User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
