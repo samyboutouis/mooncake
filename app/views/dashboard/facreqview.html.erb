@@ -14,6 +14,7 @@
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
+                  <th> Ranking </th>
                   <% @course.questions.each do |question| %>
                     <%if question.id <= 5 or question.question_text == "Which course(s) have you taken:" %>
                       <th> <%= question.question_text %><br><%= image_tag "eye.png", id: "hide",class:"eye"%></th>
@@ -25,9 +26,64 @@
                 </tr>
               </thead>
               <tbody>
+                
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
+                    <td> 
+                      <% if request.priority == nil %>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
+                          
+                          </div>
+                        </div>
+                      <% elsif request.priority == 1 %>
+                        <p style="color:green;"> 1 </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
+                          
+                          </div>
+                        </div>
+                      <% elsif request.priority == 2 %>
+                        <p style="color:orange;"> 2 </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
+                          
+                          </div>
+                        </div>
+                      <% else %>
+                        <p style="color:red;"> 3 </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "1", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "2", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "3", rank3_path(request), class:"dropdown-item" %>
+                          
+                          </div>
+                        </div>
+                      <% end %>
+                    </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>

@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   get "/accept/:request" => "dashboard#accept", as: "accept"
   get "/permnum/:req" => "dashboard#addpermnum", as: "add_permnum"
   post "/add" => "dashboard#add", as: "add"
-  
+
+  #Ranking
+  get "/rank1/:request" => "dashboard#rank1", as: "rank1"
+  get "/rank2/:request" => "dashboard#rank2", as: "rank2"
+  get "/rank3/:request" => "dashboard#rank3", as: "rank3"
+
 
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
   get "/requestform/:request" => "dashboard#view" , as: "request_form"

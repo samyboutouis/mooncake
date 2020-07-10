@@ -98,4 +98,29 @@ class DashboardController < ApplicationController
     redirect_to accept_path(@request) 
   end
 
+  def rank1
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    req.update(priority: 1)
+    puts req.priority
+    redirect_to requests_page_path(course)
+  end
+
+  def rank2
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    req.update(priority: 2)
+    redirect_to requests_page_path(course)
+  end
+
+  def rank3
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    req.update(priority: 3)
+    redirect_to requests_page_path(course)
+  end
+
 end
