@@ -40,11 +40,10 @@
                             <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "no", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
                       <% elsif request.priority == 1 %>
-                        <p style="color:green;"> yes </p>
+                        <p class="yes" style="color:green;"> yes </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
@@ -57,7 +56,7 @@
                           </div>
                         </div>
                       <% elsif request.priority == 2 %>
-                        <p style="color:orange;"> maybe </p>
+                        <p class="maybe" style="color:orange;"> maybe </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
@@ -70,7 +69,7 @@
                           </div>
                         </div>
                       <% else %>
-                        <p style="color:red;"> no </p>
+                        <p class="noo" style="color:red;"> no </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
