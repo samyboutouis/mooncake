@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :require_login
+    add_flash_types :req
     # before_action :faculty_check
     # before_action :student_check
 
