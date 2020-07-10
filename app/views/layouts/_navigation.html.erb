@@ -16,9 +16,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <% if session[:current_user]["user_type"] == "staff"%>
-        <a class="nav-item nav-link active" href="<%= faculty_page_path %>">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link " href="<%= faculty_page_path %>">Home<span class="sr-only">(current)</span></a>
       <% else %>
-        <a class="nav-item nav-link active" href="<%= root_path %>">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link " href="<%= root_path %>">Home<span class="sr-only">(current)</span></a>
       <% end %>
       <a class="nav-item nav-link" href="<%= student_show_path %>">Account</a>
       <a class="nav-item nav-link" href="<%= faq_path %>">FAQ</a>

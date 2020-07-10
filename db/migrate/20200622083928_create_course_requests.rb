@@ -4,7 +4,7 @@ class CreateCourseRequests < ActiveRecord::Migration[6.0]
       t.references :user, null: false, foreign_key: true
       t.references :course, null: false, foreign_key: true
       t.string :status
-
+      t.integer :priority
       t.timestamps
     end
   end

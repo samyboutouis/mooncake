@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_154418) do
     t.integer "user_id", null: false
     t.integer "course_id", null: false
     t.string "status"
+    t.integer "priority"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_course_requests_on_course_id"
