@@ -12,13 +12,13 @@ $(document).ready(function () {
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
-        if ((table.column(6).header().innerText).trim() != "Which course(s) have you taken:") {
-            x = 6;
-            col = 6;
-        }
-        else {
+        if ((table.column(7).header().innerText).trim() != "Which course(s) have you taken:") {
             x = 7;
             col = 7;
+        }
+        else {
+            x = 8;
+            col = 8;
         }
         for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
@@ -63,11 +63,11 @@ function format ( d, table ) {
     // `d` is the original data object for the row
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
     let x = -1;
-    if ((table.column(6).header().innerText).trim() != "Which course(s) have you taken:") {
-        x = 6;
+    if ((table.column(7).header().innerText).trim() != "Which course(s) have you taken:") {
+        x = 7;
     }
     else {
-        x = 7;
+        x = 8;
     }
     for(let i = x; i < table.columns().count() - 1; i++){
         innards += '<tr>'+ '<td>'+$(table.column(i).header()).html()+'</td>'+ '<td>'+d[i]+'</td>'+'</tr>';
