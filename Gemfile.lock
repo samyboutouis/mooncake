@@ -220,7 +220,7 @@ DEPENDENCIES
   oauth2
   puma (~> 4.1)
   rails (~> 6.0.3)
-  roo (~> 2.8)
+  roo (~> 2.8.0)
   sass-rails (>= 6)
   selenium-webdriver
   spring

@@ -19,7 +19,7 @@ function getResponse(element) {
   let selected = element.val();
   $("#howmany").empty();
   if (selected === "Yes") {
-    $("#howmany").append("<label for= 'number-choice'>How many courses are cross-listed?</label>");
+    $("#howmany").append("<label for= 'number-choice'>How many additional courses are cross-listed?</label>");
     $("#howmany").append('<input type="text" name= "number-choice" id="number-choice" class="form-control" maxlength= 2><br>');
   }
   else {
@@ -46,7 +46,7 @@ function getOptions(element) {
   let selected = element.val();
   $("#othercourses").empty();
   for(let i = 0; i < selected; i++) {
-    $("#othercourses").append("<h3> Cross-listed Course " + (i+1) + "</h3>");
+    $("#othercourses").append("<h3> Cross-listed Course " + (i+2) + "</h3>");
     $("#othercourses").append("<label for= 'department"+(i+1)+"'> Department:</label>");
     $("#othercourses").append($(document.createElement('select')).prop({
       name: "department"+(i+1),
@@ -67,7 +67,7 @@ function getOptions(element) {
     $("#othercourses").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
     $("#othercourses").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
 
-    $("#othercourses").append("<label for= 'file"+(i+1)+"'> Upload Permission Numbers CSV File</label><br>");
+    $("#othercourses").append("<label for= 'file"+(i+1)+"'> Upload Permission Numbers Excel File (xlsx) </label><br>");
     $("#othercourses").append('<input name= "file'+(i+1)+'" type="file" id="file'+(i+1)+'"><br>');
     $("#othercourses").append('<div class="spacer"></div>');
   }
@@ -84,7 +84,7 @@ function getOptions2(element) {
     $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
     $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
 
-    $("#othersections").append("<label for= 'file"+(i+1)+"'> Upload Permission Numbers CSV File</label><br>");
+    $("#othersections").append("<label for= 'file"+(i+1)+"'> Upload Permission Numbers Excel File (xlsx) </label><br>");
     $("#othersections").append('<input name= "file'+(i+1)+'" type="file" id="file'+(i+1)+'"><br>');
     $("#othersections").append('<div class="spacer"></div>');
   }

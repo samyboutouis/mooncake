@@ -1,5 +1,4 @@
-require "csv"
-
+require "roo"
 class CoursesController < ApplicationController
   # skip_before_action :student_check
   def course_params
@@ -19,11 +18,17 @@ class CoursesController < ApplicationController
       @user = User.find_by(net_id: session[:current_user]["net_id"])
       User.find_by(net_id: session[:current_user]["net_id"]).courses << course  
       file = params[:course][:file]
-      CSV.foreach(file, :headers => true) do |row|
-        unless row[0] == nil
-          course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+      xlsx = Roo::Spreadsheet.open(file)
+      sheet = xlsx.sheet(0)
+      z=0
+      sheet.each do |row|
+        if z>0
+          unless row[0] == nil
+            course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+          end
         end
-      end      
+        z += 1
+      end     
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
         if name[1]["name"] != ""
@@ -42,11 +47,17 @@ class CoursesController < ApplicationController
         cl.append(Course.last.id)
         Course.last.prereqs << course.prereqs
         file = params[file]
-        CSV.foreach(file, :headers => true) do |row|
-          unless row[0] == nil
-            Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+        xlsx = Roo::Spreadsheet.open(file)
+        sheet = xlsx.sheet(0)
+        z=0
+        sheet.each do |row|
+          if z>0
+            unless row[0] == nil
+              Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+            end
           end
-        end 
+          z += 1
+        end
         i += 1
       end
       course.update(cross_listing: cl)
@@ -59,11 +70,17 @@ class CoursesController < ApplicationController
         Course.last.prereqs << course.prereqs
         User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
         file = params[file]
-        CSV.foreach(file, :headers => true) do |row|
-          unless row[0] == nil
-            Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+        xlsx = Roo::Spreadsheet.open(file)
+        sheet = xlsx.sheet(0)
+        z=0
+        sheet.each do |row|
+          if z>0
+            unless row[0] == nil
+              Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+            end
           end
-        end 
+          z += 1
+        end
         j += 1
       end
       # UserMailer.with(user: @user, course: course).course_created.deliver_now
