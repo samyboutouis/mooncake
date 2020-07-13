@@ -12,14 +12,6 @@ $(document).ready(function(){
       getOptions2($(this));
     })
   });
-
-  $("#number-choice").on('input', function() {
-    deleteCrossSection($(this));
-  });
-
-  $("#number-choice-sec").on('input', function() {
-    deleteMultiSection($(this));
-  });
 });
 
 function getResponse(element) {
@@ -94,11 +86,5 @@ function getOptions2(element) {
     $("#othersections").append("<label for= 'file"+(i+1)+"'> Upload Permission Numbers Excel File (xlsx) </label><br>");
     $("#othersections").append('<input name= "file'+(i+1)+'" type="file" id="file'+(i+1)+'"><br>');
     $("#othersections").append('<div class="spacer"></div>');
-  }
-}
-
-function deleteCrossSection(element) {
-  if (element.val() === 'No') {
-    $("#howmany").remove();
   }
 }
