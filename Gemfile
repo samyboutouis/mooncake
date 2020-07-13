@@ -60,3 +60,6 @@ gem 'net-ldap'
 
 #roo gem
 gem "roo", "~> 2.8.0"
+
+#httparty gem
+gem "httparty", "~> 0.18.1"
