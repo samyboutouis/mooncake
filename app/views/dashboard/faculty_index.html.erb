@@ -32,6 +32,7 @@
                   </a>
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
                     <div >
+                      Term: <%= course.term %> <br>
                       Permission Numbers Granted: <%= course.seats_taken + seats %> / <%= course.capacity %> <br>
                       Number of Requests: <%= course.course_requests.length + requests %> <br>
                       <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
