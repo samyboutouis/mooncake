@@ -11,7 +11,7 @@ default_questions = Question.create([{question_type:  "text", question_text: "Fu
 all_users = User.create([{first_name: "Maryam", last_name: "Shahid", grad_year: "2023 Sprng", unique_id: "11111", net_id: "ms858", email: "maryam.shahid@duke.edu"}, {first_name: "Maple", last_name: "Adkisson", grad_year: "2023 Sprng", unique_id: "12345", net_id: "ma1000", email: "ma1000@duke.edu"}, {first_name: "Oakley", last_name: "Adkisson", grad_year: "2022 Sprng", unique_id: "15555", net_id: "oa1000", email: "oa1000@duke.edu"}])
 my_courses = User.first.courses.create([{term: "2020 Fall", department: "COMPSCI - Computer Science", course_number: "101", section_number: "01 - LEC", capacity: 200, seats_taken: 0, primary: true, published: true}, {term: "2020 Fall", department: "COMPSCI - Computer Science", course_number: "201", section_number: "03 - LEC", capacity: 200, seats_taken: 1, primary: true, published: true}, {term: "2020 Fall", department: "GSF - Gender Sexuality and Feminist", course_number: "101", section_number: "01 - LEC", capacity: 200, seats_taken: 0, primary: true, published: true}])
 #fill in course attributes
-prereqsfirst = Course.first.prereqs.create([{name: ""}])
+prereqsfirst = Course.first.prereqs.create([{name: "COMPSCI 50"}, {name: "COMPSCI 99"}])
 prereqssec = Course.second.prereqs.create([{name: ""}])
 prereqsthird = Course.last.prereqs.create([{name: ""}])
 
