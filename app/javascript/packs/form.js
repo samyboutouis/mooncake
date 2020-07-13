@@ -1,12 +1,12 @@
 $(document).ready(function(){
-  $("#crosslisting").on('input', function() {
+  $(".listing").on('input', function() {
     getResponse($(this));
     $("#number-choice").on('input', function() {
       getOptions($(this));
     })
   });
 
-  $("#sections").on('input', function() {
+  $(".sec").on('input', function() {
     getResponse2($(this));
     $("#number-choice-sec").on('input', function() {
       getOptions2($(this));
@@ -17,6 +17,7 @@ $(document).ready(function(){
 
 function getResponse(element) {
   let selected = element.val();
+  $("#othercourses").empty();
   $("#howmany").empty();
   if (selected === "Yes") {
     $("#howmany").append("<label for= 'number-choice'>How many additional courses are cross-listed?</label>");
@@ -31,6 +32,7 @@ function getResponse(element) {
   
 function getResponse2(element) {
   let selected = element.val();
+  $("#othersections").empty();
   $("#howmanysec").empty();
   if (selected === "Yes") {
     $("#howmanysec").append("<label for= 'number-choice-sec'>How many additional sections?</label>");
