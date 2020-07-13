@@ -5,6 +5,17 @@ end
     
     def course_search
 
+        key = ENV["ACCESS_TOKEN"]
+
+        response0 = HTTParty.get("https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/SUBJECT?access_token=" + key)
+        subjects = JSON.parse(response0.body)
+        subjects = subjects["scc_lov_resp"]["lovs"]["lov"]["values"]["value"]
+        
+        departments = []
+        for sub in subjects
+            departments.append(sub["code"] + " - " + sub["desc"])
+        end
+
         # Change values
         code = "ARTSVIS"
         desc = "Visual Arts"
@@ -16,7 +27,7 @@ end
             desc[desc.index("&")] =  "%26"
         end
         desc = desc.join("%20")
-        key = ENV["ACCESS_TOKEN"]
+        
         response = HTTParty.get("https://streamer.oit.duke.edu/curriculum/courses/subject/"+code+ "%20-%20"+desc+"?access_token=" +key )
         course = JSON.parse(response.body)
         course = course["ssr_get_courses_resp"]["course_search_result"]["subjects"]["subject"]["course_summaries"]["course_summary"]
