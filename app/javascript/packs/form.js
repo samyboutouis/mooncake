@@ -56,7 +56,7 @@ function getOptions(element) {
           class: "form-control",
           id: "department"+(i+1),
         }));
-        $("#deparment").append("<option value='' disabled selected> Select One </option>");
+        $("#department"+(i+1)).append("<option value='' disabled selected> Select One </option>");
         for(let j = 0; j < result.length; j++){
           $('#department'+(i+1)).append($(document.createElement('option')).prop({
             value: result[j],
