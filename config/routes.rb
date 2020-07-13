@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   #create course routes
   get '/courses/new' => "courses#new", as: "new_course"
+  get '/dept' => "courses#departments", as: "dept"
   post '/courses' => "courses#create"
   delete '/courses/:id' => 'courses#delete', as: "delete_course"
 
