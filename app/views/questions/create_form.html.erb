@@ -2,7 +2,12 @@
   <div class="row">
     <div class="col">
       <div class="box">
-        <h1 class="title" style = "margin: 20px 40px 50px 40px">Create Form for <%= @course.department.split("-").first %> <%= @course.course_number %> <%= @course.section_number %> </h1>
+        <% info = "" %>
+        <% @course.cross_listing.each do |id| %>
+            <% coursec = Course.find(id) %>
+            <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
+        <% end %>
+        <h1 class="title" style = "margin: 20px 40px 50px 40px">Create Form for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
         <div class="container">
             <% @course.questions.each do |question| %>
                 <div class="form-group">
@@ -32,7 +37,9 @@
             <% end %>
 
             <%= link_to "Add Question", new_question_path(@course), class:"btn btn-outline-dark", style:"margin:10px 0px 10px" %>
-            <%= link_to "Complete form", faculty_page_path, class:"btn btn-dark ", style:"margin:10px 0px 10px;" %>
+            <%= link_to "Save form", faculty_page_path, class:"btn btn-outline-dark ", style:"margin:10px 0px 10px;" %>
+            <%= link_to "Publish form", publish_page_path(@course), method: :get, class:"btn btn-dark", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%>
+
         </div>
       </div>
     </div>

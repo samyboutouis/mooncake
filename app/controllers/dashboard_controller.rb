@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  # skip_before_action :faculty_check, only: [:index, :withdraw, :view]
+  # skip_before_action :student_check, only: [:faculty_index, :facreqview, :deny, :addpermnum, :accept, :add]
   def index
     @user = User.find_by(net_id: session[:current_user]["net_id"])
     @course_request = @user.course_requests
@@ -21,6 +23,23 @@ class DashboardController < ApplicationController
     @courses = @user.courses.all
   end
 
+  def publish
+    course1 = Course.find(params[:course])
+    Course.find(params[:course]).update(published: true)
+    for id in Course.find(params[:course]).cross_listing do
+      Course.find(id).update(published: true)
+      Course.find(id).questions << Course.find(params[:course]).questions
+      # Course.find(id).prereqs << Course.find(params[:course]).prereqs
+    end
+    for course in Course.where(department: course1.department, course_number: course1.course_number) do
+      course.update(published: true)
+      if course.questions.length == 0
+        course.questions << course1.questions
+      end
+    end
+    redirect_to faculty_page_path
+  end
+
   def facreqview
     @course = Course.find(params[:course])
   end
@@ -30,8 +49,12 @@ class DashboardController < ApplicationController
     req = CourseRequest.find(params[:request])
     course = CourseRequest.find(params[:request]).course
     CourseRequest.find(params[:request]).update(status: "Denied")
-    UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-    redirect_to requests_page_path(course)
+    # UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
   end
 
   def accept
@@ -44,15 +67,18 @@ class DashboardController < ApplicationController
       req.update(status: "Accepted")
       course.increment!(:seats_taken)
       if course.seats_taken >= course.capacity
-        UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+        # UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
       end
       perm = course.permission_numbers.where(used: false).last
       perm.course_request = req
       perm.update(used: true)
-       UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-      redirect_to requests_page_path(course)
+      # UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+      if course.primary == false
+        redirect_to requests_page_path(course.cross_listing[0])
+      else
+        redirect_to requests_page_path(course)
+      end
     end
-    
   end
 
   def addpermnum
@@ -70,6 +96,31 @@ class DashboardController < ApplicationController
       end
     end  
     redirect_to accept_path(@request) 
+  end
+
+  def rank1
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    req.update(priority: 1)
+    puts req.priority
+    redirect_to requests_page_path(course)
+  end
+
+  def rank2
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    req.update(priority: 2)
+    redirect_to requests_page_path(course)
+  end
+
+  def rank3
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    req.update(priority: 3)
+    redirect_to requests_page_path(course)
   end
 
 end

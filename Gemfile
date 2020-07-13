@@ -57,3 +57,6 @@ gem 'oauth2'
 
 #LDAP gem
 gem 'net-ldap'
+
+#roo gem
+gem "roo", "~> 2.8.0"

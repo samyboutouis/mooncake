@@ -1,5 +1,5 @@
 class AnswerController < ApplicationController
-
+    # skip_before_action :faculty_check
     def form 
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         @course = Course.find(params[:course_request])
@@ -23,7 +23,7 @@ class AnswerController < ApplicationController
             @course_request.answers.create(answer_text: answer, question: question)
             # Answer.last << Question.find_by(question_text: question.question_text)
         end
-        UserMailer.with(user: @user, request: @course_request).request_submitted.deliver_now
+        # UserMailer.with(user: @user, request: @course_request).request_submitted.deliver_now
         redirect_to root_url
     end
 

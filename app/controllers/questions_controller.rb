@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+    # skip_before_action :student_check
     def question_params
         params.require(:question).permit(:question_type, :question_text, :option => [])
     end
@@ -6,6 +7,9 @@ class QuestionsController < ApplicationController
     # initializing the course
     def create_form
         @course = Course.find(params[:course])
+        if @course.published == true
+            redirect_to faculty_page_path
+        end
         if @course.questions.count == 0
             @course.questions << Question.find(1,2,3,4,5)
             if @course.prereqs.first != nil
@@ -17,13 +21,19 @@ class QuestionsController < ApplicationController
 
     def create
         @course = Course.find(params[:course])
+        if @course.published == true
+            redirect_to faculty_page_path
+        end
         @course.questions.create(question_params)
         redirect_to question_path(@course)
     end
 
     # add new question
     def new
-        @course = params[:course]
+        @course = Course.find(params[:course])
+        if @course.published == true
+            redirect_to faculty_page_path
+        end
         @question = Question.new
     end
 

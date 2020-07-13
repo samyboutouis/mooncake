@@ -23,7 +23,15 @@ $(document).ready(function () {
         for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
         }
+
+        let yes = $(".yes").closest("tr")
+        yes.addClass('greens')
+        let maybe = $(".maybe").closest("tr")
+        maybe.addClass('oranges')
+        let no = $(".noo").closest("tr")
+        no.addClass('reds')
     }
+
 
     $('#myTable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');

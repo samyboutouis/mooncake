@@ -7,7 +7,7 @@
         <div class="container">
         <% i = 0 %>
           <% for request in @course_request do %>
-
+            
             <div class="row">
               <div class="col">
                 <div class="request-box">
@@ -25,7 +25,7 @@
                     <div >
                       Status: <%= request.status %> <br>
                       <% if request.permission_number != nil %>
-                        PermNo: <%= request.permission_number.number %> <br>
+                        PermNo: <%= request.permission_number.number %> (expires on <%=request.permission_number.expire_date%>) <br>
                       <% end %>
                       <%= link_to "View request form", request_form_path(request), method: :get, class:"btn btn-outline-primary" %>
                       <% if request.status == "Under Review" %>

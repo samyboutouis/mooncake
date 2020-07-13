@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "dashboard#index"
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
+  get "/publish/:course" => "dashboard#publish", as: "publish_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
 
   #Accept/Deny
@@ -11,7 +12,12 @@ Rails.application.routes.draw do
   get "/accept/:request" => "dashboard#accept", as: "accept"
   get "/permnum/:req" => "dashboard#addpermnum", as: "add_permnum"
   post "/add" => "dashboard#add", as: "add"
-  
+
+  #Ranking
+  get "/rank1/:request" => "dashboard#rank1", as: "rank1"
+  get "/rank2/:request" => "dashboard#rank2", as: "rank2"
+  get "/rank3/:request" => "dashboard#rank3", as: "rank3"
+
 
   delete "/withdraw/:request" => "dashboard#withdraw" , as: "withdraw_request"
   get "/requestform/:request" => "dashboard#view" , as: "request_form"
@@ -19,7 +25,7 @@ Rails.application.routes.draw do
   get '/oauth/login' => 'authentication#login', as: "app_login"
   get '/oauth/callback' => 'authentication#callback'
   delete '/logout', to: 'authentication#destroy'
-  get '/request' => 'course_request#expand'
+  # get '/request' => 'course_request#expand'
   get '/ldap' => 'authentication#authorize', as: 'ldap'
 
   #answer routes
@@ -35,6 +41,7 @@ Rails.application.routes.draw do
 
   #student requests a permission number
   get '/search' => 'course_request#index', as: "search"
+  get '/term' => 'course_request#term'
   get '/department' => 'course_request#department'
   get '/section' => 'course_request#section'
   get '/courserequests' => 'course_request#submit'
@@ -46,5 +53,6 @@ Rails.application.routes.draw do
   delete '/courses/:id' => 'courses#delete', as: "delete_course"
 
   #faq
-  get "/faq" => "faq#show", as:"faq"
+  get '/faq' => "faq#show", as: "faq" 
 end
+

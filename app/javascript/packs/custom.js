@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $(".term").on('change', function() {
+    getDepartment($(this));
+  });
+
   $(".department").on('change', function() {
     getNumber($(this));
   });
@@ -8,18 +12,59 @@ $(document).ready(function () {
   });
 });
 
-function getNumber(element) {
+$(function(){
+    var current = location.pathname;
+    $('.navbar a').each(function(){
+        var $this = $(this);
+        // if the current path is like this link, make it active
+        if($this.attr('href').indexOf(current) !== -1){
+            $this.addClass('active');
+        }
+    })
+})
+
+function getDepartment(element) {
   let selected = element.val();
+  $(".department").empty();
+  console.log
+  $.ajax('/term', {
+    type: 'GET',
+    dataType: 'json',
+    data: {term: selected},
+    success: function(result) {
+      console.log('Success');
+      $(".department").append("<option value=''>Choose Department</option>");
+      let used = [];
+      for (var i = 0; i < result.length; i++) {
+        if (!(used.includes(result[i].department))) {
+          $(".department").append("<option>" + result[i].department + "</option>");
+          used.push(result[i].department);
+        }
+      }
+    },
+    error: function() {
+      console.log('Error');
+    }
+  });
+}
+
+function getNumber(element) {
+  let department = element.val();
+  let term = $(".term").val();
   $(".number").empty();
   $.ajax('/department', {
     type: 'GET',
     dataType: 'json',
-    data: {department: selected},
+    data: {department: department, term: term},
     success: function(result) {
       console.log('Success');
-      $(".number").append("<option>Choose Course Number</option>");
+      $(".number").append("<option value=''>Choose Course Number</option>");
+      let used = [];
       for (var i = 0; i < result.length; i++) {
-        $(".number").append("<option>" + result[i].course_number + "</option>");
+        if (!(used.includes(result[i].course_number))) {
+          $(".number").append("<option>" + result[i].course_number + "</option>");
+          used.push(result[i].course_number);
+        }
       }
     },
     error: function() {
@@ -31,14 +76,15 @@ function getNumber(element) {
 function getSection(element) {
   let courseNumber = element.val();
   let department = $(".department").val();
+  let term = $(".term").val();
   $(".section").empty();
   $.ajax('/section', {
     type: 'GET',
     dataType: 'json',
-    data: {course_number: courseNumber, department: department},
+    data: {course_number: courseNumber, department: department, term: term},
     success: function(result) {
       console.log('Success');
-      $(".section").append("<option>Choose Section Number</option>");
+      $(".section").append("<option value=''>Choose Section Number</option>");
       for (var i = 0; i < result.length; i++) {
         $(".section").append("<option>" + result[i].section_number + "</option>");
       }
@@ -48,16 +94,3 @@ function getSection(element) {
     }
   });
 }
-
-
-
-
-
-/*
-
-$(document).ready(function(){
-  $("button").click(function(){
-    $("#div1").load("demotext.txt");
-  });
-});
-*/

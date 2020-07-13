@@ -6,7 +6,10 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.string :section_number
       t.integer :capacity
       t.integer :seats_taken
-
+      t.string :term
+      t.boolean :published
+      t.boolean :primary
+      t.text :cross_listing, default: [].to_yaml
       t.timestamps
     end
   end

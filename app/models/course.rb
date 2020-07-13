@@ -1,4 +1,5 @@
 class Course < ApplicationRecord
+    serialize :cross_listing, Array
     has_and_belongs_to_many :users
     has_and_belongs_to_many :prereqs
     before_destroy do
