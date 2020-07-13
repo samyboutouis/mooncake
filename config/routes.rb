@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
   get "/publish/:course" => "dashboard#publish", as: "publish_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
-
+  get "/numbers/:course" => "dashboard#numbers", as: "numbers"
   #Accept/Deny
   get "/deny/:request" => "dashboard#deny", as: "deny"
   get "/accept/:request" => "dashboard#accept", as: "accept"
@@ -53,6 +53,5 @@ Rails.application.routes.draw do
   delete '/courses/:id' => 'courses#delete', as: "delete_course"
 
   #faq
-  get '/faq' => "faq#show", as: "faq" 
+  get '/faq' => "faq#show", as: "faq"
 end
-

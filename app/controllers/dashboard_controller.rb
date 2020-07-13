@@ -94,8 +94,8 @@ class DashboardController < ApplicationController
       unless row[0] == nil
         course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
       end
-    end  
-    redirect_to accept_path(@request) 
+    end
+    redirect_to accept_path(@request)
   end
 
   def rank1
@@ -122,5 +122,10 @@ class DashboardController < ApplicationController
     req.update(priority: 3)
     redirect_to requests_page_path(course)
   end
+
+  def numbers
+    @course = Course.find(params[:course])
+  end
+
 
 end
