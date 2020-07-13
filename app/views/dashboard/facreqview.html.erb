@@ -43,10 +43,10 @@
                           </div>
                         </div>
                       <% elsif request.priority == 1 %>
-                        <p class="yes" style="color:green;"> yes </p>
+                        <p class="yes" hidden style="color:green;"> yes </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select
+                            yes
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
@@ -56,10 +56,10 @@
                           </div>
                         </div>
                       <% elsif request.priority == 2 %>
-                        <p class="maybe" style="color:orange;"> maybe </p>
+                        <p class="maybe" hidden style="color:orange;"> maybe </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select
+                            maybe
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
@@ -69,10 +69,10 @@
                           </div>
                         </div>
                       <% else %>
-                        <p class="noo" style="color:red;"> no </p>
+                        <p class="noo" hidden style="color:red;"> no </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select
+                            no
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <%=link_to "yes", rank1_path(request), class:"dropdown-item" %>
