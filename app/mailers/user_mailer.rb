@@ -39,10 +39,12 @@ class UserMailer < ApplicationMailer
   end 
 
   def email_student
-    sender = params[:sender]
+    course = Course.find(params[:course])
+    em = course.department.split(" ").first + "-" + course.course_number + "-" + course.section_number + "@duke.edu"
+    @sender = params[:sender]
     email = params[:email]
     subject = params[:subject]
     @body = params[:body]
-    mail(to: email, subject: subject)
+    mail(to: email, from: em, subject: subject)
   end 
 end

@@ -147,27 +147,36 @@ class DashboardController < ApplicationController
   end
 
   def mailing2
+    course = Course.find(params[:course])
     @sender = User.find_by(net_id: session[:current_user]["net_id"])
-    UserMailer.with(email: params[:email], subject: params[:subject], body: params[:body], sender: @sender).email_student.deliver_now
-    redirect_to requests_page_path(params[:course])
+    UserMailer.with(email: params[:email], subject: params[:subject], body: params[:body], sender: @sender, course: params[:course]).email_student.deliver_now
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
   end
 
   def mailingall
     @course = Course.find(params[:course])
-    
   end
   
   def mailingall2
-    @course = Course.find(params[:course])
+    @course = Course.find(params[:courseid])
     @sender = User.find_by(net_id: session[:current_user]["net_id"])
     @course.course_requests.each  do |request|
-      UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender).email_student.deliver_now
+      UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: params[:courseid]).email_student.deliver_now
     end
     @course.cross_listing.each do |id|
       Course.find(id).course_requests.each do |request|
-        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender).email_student.deliver_now
+        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
       end
     end
-    redirect_to requests_page_path(params[:course])
+    
+    if @course.primary == false
+      redirect_to requests_page_path(@course.cross_listing[0])
+    else
+      redirect_to requests_page_path(@course)
+    end
   end
 end
