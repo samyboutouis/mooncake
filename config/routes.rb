@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get "/publish/:course" => "dashboard#publish", as: "publish_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
   get "/mailing/:request" => "dashboard#mailing", as: "send_mailer"
+  get "/mailingall/:course" => "dashboard#mailingall", as: "send_all_mailer"
   get "/mailing2" => "dashboard#mailing2"
+  get "/mailingall2" => "dashboard#mailingall2"
   get "/numbers/:course" => "dashboard#numbers", as: "numbers"
 
   #Accept/Deny
