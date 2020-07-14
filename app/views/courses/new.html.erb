@@ -41,6 +41,9 @@
     </div>
 
     <label style="padding: 10px 6px 0px"> Permission Numbers:</label>
+    <div class="popup" onclick="excelPop()"> <%= image_tag "help.png", class:"help" %>
+      <span class="popuptext" id="myPopup"> <%= image_tag "exceltut.png", class:"exceltut" %> </span>
+    </div>
     <div class="form-group custom-file" style= "margin: 0px 0px 10px 0px;">
       <%= f.label :file, "Upload Permission Numbers Excel File", class:"custom-file-label", for:"customFile", style: "margin: 5px" %>
       <%= f.file_field :file, class:"custom-file-input", id:"customFile", required: true%>
