@@ -37,4 +37,12 @@ class UserMailer < ApplicationMailer
     @course = params[:course]
     mail(to: @user.email, subject: 'Course Capacity Reached')
   end 
+
+  def email_student
+    sender = params[:sender]
+    email = params[:email]
+    subject = params[:subject]
+    @body = params[:body]
+    mail(to: email, subject: subject)
+  end 
 end

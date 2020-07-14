@@ -140,5 +140,16 @@ class DashboardController < ApplicationController
     @course = Course.find(params[:course])
   end
 
+  def mailing
+    @course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    @user = req.user
+  end
+
+  def mailing2
+    @sender = User.find_by(net_id: session[:current_user]["net_id"])
+    UserMailer.with(email: params[:email], subject: params[:subject], body: params[:body], sender: @sender).email_student.deliver_now
+    redirect_to requests_page_path(params[:course])
+  end
 
 end
