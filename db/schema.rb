@@ -68,6 +68,9 @@ ActiveRecord::Schema.define(version: 2020_06_23_154418) do
     t.boolean "used"
     t.integer "course_id", null: false
     t.integer "course_request_id"
+    t.boolean "consent"
+    t.boolean "reqs"
+    t.boolean "capacity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_permission_numbers_on_course_id"
