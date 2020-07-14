@@ -22,7 +22,7 @@
                       <th> <%= question.question_text %></th>
                     <%end%>
                   <% end %>
-                  <th> Mailer </th>
+                  <th>  </th>
                   <th> Accept/Deny Request </th>
                 </tr>
               </thead>
@@ -93,7 +93,7 @@
                         <td><%= answer.answer_text %></td>
                       <% end %>
                     <% end %>
-                    <td>  <%= link_to "Send Mailer", send_mailer_path(request) %> </td>
+                    <td>  <%= link_to "Send Custom Email", send_mailer_path(request) %> </td>
                     <td>
                       <% if request.status == "Under Review"%>
                         <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}?"}, class:"btn btn-success btn-sm accept"%>
@@ -176,7 +176,7 @@
                         <td><%= answer.answer_text %></td>
                       <% end %>
                     <% end %>
-                    <td>  mail </td>
+                    <td>  <%= link_to "Send Custom Email", send_mailer_path(request) %> </td>
                     <td>
                       <% if request.status == "Under Review"%>
                         <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to accept #{request.user.first_name}?"}, class:"btn btn-success btn-sm accept"%>
