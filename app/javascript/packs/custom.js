@@ -33,6 +33,9 @@ function getDepartment(element) {
     data: {term: selected},
     success: function(result) {
       console.log('Success');
+      result.sort(function(a, b) {
+        return compareStrings(a.department, b.department);
+      })
       $(".department").append("<option value=''>Choose Department</option>");
       let used = [];
       for (var i = 0; i < result.length; i++) {
@@ -57,6 +60,9 @@ function getNumber(element) {
     dataType: 'json',
     data: {department: department, term: term},
     success: function(result) {
+      result.sort(function(a, b) {
+        return compareStrings(a.department, b.department);
+      })
       console.log('Success');
       $(".number").append("<option value=''>Choose Course Number</option>");
       let used = [];
@@ -83,6 +89,9 @@ function getSection(element) {
     dataType: 'json',
     data: {course_number: courseNumber, department: department, term: term},
     success: function(result) {
+      result.sort(function(a, b) {
+        return compareStrings(a.department, b.department);
+      })
       console.log('Success');
       $(".section").append("<option value=''>Choose Section Number</option>");
       for (var i = 0; i < result.length; i++) {
@@ -93,4 +102,12 @@ function getSection(element) {
       console.log('Error');
     }
   });
+}
+
+function compareStrings(a, b) {
+  // Assuming you want case-insensitive comparison
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+
+  return (a < b) ? -1 : (a > b) ? 1 : 0;
 }
