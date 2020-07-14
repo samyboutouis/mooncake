@@ -8,12 +8,24 @@
 
 #initialize (uncomment lines 11-end to get the rest of the seed)
 default_questions = Question.create([{question_type:  "text", question_text: "Full name:"}, {question_type:  "text", question_text: "Email:"}, {question_type:  "text", question_text: "Graduation year:"}, {question_type:  "text", question_text: "Major(s), separated by comma:"}, {question_type:  "text", question_text: "Minor(s), separated by comma:"}])
-all_users = User.create([{first_name: "Maryam", last_name: "Shahid", grad_year: "2023 Sprng", unique_id: "11111", net_id: "ms858", email: "maryam.shahid@duke.edu"}, {first_name: "Maple", last_name: "Adkisson", grad_year: "2023 Sprng", unique_id: "12345", net_id: "ma1000", email: "ma1000@duke.edu"}, {first_name: "Oakley", last_name: "Adkisson", grad_year: "2022 Sprng", unique_id: "15555", net_id: "oa1000", email: "oa1000@duke.edu"}])
+all_users = User.create([{first_name: "Maryam", last_name: "Shahid", grad_year: "2023 Sprng", net_id: "ms858", email: "maryam.shahid@duke.edu"}, {first_name: "Maple", last_name: "Adkisson", grad_year: "2023 Sprng", unique_id: "12345", net_id: "ma1000", email: "ma1000@duke.edu"}, {first_name: "Oakley", last_name: "Adkisson", grad_year: "2022 Sprng", unique_id: "15555", net_id: "oa1000", email: "oa1000@duke.edu"}])
 my_courses = User.first.courses.create([{term: "2020 Fall", department: "COMPSCI - Computer Science", course_number: "101", section_number: "01 - LEC", capacity: 200, seats_taken: 0, primary: true, published: true}])#, {term: "2020 Fall", department: "COMPSCI - Computer Science", course_number: "201", section_number: "03 - LEC", capacity: 200, seats_taken: 1, primary: true, published: true}, {term: "2020 Fall", department: "GSF - Gender Sexuality and Feminist", course_number: "101", section_number: "01 - LEC", capacity: 200, seats_taken: 0, primary: true, published: true}])
-sunny = User.create({first_name: "Sunny", last_name: "Li", grad_year: "2023 Sprng", unique_id: "15555", net_id: "sl616", email: "sl616@duke.edu"})
-elizabeth = User.create({first_name: "Elizabeth", last_name: "Zhang", grad_year: "2022 Sprng", unique_id: "15555", net_id: "eyz3", email: "eyz3@duke.edu"})
+sunny = User.create({first_name: "Sunny", last_name: "Li", grad_year: "2023 Sprng", net_id: "sl616", email: "sl616@duke.edu"})
+elizabeth = User.create({first_name: "Elizabeth", last_name: "Zhang", grad_year: "2022 Sprng", net_id: "eyz3", email: "eyz3@duke.edu"})
+samy = User.create({first_name: "Samy", last_name: "Boutouis", grad_year: "2023 Sprng", net_id: "sb590", email: "sb590@duke.edu"})
+vaishvi = User.create({first_name: "Vaishvi", last_name: "Patel", grad_year: "2023 Sprng", net_id: "vkp3", email: "vkp3@duke.edu"})
+zeyu = User.create({first_name: "Zeyu", last_name: "Shen", grad_year: "2023 Sprng", net_id: "zs93", email: "zs93@duke.edu"})
+georgia_tse = User.create({first_name: "Georgia", last_name: "Tse", net_id: "ggt3", email: "ggt3@duke.edu"})
+leonard_white = User.create({first_name: "Leonard", last_name: "White", net_id: "white033", email: "len.white@duke.edu"})
+laura_bey = User.create({first_name: "Laura", last_name: "Bey", net_id: "lmb83", email: "lmb83@duke.edu"})
 Course.first.users << sunny
 Course.first.users << elizabeth
+Course.first.users << samy
+Course.first.users << vaishvi
+Course.first.users << zeyu
+Course.first.users << georgia_tse
+Course.first.users << leonard_white
+Course.first.users << laura_bey
 
 
 #fill in course attributes
