@@ -17,6 +17,9 @@
                   <th> Course </th>
                   <th> Number </th>
                   <th> Student Assigned </th>
+                  <th> Closed Class </th>
+                  <th> Req not met </th>
+                  <th> Consent Req </th>
                   <th> Expiration Date </th>
 
                 </tr>
@@ -39,6 +42,22 @@
                         <td><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
                         </td>
                       <% end %>
+
+                    <td>
+                      <% if number.capacity == true %>
+                        Y
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if number.reqs == true %>
+                        Y
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if number.consent == true %>
+                        Y
+                      <% end %>
+                    </td>
                     <td>
                       <%= number.expire_date %>
                     </td>
