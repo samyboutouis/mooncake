@@ -6,6 +6,9 @@ class CreatePermissionNumbers < ActiveRecord::Migration[6.0]
       t.boolean :used
       t.references :course, null: false, foreign_key: true
       t.references :course_request, foreign_key: true
+      t.boolean :consent
+      t.boolean :reqs
+      t.boolean :capacity
 
       t.timestamps
     end
