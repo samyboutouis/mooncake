@@ -23,12 +23,16 @@ class CoursesController < ApplicationController
   end
 
   def create
-    if course = Course.create(course_params)
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    if @user.courses.where(term: params[:course][:term], department: params[:course][:department], course_number: params[:course][:course_number], section_number: params[:course][:section_number]).exists?
+        flash[:alert2] = "You cannot create a course again unless deleted"
+        redirect_to faculty_page_url
+    elsif course = Course.create(course_params)
+      session[:course] = course
       course.published = false
       course.primary = true
       course.seats_taken = 0
-      @user = User.find_by(net_id: session[:current_user]["net_id"])
-      User.find_by(net_id: session[:current_user]["net_id"]).courses << course  
+      @user.courses << course  
       file = params[:course][:file]
       xlsx = Roo::Spreadsheet.open(file)
       sheet = xlsx.sheet(0)

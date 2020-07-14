@@ -6,6 +6,9 @@
         <h1 class="title">My Courses - <%= @user.first_name %> INSTRUCTOR </h1>
         <a href="<%= new_course_path %>"><button class="btn btn-dark" type="button">Create a Course</button></a>
       </div>
+      <% if flash[:alert2] %>
+        <div class="alert1", style = "color: red"><%= flash[:alert2] %></div>
+      <% end %>
         <%= no_course(@user)%>
         <div class="container">
           <% i = 0 %>
