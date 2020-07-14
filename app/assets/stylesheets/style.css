@@ -243,3 +243,17 @@ a[aria-expanded=false] .fa-chevron-down {
  .allmailer {
     margin: 20px 10px 5px;
  }
+
+ @media screen and (min-width: 768px) {
+    .modal-dialog {
+      width: 700px; /* New width for default modal */
+    }
+    .modal-sm {
+      width: 350px; /* New width for small modal */
+    }
+}
+@media screen and (min-width: 1000px) {
+    .modal-lg {
+      width: 1000px; /* New width for large modal */
+    }
+}
