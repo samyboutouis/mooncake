@@ -31,16 +31,13 @@
     <div class="form row", style="padding: 10px 20px 0px">
       <%= f.fields_for :prereqs do |prereqs_form| %>
           <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
-          <div class="form-group form-inline addNew">
-            <input name="prereq_attributes[0]name" type="text" placeholder="Ex: COMPSCI 101" class="form-control prereqfield" id="formGroupExampleInput prereq", style="margin: 0px 0px 10px 5px"/>
+          <div class="form-group form-inline">
+            <div class="addNew">
+              <input name="prereq_attributes[0]name" type="text" placeholder="Ex: COMPSCI 101" class="form-control prereqfield" id="formGroupExampleInput prereq", style="margin: 0px 0px 10px 5px"/>
+            </div>
+             <button type="button" class="btn btn-secondary add", id="add-prereq" style="margin: 0px 0px 10px 5px"> + </button>
           </div>
       <% end %>
-    </div>
-
-    <div class="form-group row" style="padding: 10px 6px 0px">
-      <div class="col-sm-10">
-        <button type="button" class="btn btn-secondary add", id="add-prereq"> + </button>
-      </div>
     </div>
 
     <div class="form-group">

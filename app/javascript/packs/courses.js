@@ -18,15 +18,12 @@ $(document).ready(function () {
   }); 
 });
 
-
-
 function createField() {
     count++;
     var clonedField = $(".prereqfield:first").clone();
     clonedField.attr("name", "prereq_attributes["+ count + "]name" );
     clonedField.appendTo(".addNew");
 }
-
 
 function getQuestion(element) {
   let selected = element.val();
