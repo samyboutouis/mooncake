@@ -28,7 +28,7 @@
       <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity", :required => true%>
     </div>
 
-    <div class="form row", style="padding: 10px 20px 0px">
+    <div class="form-group row", style="padding: 10px 20px 0px">
       <%= f.fields_for :prereqs do |prereqs_form| %>
           <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
           <div class="form-group form-inline">
@@ -40,12 +40,13 @@
       <% end %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :file, "Upload Permission Numbers Excel File" %>
-      <%= f.file_field :file, class: 'form-control-file', required: true %>
+    <label style="padding: 10px 6px 0px"> Permission Numbers:</label>
+    <div class="form-group custom-file" style= "margin: 0px 0px 10px 0px;">
+      <%= f.label :file, "Upload Permission Numbers Excel File", class:"custom-file-label", for:"customFile", style: "margin: 5px" %>
+      <%= f.file_field :file, class:"custom-file-input", id:"customFile", required: true%>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="padding: 10px 6px 0px">
       <label for="crosslisting">Is this course cross-listed?</label><br>
       <input type="radio" id="crosslisting" name="crosslisting" value="Yes"> Yes<br>
       <input type="radio" id="crosslisting" name="crosslisting" value = "No" checked> No<br>
@@ -57,7 +58,7 @@
     <div class="form-group" id="othercourses">
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="padding: 10px 6px 0px">
       <label for="sections">Does this course have additional sections?</label><br>
       <input type="radio" id="sections" name="sections" value="Yes"> Yes<br>
       <input type="radio" id="sections" name="sections" value = "No" checked> No<br>
