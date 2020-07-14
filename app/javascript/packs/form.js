@@ -23,7 +23,7 @@ function getResponse(element) {
   let selected = element.val();
   $("#howmany").empty();
   if (selected === "Yes") {
-    $("#howmany").append("<label for= 'number-choice'>How many additional courses are cross-listed?</label>");
+    $("#howmany").append("<label for= 'number-choice'>How many additional departments are cross-listed with this course?</label>");
     $("#howmany").append('<input type="text" name= "number-choice" id="number-choice" class="form-control" maxlength= 2><br>');
   }
   else {
