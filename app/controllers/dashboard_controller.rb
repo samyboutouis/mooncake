@@ -104,7 +104,12 @@ class DashboardController < ApplicationController
     req = CourseRequest.find(params[:request])
     req.update(priority: 1)
     puts req.priority
-    redirect_to requests_page_path(course)
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
+
   end
 
   def rank2
@@ -112,7 +117,11 @@ class DashboardController < ApplicationController
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
     req.update(priority: 2)
-    redirect_to requests_page_path(course)
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
   end
 
   def rank3
@@ -120,7 +129,11 @@ class DashboardController < ApplicationController
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
     req.update(priority: 3)
-    redirect_to requests_page_path(course)
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
   end
 
   def numbers
