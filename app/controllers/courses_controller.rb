@@ -35,7 +35,19 @@ class CoursesController < ApplicationController
       sheet.each do |row|
         if z>0
           unless row[0] == nil
-            course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+            consent = false;
+            reqs = false;
+            capacity = false;
+            if row[8] == "Y"
+              capacity = true;
+            end
+            if row[9] == "Y"
+              reqs = true;
+            end
+            if row[10] == "Y"
+              consent = true;
+            end
+            course.permission_numbers.create(number: row[0], expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
           end
         end
         z += 1
@@ -64,6 +76,18 @@ class CoursesController < ApplicationController
         sheet.each do |row|
           if z>0
             unless row[0] == nil
+              consent = false;
+              reqs = false;
+              capacity = false;
+              if row[8] == "Y"
+                capacity = true;
+              end
+              if row[9] == "Y"
+                reqs = true;
+              end
+              if row[10] == "Y"
+                consent = true;
+              end
               Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
             end
           end
@@ -87,6 +111,18 @@ class CoursesController < ApplicationController
         sheet.each do |row|
           if z>0
             unless row[0] == nil
+              consent = false;
+              reqs = false;
+              capacity = false;
+              if row[8] == "Y"
+                capacity = true;
+              end
+              if row[9] == "Y"
+                reqs = true;
+              end
+              if row[10] == "Y"
+                consent = true;
+              end
               Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
             end
           end
