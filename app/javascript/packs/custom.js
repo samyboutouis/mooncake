@@ -10,6 +10,9 @@ $(document).ready(function () {
   $(".number").on('change', function() {
     getSection($(this));
   });
+  $('#facModal').on('shown.bs.modal', function () {
+  $('#factut').trigger('focus')
+})
 });
 
 $(function(){
