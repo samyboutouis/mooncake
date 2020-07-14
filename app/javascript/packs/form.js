@@ -12,6 +12,11 @@ $(document).ready(function(){
       getOptions2($(this));
     })
   });
+
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  }); 
 });
 
 function getResponse(element) {
@@ -71,9 +76,11 @@ function getOptions(element) {
         $("#othercourses").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
         $("#othercourses").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
         
-        $("#othercourses").append("<label for= 'file"+(i+1)+"'> Upload Permission Numbers Excel File (xlsx) </label><br>");
-        $("#othercourses").append('<input name= "file'+(i+1)+'" type="file" id="file'+(i+1)+'"><br>');
-        $("#othercourses").append('<div class="spacer"></div>');
+        $("#othercourses").append("<label> Permission Numbers:</label>");
+        $("#othercourses").append('<div class="custom-file" id="course'+(i+1)+'" style="margin-bottom:20px;">');
+        $("#othercourses #course"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');
+        $("#othercourses #course"+(i+1)).append('<label class="custom-file-label" for="customFile'+(i+1)+'">Upload Permission Numbers Excel File</label>');
+        $("#othercourses").append('</div>');
       }
     },
       error: function() {
@@ -92,8 +99,10 @@ function getOptions2(element) {
     $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
     $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
 
-    $("#othersections").append("<label for= 'file"+(i+1)+"'> Upload Permission Numbers Excel File (xlsx) </label><br>");
-    $("#othersections").append('<input name= "file'+(i+1)+'" type="file" id="file'+(i+1)+'"><br>');
-    $("#othersections").append('<div class="spacer"></div>');
+    $("#othersections").append("<label> Permission Numbers:</label>");
+    $("#othersections").append('<div class="custom-file" id="section'+(i+1)+'" style="margin-bottom:20px;">');
+    $("#othersections #section"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');
+    $("#othersections #section"+(i+1)).append('<label class="custom-file-label" for="customFile'+(i+1)+'">Upload Permission Numbers Excel File</label>');
+    $("#othersections").append('</div>');
   }
 }
