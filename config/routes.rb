@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post "/add" => "dashboard#add", as: "add"
   get "/denyview/:request" => "dashboard#denyview", as: "denyview"
   get "/acceptview/:request" => "dashboard#acceptview", as: "acceptview"
+  get "/addpermnum/:course" => "dashboard#addmorepermnum", as: "add_more_permnum"
+  post "/addmore" => "dashboard#addmore", as: "add_more"
 
   #Ranking
   get "/rank1/:request" => "dashboard#rank1", as: "rank1"
