@@ -57,6 +57,44 @@
                             <td>  <%= link_to "Email", send_mailer_path(request) %> </td>
                             </tr>
                         <% end %>
+
+                        <% i = 0 %>
+                        <% course.cross_listing.each do |id| %>
+                        <% Course.find(id).course_requests.each do |request| %>
+                        <% i = 0 %>
+                        <tr style="text-align: center; vertical-align: middle;">
+                            <td> <%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number%> </td>
+                            <% request.answers.each do |answer| %>
+                                
+                                
+                                <% if i < 4 %>
+                                    <% if answer.question.question_type == "Checkbox"%>
+                                        <td><%= answer.answer_text.gsub("~", ", ") %></td>
+                                    <% elsif answer.question.question_type == "Long Answer"%>
+                                        <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div></td>
+                                    <% else %>
+                                        <td><%= answer.answer_text %></td>
+                                    <% end %>
+                                    <% i += 1 %>
+                                <% end %>
+                                
+                            <% end %>
+                            
+                            <td> 
+                                <% if request.status == "Under Review"%>
+                                    <%= link_to "Accept", acceptview_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}?"}, class:"btn btn-success btn-sm accept"%>
+                                    <%= link_to "Deny", denyview_path(request), data: {confirm: "Are you sure you want to deny #{request.answers.first.answer_text}?"}, class:"btn btn-danger btn-sm accept"%>
+                                <% elsif request.status == "Denied"%>
+                                    <p style="color:red;"> Denied </p>
+                                <% else %>
+                                    <p style="color:green;"> Accepted </p>
+                                    <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
+                                <% end %>
+                            </td>
+                            <td>  <%= link_to "Email", send_mailer_path(request) %> </td>
+                            </tr>
+                        <% end %>
+                        <% end %>
                         
                     <% end %>
                     
