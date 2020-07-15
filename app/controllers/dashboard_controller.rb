@@ -94,8 +94,8 @@ class DashboardController < ApplicationController
       unless row[0] == nil
         course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
       end
-    end  
-    redirect_to accept_path(@request) 
+    end
+    redirect_to accept_path(@request)
   end
 
   def rank1
@@ -104,7 +104,12 @@ class DashboardController < ApplicationController
     req = CourseRequest.find(params[:request])
     req.update(priority: 1)
     puts req.priority
-    redirect_to requests_page_path(course)
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
+
   end
 
   def rank2
@@ -112,7 +117,11 @@ class DashboardController < ApplicationController
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
     req.update(priority: 2)
-    redirect_to requests_page_path(course)
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
   end
 
   def rank3
@@ -120,7 +129,54 @@ class DashboardController < ApplicationController
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
     req.update(priority: 3)
-    redirect_to requests_page_path(course)
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
   end
 
+  def numbers
+    @course = Course.find(params[:course])
+  end
+
+  def mailing
+    @course = CourseRequest.find(params[:request]).course
+    req = CourseRequest.find(params[:request])
+    @user = req.user
+  end
+
+  def mailing2
+    course = Course.find(params[:course])
+    @sender = User.find_by(net_id: session[:current_user]["net_id"])
+    UserMailer.with(email: params[:email], subject: params[:subject], body: params[:body], sender: @sender, course: params[:course]).email_student.deliver_now
+    if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+    else
+      redirect_to requests_page_path(course)
+    end
+  end
+
+  def mailingall
+    @course = Course.find(params[:course])
+  end
+  
+  def mailingall2
+    @course = Course.find(params[:courseid])
+    @sender = User.find_by(net_id: session[:current_user]["net_id"])
+    @course.course_requests.each  do |request|
+      UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: params[:courseid]).email_student.deliver_now
+    end
+    @course.cross_listing.each do |id|
+      Course.find(id).course_requests.each do |request|
+        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+      end
+    end
+    
+    if @course.primary == false
+      redirect_to requests_page_path(@course.cross_listing[0])
+    else
+      redirect_to requests_page_path(@course)
+    end
+  end
 end

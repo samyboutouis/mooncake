@@ -12,6 +12,7 @@ services:
       RAILS_MASTER_KEY: ${MOONCAKE_MASTER_KEY}
       MOONCAKE_OAUTH_KEY: ${MOONCAKE_OAUTH_KEY}
       MOONCAKE_OAUTH_REDIRECT: ${MOONCAKE_OAUTH_REDIRECT}
+      ACCESS_TOKEN: ${ACCESS_TOKEN}
     volumes:
       - .:/webapp
       - /webapp/node_modules

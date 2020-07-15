@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
   get "/publish/:course" => "dashboard#publish", as: "publish_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
+  get "/mailing/:request" => "dashboard#mailing", as: "send_mailer"
+  get "/mailingall/:course" => "dashboard#mailingall", as: "send_all_mailer"
+  get "/mailing2" => "dashboard#mailing2"
+  get "/mailingall2" => "dashboard#mailingall2"
+  get "/numbers/:course" => "dashboard#numbers", as: "numbers"
 
   #Accept/Deny
   get "/deny/:request" => "dashboard#deny", as: "deny"
@@ -49,10 +54,10 @@ Rails.application.routes.draw do
 
   #create course routes
   get '/courses/new' => "courses#new", as: "new_course"
+  get '/dept' => "courses#departments", as: "dept"
   post '/courses' => "courses#create"
   delete '/courses/:id' => 'courses#delete', as: "delete_course"
 
   #faq
-  get '/faq' => "faq#show", as: "faq" 
+  get '/faq' => "faq#show", as: "faq"
 end
-

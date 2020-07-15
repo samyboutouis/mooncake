@@ -11,22 +11,26 @@ $(document).ready(function () {
       getOptions($(this));
     })
   });
-
-  $(".custom-file-input").on("change", function() {
-    var fileName = $(this).val().split("\\").pop();
-    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-  }); 
 });
 
-
-
 function createField() {
-    count++;
-    var clonedField = $(".prereqfield:first").clone();
-    clonedField.attr("name", "prereq_attributes["+ count + "]name" );
-    clonedField.appendTo(".addNew");
+  count++;
+  var clonedField = $(".prereqfield:first").clone();
+  clonedField.attr("name", "prereq_attributes["+ count + "]name");
+  clonedField.attr("id", "prereq*"+count+"*");
+  clonedField.appendTo(".addNew");
+  var button = $('<button/>',
+  {
+      text: '-',
+      class: "btn btn-outline-danger",
+      style: "margin: 0px 0px 10px 5px",
+      click: function () {
+        $(this).prev().remove();
+        $(this).remove();
+      }
+  });
+  $(".addNew").append(button);
 }
-
 
 function getQuestion(element) {
   let selected = element.val();
