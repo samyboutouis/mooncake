@@ -10,9 +10,15 @@ $(document).ready(function () {
   $(".number").on('change', function() {
     getSection($(this));
   });
+  //fac index modal
   $('#facModal').on('shown.bs.modal', function () {
   $('#factut').trigger('focus')
+
 })
+  $(".help").on('click', function() {
+    excelPop();
+  });
+
 });
 
 $(function(){
@@ -113,4 +119,10 @@ function compareStrings(a, b) {
   b = b.toLowerCase();
 
   return (a < b) ? -1 : (a > b) ? 1 : 0;
+}
+
+
+function excelPop() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
 }
