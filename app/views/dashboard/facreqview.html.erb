@@ -4,13 +4,15 @@
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
       <%= link_to "Send All Mailer", send_all_mailer_path(@course), class:"btn btn-outline-secondary allmailer" %>
       <div class="table_box">
+      
       <% info = "" %>
       <% @course.cross_listing.each do |id| %>
           <% coursec = Course.find(id) %>
           <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
       <% end %>
-        <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
+        <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1> <br>
         <div class="table-responsive">
+        <form action = "/mailselected">
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
@@ -25,10 +27,11 @@
                   <% end %>
                   <th>  </th>
                   <th> Accept/Deny Request </th>
+                  <th> Select </th>
                 </tr>
               </thead>
               <tbody>
-
+                  
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
@@ -105,6 +108,9 @@
                         <p style="color:green;"> Accepted </p>
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
+                    </td>
+                    <td> 
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
                     </td>
 
                   </tr>
@@ -189,14 +195,20 @@
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
+                    <td> 
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
+                    </td>
 
                   </tr>
+                  
                   <% end %>
                 <% end %>
-
+                
+                
 
               </tbody>
           </table>
+          <button type="submit" class="btn btn-outline-secondary">Mail Selected</button>
         </div>
       </div>
     </div>
