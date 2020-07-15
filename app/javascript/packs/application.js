@@ -10,6 +10,7 @@ require("packs/form");
 require("packs/courses");
 require("packs/facreqview");
 require('packs/numbers');
+require('packs/allrequests');
 require('datatables.net');
 
 
