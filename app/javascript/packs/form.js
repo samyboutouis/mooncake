@@ -54,7 +54,7 @@ function getOptions(element) {
       let selected = element.val();
       $("#othercourses").empty();
       for(let i = 0; i < selected; i++) {
-        $("#othercourses").append("<h3> Cross-listed Course " + (i+2) + "</h3>");
+        $("#othercourses").append("<h3 style='margin: 10px 8px 10px 0px'> Cross-listed Course " + (i+2) + "</h3>");
         $("#othercourses").append("<label for= 'department"+(i+1)+"'> Department:</label>");
         $("#othercourses").append($(document.createElement('select')).prop({
           name: "department"+(i+1),
@@ -69,7 +69,6 @@ function getOptions(element) {
           }));
         }
         $("#othercourses").append('</select><br>');
-        
         $("#othercourses").append("<label for= 'course_number"+(i+1)+"'> Course Number:</label>");
         $("#othercourses").append('<input name= "course_number'+(i+1)+'" type="text" class="form-control" id="course_number'+(i+1)+'"><br>');
         
