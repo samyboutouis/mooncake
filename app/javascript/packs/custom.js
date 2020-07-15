@@ -12,9 +12,9 @@ $(document).ready(function () {
   });
   //fac index modal
   $('#facModal').on('shown.bs.modal', function () {
-  $('#factut').trigger('focus')
+    $('#factut').trigger('focus');
+  });
 
-})
   $(".help").on('click', function() {
     excelPop();
   });
