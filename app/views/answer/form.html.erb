@@ -17,7 +17,7 @@
                 <% if question.question_type == "Checkbox" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %>" id = "cb"/>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %>" id = "cb" required/>
                           <label for="<%= option %><%= z %>">
                           <%= option %>
                           </label>
@@ -27,7 +27,7 @@
                 <% elsif question.question_type == "Radio" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %>" id = "rb"/>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %>" id = "rb" required/>
                           <label for="<%= option %><%= w %>">
                           <%= option %>
                           </label>
@@ -35,9 +35,9 @@
                       </div>
                   <% end %>
                 <% elsif question.question_type == "Long Answer" %>
-                  <textarea style="font-family: 'Roboto', sans-serif;font-size: 15px;" class="form-control" id="exampleFormControlTextarea1" name="<%= question.question_text %>" rows="4"></textarea>
+                  <textarea style="font-family: 'Roboto', sans-serif;font-size: 15px;" class="form-control" id="exampleFormControlTextarea1" name="<%= question.question_text %>" rows="4" required></textarea>
                 <% else %>
-                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type= "text" class="form-control" id="reasons"  name="<%= question.question_text %>">
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type= "text" class="form-control" id="reasons"  name="<%= question.question_text %>" required>
                 <% end %>
               </div>
             <% end %>
