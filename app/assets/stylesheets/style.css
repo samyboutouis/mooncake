@@ -274,7 +274,7 @@ a[aria-expanded=false] .fa-chevron-down {
 /* The actual popup */
 .popup .popuptext {
   visibility: hidden;
-  width: 490px;
+  width: 460px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -287,17 +287,7 @@ a[aria-expanded=false] .fa-chevron-down {
   margin-left: -80px;
 }
 
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
+
 
 /* Toggle this class - hide and show the popup */
 .popup .show {
