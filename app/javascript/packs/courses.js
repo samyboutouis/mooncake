@@ -35,9 +35,10 @@ function createField() {
 function getQuestion(element) {
   let selected = element.val();
   $("#question-choice").empty();
+  $("#question-options").empty();
   if (selected === "Checkbox" || selected === "Radio") {
     $("#question-choice").append("<label>How many options would you like?</label>");
-    $("#question-choice").append('<input type="text" id="number-choice" maxlength= 2>');
+    $("#question-choice").append('<input type="number" id="number-choice" max=20 class="form-control">');
   }
   else {
     return;
@@ -49,6 +50,6 @@ function getOptions(element) {
   $("#question-options").empty();
   for(let i = 0; i < selected; i++) {
     $("#question-options").append("<label for= 'question_option[]'>Option " + (i + 1) + ":</label>");
-    $("#question-options").append('<input name= "question[option][]" type="text" id="question_option"><br>');
+    $("#question-options").append('<input name= "question[option][]" type="text" class="form-control" id="question_option"><br>');
   }
 }
