@@ -2,12 +2,22 @@ var col = 0;
 
 $(document).ready(function () {
     var table = $('#myTable').DataTable( {
-        columnDefs: [ 
-            { 
-                orderable: false, 
-                targets: [0] 
+        columnDefs: [
+            {
+                orderable: false,
+                targets: [0]
             }],
         order: [[ 1, 'asc' ]],
+
+        "fnDrawCallback": function(){
+          let yes = $(".yes").closest("tr")
+          yes.addClass('greens')
+          let maybe = $(".maybe").closest("tr")
+          maybe.addClass('oranges')
+          let no = $(".noo").closest("tr")
+          no.addClass('reds')
+        }
+
     } );
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
@@ -24,19 +34,13 @@ $(document).ready(function () {
             table.column(i).visible(false);
         }
 
-        let yes = $(".yes").closest("tr")
-        yes.addClass('greens')
-        let maybe = $(".maybe").closest("tr")
-        maybe.addClass('oranges')
-        let no = $(".noo").closest("tr")
-        no.addClass('reds')
     }
 
 
     $('#myTable tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row( tr );
-    
+
         if ( row.child.isShown() ) {
             // This row is already open - close it
             row.child.hide();
