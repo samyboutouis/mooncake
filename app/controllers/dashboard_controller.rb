@@ -254,8 +254,8 @@ class DashboardController < ApplicationController
       UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: params[:courseid]).email_student.deliver_now
     end
     @course.cross_listing.each do |id|
-      Course.find(id).course_requests.each do |request|
-        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+      Course.find(id).course_requests.each do |request2|
+        UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
       end
     end
     
@@ -272,14 +272,12 @@ class DashboardController < ApplicationController
   def reqmailingall2
     @user = User.find_by(net_id: session[:current_user]["net_id"])
     @user.courses.each do |course|
-      puts course.department
       course.course_requests.each  do |request|
-        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: course.id).email_student.deliver_now
+        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
         if course.primary == true
           course.cross_listing.each do |id|
-            Course.find(id).course_requests.each do |request|
-              puts Course.find(id).department
-              UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+            Course.find(id).course_requests.each do |request2|
+              UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
             end
           end
         end
@@ -289,13 +287,19 @@ class DashboardController < ApplicationController
   end
 
   def mailselected 
-    @selected = (params[:selected]).join("~")
-    course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
-    if course.primary == false
-      @course = Course.find(course.cross_listing[0])
+    if params.include?("selected")
+      @selected = (params[:selected]).join("~")
+      course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+      if course.primary == false
+        @course = Course.find(course.cross_listing[0])
+      else
+        @course = course
+      end
+    
     else
-      @course = course
+      redirect_to requests_page_path(params[:courseid])
     end
+      
   end
 
   def mailselected2
