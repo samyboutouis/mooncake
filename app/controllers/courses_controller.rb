@@ -1,4 +1,6 @@
 require "roo"
+require "roo-xls"
+require "httparty"
 class CoursesController < ApplicationController
   # skip_before_action :student_check
   def course_params
@@ -8,6 +10,16 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     @prereqs = @course.prereqs.build
+    key = ENV["ACCESS_TOKEN"]
+    response0 = HTTParty.get("https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/SUBJECT?access_token=" + key)
+    subjects = JSON.parse(response0.body)
+    subjects = subjects["scc_lov_resp"]["lovs"]["lov"]["values"]["value"]
+    departments = []
+    for sub in subjects
+        departments.append(sub["code"] + " - " + sub["desc"])
+    end
+    @departments = departments
+    @terms = [Date.today.year.to_s+" Spring", Date.today.year.to_s+" Summer1", Date.today.year.to_s+" Summer2", Date.today.year.to_s+" Fall", (Date.today.year+1).to_s+" Spring", (Date.today.year+1).to_s+" Summer1", (Date.today.year+1).to_s+" Summer2", (Date.today.year+1).to_s+" Fall"]
   end
 
   def create
@@ -27,7 +39,19 @@ class CoursesController < ApplicationController
       sheet.each do |row|
         if z>0
           unless row[0] == nil
-            course.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+            consent = false
+            reqs = false
+            capacity = false
+            if row[8] == "Y"
+              capacity = true
+            end
+            if row[9] == "Y"
+              reqs = true
+            end
+            if row[10] == "Y"
+              consent = true
+            end
+            course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
           end
         end
         z += 1
@@ -56,6 +80,18 @@ class CoursesController < ApplicationController
         sheet.each do |row|
           if z>0
             unless row[0] == nil
+              consent = false;
+              reqs = false;
+              capacity = false;
+              if row[8] == "Y"
+                capacity = true;
+              end
+              if row[9] == "Y"
+                reqs = true;
+              end
+              if row[10] == "Y"
+                consent = true;
+              end
               Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
             end
           end
@@ -79,6 +115,18 @@ class CoursesController < ApplicationController
         sheet.each do |row|
           if z>0
             unless row[0] == nil
+              consent = false;
+              reqs = false;
+              capacity = false;
+              if row[8] == "Y"
+                capacity = true;
+              end
+              if row[9] == "Y"
+                reqs = true;
+              end
+              if row[10] == "Y"
+                consent = true;
+              end
               Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
             end
           end
@@ -103,5 +151,18 @@ class CoursesController < ApplicationController
     redirect_to faculty_page_url
   end
 
+  def departments
+    key = ENV["ACCESS_TOKEN"]
+    response0 = HTTParty.get("https://streamer.oit.duke.edu/curriculum/list_of_values/fieldname/SUBJECT?access_token=" + key)
+    subjects = JSON.parse(response0.body)
+    subjects = subjects["scc_lov_resp"]["lovs"]["lov"]["values"]["value"]
+    departments = []
+    for sub in subjects
+        departments.append(sub["code"] + " - " + sub["desc"])
+    end
+    respond_to do |format|
+      format.json {render json: departments}
+    end
+  end
 end
 

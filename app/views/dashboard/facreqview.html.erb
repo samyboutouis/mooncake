@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col">
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
+      <%= link_to "Email All", send_all_mailer_path(@course), class:"btn btn-outline-secondary allmailer" %>
       <div class="table_box">
       <% info = "" %>
       <% @course.cross_listing.each do |id| %>
@@ -14,7 +15,7 @@
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
-                  <!-- <th> Ranking </th> -->
+                  <th> Ranking </th>
                   <% @course.questions.each do |question| %>
                     <%if question.id <= 5 or question.question_text == "Which course(s) have you taken:" %>
                       <th> <%= question.question_text %><br><%= image_tag "eye.png", id: "hide",class:"eye"%></th>
@@ -22,6 +23,7 @@
                       <th> <%= question.question_text %></th>
                     <%end%>
                   <% end %>
+                  <th>  </th>
                   <th> Accept/Deny Request </th>
                 </tr>
               </thead>
@@ -30,6 +32,59 @@
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
+                    <td>
+                    <% if request.priority == nil %>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+                          </div>
+                        </div>
+                      <% elsif request.priority == 1 %>
+                        <p class="yes" hidden style="color:green;"> Yes </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Yes
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+
+                          </div>
+                        </div>
+                      <% elsif request.priority == 2 %>
+                        <p class="maybe" hidden style="color:orange;"> Maybe </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Maybe
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+
+                          </div>
+                        </div>
+                      <% else %>
+                        <p class="noo" hidden style="color:red;"> No </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            No
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+
+                          </div>
+                        </div>
+                      <% end %>
+                      </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -39,6 +94,7 @@
                         <td><%= answer.answer_text %></td>
                       <% end %>
                     <% end %>
+                    <td>  <%= link_to "Send Custom Email", send_mailer_path(request) %> </td>
                     <td>
                       <% if request.status == "Under Review"%>
                         <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}?"}, class:"btn btn-success btn-sm accept"%>
@@ -57,8 +113,61 @@
 
                 <% @course.cross_listing.each do |id| %>
                   <% Course.find(id).course_requests.each do |request| %>
-                  <tr style="text-align: center; vertical-align: middle;">
+                    <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
+                    <td>
+                      <% if request.priority == nil %>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+                          </div>
+                        </div>
+                      <% elsif request.priority == 1 %>
+                        <p class="yes" hidden style="color:green;"> Yes </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Yes
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+
+                          </div>
+                        </div>
+                      <% elsif request.priority == 2 %>
+                        <p class="maybe" hidden style="color:orange;"> Maybe </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Maybe
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+
+                          </div>
+                        </div>
+                      <% else %>
+                        <p class="noo" hidden style="color:red;"> No </p>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            No
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
+                            <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
+                            <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
+
+                          </div>
+                        </div>
+                      <% end %>
+                    </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -68,6 +177,7 @@
                         <td><%= answer.answer_text %></td>
                       <% end %>
                     <% end %>
+                    <td>  <%= link_to "Send Custom Email", send_mailer_path(request) %> </td>
                     <td>
                       <% if request.status == "Under Review"%>
                         <%= link_to "Accept", accept_path(request), data: {confirm: "Are you sure you want to accept #{request.user.first_name}?"}, class:"btn btn-success btn-sm accept"%>

@@ -2,10 +2,32 @@
   <div class="row">
     <div class="col">
       <div class="box">
+      <div class="header">
         <h1 class="title">My Courses - <%= @user.first_name %> INSTRUCTOR </h1>
         <% if flash[:alert2] %>
           <div class="alert1", style = "color: red"><%= flash[:alert2] %></div>
         <% end %>
+        <a href="<%= new_course_path %>"><button class="btn btn-dark" type="button">Create a Course</button></a>
+        <button type="button" class="btn btn-primary" style="height:38px;" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button>
+        <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= image_tag "factutorial.png", class: "factut"%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
         <%= no_course(@user)%>
         <div class="container">
           <% i = 0 %>
@@ -14,6 +36,7 @@
               <div class="col">
                 <div class="request-box">
                   <%= course_status(course) %>
+
                   <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
                     <p class="course">
                       <% if course.published == false %>
@@ -53,9 +76,11 @@
                       <br>
                       <% if course.published == false %>
                           <%= link_to "Edit Questions", question_path(course), method: :get, class:"btn btn-outline-primary" %>
+                          <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-outline-primary" %>
                           <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
                       <% else %>
                           <%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %>
+                          <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-outline-primary" %>
                           <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
                       <% end %>
                     </div>
@@ -66,7 +91,7 @@
             <% i += 1 %>
           <% end %>
         </div>
-        <a href="<%= new_course_path %>"><button class="btn btn-dark" type="button">Create a Course</button></a>
+
       </div>
     </div>
   </div>

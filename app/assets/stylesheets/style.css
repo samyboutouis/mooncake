@@ -155,6 +155,10 @@ a[aria-expanded=false] .fa-chevron-down {
     width: 20px;
 }
 
+.factut {
+  width: 100%;
+}
+
 .greens {
     background-color: rgba(179, 225, 157, 0.44) !important;
 }
@@ -186,7 +190,7 @@ a[aria-expanded=false] .fa-chevron-down {
         margin-left: 3.5%;
         margin-bottom: 30px;
      }
-     
+
      .faq-box {
          padding-left: 10%;
          width: 100%;
@@ -197,7 +201,7 @@ a[aria-expanded=false] .fa-chevron-down {
          margin-left: 3.5%;
          margin-bottom: 30px;
       }
-     
+
      .akioi {
          width: 100%;
          margin-top: 20px;
@@ -206,4 +210,103 @@ a[aria-expanded=false] .fa-chevron-down {
          line-height: 25px;
          margin-bottom: 30px;
       }
+}
+
+
+.header {
+    display: flex;
+  }
+
+  .header h1 {
+    flex-grow: 1;
+  }
+
+  .header button {
+    margin-left: 20px;
+  }
+
+  .header {
+    overflow: hidden;
+  }
+
+  .header button {
+    float: right;
+    margin-left: 20px;
+  }
+
+  .form-group.required .control-label:after {
+    content:" *";
+    color:red;
+ }
+
+
+ .allmailer {
+    margin: 20px 10px 5px;
+ }
+
+ @media screen and (min-width: 768px) {
+    .modal-dialog {
+      width: 700px; /* New width for default modal */
+    }
+    .modal-sm {
+      width: 350px; /* New width for small modal */
+    }
+}
+@media screen and (min-width: 1000px) {
+    .modal-lg {
+      width: 1000px; /* New width for large modal */
+    }
+}
+
+
+
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 460px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+.help {
+  width: 25px;
 }

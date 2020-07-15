@@ -37,4 +37,14 @@ class UserMailer < ApplicationMailer
     @course = params[:course]
     mail(to: @user.email, subject: 'Course Capacity Reached')
   end 
+
+  def email_student
+    course = Course.find(params[:course])
+    em = course.department.split(" ").first + "-" + course.course_number + "-" + course.section_number + "@duke.edu"
+    @sender = params[:sender]
+    email = params[:email]
+    subject = params[:subject]
+    @body = params[:body]
+    mail(to: email, from: em, subject: subject)
+  end 
 end

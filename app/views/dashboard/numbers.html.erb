@@ -1,0 +1,111 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
+      <div class="table_box">
+      <% info = "" %>
+      <% @course.cross_listing.each do |id| %>
+          <% coursec = Course.find(id) %>
+          <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
+      <% end %>
+        <h1 class="title"> All Uploaded Permission Numbers for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
+        <div class="table-responsive">
+            <table id="numTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
+              <thead>
+                <tr style="text-align: center; vertical-align: middle;">
+                  <th> </th>
+                  <th> Course </th>
+                  <th> Number </th>
+                  <th> Student Assigned </th>
+                  <th> Closed Class </th>
+                  <th> Req not met </th>
+                  <th> Consent Req </th>
+                  <th> Expiration Date </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <% i = 1 %>
+                <% @course.permission_numbers.each do |number| %>
+
+                  <tr style="text-align: center; vertical-align: middle;">
+                    <td> <%= i %></td>
+                    <td>
+                      <%= @course.department.split("-").first + " "+ @course.course_number + " - " + @course.section_number %>
+                    </td>
+                    <td>
+                      <%=number.number%>
+                    </td>
+                      <% if number.course_request_id == nil %>
+                        <td> Unassigned </td>
+                      <% else %>
+                        <td><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
+                        </td>
+                      <% end %>
+
+                    <td>
+                      <% if number.capacity == true %>
+                        Y
+                      <% else %>
+                        N
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if number.reqs == true %>
+                        Y
+                      <% else %>
+                        N
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if number.consent == true %>
+                        Y
+                      <% else %>
+                        N
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= number.expire_date %>
+                    </td>
+
+                  </tr>
+                  <% i += 1 %>
+                <% end %>
+
+
+                <% @course.cross_listing.each do |id| %>
+                  <% Course.find(id).permission_numbers.each do |number| %>
+                  <tr style="text-align: center; vertical-align: middle;">
+                        <td> <%= i %></td>
+                        <td>
+                          <%= number.course.department.split("-").first + " "+ number.course.course_number + " - " + number.course.section_number %>
+                        </td>
+                        <td>
+                          <%=number.number%>
+                        </td>
+                          <% if number.course_request_id == nil %>
+                            <td> 
+                             Unassigned 
+                            </td>
+                          <% else %>
+                            <td><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
+                            </td>
+                          <% end %>
+                        <td>
+                          <%= number.expire_date %>
+                        </td>
+
+                      </tr>
+                      <% i += 1 %>
+                    <% end %>
+                  <% end %>
+
+
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="spacer"></p>
