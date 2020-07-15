@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "/mailingall/:course" => "dashboard#mailingall", as: "send_all_mailer"
   get "/mailing2" => "dashboard#mailing2"
   get "/mailingall2" => "dashboard#mailingall2"
+  get "/reqmailingall" => "dashboard#reqmailingall", as: "send_allreq_mailer"
+  get "/reqmailingall2" => "dashboard#reqmailingall2"
   get "/numbers/:course" => "dashboard#numbers", as: "numbers"
   get "/allrequests" => "dashboard#allrequests", as: "allrequests"
 

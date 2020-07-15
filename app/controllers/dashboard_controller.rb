@@ -213,4 +213,28 @@ class DashboardController < ApplicationController
       redirect_to requests_page_path(@course)
     end
   end
+
+  def reqmailingall
+  end
+  
+  def reqmailingall2
+    @user = User.find_by(net_id: session[:current_user]["net_id"])
+    @user.courses.each do |course|
+      puts course.department
+      course.course_requests.each  do |request|
+        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: course.id).email_student.deliver_now
+        if course.primary == true
+          course.cross_listing.each do |id|
+            Course.find(id).course_requests.each do |request|
+              puts Course.find(id).department
+              UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+            end
+          end
+        end
+      end
+      
+    end
+    
+    redirect_to allrequests_path
+  end
 end
