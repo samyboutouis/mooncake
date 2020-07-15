@@ -1,8 +1,8 @@
 <div class="col">
 <div class="box">
   <h1 class="title" style="margin-left: 5px">Create A Course</h1>
-  <p style = "margin: 0px 40px 20px 5px; font-size: 14px;"> This is the page where you will add your course that 
-    students will request permission numbers for. Enter all information as seen on DukeHub. You also have the ability to 
+  <p style = "margin: 0px 40px 20px 5px; font-size: 14px;"> This is the page where you will add your course that
+    students will request permission numbers for. Enter all information as seen on DukeHub. You also have the ability to
     create crosslisted courses (i.e. CS 250/ECE 250) or multi-section courses (i.e. CHEM 101L 01, CHEM 101L 02).</p>
   <%= form_for @course do |f| %>
 
@@ -45,10 +45,31 @@
 
     <div class="form-group row", style="padding: 10px 20px 0px">
       <label> Permission Numbers:</label>
-      <div class="popup"> <%= image_tag "help.png", class:"help", style: "margin: 0px 10px" %>
-        <span class="popuptext" id="myPopup"> You need to generate as many permission numbers on DukeHub as there are seats in the course and download 
-        the corresponding excel file. <br> Download from DukeHub: <%= image_tag "exceltut.png", class:"exceltut" %> </span>
+
+        <%= image_tag "help.png", class:"help", style: "height: 25px" %>
+
+      <div class="modal fade" id="excelModal">
+      	<div class="modal-dialog">
+      		<div class="modal-content">
+      			<div class="modal-header">
+              <h4 class="modal-title">
+              	Generating Excel Files
+              </h4>
+      				<button type="button" class="close" data-dismiss="modal">×</button>
+
+      			</div>
+      			<div class="modal-body">
+              <p>You need to generate as many permission numbers on DukeHub as there are seats in the course and download
+              the corresponding excel file. <br> Download from DukeHub: </p>
+              <%= image_tag "exceltut.png", class:"exceltut" %>
+      			</div>
+      			<div class="modal-footer">
+      				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      			</div>
+      		</div>
+      	</div>
       </div>
+
       <div class="form-group custom-file" style= "margin: 0px 0px 10px 0px;">
         <%= f.label :file, "Upload Permission Numbers Excel File", class:"custom-file-label", for:"customFile" %>
         <%= f.file_field :file, class:"custom-file-input", id:"customFile", required: true%>

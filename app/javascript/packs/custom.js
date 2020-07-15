@@ -15,10 +15,12 @@ $(document).ready(function () {
     $('#factut').trigger('focus');
   });
 
-  $(".help").on('click', function() {
-    excelPop();
-  });
-
+  // $('#excelTutorial').on('shown.bs.modal', function () {
+  //   $('#excelModal').trigger('focus')
+  // })
+  $('.help').click(function(){
+  		$('#excelModal').modal('show')
+	});
 });
 
 $(function(){
