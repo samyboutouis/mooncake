@@ -11,12 +11,15 @@ Rails.application.routes.draw do
   get "/mailing2" => "dashboard#mailing2"
   get "/mailingall2" => "dashboard#mailingall2"
   get "/numbers/:course" => "dashboard#numbers", as: "numbers"
+  get "/allrequests" => "dashboard#allrequests", as: "allrequests"
 
   #Accept/Deny
   get "/deny/:request" => "dashboard#deny", as: "deny"
   get "/accept/:request" => "dashboard#accept", as: "accept"
   get "/permnum/:req" => "dashboard#addpermnum", as: "add_permnum"
   post "/add" => "dashboard#add", as: "add"
+  get "/denyview/:request" => "dashboard#denyview", as: "denyview"
+  get "/acceptview/:request" => "dashboard#acceptview", as: "acceptview"
 
   #Ranking
   get "/rank1/:request" => "dashboard#rank1", as: "rank1"
