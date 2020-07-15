@@ -92,7 +92,7 @@ class CoursesController < ApplicationController
               if row[10] == "Y"
                 consent = true;
               end
-              Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+              Course.last.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
             end
           end
           z += 1
@@ -127,7 +127,7 @@ class CoursesController < ApplicationController
               if row[10] == "Y"
                 consent = true;
               end
-              Course.last.permission_numbers.create(number: row[0], expire_date: row[7], used: false)
+              Course.last.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
             end
           end
           z += 1
