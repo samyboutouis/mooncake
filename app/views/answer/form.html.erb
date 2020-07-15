@@ -17,7 +17,7 @@
                 <% if question.question_type == "Checkbox" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %>" id = "cb" required/>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %>" id = "cb"/>
                           <label for="<%= option %><%= z %>">
                           <%= option %>
                           </label>
@@ -27,7 +27,7 @@
                 <% elsif question.question_type == "Radio" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %>" id = "rb" required/>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %>" id = "rb"/>
                           <label for="<%= option %><%= w %>">
                           <%= option %>
                           </label>
