@@ -103,9 +103,10 @@ class CoursesController < ApplicationController
       j = 1
       while (j < (params["number-choice-sec"].to_i) +1)
         sec = "section_number" + j.to_s
+        capacity = "capacity" + j.to_s
         file = "file" + i.to_s
         Course.create(term: course.term, department: course.department, course_number: course.course_number,
-        section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [], published: false)
+        section_number: params[sec], primary: true, seats_taken: 0, capacity: params[capacity], cross_listing: [], published: false)
         Course.last.prereqs << course.prereqs
         User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
         file = params[file]

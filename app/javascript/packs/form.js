@@ -98,7 +98,10 @@ function getOptions2(element) {
     $("#othersections").append("<h3> Section " + (i+2) + "</h3>");
     
     $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
-    $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
+    $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="capacity'+(i+1)+'"><br>');
+
+    $("#othersections").append("<label for= 'capacity"+(i+1)+"'> Capacity:</label>");
+    $("#othersections").append('<input name= "capacity'+(i+1)+'" class="form-control" type="number" id="capacity'+(i+1)+'"><br>');
 
     $("#othersections").append("<label> Permission Numbers:</label>");
     $("#othersections").append('<div class="custom-file" id="section'+(i+1)+'" style="margin-bottom:20px;">');
