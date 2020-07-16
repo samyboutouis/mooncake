@@ -2,14 +2,23 @@
   <div class="row">
     <div class="col">
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
-      <%= link_to "Email All", send_allreq_mailer_path, class:"btn btn-outline-secondary allmailer" %>
-      <button type="button" class="btn btn-outline-secondary" id="email-all" style="margin: 20px 10px 5px; float: right" >Email Selected</button>
+      
+     
+      
       <div class="table_box">
     
         <h1 class="title"> All Requests </h1>
         <div class="table-responsive">
         <form action = "/allmailselected">
             <table id="allrequestsTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
+              
+               <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0"> 
+                    <option value="">For Selected Requests</option>
+                    <option value="email">Email</option>
+                    <option value="accept">Accept</option>
+                    <option value="deny">Deny</option>
+                </select>
+              
               <thead>
                     <tr style="text-align: center; vertical-align: middle;">
                     <th> Course </th>
@@ -103,7 +112,19 @@
               </tbody>
           </table>
           <br>
-          <button type="submit" class="btn btn-outline-secondary" id="hidden-email-all" style="float: right" hidden >Email Selected</button>
+          
+          <button hidden id="email" type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
+          <button hidden id = "accept" type="submit" class="btn btn-outline-success" formaction="/all_accept_selected"> Accept Selected</button>
+          <button hidden id = "deny" type="submit" class="btn btn-outline-danger" formaction="/all_deny_selected"> Deny Selected</button>
+
+          <script>
+            function SelectAction() {
+              var act = document.getElementById("selected_action").value;
+              console.log(act)
+              document.getElementById(act).click();
+            }
+          </script>
+        
         </div>
       </div>
     </div>

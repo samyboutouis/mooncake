@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get "/deny_selected"  => "dashboard#deny_selected"
   get "/addpermnum/:course" => "dashboard#addmorepermnum", as: "add_more_permnum"
   post "/addmore" => "dashboard#addmore", as: "add_more"
+  get "/all_accept_selected"  => "dashboard#all_accept_selected"
+  get "/all_deny_selected"  => "dashboard#all_deny_selected"
 
   #Custom Mailing
   get "/mailing/:request" => "mailing#mailing", as: "send_mailer"
