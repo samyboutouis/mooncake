@@ -61,6 +61,7 @@ class ApplicationController < ActionController::Base
     end
 
     def makeFirstPermissionNums(row, course)
+      
       unless row[0] == nil
         consent = false
         reqs = false
