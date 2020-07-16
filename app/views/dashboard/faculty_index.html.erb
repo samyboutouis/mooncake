@@ -15,8 +15,8 @@
 
         <% if @user.courses.count > 1 %>
           <a href="<%= allrequests_path %>"><button class="btn btn-dark" type="button"> All Courses Requests</button></a>
-        <% end %>
-        <button type="button" class="btn btn-primary" style="height:38px;" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button>
+        <% end %> 
+        <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
         <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">

@@ -4,6 +4,9 @@
   <p style = "margin: 0px 40px 20px 5px; font-size: 14px;"> This is the page where you will add your course that
     students will request permission numbers for. Enter all information as seen on DukeHub. You also have the ability to
     create crosslisted courses (i.e. CS 250/ECE 250) or multi-section courses (i.e. CHEM 101L 01, CHEM 101L 02).</p>
+  <% if flash[:alert3] %>
+    <div class="alert1", style = "color: red"><%= flash[:alert3] %></div>
+  <% end %>
   <%= form_for @course do |f| %>
 
     <div class="form-group row" style="padding: 10px 20px 0px">
@@ -45,9 +48,7 @@
 
     <div class="form-group row", style="padding: 10px 20px 0px">
       <label> Permission Numbers:</label>
-
         <%= image_tag "help.png", class:"help", style: "height: 25px" %>
-
       <div class="modal fade" id="excelModal">
       	<div class="modal-dialog">
       		<div class="modal-content">
@@ -56,7 +57,6 @@
               	Generating Excel Files
               </h4>
       				<button type="button" class="close" data-dismiss="modal">×</button>
-
       			</div>
       			<div class="modal-body">
               <p>You need to generate at least as many permission numbers on DukeHub as there are seats in the course and download
@@ -72,7 +72,7 @@
 
       <div class="form-group custom-file" style= "margin: 0px 0px 10px 0px;">
         <%= f.label :file, "Upload Permission Numbers Excel File", class:"custom-file-label", for:"customFile" %>
-        <%= f.file_field :file, class:"custom-file-input", id:"customFile", required: true%>
+        <%= f.file_field :file, class:"custom-file-input form-control", id:"customFile", required: true %>
       </div>
     </div>
 
