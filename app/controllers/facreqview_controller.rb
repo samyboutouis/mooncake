@@ -119,31 +119,9 @@ class FacreqviewController < ApplicationController
     def add_selected
         @selected = params[:selected]
         @courseid = params[:courseid]
-        course = CourseRequest.find(@selected.first).course
+        course = CourseRequest.find(@selected.split("~").first).course
         file = params[:file]
-        xlsx = Roo::Spreadsheet.open(file)
-        sheet = xlsx.sheet(0)
-        z=0
-        sheet.each do |row|
-        if z>0
-            unless row[0] == nil
-                consent = false
-                reqs = false
-                capacity = false
-                if row[8] == "Y"
-                capacity = true
-                end
-                if row[9] == "Y"
-                reqs = true
-                end
-                if row[10] == "Y"
-                consent = true
-                end
-                course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
-            end
-        end
-        z += 1
-        end
+        file_upload(file, course.id)
     end
 
   def addpermnum
@@ -155,31 +133,8 @@ class FacreqviewController < ApplicationController
   def add
       course = CourseRequest.find(params[:request]).course
       file = params[:file]
-      @request = CourseRequest.find(params[:request])
-      xlsx = Roo::Spreadsheet.open(file)
-      sheet = xlsx.sheet(0)
-      z=0
-      sheet.each do |row|
-      if z>0
-          unless row[0] == nil
-              consent = false
-              reqs = false
-              capacity = false
-              if row[8] == "Y"
-              capacity = true
-              end
-              if row[9] == "Y"
-              reqs = true
-              end
-              if row[10] == "Y"
-              consent = true
-              end
-              course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
-          end
-      end
-      z += 1
-      end
-      redirect_to accept_path(@request)
+      file_upload(file, course.id)
+      redirect_to accept_path(params[:request])
   end
 
 

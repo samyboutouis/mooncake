@@ -82,6 +82,8 @@ class CoursesController < ApplicationController
           prereqs = course.prereqs.create(name: name[1]["name"])
         end
       end
+
+      
       i = 1
       cl = Array.new
       while (i < (params["number-choice"].to_i) +1)
