@@ -6,14 +6,6 @@ Rails.application.routes.draw do
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
   get "/publish/:course" => "dashboard#publish", as: "publish_page"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
-  get "/mailing/:request" => "dashboard#mailing", as: "send_mailer"
-  get "/mailingall/:course" => "dashboard#mailingall", as: "send_all_mailer"
-  get "/mailing2" => "dashboard#mailing2"
-  get "/mailingall2" => "dashboard#mailingall2"
-  get "/reqmailingall" => "dashboard#reqmailingall", as: "send_allreq_mailer"
-  get "/reqmailingall2" => "dashboard#reqmailingall2"
-  get "/mailselected" => "dashboard#mailselected"
-  get "/mailselected2" => "dashboard#mailselected2"
   get "/numbers/:course" => "dashboard#numbers", as: "numbers"
   get "/allrequests" => "dashboard#allrequests", as: "allrequests"
 
@@ -26,6 +18,18 @@ Rails.application.routes.draw do
   get "/acceptview/:request" => "dashboard#acceptview", as: "acceptview"
   get "/addpermnum/:course" => "dashboard#addmorepermnum", as: "add_more_permnum"
   post "/addmore" => "dashboard#addmore", as: "add_more"
+
+  #Custom Mailing
+  get "/mailing/:request" => "mailing#mailing", as: "send_mailer"
+  get "/mailingall/:course" => "mailing#mailingall", as: "send_all_mailer"
+  get "/mailing2" => "mailing#mailing2"
+  get "/mailingall2" => "mailing#mailingall2"
+  get "/reqmailingall" => "mailing#reqmailingall", as: "send_allreq_mailer"
+  get "/reqmailingall2" => "mailing#reqmailingall2"
+  get "/mailselected" => "mailing#mailselected"
+  get "/mailselected2" => "mailing#mailselected2"
+  get "/allmailselected" => "mailing#allmailselected"
+  get "/allmailselected2" => "mailing#allmailselected2"
 
   #Ranking
   get "/rank1/:request" => "dashboard#rank1", as: "rank1"

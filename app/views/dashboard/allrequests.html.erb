@@ -7,6 +7,7 @@
     
         <h1 class="title"> All Requests </h1>
         <div class="table-responsive">
+        <form action = "/allmailselected">
             <table id="allrequestsTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
               <thead>
                     <tr style="text-align: center; vertical-align: middle;">
@@ -16,7 +17,7 @@
                     <th> Graduation year</th>
                     <th> Major(s) </th>
                     <th> Accept/Deny Request </th>
-                    <th> Send Custom Email </th>
+                    <th> Select </th>
                     </tr>
               </thead>
               <tbody>
@@ -53,7 +54,7 @@
                                     <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                                 <% end %>
                             </td>
-                            <td>  <%= link_to "Email", send_mailer_path(request) %> </td>
+                            <td>  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             </tr>
                         <% end %>
 
@@ -90,7 +91,7 @@
                                     <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                                 <% end %>
                             </td>
-                            <td>  <%= link_to "Email", send_mailer_path(request) %> </td>
+                            <td>  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             </tr>
                         <% end %>
                         <% end %>
@@ -100,6 +101,8 @@
 
               </tbody>
           </table>
+          <br>
+          <button type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
         </div>
       </div>
     </div>
