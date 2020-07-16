@@ -38,7 +38,7 @@ class AllrequestController < ApplicationController
     course = CourseRequest.find(params[:request]).course
     req = CourseRequest.find(params[:request])
         if course.permission_numbers.where(used: false).count == 0
-            redirect_to add_permnum_path(req)
+            redirect_to all_add_permnum_path(req)
         else
             req.update(status: "Accepted")
             course.increment!(:seats_taken)
@@ -65,7 +65,7 @@ class AllrequestController < ApplicationController
         req = CourseRequest.find(id)
         course = req.course
         if course.permission_numbers.where(used: false).count < (params[:selected]).count
-            redirect_to add_permnum_path(req)
+            redirect_to all_add_permnum_path(req)
         else
             req.update(status: "Accepted")
             course.increment!(:seats_taken)
@@ -85,6 +85,42 @@ class AllrequestController < ApplicationController
 
     end
     
+     # Add More Permission Numbers
+     def all_addpermnum
+        @request = CourseRequest.find(params[:req])
+        @course = @request.course
+    end
+    
+    def all_add
+        course = CourseRequest.find(params[:request]).course
+        file = params[:file]
+        @request = CourseRequest.find(params[:request])
+        xlsx = Roo::Spreadsheet.open(file)
+        sheet = xlsx.sheet(0)
+        z=0
+        sheet.each do |row|
+        if z>0
+            unless row[0] == nil
+                consent = false
+                reqs = false
+                capacity = false
+                if row[8] == "Y"
+                capacity = true
+                end
+                if row[9] == "Y"
+                reqs = true
+                end
+                if row[10] == "Y"
+                consent = true
+                end
+                course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+            end
+        end
+        z += 1
+        end
+        redirect_to allrequests_path
+    end
+
       
       
     # Custom Mailing
