@@ -14,6 +14,16 @@
         <div class="table-responsive">
         <form action = "/mailselected">
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
+              <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0"> 
+                <option value="">For Selected Requests</option>
+                <option value="email">Email</option>
+                <option value="accept">Accept</option>
+                <option value="deny">Deny</option>
+              </select>
+
+              <br>
+
+              
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
@@ -210,9 +220,17 @@
           </table>
           <input type="hidden" name="courseid" value="<%= @course.id %>">
           <br>
-          <button type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
-          <button type="submit" class="btn btn-outline-success" formaction="/accept_selected"> Accept Selected</button>
-          <button type="submit" class="btn btn-outline-danger" formaction="/deny_selected"> Deny Selected</button>
+          <button hidden id="email" type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
+          <button hidden id = "accept" type="submit" class="btn btn-outline-success" formaction="/accept_selected"> Accept Selected</button>
+          <button hidden id = "deny" type="submit" class="btn btn-outline-danger" formaction="/deny_selected"> Deny Selected</button>
+
+          <script>
+            function SelectAction() {
+              var act = document.getElementById("selected_action").value;
+              console.log(act)
+              document.getElementById(act).click();
+            }
+          </script>
         </div>
       </div>
     </div>
