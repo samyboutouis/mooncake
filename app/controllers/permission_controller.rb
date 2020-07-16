@@ -1,9 +1,9 @@
-class PermissionController < ApplicationController 
+class PermissionController < ApplicationController
 
     def addmorepermnum
         @course = Course.find(params[:course])
       end
-    
+
     def addmore
         course = Course.find(params[:course]) #CourseRequest.find(params[:request]).course
         file = params[:file]
@@ -30,12 +30,19 @@ class PermissionController < ApplicationController
                 end
             end
             z += 1
-            end  
+            end
         redirect_to numbers_path(course)
     end
 
     def numbers
         @course = Course.find(params[:course])
     end
-    
+
+
+
+
+    def assignman
+      @user = User.find(params[:net_id])
+    end
+
 end

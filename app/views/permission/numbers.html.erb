@@ -22,7 +22,7 @@
                   <th> Req not met </th>
                   <th> Consent Req </th>
                   <th> Expiration Date </th>
-
+                  <th> Assign this Number </th>
                 </tr>
               </thead>
               <tbody>
@@ -68,7 +68,38 @@
                     <td>
                       <%= number.expire_date %>
                     </td>
+                    <% if number.course_request_id == nil %>
+                      <td>
+                        <button type="button" class="btn btn-outline-dark assignbutt" data-toggle="modal" data-target="#exampleModal">Assign</button>
 
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Assign a number without a request</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <input type="text" id="form3" class="form-control validate">
+                                <label data-error="wrong" data-success="right" for="form3">Student's NetID</label>
+                              </div>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="submit" id="sendsend" class="btn btn-primary assigningman">Send</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    <% else %>
+                      <td>
+                      </td>
+                    <% end %>
                   </tr>
                   <% i += 1 %>
                 <% end %>
@@ -85,8 +116,8 @@
                           <%=number.number%>
                         </td>
                           <% if number.course_request_id == nil %>
-                            <td> 
-                             Unassigned 
+                            <td>
+                             Unassigned
                             </td>
                           <% else %>
                             <td><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
@@ -95,7 +126,14 @@
                         <td>
                           <%= number.expire_date %>
                         </td>
-
+                        <% if number.course_request_id == nil %>
+                      <td>
+                        <button type="button" class="btn btn-outline-dark assignbutt" data-toggle="modal" data-target="#exampleModal">Assign</button>
+                      </td>
+                    <% else %>
+                      <td>
+                      </td>
+                    <% end %>
                       </tr>
                       <% i += 1 %>
                     <% end %>

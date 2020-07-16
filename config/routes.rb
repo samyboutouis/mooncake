@@ -35,8 +35,8 @@ Rails.application.routes.draw do
   get "/allmailselected" => "allrequest#allmailselected"
   get "/allmailselected2" => "allrequest#allmailselected2"
 
-  # Permission 
-  
+  # Permission
+
   get "/addpermnum/:course" => "permission#addmorepermnum", as: "add_more_permnum"
   post "/addmore" => "permission#addmore", as: "add_more"
   get "/numbers/:course" => "permission#numbers", as: "numbers"
@@ -61,6 +61,9 @@ Rails.application.routes.draw do
   get '/form/:course_request'=> 'answer#form', as: "answer"
   get '/data'=> 'answer#data', as: "data"
 
+
+  get '/assignman' => 'permission#assignman', as: 'assignman'
+  
   #faculty creating questions routes
   get '/questions/:course'=> 'questions#create_form', as: "question"
   put '/questions/:course' => 'questions#create', as: "questions"
