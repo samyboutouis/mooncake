@@ -11,6 +11,20 @@ $(document).ready(function () {
       getOptions($(this));
     })
   });
+
+  $("#customFile").on('change', function() {
+    if (!(validate($(this)))) {
+      if ($('.invalid-feedback').length == 0) {
+        $('.custom-file').append('<div class="invalid-feedback">You uploaded an invalid file. You can only upload an excel file from DukeHub.</div>');
+      }
+      $(this).addClass('is-invalid');
+      $("#customFile").replaceWith($("#customFile").val('').clone(true));
+    }
+    else {
+      $(".invalid-feedback").remove();
+      $(this).css('background-color', 'white');
+    }
+  });
 });
 
 function createField() {
@@ -52,4 +66,17 @@ function getOptions(element) {
     $("#question-options").append("<label for= 'question_option[]'>Option " + (i + 1) + ":</label>");
     $("#question-options").append('<input name= "question[option][]" type="text" class="form-control" id="question_option"><br>');
   }
+}
+
+function validate(file) {
+  var allowed_extensions = new Array("xlsx","xls","csv");
+  var file_extension = file.val().split('.').pop().toLowerCase();
+  for(var i = 0; i <= allowed_extensions.length; i++)
+  {
+      if(allowed_extensions[i]==file_extension)
+      {
+          return true; // valid file extension
+      }
+  }
+  return false;
 }

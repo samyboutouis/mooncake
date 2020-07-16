@@ -48,9 +48,7 @@
 
     <div class="form-group row", style="padding: 10px 20px 0px">
       <label> Permission Numbers:</label>
-
         <%= image_tag "help.png", class:"help", style: "height: 25px" %>
-
       <div class="modal fade" id="excelModal">
       	<div class="modal-dialog">
       		<div class="modal-content">
@@ -59,7 +57,6 @@
               	Generating Excel Files
               </h4>
       				<button type="button" class="close" data-dismiss="modal">×</button>
-
       			</div>
       			<div class="modal-body">
               <p>You need to generate at least as many permission numbers on DukeHub as there are seats in the course and download
@@ -75,7 +72,7 @@
 
       <div class="form-group custom-file" style= "margin: 0px 0px 10px 0px;">
         <%= f.label :file, "Upload Permission Numbers Excel File", class:"custom-file-label", for:"customFile" %>
-        <%= f.file_field :file, class:"custom-file-input", id:"customFile", required: true%>
+        <%= f.file_field :file, class:"custom-file-input form-control", id:"customFile", required: true %>
       </div>
     </div>
 
