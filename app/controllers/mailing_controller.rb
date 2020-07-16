@@ -95,7 +95,7 @@ class MailingController < ApplicationController
         end
         
         else
-            redirect_to requests_page_path(params[:courseid])
+            redirect_to allrequests_path
         end
         
     end
