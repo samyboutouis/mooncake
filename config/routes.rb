@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   get "/denyview/:request" => "allrequest#denyview", as: "denyview"
   get "/acceptview/:request" => "allrequest#acceptview", as: "acceptview"
+  get "/allpermnum/:req" => "allrequest#all_addpermnum", as: "all_add_permnum"
+  post "/alladd" => "allrequest#all_add", as: "all_add"
   get "/all_accept_selected"  => "allrequest#all_accept_selected"
   get "/all_deny_selected"  => "allrequest#all_deny_selected"
   get "/reqmailingall" => "allrequest#reqmailingall", as: "send_allreq_mailer"
