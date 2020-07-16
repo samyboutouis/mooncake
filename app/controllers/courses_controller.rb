@@ -25,37 +25,57 @@ class CoursesController < ApplicationController
   def create
     @user = User.find_by(net_id: session[:current_user]["net_id"])
     if @user.courses.where(term: params[:course][:term], department: params[:course][:department], course_number: params[:course][:course_number], section_number: params[:course][:section_number]).exists?
-        flash[:alert2] = "You cannot create a course again unless deleted"
-        redirect_to faculty_page_url
+        flash[:alert2] = "The course you tried to create already exists. You can only create this course if the original one is deleted"
+        redirect_to faculty_page_url and return
     elsif course = Course.create(course_params)
       course.published = false
       course.primary = true
       course.seats_taken = 0
       @user.courses << course  
       file = params[:course][:file]
-      xlsx = Roo::Spreadsheet.open(file)
-      sheet = xlsx.sheet(0)
-      z=0
-      sheet.each do |row|
-        if z>0
-          unless row[0] == nil
-            consent = false
-            reqs = false
-            capacity = false
-            if row[8] == "Y"
-              capacity = true
-            end
-            if row[9] == "Y"
-              reqs = true
-            end
-            if row[10] == "Y"
-              consent = true
-            end
-            course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+      extension = File.extname(file)
+      if(extension == ".xlsx")
+        xlsx = Roo::Spreadsheet.open(file)
+        sheet = xlsx.sheet(0)
+        z=0
+        sheet.each do |row|
+          if z>0
+            makeFirstPermissionNums(row, course)
           end
+          z += 1
         end
-        z += 1
-      end     
+      elsif(extension == ".xls")
+        begin
+          xlsx = Roo::Spreadsheet.open(file)
+          sheet = xlsx.sheet(0)
+          z=0
+          sheet.each do |row|
+            if z>0
+              makeFirstPermissionNums(row, course)
+            end
+            z += 1
+          end
+        rescue StandardError => e
+          doc = Nokogiri::HTML(file)
+          csv = CSV.open("output.csv", 'w')
+          doc.xpath('//table//tr').each do |row|
+              tarray = [] #temporary array
+              row.xpath('td').each do |cell|
+                  tarray << cell.text #Build array of that row of data.
+              end
+              csv << tarray #Write that row out to csv file
+          end
+          csv.close
+          CSV.foreach("output.csv", :headers => true) do |row|
+            makeFirstPermissionNums(row, course)
+          end
+          File.delete('output.csv')
+        end
+      else
+        flash[:alert3] = "You uploaded an invalid file. You can only upload an excel file from DukeHub."
+        course.destroy
+        redirect_to new_course_url and return
+      end
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
         if name[1]["name"] != ""
@@ -79,21 +99,7 @@ class CoursesController < ApplicationController
         z=0
         sheet.each do |row|
           if z>0
-            unless row[0] == nil
-              consent = false;
-              reqs = false;
-              capacity = false;
-              if row[8] == "Y"
-                capacity = true;
-              end
-              if row[9] == "Y"
-                reqs = true;
-              end
-              if row[10] == "Y"
-                consent = true;
-              end
-              Course.last.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
-            end
+            makeOtherPermissionNums(row)
           end
           z += 1
         end
@@ -115,21 +121,7 @@ class CoursesController < ApplicationController
         z=0
         sheet.each do |row|
           if z>0
-            unless row[0] == nil
-              consent = false;
-              reqs = false;
-              capacity = false;
-              if row[8] == "Y"
-                capacity = true;
-              end
-              if row[9] == "Y"
-                reqs = true;
-              end
-              if row[10] == "Y"
-                consent = true;
-              end
-              Course.last.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
-            end
+            makeOtherPermissionNums(row)
           end
           z += 1
         end
@@ -165,5 +157,40 @@ class CoursesController < ApplicationController
       format.json {render json: departments}
     end
   end
-end
 
+  def makeFirstPermissionNums(row, course)
+    unless row[0] == nil
+      consent = false
+      reqs = false
+      capacity = false
+      if row[8] == "Y"
+        capacity = true
+      end
+      if row[9] == "Y"
+        reqs = true
+      end
+      if row[10] == "Y"
+        consent = true
+      end
+      course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+    end
+  end
+
+  def makeOtherPermissionNums(row)
+    unless row[0] == nil
+      consent = false;
+      reqs = false;
+      capacity = false;
+      if row[8] == "Y"
+        capacity = true;
+      end
+      if row[9] == "Y"
+        reqs = true;
+      end
+      if row[10] == "Y"
+        consent = true;
+      end
+      Course.last.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+    end
+  end
+end
