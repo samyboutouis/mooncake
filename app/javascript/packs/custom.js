@@ -21,6 +21,11 @@ $(document).ready(function () {
   $('.help').click(function(){
   		$('#excelModal').modal('show')
 	});
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
 });
 
 $(function(){

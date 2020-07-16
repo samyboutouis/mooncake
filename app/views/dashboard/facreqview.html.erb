@@ -29,7 +29,7 @@
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
                   <th> Ranking </th>
                   <% @course.questions.each do |question| %>
-                    <%if question.id <= 5 or question.question_text == "Which course(s) have you taken:" %>
+                    <%if question.id <= 5 or question.question_text == "Which prerequisite(s) have you satisfied:" %>
                       <th> <%= question.question_text %><br><%= image_tag "eye.png", id: "hide",class:"eye"%></th>
                     <%else%>
                       <th> <%= question.question_text %></th>

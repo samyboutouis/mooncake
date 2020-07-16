@@ -12,7 +12,7 @@ require("packs/facreqview");
 require('packs/numbers');
 require('packs/allrequests');
 require('datatables.net');
-
+require('packs/popper.min.js')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

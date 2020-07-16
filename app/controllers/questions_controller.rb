@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
         if @course.questions.count == 0
             @course.questions << Question.find(1,2,3,4,5)
             if @course.prereqs.first != nil
-                @course.questions.create(question_type:  "Checkbox", question_text: "Which course(s) have you taken:", option: @course.prereqs.pluck(:name))
+                @course.questions.create(question_type:  "Checkbox", question_text: "Which prerequisite(s) have you satisfied:", option: @course.prereqs.pluck(:name))
             end
         end
         @question = @course.questions

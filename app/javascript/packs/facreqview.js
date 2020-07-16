@@ -22,7 +22,7 @@ $(document).ready(function () {
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
-        if ((table.column(7).header().innerText).trim() != "Which course(s) have you taken:") {
+        if ((table.column(7).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
             x = 7;
             col = 7;
         }
@@ -75,7 +75,7 @@ function format ( d, table ) {
     // `d` is the original data object for the row
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
     let x = -1;
-    if ((table.column(7).header().innerText).trim() != "Which course(s) have you taken:") {
+    if ((table.column(7).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
         x = 7;
     }
     else {

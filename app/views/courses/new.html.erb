@@ -16,12 +16,12 @@
       <%= f.select :department, options_for_select(@departments), {:prompt => "Select One"}, class:"form-control", id:"exampleFormControlSelect1 department", :required => true%>
     </div>
 
-    <div class="form-group row" style="padding: 10px 20px 0px">
+    <div class="form-group row" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Enter as seen on DukeHub!">
       <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
       <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number", :required => true%>
     </div>
 
-    <div class="form-group row" style="padding: 10px 20px 0px">
+    <div class="form-group row" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find!">
       <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
       <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number", :required => true%>
     </div>
@@ -31,7 +31,7 @@
       <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity", :required => true%>
     </div>
 
-    <div class="form-group row", style="padding: 10px 20px 0px">
+    <div class="form-group row", style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="left" title="Optional—leave empty if there are no pre-requisites">
       <%= f.fields_for :prereqs do |prereqs_form| %>
           <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
           <div class="form-inline">
@@ -43,7 +43,7 @@
       <% end %>
     </div>
 
-    <div class="form-group row", style="padding: 10px 20px 0px">
+    <div class="form-group row", style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Click the question mark for help!">
       <label> Permission Numbers:</label>
 
         <%= image_tag "help.png", class:"help", style: "height: 25px" %>
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="form-group" style="padding: 10px 6px 0px">
+    <div class="form-group" style="padding: 10px 6px 0px" data-toggle="tooltip" data-placement="left" title="Fill out this section if your course is listed under multiple departments.">
       <label for="crosslisting">Is this course cross-listed?</label><br>
       <input type="radio" class="listing" id="crosslisting" name="crosslisting" value="Yes"> Yes<br>
       <input type="radio" class="listing" id="crosslisting" name="crosslisting" value = "No" checked> No<br>
@@ -88,7 +88,7 @@
     <div class="form-group" id="othercourses" style="margin-bottom: 0px">
     </div>
 
-    <div class="form-group" style="padding: 10px 6px 0px">
+    <div class="form-group" style="padding: 10px 6px 0px" data-toggle="tooltip" data-placement="left" title="Fill this out to create multiple meeting sections at once!">
       <label for="sections">Does this course have additional sections?</label><br>
       <input type="radio" class="sec" id="sections" name="sections" value="Yes"> Yes<br>
       <input type="radio" class="sec" id="sections" name="sections" value = "No" checked> No<br>
