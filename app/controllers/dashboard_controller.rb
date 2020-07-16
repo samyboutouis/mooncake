@@ -226,6 +226,59 @@ class DashboardController < ApplicationController
     end
   end
 
+  def accept_selected
+    if params.include?("selected")
+      course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+      if course.primary == false
+          @course = Course.find(course.cross_listing[0])
+      else
+          @course = course
+      end
+      for id in (params[:selected]) do
+        req = CourseRequest.find(id)
+        course = req.course
+        if course.permission_numbers.where(used: false).count < (params[:selected]).count
+          redirect_to add_permnum_path(req)
+        else
+          req.update(status: "Accepted")
+          course.increment!(:seats_taken)
+          if course.seats_taken >= course.capacity
+            UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+          end
+          perm = course.permission_numbers.where(used: false).last
+          perm.course_request = req
+          perm.update(used: true)
+          UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+        end
+      end
+      redirect_to requests_page_path(@course)
+    else
+      redirect_to requests_page_path(params[:courseid])
+    end
+
+  end
+
+  def deny_selected
+    if params.include?("selected")
+      course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+      if course.primary == false
+          @course = Course.find(course.cross_listing[0])
+      else
+          @course = course
+      end
+      for id in (params[:selected]) do
+        req = CourseRequest.find(id)
+        course = req.course
+        req.update(status: "Denied")
+        UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+      end
+      redirect_to requests_page_path(@course)
+    else
+      redirect_to requests_page_path(params[:courseid])
+    end
+
+  end
+
 
 
 end

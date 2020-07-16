@@ -211,6 +211,8 @@
           <input type="hidden" name="courseid" value="<%= @course.id %>">
           <br>
           <button type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
+          <button type="submit" class="btn btn-outline-success" formaction="/accept_selected"> Accept Selected</button>
+          <button type="submit" class="btn btn-outline-danger" formaction="/deny_selected"> Deny Selected</button>
         </div>
       </div>
     </div>
