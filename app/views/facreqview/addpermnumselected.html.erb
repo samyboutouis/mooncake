@@ -1,0 +1,12 @@
+<div class="col">
+<div class="box">
+  <h1 class="title">More Permission Numbers Required for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%></h1>
+  <%= form_tag({action: :add_selected}, multipart: true) do %>
+    <%= file_field_tag 'file' %>
+    <%= hidden_field_tag "selected", @selected %>
+    <%= hidden_field_tag "courseid", @courseid %>
+    <%= submit_tag 'Upload' %>
+ <% end %>
+
+</div>
+
