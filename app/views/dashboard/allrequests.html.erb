@@ -3,6 +3,7 @@
     <div class="col">
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
       <%= link_to "Email All", send_allreq_mailer_path, class:"btn btn-outline-secondary allmailer" %>
+      <button type="button" class="btn btn-outline-secondary" id="email-all" style="margin: 20px 10px 5px; float: right" >Email Selected</button>
       <div class="table_box">
     
         <h1 class="title"> All Requests </h1>
@@ -102,8 +103,7 @@
               </tbody>
           </table>
           <br>
-          <button type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
-          <button type="submit" class="btn btn-outline-secondary" formaction="accept_selected"> Accept Selected</button>
+          <button type="submit" class="btn btn-outline-secondary" id="hidden-email-all" style="float: right" hidden >Email Selected</button>
         </div>
       </div>
     </div>
