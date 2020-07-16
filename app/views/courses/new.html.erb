@@ -16,12 +16,12 @@
       <%= f.select :department, options_for_select(@departments), {:prompt => "Select One"}, class:"form-control", id:"exampleFormControlSelect1 department", :required => true%>
     </div>
 
-    <div class="form-group row" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Enter as seen on DukeHub!">
+    <div class="form-group row" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find!">
       <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
       <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number", :required => true%>
     </div>
 
-    <div class="form-group row" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find!">
+    <div class="form-group row" style="padding: 10px 20px 0px">
       <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
       <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number", :required => true%>
     </div>

@@ -40,7 +40,7 @@
             <% end %>
 
             <%= link_to "Add Question", new_question_path(@course), class:"btn btn-outline-dark", style:"margin:10px 0px 10px" %>
-            <b data-toggle="tooltip" data-placement="top" title="Return and make edits!"><%= link_to "Save Form", faculty_page_path, class:"btn btn-outline-dark ", style:"margin:10px 0px 10px;" %> </b>
+            <%= link_to "Save Form", faculty_page_path, class:"btn btn-outline-dark ", style:"margin:10px 0px 10px;" %>
             <b data-toggle="tooltip" data-placement="top" title="Your class will be visible for students to begin making requests"><%= link_to "Publish Form", publish_page_path(@course), method: :get, class:"btn btn-dark", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%></b>
 
         </div>
