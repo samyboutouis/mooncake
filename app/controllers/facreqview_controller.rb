@@ -27,6 +27,9 @@ class FacreqviewController < ApplicationController
 
     def accept_selected
         if params.include?("selected")
+          if params[:selected].class == String
+            params[:selected] = params[:selected].split("~")
+          end
           course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
           if course.primary == false
               @course = Course.find(course.cross_listing[0])
@@ -34,12 +37,17 @@ class FacreqviewController < ApplicationController
               @course = course
           end
           reqlist = []
+          courselist = []
           coursenames = []
           for id in (params[:selected]) do
             req = CourseRequest.find(id)
             course = req.course
+            if req.permission_number != nil
+              next
+            end
             if course.permission_numbers.where(used: false).count == 0
-              reqlist.append(req)
+              reqlist.append(req.id)
+              courselist.append(course.id)
               coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
               next
             end
@@ -52,17 +60,18 @@ class FacreqviewController < ApplicationController
             perm.course_request = req
             perm.update(used: true)
             UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-            
-            
           end
-          flash[:alert3] = "Not enough permission numbers for #{coursenames.join(", ")}. Upload through Permission numbers page"
-          redirect_to requests_page_path(@course)
+          if reqlist.count == 0
+            redirect_to requests_page_path(@course)
+          else
+            selected = reqlist.join("~")
+            coursid = params[:courseid]
+            redirect_to add_permnum_selected_path(selected, coursid)
+          end
         else
           redirect_to requests_page_path(params[:courseid])
         end
     end
-    
-      
       
     # Deny
 
@@ -101,15 +110,17 @@ class FacreqviewController < ApplicationController
 
 
     # Add More Permission Numbers
-    def addpermnum
-        @request = CourseRequest.find(params[:req])
-        @course = @request.course
+    def addpermnumselected
+        @selected = params[:selected]
+        @course = CourseRequest.find(@selected.first).course
+        @courseid = params[:courseid]
     end
     
-    def add
-        course = CourseRequest.find(params[:request]).course
+    def add_selected
+        @selected = params[:selected]
+        @courseid = params[:courseid]
+        course = CourseRequest.find(@selected.first).course
         file = params[:file]
-        @request = CourseRequest.find(params[:request])
         xlsx = Roo::Spreadsheet.open(file)
         sheet = xlsx.sheet(0)
         z=0
@@ -133,8 +144,43 @@ class FacreqviewController < ApplicationController
         end
         z += 1
         end
-        redirect_to accept_path(@request)
     end
+
+  def addpermnum
+      @request = CourseRequest.find(params[:req])
+      @course = @request.course
+
+  end
+  
+  def add
+      course = CourseRequest.find(params[:request]).course
+      file = params[:file]
+      @request = CourseRequest.find(params[:request])
+      xlsx = Roo::Spreadsheet.open(file)
+      sheet = xlsx.sheet(0)
+      z=0
+      sheet.each do |row|
+      if z>0
+          unless row[0] == nil
+              consent = false
+              reqs = false
+              capacity = false
+              if row[8] == "Y"
+              capacity = true
+              end
+              if row[9] == "Y"
+              reqs = true
+              end
+              if row[10] == "Y"
+              consent = true
+              end
+              course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+          end
+      end
+      z += 1
+      end
+      redirect_to accept_path(@request)
+  end
 
 
 
