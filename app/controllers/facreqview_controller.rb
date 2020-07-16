@@ -33,25 +33,29 @@ class FacreqviewController < ApplicationController
           else
               @course = course
           end
-          
+          reqlist = []
+          coursenames = []
           for id in (params[:selected]) do
             req = CourseRequest.find(id)
             course = req.course
             if course.permission_numbers.where(used: false).count == 0
-              redirect_to add_permnum_path(req)
-            else
-              req.update(status: "Accepted")
-              course.increment!(:seats_taken)
-              if course.seats_taken >= course.capacity
-                UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
-              end
-              perm = course.permission_numbers.where(used: false).last
-              perm.course_request = req
-              perm.update(used: true)
-              UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+              reqlist.append(req)
+              coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
+              next
             end
+            req.update(status: "Accepted")
+            course.increment!(:seats_taken)
+            if course.seats_taken >= course.capacity
+              UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+            end
+            perm = course.permission_numbers.where(used: false).last
+            perm.course_request = req
+            perm.update(used: true)
+            UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+            
             
           end
+          flash[:alert3] = "Not enough permission numbers for #{coursenames.join(", ")}. Upload through Permission numbers page"
           redirect_to requests_page_path(@course)
         else
           redirect_to requests_page_path(params[:courseid])

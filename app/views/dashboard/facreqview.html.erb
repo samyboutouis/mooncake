@@ -4,13 +4,15 @@
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
       <%= link_to "Email All", send_all_mailer_path(@course), class:"btn btn-outline-secondary allmailer" %>
       <div class="table_box">
-      
       <% info = "" %>
       <% @course.cross_listing.each do |id| %>
           <% coursec = Course.find(id) %>
           <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
       <% end %>
         <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1> <br>
+        <% if flash[:alert3] %>
+        <div class="alert1", style = "color: red"><%= flash[:alert3] %></div>
+        <% end %>
         <div class="table-responsive">
         <form action = "/mailselected">
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
