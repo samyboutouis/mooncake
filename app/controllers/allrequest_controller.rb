@@ -4,8 +4,10 @@ class AllrequestController < ApplicationController
     def denyview
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         req = CourseRequest.find(params[:request])
+        
         course = CourseRequest.find(params[:request]).course
         CourseRequest.find(params[:request]).update(status: "Denied")
+        CourseRequest.find(params[:request]).permission_number = nil
         UserMailer.with(user: req.user, request: req).status_changed.deliver_now
         redirect_to allrequests_path
     end
@@ -17,6 +19,7 @@ class AllrequestController < ApplicationController
               req = CourseRequest.find(id)
               course = req.course
               req.update(status: "Denied")
+              req.permission_number = nil
               UserMailer.with(user: req.user, request: req).status_changed.deliver_now
             end
             redirect_to allrequests_path
