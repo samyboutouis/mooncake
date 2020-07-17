@@ -32,7 +32,7 @@
                   <tr style="text-align: center; vertical-align: middle;">
                     <td> <%= i %></td>
                     <td>
-                      <%= @course.department.split("-").first + " "+ @course.course_number + " - " + @course.section_number %>
+                      <b><%= @course.department.split("-").first + " "+ @course.course_number + " - " + @course.section_number %></b>
                     </td>
                     <td>
                       <%=number.number%>
@@ -113,7 +113,7 @@
                   <tr style="text-align: center; vertical-align: middle;">
                     <td> <%= i %></td>
                     <td>
-                      <%= Course.find(id).department.split("-").first + " "+ Course.find(id).course_number + " - " + Course.find(id).section_number %>
+                      <b><%= Course.find(id).department.split("-").first + " "+ Course.find(id).course_number + " - " + Course.find(id).section_number %></b>
                     </td>
                     <td>
                       <%=number.number%>
