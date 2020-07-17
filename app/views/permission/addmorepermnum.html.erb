@@ -1,6 +1,6 @@
 <div class="col">
 <div class="box">
-  <h1 class="title">Add Permission Numbers for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%></h1>
+  <h1 class="title">Add Permission Numbers </h1>
   <%= form_tag({action: :addmore}, multipart: true) do %>
     <select name="course" id="course">
     <% for id in @list %>
@@ -11,6 +11,6 @@
 
     <%= file_field_tag 'file' %>
     <%= submit_tag 'Submit' %>
- <% end %>
+  <% end %>
 
 </div>

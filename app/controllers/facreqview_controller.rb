@@ -27,6 +27,7 @@ class FacreqviewController < ApplicationController
 
     def accept_selected
         if params.include?("selected")
+
           if params[:selected].class == String
             params[:selected] = params[:selected].split("~")
           end
@@ -51,7 +52,11 @@ class FacreqviewController < ApplicationController
               coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
               next
             end
+            puts "******"
+            puts req.id
+            puts req.status
             req.update(status: "Accepted")
+            puts req.status
             course.increment!(:seats_taken)
             if course.seats_taken >= course.capacity
               UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
@@ -80,6 +85,7 @@ class FacreqviewController < ApplicationController
         req = CourseRequest.find(params[:request])
         course = CourseRequest.find(params[:request]).course
         CourseRequest.find(params[:request]).update(status: "Denied")
+        CourseRequest.find(params[:request]).permission_number = nil
         UserMailer.with(user: req.user, request: req).status_changed.deliver_now
         if course.primary == false
           redirect_to requests_page_path(course.cross_listing[0])
@@ -100,6 +106,7 @@ class FacreqviewController < ApplicationController
             req = CourseRequest.find(id)
             course = req.course
             req.update(status: "Denied")
+            req.permission_number = nil
             UserMailer.with(user: req.user, request: req).status_changed.deliver_now
           end
           redirect_to requests_page_path(@course)
