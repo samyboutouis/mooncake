@@ -47,8 +47,10 @@
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
-                    <td>
+                    
                     <% if request.priority == nil %>
+                    <td>
+                    <p hidden> 3 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
@@ -59,8 +61,10 @@
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 1 %>
-                        <p class="yes" hidden style="color:green;"> Yes </p>
+                      <td>
+                        <p class="yes" hidden style="color:green;"> 1 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Yes
@@ -69,11 +73,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 2 %>
-                        <p class="maybe" hidden style="color:orange;"> Maybe </p>
+                      <td>
+                        <p class="maybe" hidden style="color:orange;"> 2 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Maybe
@@ -82,11 +87,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% else %>
-                        <p class="noo" hidden style="color:red;"> No </p>
+                      <td>
+                        <p class="noo" hidden style="color:red;"> 4 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             No
@@ -98,8 +104,9 @@
 
                           </div>
                         </div>
+                        </td>
                       <% end %>
-                      </td>
+                      
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -133,8 +140,9 @@
                   <% Course.find(id).course_requests.each do |request| %>
                     <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
+                    <% if request.priority == nil %>
                     <td>
-                      <% if request.priority == nil %>
+                    <p hidden> 3 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
@@ -145,8 +153,10 @@
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 1 %>
-                        <p class="yes" hidden style="color:green;"> Yes </p>
+                      <td>
+                        <p class="yes" hidden style="color:green;"> 1 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Yes
@@ -155,11 +165,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 2 %>
-                        <p class="maybe" hidden style="color:orange;"> Maybe </p>
+                      <td>
+                        <p class="maybe" hidden style="color:orange;"> 2 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Maybe
@@ -168,11 +179,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% else %>
-                        <p class="noo" hidden style="color:red;"> No </p>
+                      <td>
+                        <p class="noo" hidden style="color:red;"> 4 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             No
@@ -184,8 +196,8 @@
 
                           </div>
                         </div>
+                        </td>
                       <% end %>
-                    </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
