@@ -28,54 +28,16 @@ class CoursesController < ApplicationController
         flash[:alert2] = "The course you tried to create already exists. You can only create this course if the original one is deleted"
         redirect_to faculty_page_url and return
     elsif course = Course.create(course_params)
+      rec = course
+      courses = []
+      courses.append(course.id)
+      session[:course] = course
       course.published = false
       course.primary = true
       course.seats_taken = 0
       @user.courses << course  
       file = params[:course][:file]
-      extension = File.extname(file)
-      if(extension == ".xlsx")
-        xlsx = Roo::Spreadsheet.open(file)
-        sheet = xlsx.sheet(0)
-        z=0
-        sheet.each do |row|
-          if z>0
-            makeFirstPermissionNums(row, course)
-          end
-          z += 1
-        end
-      elsif(extension == ".xls")
-        begin
-          xlsx = Roo::Spreadsheet.open(file)
-          sheet = xlsx.sheet(0)
-          z=0
-          sheet.each do |row|
-            if z>0
-              makeFirstPermissionNums(row, course)
-            end
-            z += 1
-          end
-        rescue StandardError => e
-          doc = Nokogiri::HTML(file)
-          csv = CSV.open("output.csv", 'w')
-          doc.xpath('//table//tr').each do |row|
-              tarray = [] #temporary array
-              row.xpath('td').each do |cell|
-                  tarray << cell.text #Build array of that row of data.
-              end
-              csv << tarray #Write that row out to csv file
-          end
-          csv.close
-          CSV.foreach("output.csv", :headers => true) do |row|
-            makeFirstPermissionNums(row, course)
-          end
-          File.delete('output.csv')
-        end
-      else
-        flash[:alert3] = "You uploaded an invalid file. You can only upload an excel file from DukeHub."
-        course.destroy
-        redirect_to new_course_url and return
-      end
+      fileUpload(file, course)
       prereqs_attributes = params["prereq_attributes"]
       prereqs_attributes.each do |name|
         if name[1]["name"] != ""
@@ -84,18 +46,82 @@ class CoursesController < ApplicationController
       end
 
       
-      i = 1
+      j = 0
       cl = Array.new
-      while (i < (params["number-choice"].to_i) +1)
-          crosslist(course, i, cl)
-        i += 1
+      update = false;
+      tmp = 0
+      if (params["number-choice"].to_i>0)
+        tmp = params["number-choice"].to_i
+        update = true
+      end  
+
+      i = 1
+      if (update)
+        while (i < (params["number-choice"].to_i) +1)
+          dep = "department" + i.to_s
+          num = "course_number" + i.to_s
+          sec = "section_number" + ((j*(params["number-choice"].to_i+2))+i).to_s
+          file = "file" + ((j*(params["number-choice"].to_i+2))+i).to_s
+          Course.create(term: course.term, department: params[dep], course_number: params[num],
+          section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
+          cl.append(Course.last.id)
+          Course.last.prereqs << course.prereqs
+          file = params[file]
+          fileUpload(file, course)
+          i += 1
+          course.update(cross_listing: cl)
+        end
+
+        j = 1
+        while (j < (params["number-choice-sec"].to_i) +1)
+          i=1
+          cl = Array.new
+          while (i <= (params["number-choice"].to_i+1))
+            if i == 1
+              n = params["number-choice"].to_i
+              sec = "section_number" + (j*(n+2)+i).to_s
+              file = "file" + (j*(n+2)+i).to_s
+              course = Course.create(term: course.term, department: course.department, course_number: course.course_number,
+              section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [], published: false)
+              User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
+            else
+              dep = "department" + (i-1).to_s
+              num = "course_number" + (i-1).to_s
+              n = params["number-choice"].to_i
+              a = j*(n+2)+i
+              sec = "section_number" + a.to_s
+              b = j*(n+2)+i
+              file = "file" + b.to_s
+              Course.create(term: course.term, department: params[dep], course_number: params[num],
+              section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
+            end  
+            if i != 1
+              cl.append(Course.last.id)
+            end  
+            Course.last.prereqs << course.prereqs
+            file = params[file]
+            fileUpload(file, Course.last)
+            i += 1
+            course.update(cross_listing: cl)
+          end 
+          j += 1 
+        end
       end
-      course.update(cross_listing: cl)
-      j = 1
-      while (j < (params["number-choice-sec"].to_i) +1)
-        multisec(course, j)
-        j += 1
-      end
+
+      if (!update)
+        while (j < (params["number-choice-sec"].to_i) +1)
+          sec = "section_number" + j.to_s
+          file = "file" + j.to_s
+          Course.create(term: course.term, department: course.department, course_number: course.course_number,
+          section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [], published: false)
+          Course.last.prereqs << course.prereqs
+          User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
+          file = params[file]
+          fileUpload(file, Course.last)
+          j += 1
+        end
+      end  
+      course = rec
       UserMailer.with(user: @user, course: course).course_created.deliver_now
       redirect_to question_path(course), alert: "Course created successfully."
     else
@@ -127,7 +153,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  def makeFirstPermissionNums(row, course)
+  def makePermissionNums(row, course)
     unless row[0] == nil
       consent = false
       reqs = false
@@ -145,62 +171,52 @@ class CoursesController < ApplicationController
     end
   end
 
-  def makeOtherPermissionNums(row)
-    unless row[0] == nil
-      consent = false;
-      reqs = false;
-      capacity = false;
-      if row[8] == "Y"
-        capacity = true;
+  def fileUpload(file, course)
+    extension = File.extname(file)
+    if(extension == ".xlsx")
+      xlsx = Roo::Spreadsheet.open(file)
+      sheet = xlsx.sheet(0)
+      z=0
+      sheet.each do |row|
+        if z>0
+          makePermissionNums(row, course)
+        end
+        z += 1
       end
-      if row[9] == "Y"
-        reqs = true;
+    elsif(extension == ".xls")
+      begin
+        xlsx = Roo::Spreadsheet.open(file)
+        sheet = xlsx.sheet(0)
+        z=0
+        sheet.each do |row|
+          if z>0
+            makePermissionNums(row, course)
+          end
+          z += 1
+        end
+      rescue StandardError => e
+        doc = Nokogiri::HTML(file)
+        csv = CSV.open("output.csv", 'w')
+        doc.xpath('//table//tr').each do |row|
+            tarray = [] #temporary array
+            row.xpath('td').each do |cell|
+                tarray << cell.text #Build array of that row of data.
+            end
+            csv << tarray #Write that row out to csv file
+        end
+        csv.close
+        CSV.foreach("output.csv", :headers => true) do |row|
+          makePermissionNums(row, course)
+        end
+        File.delete('output.csv')
       end
-      if row[10] == "Y"
-        consent = true;
+    else
+      flash[:alert3] = "You uploaded an invalid file. You can only upload an excel file from DukeHub."
+      course.cross_listing.each do |id|
+        Course.destroy(id)
       end
-      Course.last.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+      course.destroy
+      redirect_to new_course_url and return
     end
   end
-
-  def crosslist(course, i, cl)
-    dep = "department" + i.to_s
-    num = "course_number" + i.to_s
-    sec = "section_number" + i.to_s
-    file = "file" + i.to_s
-    Course.create(term: course.term, department: params[dep], course_number: params[num],
-    section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
-    cl.append(Course.last.id)
-    Course.last.prereqs << course.prereqs
-    file = params[file]
-    xlsx = Roo::Spreadsheet.open(file)
-    sheet = xlsx.sheet(0)
-    z=0
-    sheet.each do |row|
-      if z>0
-        makeOtherPermissionNums(row)
-      end
-      z += 1
-    end
   end
-
-  def multisec(course, j)
-    sec = "section_number" + j.to_s
-    capacity = "capacity" + j.to_s
-    file = "file" + j.to_s
-    Course.create(term: course.term, department: course.department, course_number: course.course_number,
-    section_number: params[sec], primary: true, seats_taken: 0, capacity: params[capacity], cross_listing: [], published: false)
-    Course.last.prereqs << course.prereqs
-    User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
-    file = params[file]
-    xlsx = Roo::Spreadsheet.open(file)
-    sheet = xlsx.sheet(0)
-    z=0
-    sheet.each do |row|
-      if z>0
-        makeOtherPermissionNums(row)
-      end
-      z += 1
-    end
-  end
-end

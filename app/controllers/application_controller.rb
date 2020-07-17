@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     # before_action :student_check
 
     private
-    
+
     def require_login
       redirect_to app_login_path unless session[:user_id]
     end
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
     end
 
     def makeFirstPermissionNums(row, course)
-      
+
       unless row[0] == nil
         consent = false
         reqs = false
@@ -83,18 +83,40 @@ class ApplicationController < ActionController::Base
 
       end
     end
-  
+
 
     # def faculty_check
     #   if session[:current_user]["user_type"] == "student"
     #     redirect_to root_path
     #   end
-    # end  
+    # end
 
     # def student_check
     #   if session[:current_user]["user_type"] == "faculty" || session[:current_user]["user_type"] == "staff"
     #     redirect_to faculty_page_path
     #   end
-    # end  
+    # end
+
+    # def checkexpire(yo)
+    #   heyy = Course.find(yo)
+    #   datee = []
+    #   courseunused = heyy.permission_numbers.where(used: false)
+    #   for ew in courseunused
+    #     datee.append(ew.expire_date)
+    #   end
+    #   #alldatee = datee.map { |date| Date.strptime(date) } # [Wed, 22 Jan 2020, Wed, 22 Jan 2020, Wed, 22 Jan 2020]
+    #   for numberdate in datee
+    #     datetimedate = Date.strptime(numberdate)
+    #     if Date.today >= datetimedate #expired
+    #       stringnumber = datetimedate.to_s
+    #       expiredboi = courseunused.where(expire_date: stringnumber)
+    #       for nummm in expiredboi
+    #         nummm.expired = true
+    #       end
+    #     end
+    #   end
+    # end
+    #   #end check
+
 
 end
