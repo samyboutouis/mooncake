@@ -155,7 +155,7 @@ class FacreqviewController < ApplicationController
     # Add More Permission Numbers
     def addpermnumselected
         @selected = params[:selected]
-        @course = CourseRequest.find(@selected.first).course
+        @course = CourseRequest.find(@selected.split("~").first).course
         @courseid = params[:courseid]
     end
 

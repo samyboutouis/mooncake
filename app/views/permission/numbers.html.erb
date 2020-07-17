@@ -37,10 +37,12 @@
                     <td>
                       <%=number.number%>
                     </td>
-                      <% if number.course_request_id == nil %>
-                        <td> Unassigned </td>
+                      <% if number.course_request_id == nil && number.used == true %>
+                        <td> Previously Assigned  </td>
+                      <% elsif number.course_request_id == nil %>
+                        <td style="color:green"> Unassigned </td>
                       <% else %>
-                        <td><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
+                        <td style="color:blue"><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
                         </td>
                       <% end %>
 
@@ -69,7 +71,7 @@
                     <td>
                       <%= number.expire_date %>
                     </td>
-                    <% if number.course_request_id == nil %>
+                    <% if number.used == false %>
                       <td>
                         <button type="button" class="btn btn-outline-dark assignbutt" data-toggle="modal" data-target="#exampleModal">Assign</button>
 
@@ -85,22 +87,13 @@
                               <div class="modal-body">
                                 <div class="md-form mb-5">
                                 <i class="fas fa-user prefix grey-text"></i>
-                                
-                            
-                             <%= form_tag({action: :assign_num}) do %>
-                              <%= select_tag "user_id", options_for_select(@course.course_requests.collect{|request| [request.user.first_name + " " + request.user.last_name, request.user.id]}), prompt: "Select Student"%>
-                              <%= hidden_field_tag "course", @course.id %>
-                              <%= hidden_field_tag "permnum", number.id %>
-                              <%= submit_tag 'Submit' %>
-                            <% end %>
-
-                              
-                                <%#= link_to "Send", assign_num_path(number), method: :get, class:"btn btn-outline-primary" %>
-                              </div>
-
-                              </div>
-                              <div class="modal-footer">
-                                
+                                <%= form_tag({action: :assign_num}) do %>
+                                  <%= select_tag "user_id", options_for_select(@course.course_requests.collect{|request| [request.user.first_name + " " + request.user.last_name, request.user.id]}), prompt: "Select Student"%>
+                                  <%= hidden_field_tag "course", @course.id %>
+                                  <%= hidden_field_tag "permnum", number.id %>
+                                  <%= submit_tag 'Submit' %>
+                                <% end %>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -118,47 +111,48 @@
                 <% @course.cross_listing.each do |id| %>
                   <% Course.find(id).permission_numbers.each do |number| %>
                   <tr style="text-align: center; vertical-align: middle;">
-                        <td> <%= i %></td>
-                        <td>
-                          <%= number.course.department.split("-").first + " "+ number.course.course_number + " - " + number.course.section_number %>
+                    <td> <%= i %></td>
+                    <td>
+                      <%= Course.find(id).department.split("-").first + " "+ Course.find(id).course_number + " - " + Course.find(id).section_number %>
+                    </td>
+                    <td>
+                      <%=number.number%>
+                    </td>
+                      <% if number.course_request_id == nil && number.used == true %>
+                        <td> Previously Assigned  </td>
+                      <% elsif number.course_request_id == nil %>
+                        <td style="color:green"> Unassigned </td>
+                      <% else %>
+                        <td style="color:blue"><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
                         </td>
-                        <td>
-                          <%=number.number%>
-                        </td>
-                          <% if number.course_request_id == nil %>
-                            <td>
-                             Unassigned
-                            </td>
-                          <% else %>
-                            <td><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
-                            </td>
-                          <% end %>
+                      <% end %>
 
-                              <td>
-                          <% if number.capacity == true %>
-                            Y
-                          <% else %>
-                            N
-                          <% end %>
-                        </td>
-                        <td>
-                          <% if number.reqs == true %>
-                            Y
-                          <% else %>
-                            N
-                          <% end %>
-                        </td>
-                        <td>
-                          <% if number.consent == true %>
-                            Y
-                          <% else %>
-                            N
-                          <% end %>
-                        </td>
-                        <td>
-                          <%= number.expire_date %>
-                        </td>
-                        <% if number.course_request_id == nil %>
+                    <td>
+                      <% if number.capacity == true %>
+                        Y
+                      <% else %>
+                        N
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if number.reqs == true %>
+                        Y
+                      <% else %>
+                        N
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if number.consent == true %>
+                        Y
+                      <% else %>
+                        N
+                      <% end %>
+                    </td>
+
+                    <td>
+                      <%= number.expire_date %>
+                    </td>
+                    <% if number.used == false %>
                       <td>
                         <button type="button" class="btn btn-outline-dark assignbutt" data-toggle="modal" data-target="#exampleModal">Assign</button>
                       </td>
@@ -166,10 +160,11 @@
                       <td>
                       </td>
                     <% end %>
-                      </tr>
-                      <% i += 1 %>
-                    <% end %>
+                  </tr>
+                  <% i += 1 %>
                   <% end %>
+                <% end %>
+
 
 
               </tbody>
