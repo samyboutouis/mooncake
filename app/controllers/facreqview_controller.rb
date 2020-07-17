@@ -6,7 +6,7 @@ class FacreqviewController < ApplicationController
         course = CourseRequest.find(params[:request]).course
         req = CourseRequest.find(params[:request])
 
-        # #currently deletes if expired
+        # #checks if expired, boolean "expired" becomes true
         # datee = []
         # courseunused = course.permission_numbers.where(used: false)
         # for ew in courseunused
@@ -17,16 +17,15 @@ class FacreqviewController < ApplicationController
         #   datetimedate = Date.strptime(numberdate)
         #   if Date.today >= datetimedate #expired
         #     stringnumber = datetimedate.to_s
-        #     expiredboi = courseunused.permission_numbers.where(expire_date: stringnumber)
+        #     expiredboi = courseunused.where(expire_date: stringnumber)
         #     for nummm in expiredboi
-        #       #what do i do with the number now?
-        #       #numm.delete
+        #       nummm.expired = true
         #     end
         #   end
         # end
 
 
-        if course.permission_numbers.where(used: false).count == 0
+        if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
           redirect_to add_permnum_path(req)
         else
           req.update(status: "Accepted")
@@ -67,7 +66,23 @@ class FacreqviewController < ApplicationController
             if req.permission_number != nil
               next
             end
-            if course.permission_numbers.where(used: false).count == 0
+            # #checks if expired, boolean "expired" becomes true
+            # datee = []
+            # courseunused = course.permission_numbers.where(used: false)
+            # for ew in courseunused
+            #   datee.append(ew.expire_date)
+            # end
+            # for numberdate in datee
+            #   datetimedate = Date.strptime(numberdate)
+            #   if Date.today >= datetimedate #expired
+            #     stringnumber = datetimedate.to_s
+            #     expiredboi = courseunused.where(expire_date: stringnumber)
+            #     for nummm in expiredboi
+            #       nummm.expired = true
+            #     end
+            #   end
+            # end
+            if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
               reqlist.append(req.id)
               courselist.append(course.id)
               coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)

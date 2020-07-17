@@ -1,6 +1,6 @@
-class AllrequestController < ApplicationController 
+class AllrequestController < ApplicationController
 
-    # Deny 
+    # Deny
     def denyview
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         req = CourseRequest.find(params[:request])
@@ -27,13 +27,29 @@ class AllrequestController < ApplicationController
             redirect_to allrequests_path
         end
     end
-      
-    # Accept 
+
+    # Accept
     def acceptview
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         course = CourseRequest.find(params[:request]).course
         req = CourseRequest.find(params[:request])
-        if course.permission_numbers.where(used: false).count == 0
+        # #checks if expired, boolean "expired" becomes true
+        # datee = []
+        # courseunused = course.permission_numbers.where(used: false)
+        # for ew in courseunused
+        #   datee.append(ew.expire_date)
+        # end
+        # for numberdate in datee
+        #   datetimedate = Date.strptime(numberdate)
+        #   if Date.today >= datetimedate #expired
+        #     stringnumber = datetimedate.to_s
+        #     expiredboi = courseunused.where(expire_date: stringnumber)
+        #     for nummm in expiredboi
+        #       nummm.expired = true
+        #     end
+        #   end
+        # end
+        if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
           redirect_to all_add_permnum_path(req)
         else
           req.update(status: "Accepted")
@@ -45,7 +61,7 @@ class AllrequestController < ApplicationController
           perm.course_request = req
           perm.update(used: true)
           UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-          
+
           redirect_to allrequests_path
         end
     end
@@ -56,7 +72,7 @@ class AllrequestController < ApplicationController
               params[:selected] = params[:selected].split("~")
             end
             course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
-            
+
             reqlist = []
             courselist = []
             coursenames = []
@@ -66,7 +82,23 @@ class AllrequestController < ApplicationController
               if req.permission_number != nil
                 next
               end
-              if course.permission_numbers.where(used: false).count == 0
+              # #checks if expired, boolean "expired" becomes true
+              # datee = []
+              # courseunused = course.permission_numbers.where(used: false)
+              # for ew in courseunused
+              #   datee.append(ew.expire_date)
+              # end
+              # for numberdate in datee
+              #   datetimedate = Date.strptime(numberdate)
+              #   if Date.today >= datetimedate #expired
+              #     stringnumber = datetimedate.to_s
+              #     expiredboi = courseunused.where(expire_date: stringnumber)
+              #     for nummm in expiredboi
+              #       nummm.expired = true
+              #     end
+              #   end
+              # end
+              if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
                 reqlist.append(req.id)
                 courselist.append(course.id)
                 coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
@@ -93,7 +125,7 @@ class AllrequestController < ApplicationController
             redirect_to allrequests_path
           end
       end
-    
+
      # Add More Permission Numbers
 
      def all_addpermnumselected
@@ -101,7 +133,7 @@ class AllrequestController < ApplicationController
         @course = CourseRequest.find(@selected.split("~").first).course
         #@courseid = params[:courseid]
     end
-    
+
     def all_add_selected
         @selected = params[:selected]
         #@courseid = params[:courseid]
@@ -115,7 +147,7 @@ class AllrequestController < ApplicationController
         @request = CourseRequest.find(params[:req])
         @course = @request.course
     end
-    
+
     def all_add
       course = CourseRequest.find(params[:request]).course
       file = params[:file]
@@ -123,12 +155,12 @@ class AllrequestController < ApplicationController
       redirect_to allrequests_path
   end
 
-      
-      
+
+
     # Custom Mailing
       def reqmailingall
       end
-      
+
       def reqmailingall2
           @user = User.find_by(net_id: session[:current_user]["net_id"])
           @user.courses.each do |course|
@@ -145,10 +177,10 @@ class AllrequestController < ApplicationController
           end
           redirect_to allrequests_path
       end
-  
-      
-  
-      def allmailselected 
+
+
+
+      def allmailselected
           if params.include?("selected")
           @selected = (params[:selected]).join("~")
           course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
@@ -157,13 +189,13 @@ class AllrequestController < ApplicationController
           else
               @course = course
           end
-          
+
           else
               redirect_to allrequests_path
           end
-          
+
       end
-  
+
       def allmailselected2
           @course = Course.find(params[:courseid])
           for req in (params[:selected]).split("~") do

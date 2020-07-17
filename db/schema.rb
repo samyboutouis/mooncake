@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_154418) do
     t.boolean "consent"
     t.boolean "reqs"
     t.boolean "capacity"
+    t.boolean "expired"
     t.integer "course_id", null: false
     t.integer "course_request_id"
     t.datetime "created_at", precision: 6, null: false
