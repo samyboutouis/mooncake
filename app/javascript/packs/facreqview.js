@@ -1,6 +1,11 @@
 var col = 0;
 
+$(document).ready(function(){
+    $("#frm1").submit();
+});
+
 $(document).ready(function () {
+    
     var table = $('#myTable').DataTable( {
         columnDefs: [
             {
