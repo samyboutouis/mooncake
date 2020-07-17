@@ -40,8 +40,29 @@ class QuestionsController < ApplicationController
     # delete question
     def delete
         @question = Question.find(params[:id])
-        @course = @question.courses.first
-        @question.destroy
+        @course = Course.find(params[:course])
+        @course.questions.delete(params[:id])
+        redirect_to question_path(@course)
+    end
+
+    def save_template
+        @course = Course.find(params[:course])
+        questionids = @course.questions.pluck(:question_id)
+        questionids = questionids.join("~")
+        send_data questionids, :filename => 'Template.txt'
+    end
+
+    def load_template
+        @course = Course.find(params[:course])
+        file = params[:file]
+        file_data = file.read
+        for id in file_data.split("~")
+            if @course.questions.pluck(:question_id).include? id.to_i
+                next
+            else
+                @course.questions << Question.find(id)
+            end
+        end
         redirect_to question_path(@course)
     end
 
