@@ -1,10 +1,31 @@
-class FacreqviewController < ApplicationController 
+class FacreqviewController < ApplicationController
 
     # Accept
     def accept
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         course = CourseRequest.find(params[:request]).course
         req = CourseRequest.find(params[:request])
+
+        # #currently deletes if expired
+        # datee = []
+        # courseunused = course.permission_numbers.where(used: false)
+        # for ew in courseunused
+        #   datee.append(ew.expire_date)
+        # end
+        # #alldatee = datee.map { |date| Date.strptime(date) } # [Wed, 22 Jan 2020, Wed, 22 Jan 2020, Wed, 22 Jan 2020]
+        # for numberdate in datee
+        #   datetimedate = Date.strptime(numberdate)
+        #   if Date.today >= datetimedate #expired
+        #     stringnumber = datetimedate.to_s
+        #     expiredboi = courseunused.permission_numbers.where(expire_date: stringnumber)
+        #     for nummm in expiredboi
+        #       #what do i do with the number now?
+        #       #numm.delete
+        #     end
+        #   end
+        # end
+
+
         if course.permission_numbers.where(used: false).count == 0
           redirect_to add_permnum_path(req)
         else
@@ -27,6 +48,7 @@ class FacreqviewController < ApplicationController
 
     def accept_selected
         if params.include?("selected")
+
           if params[:selected].class == String
             params[:selected] = params[:selected].split("~")
           end
@@ -51,7 +73,11 @@ class FacreqviewController < ApplicationController
               coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
               next
             end
+            puts "******"
+            puts req.id
+            puts req.status
             req.update(status: "Accepted")
+            puts req.status
             course.increment!(:seats_taken)
             if course.seats_taken >= course.capacity
               UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
@@ -72,7 +98,7 @@ class FacreqviewController < ApplicationController
           redirect_to requests_page_path(params[:courseid])
         end
     end
-      
+
     # Deny
 
     def deny
@@ -80,6 +106,7 @@ class FacreqviewController < ApplicationController
         req = CourseRequest.find(params[:request])
         course = CourseRequest.find(params[:request]).course
         CourseRequest.find(params[:request]).update(status: "Denied")
+        CourseRequest.find(params[:request]).permission_number = nil
         UserMailer.with(user: req.user, request: req).status_changed.deliver_now
         if course.primary == false
           redirect_to requests_page_path(course.cross_listing[0])
@@ -100,6 +127,7 @@ class FacreqviewController < ApplicationController
             req = CourseRequest.find(id)
             course = req.course
             req.update(status: "Denied")
+            req.permission_number = nil
             UserMailer.with(user: req.user, request: req).status_changed.deliver_now
           end
           redirect_to requests_page_path(@course)
@@ -115,7 +143,7 @@ class FacreqviewController < ApplicationController
         @course = CourseRequest.find(@selected.first).course
         @courseid = params[:courseid]
     end
-    
+
     def add_selected
         @selected = params[:selected]
         @courseid = params[:courseid]
@@ -129,7 +157,7 @@ class FacreqviewController < ApplicationController
       @course = @request.course
 
   end
-  
+
   def add
       course = CourseRequest.find(params[:request]).course
       file = params[:file]
@@ -162,7 +190,7 @@ class FacreqviewController < ApplicationController
     def mailingall
         @course = Course.find(params[:course])
     end
-    
+
     def mailingall2
         @course = Course.find(params[:courseid])
         @sender = User.find_by(net_id: session[:current_user]["net_id"])
@@ -174,7 +202,7 @@ class FacreqviewController < ApplicationController
             UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
         end
         end
-        
+
         if @course.primary == false
         redirect_to requests_page_path(@course.cross_listing[0])
         else
@@ -182,7 +210,7 @@ class FacreqviewController < ApplicationController
         end
     end
 
-    def mailselected 
+    def mailselected
         if params.include?("selected")
         @selected = (params[:selected]).join("~")
         course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
@@ -191,11 +219,11 @@ class FacreqviewController < ApplicationController
         else
             @course = course
         end
-        
+
         else
         redirect_to requests_page_path(params[:courseid])
         end
-        
+
     end
 
     def mailselected2
