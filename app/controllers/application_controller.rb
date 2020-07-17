@@ -75,7 +75,12 @@ class ApplicationController < ActionController::Base
         if row[10] == "Y"
           consent = true
         end
-        course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+
+        unless PermissionNumber.exists?(number: row[0].to_i, course: course) 
+          course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+        else
+        end
+
       end
     end
   
