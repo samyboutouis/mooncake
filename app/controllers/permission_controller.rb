@@ -1,7 +1,12 @@
 class PermissionController < ApplicationController
 
     def addmorepermnum
+        @list = []
         @course = Course.find(params[:course])
+        @list.append(@course.id)
+        for id in @course.cross_listing
+            @list.append(id)
+        end
       end
 
     def addmore
@@ -31,7 +36,11 @@ class PermissionController < ApplicationController
             end
             z += 1
             end
-        redirect_to numbers_path(course)
+        if course.primary == false 
+            redirect_to numbers_path(course.cross_listing[0])
+        else
+            redirect_to numbers_path(course)
+        end
     end
 
     def numbers

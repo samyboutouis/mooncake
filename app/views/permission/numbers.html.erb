@@ -65,6 +65,7 @@
                         N
                       <% end %>
                     </td>
+
                     <td>
                       <%= number.expire_date %>
                     </td>
@@ -132,6 +133,28 @@
                             <td><%= number.course_request.user.first_name %> <%= number.course_request.user.last_name %> |  <%= number.course_request.user.net_id %>
                             </td>
                           <% end %>
+
+                              <td>
+                          <% if number.capacity == true %>
+                            Y
+                          <% else %>
+                            N
+                          <% end %>
+                        </td>
+                        <td>
+                          <% if number.reqs == true %>
+                            Y
+                          <% else %>
+                            N
+                          <% end %>
+                        </td>
+                        <td>
+                          <% if number.consent == true %>
+                            Y
+                          <% else %>
+                            N
+                          <% end %>
+                        </td>
                         <td>
                           <%= number.expire_date %>
                         </td>

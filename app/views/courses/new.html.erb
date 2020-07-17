@@ -4,6 +4,9 @@
   <p style = "margin: 0px 40px 20px 5px; font-size: 14px;"> This is the page where you will add your course that
     students will request permission numbers for. Enter all information as seen on DukeHub. You also have the ability to
     create crosslisted courses (i.e. CS 250/ECE 250) or multi-section courses (i.e. CHEM 101L 01, CHEM 101L 02).</p>
+  <% if flash[:alert3] %>
+    <div class="alert1", style = "color: red"><%= flash[:alert3] %></div>
+  <% end %>
   <%= form_for @course do |f| %>
 
     <div class="form-group row" style="padding: 10px 20px 0px">
@@ -45,9 +48,7 @@
 
     <div class="form-group row", style="padding: 10px 20px 0px">
       <label> Permission Numbers:</label>
-
         <%= image_tag "help.png", class:"help", style: "height: 25px" %>
-
       <div class="modal fade" id="excelModal">
       	<div class="modal-dialog">
       		<div class="modal-content">
@@ -56,7 +57,6 @@
               	Generating Excel Files
               </h4>
       				<button type="button" class="close" data-dismiss="modal">×</button>
-
       			</div>
       			<div class="modal-body">
               <p>You need to generate at least as many permission numbers on DukeHub as there are seats in the course and download
@@ -72,32 +72,31 @@
 
       <div class="form-group custom-file" style= "margin: 0px 0px 10px 0px;">
         <%= f.label :file, "Upload Permission Numbers Excel File", class:"custom-file-label", for:"customFile" %>
-        <%= f.file_field :file, class:"custom-file-input", id:"customFile", required: true%>
+        <%= f.file_field :file, class:"custom-file-input form-control", id:"customFile", required: true %>
       </div>
     </div>
 
-    <div class="form-group" style="padding: 10px 6px 0px" data-toggle="tooltip" data-placement="left" title="Fill out this section if your course is listed under multiple departments.">
-      <label for="crosslisting">Is this course cross-listed?</label><br>
-      <input type="radio" class="listing" id="crosslisting" name="crosslisting" value="Yes"> Yes<br>
-      <input type="radio" class="listing" id="crosslisting" name="crosslisting" value = "No" checked> No<br>
+    <div class="form-group" style="padding: 10px 6px 0px">
+      <label for="crosslisting sections">Is this course cross-listed or has multiple section?</label><br>
+      <input type="radio" class="listing" id="crosslisting sections" name="crosslisting sections" value="Cross-listed and has multiple sections"> Cross-listed and has multiple sections<br>
+      <input type="radio" class="listing" id="crosslisting sections" name="crosslisting sections" value="Cross-listed only"> Cross-listed only<br>
+      <input type="radio" class="listing" id="crosslisting sections" name="crosslisting sections" value="Multiple sections only"> Multiple sections only<br>
+      <input type="radio" class="listing" id="crosslisting sections" name="crosslisting sections" value="No" checked> No <br>
     </div>
 
     <div class="form-group row" id="howmany" style="padding: 10px 20px 0px">
     </div>
 
-    <div class="form-group" id="othercourses" style="margin-bottom: 0px">
-    </div>
-
-    <div class="form-group" style="padding: 10px 6px 0px" data-toggle="tooltip" data-placement="left" title="Fill this out to create multiple meeting sections at once!">
-      <label for="sections">Does this course have additional sections?</label><br>
-      <input type="radio" class="sec" id="sections" name="sections" value="Yes"> Yes<br>
-      <input type="radio" class="sec" id="sections" name="sections" value = "No" checked> No<br>
-    </div>
-
     <div class="form-group row" id="howmanysec" style="padding: 10px 20px 0px">
     </div>
 
+    <div class="form-group" id="othercourses" style="margin-bottom: 0px">
+    </div>
+
     <div class="form-group" id="othersections">
+    </div>
+
+    <div class="form-group" id="upload">
     </div>
 
     <div class="form-group row" style="padding: 10px 6px 0px">

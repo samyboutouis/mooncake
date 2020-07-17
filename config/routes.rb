@@ -11,10 +11,14 @@ Rails.application.routes.draw do
   # Facreqview
   get "/deny/:request" => "facreqview#deny", as: "deny"
   get "/accept/:request" => "facreqview#accept", as: "accept"
-  get "/accept_selected"  => "facreqview#accept_selected"
+  get "/accept_selected"  => "facreqview#accept_selected", as: "accept_selected"
   get "/deny_selected"  => "facreqview#deny_selected"
   get "/permnum/:req" => "facreqview#addpermnum", as: "add_permnum"
   post "/add" => "facreqview#add", as: "add"
+
+  get "/permnumselected/:selected, :courseid" => "facreqview#addpermnumselected", as: "add_permnum_selected"
+  post "/add_selected" => "facreqview#add_selected", as: "add_selected"
+
   get "/mailing/:request" => "facreqview#mailing", as: "send_mailer"
   get "/mailingall/:course" => "facreqview#mailingall", as: "send_all_mailer"
   get "/mailing2" => "facreqview#mailing2"
