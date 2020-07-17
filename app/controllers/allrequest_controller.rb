@@ -6,120 +6,119 @@ class AllrequestController < ApplicationController
         req = CourseRequest.find(params[:request])
         course = CourseRequest.find(params[:request]).course
         CourseRequest.find(params[:request]).update(status: "Denied")
-        # UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-        
-        redirect_to allrequests_path(course)
+        UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+        redirect_to allrequests_path
     end
 
     def all_deny_selected
-    if params.include?("selected")
-        course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
-        if course.primary == false
-            @course = Course.find(course.cross_listing[0])
+        if params.include?("selected")
+            course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+            for id in (params[:selected]) do
+              req = CourseRequest.find(id)
+              course = req.course
+              req.update(status: "Denied")
+              UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+            end
+            redirect_to allrequests_path
         else
-            @course = course
+            redirect_to allrequests_path
         end
-        for id in (params[:selected]) do
-        req = CourseRequest.find(id)
-        course = req.course
-        req.update(status: "Denied")
-        UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-        end
-        redirect_to allrequests_path
-    else
-        redirect_to allrequests_path
-    end
-
     end
       
     # Accept 
     def acceptview
-    @user = User.find_by(net_id: session[:current_user]["net_id"])
-    course = CourseRequest.find(params[:request]).course
-    req = CourseRequest.find(params[:request])
+        @user = User.find_by(net_id: session[:current_user]["net_id"])
+        course = CourseRequest.find(params[:request]).course
+        req = CourseRequest.find(params[:request])
         if course.permission_numbers.where(used: false).count == 0
-            redirect_to all_add_permnum_path(req)
+          redirect_to all_add_permnum_path(req)
         else
-            req.update(status: "Accepted")
-            course.increment!(:seats_taken)
-            if course.seats_taken >= course.capacity
-            # UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
-            end
-            perm = course.permission_numbers.where(used: false).last
-            perm.course_request = req
-            perm.update(used: true)
-            # UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-            redirect_to allrequests_path(course)
+          req.update(status: "Accepted")
+          course.increment!(:seats_taken)
+          if course.seats_taken >= course.capacity
+            UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+          end
+          perm = course.permission_numbers.where(used: false).last
+          perm.course_request = req
+          perm.update(used: true)
+          UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+          
+          redirect_to allrequests_path
         end
     end
 
     def all_accept_selected
-    if params.include?("selected")
-        course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
-        if course.primary == false
-            @course = Course.find(course.cross_listing[0])
-        else
-            @course = course
-        end
-        for id in (params[:selected]) do
-        req = CourseRequest.find(id)
-        course = req.course
-        if course.permission_numbers.where(used: false).count < (params[:selected]).count
-            redirect_to all_add_permnum_path(req)
-        else
-            req.update(status: "Accepted")
-            course.increment!(:seats_taken)
-            if course.seats_taken >= course.capacity
-            UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+        if params.include?("selected")
+            if params[:selected].class == String
+              params[:selected] = params[:selected].split("~")
             end
-            perm = course.permission_numbers.where(used: false).last
-            perm.course_request = req
-            perm.update(used: true)
-            UserMailer.with(user: req.user, request: req).status_changed.deliver_now
-        end
-        end
-        redirect_to allrequests_path
-    else
-        redirect_to allrequests_path
-    end
-
-    end
+            course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+            
+            reqlist = []
+            courselist = []
+            coursenames = []
+            for id in (params[:selected]) do
+              req = CourseRequest.find(id)
+              course = req.course
+              if req.permission_number != nil
+                next
+              end
+              if course.permission_numbers.where(used: false).count == 0
+                reqlist.append(req.id)
+                courselist.append(course.id)
+                coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
+                next
+              end
+              req.update(status: "Accepted")
+              course.increment!(:seats_taken)
+              if course.seats_taken >= course.capacity
+                UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+              end
+              perm = course.permission_numbers.where(used: false).last
+              perm.course_request = req
+              perm.update(used: true)
+              UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+            end
+            if reqlist.count == 0
+              redirect_to allrequests_path
+            else
+              selected = reqlist.join("~")
+              #courseid = params[:courseid]
+              redirect_to all_add_permnum_selected_path(selected)
+            end
+          else
+            redirect_to allrequests_path
+          end
+      end
     
      # Add More Permission Numbers
+
+     def all_addpermnumselected
+        @selected = params[:selected]
+        @course = CourseRequest.find(@selected.split("~").first).course
+        #@courseid = params[:courseid]
+    end
+    
+    def all_add_selected
+        @selected = params[:selected]
+        #@courseid = params[:courseid]
+        course = CourseRequest.find(@selected.split("~").first).course
+        file = params[:file]
+        file_upload(file, course.id)
+    end
+
+
      def all_addpermnum
         @request = CourseRequest.find(params[:req])
         @course = @request.course
     end
     
     def all_add
-        course = CourseRequest.find(params[:request]).course
-        file = params[:file]
-        @request = CourseRequest.find(params[:request])
-        xlsx = Roo::Spreadsheet.open(file)
-        sheet = xlsx.sheet(0)
-        z=0
-        sheet.each do |row|
-        if z>0
-            unless row[0] == nil
-                consent = false
-                reqs = false
-                capacity = false
-                if row[8] == "Y"
-                capacity = true
-                end
-                if row[9] == "Y"
-                reqs = true
-                end
-                if row[10] == "Y"
-                consent = true
-                end
-                course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
-            end
-        end
-        z += 1
-        end
-        redirect_to allrequests_path
-    end
+      course = CourseRequest.find(params[:request]).course
+      file = params[:file]
+      file_upload(file, course.id)
+      redirect_to allrequests_path
+  end
 
       
       

@@ -34,6 +34,10 @@ Rails.application.routes.draw do
   post "/alladd" => "allrequest#all_add", as: "all_add"
   get "/all_accept_selected"  => "allrequest#all_accept_selected"
   get "/all_deny_selected"  => "allrequest#all_deny_selected"
+
+  get "/all_permnumselected/:selected" => "allrequest#all_addpermnumselected", as: "all_add_permnum_selected"
+  post "/all_add_selected" => "allrequest#all_add_selected", as: "all_add_selected"
+
   get "/reqmailingall" => "allrequest#reqmailingall", as: "send_allreq_mailer"
   get "/reqmailingall2" => "allrequest#reqmailingall2"
   get "/allmailselected" => "allrequest#allmailselected"
