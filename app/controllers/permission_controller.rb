@@ -38,11 +38,29 @@ class PermissionController < ApplicationController
         @course = Course.find(params[:course])
     end
 
-
-
-
     def assignman
       @user = User.find(params[:net_id])
+    end
+
+    def assign_num
+        course = Course.find(params[:course])
+        permission_number = params[:permnum]
+        permnum = PermissionNumber.find(permission_number)
+        user = User.find(params[:user_id])
+        request = CourseRequest.find_by(course_id: course, user_id: user)
+        
+        #permnum.course_request.update(course_request: request)
+        request.update(permission_number: permnum)
+        permnum.update(used: true)
+    
+        
+        redirect_to numbers_path(course)
+        # term = params[:term]
+        # @course = Course.where(term: term, published: true)
+        # respond_to do |format|
+        #     format.json {render json: @course}
+        # end
+        
     end
 
 end

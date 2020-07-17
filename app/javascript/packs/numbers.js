@@ -27,5 +27,36 @@ $(document).ready( function () {
     // $(document).on('click', '#sendsend', function() {
     // 	$('#form3').submit();
     // });
+    $(".student-name").on('change', function() {
+      assignNum($(this));
+    });
 ;
 });
+
+function assignNum(element) {
+  let selected = element.val();
+  console.log(selected);
+
+  // $.ajax('/assign_num', {
+  //   type: 'GET',
+  //   dataType: 'json',
+  //   data: {term: selected},
+  //   success: function(result) {
+  //     console.log('Success');
+  //     result.sort(function(a, b) {
+  //       return compareStrings(a.department, b.department);
+  //     })
+  //     $(".department").append("<option value=''>Choose Department</option>");
+  //     let used = [];
+  //     for (var i = 0; i < result.length; i++) {
+  //       if (!(used.includes(result[i].department))) {
+  //         $(".department").append("<option>" + result[i].department + "</option>");
+  //         used.push(result[i].department);
+  //       }
+  //     }
+  //   },
+  //   error: function() {
+  //     console.log('Error');
+  //   }
+  // });
+}
