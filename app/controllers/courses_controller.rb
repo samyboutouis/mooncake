@@ -87,46 +87,13 @@ class CoursesController < ApplicationController
       i = 1
       cl = Array.new
       while (i < (params["number-choice"].to_i) +1)
-        dep = "department" + i.to_s
-        num = "course_number" + i.to_s
-        sec = "section_number" + i.to_s
-        file = "file" + i.to_s
-        Course.create(term: course.term, department: params[dep], course_number: params[num],
-        section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
-        cl.append(Course.last.id)
-        Course.last.prereqs << course.prereqs
-        file = params[file]
-        xlsx = Roo::Spreadsheet.open(file)
-        sheet = xlsx.sheet(0)
-        z=0
-        sheet.each do |row|
-          if z>0
-            makeOtherPermissionNums(row)
-          end
-          z += 1
-        end
+          crosslist(course, i, cl)
         i += 1
       end
       course.update(cross_listing: cl)
       j = 1
       while (j < (params["number-choice-sec"].to_i) +1)
-        sec = "section_number" + j.to_s
-        capacity = "capacity" + j.to_s
-        file = "file" + i.to_s
-        Course.create(term: course.term, department: course.department, course_number: course.course_number,
-        section_number: params[sec], primary: true, seats_taken: 0, capacity: params[capacity], cross_listing: [], published: false)
-        Course.last.prereqs << course.prereqs
-        User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
-        file = params[file]
-        xlsx = Roo::Spreadsheet.open(file)
-        sheet = xlsx.sheet(0)
-        z=0
-        sheet.each do |row|
-          if z>0
-            makeOtherPermissionNums(row)
-          end
-          z += 1
-        end
+        multisec(course, j)
         j += 1
       end
       UserMailer.with(user: @user, course: course).course_created.deliver_now
@@ -193,6 +160,47 @@ class CoursesController < ApplicationController
         consent = true;
       end
       Course.last.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+    end
+  end
+
+  def crosslist(course, i, cl)
+    dep = "department" + i.to_s
+    num = "course_number" + i.to_s
+    sec = "section_number" + i.to_s
+    file = "file" + i.to_s
+    Course.create(term: course.term, department: params[dep], course_number: params[num],
+    section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
+    cl.append(Course.last.id)
+    Course.last.prereqs << course.prereqs
+    file = params[file]
+    xlsx = Roo::Spreadsheet.open(file)
+    sheet = xlsx.sheet(0)
+    z=0
+    sheet.each do |row|
+      if z>0
+        makeOtherPermissionNums(row)
+      end
+      z += 1
+    end
+  end
+
+  def multisec(course, j)
+    sec = "section_number" + j.to_s
+    capacity = "capacity" + j.to_s
+    file = "file" + j.to_s
+    Course.create(term: course.term, department: course.department, course_number: course.course_number,
+    section_number: params[sec], primary: true, seats_taken: 0, capacity: params[capacity], cross_listing: [], published: false)
+    Course.last.prereqs << course.prereqs
+    User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
+    file = params[file]
+    xlsx = Roo::Spreadsheet.open(file)
+    sheet = xlsx.sheet(0)
+    z=0
+    sheet.each do |row|
+      if z>0
+        makeOtherPermissionNums(row)
+      end
+      z += 1
     end
   end
 end
