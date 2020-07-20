@@ -8,11 +8,12 @@
       <div class="table_box">
 
         <h1 class="title"> All Requests </h1>
+        <br>
         <div class="table-responsive">
         <form action = "/allmailselected">
             <table id="allrequestsTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
-
-               <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0">
+              
+               <select name="select_action" id="selected_action" class="btn btn-primary" onchange="SelectAction()" style="margin: 0 0 20px 0"> 
                     <option value="">For Selected Requests</option>
                     <option value="email">Email</option>
                     <option value="accept">Accept</option>
