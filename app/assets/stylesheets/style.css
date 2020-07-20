@@ -218,17 +218,8 @@ a[aria-expanded=false] .fa-chevron-down {
     flex-grow: 1;
   }
 
-  .header button {
-    margin-left: 20px;
-  }
-
   .header {
     overflow: hidden;
-  }
-
-  .header button {
-    float: right;
-    margin-left: 20px;
   }
 
   .form-group.required .control-label:after {

@@ -3,8 +3,16 @@
     <div class="col">
       <div class="box">
         <div class="header">
-        <h1 class="title"> <i class="fas fa-frog"></i> <i class="fas fa-kiwi-bird"></i> <i class="fas fa-fish"></i> Active Requests - <%= @user.first_name %></h1>
-        <a href="<%= search_path %>"><button class="btn btn-dark" type="button">Request a permission number</button></a>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8">
+                <h1 class="title"> Active Requests - <%= @user.first_name %></h1>
+              </div>
+              <div class="col-sm-4">
+                <a href="<%= search_path %>"><button class="btn btn-dark" type="button">Request a permission number</button></a>
+              </div>
+            </div>
+          </div>
         </div>
         <%= no_request(@user)%>
         <div class="container">
