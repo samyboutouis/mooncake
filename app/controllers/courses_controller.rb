@@ -163,7 +163,19 @@ class CoursesController < ApplicationController
       if row[10] == "Y"
         consent = true
       end
-      course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+
+      numExists = false
+      course.cross_listing.each do |course|
+        if PermissionNumber.exists?(number: row[0].to_i) 
+          numExists = true
+        else
+        end
+      end
+
+      if numExists == false
+        course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+      else
+      end
     end
   end
 
