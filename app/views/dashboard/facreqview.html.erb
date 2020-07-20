@@ -28,8 +28,8 @@
               
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
+                  <th> <input type="checkbox" name="selected1" class="selectall"/> </th>
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
-                  <th> Select </th>
                   <th> Ranking Helper</th>
                   <% @course.questions.each do |question| %>
                     <%if question.id <= 5 or question.question_text == "Which prerequisite(s) have you satisfied:" %>
@@ -47,11 +47,10 @@
                   
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
-                    <td class="details-control"></td>
                     <td> 
-                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id="<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
                     </td>
-                    
+                    <td class="details-control"></td>
                     <% if request.priority == nil %>
                     <td>
                     <p hidden> 3 </p>
@@ -141,10 +140,10 @@
                 <% @course.cross_listing.each do |id| %>
                   <% Course.find(id).course_requests.each do |request| %>
                     <tr style="text-align: center; vertical-align: middle;">
-                    <td class="details-control"></td>
                     <td> 
-                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id="<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
                     </td>
+                    <td class="details-control"></td>
                     <% if request.priority == nil %>
                     <td>
                     <p hidden> 3 </p>

@@ -11,7 +11,7 @@
         <p style = "margin: 0px 40px 20px 15px; font-size: 14px;"> This form is what will be displayed to students when they request a permission number from your course.
             Along with the default questions listed, you can add your own custom questions to the form. This form
             is only intended to assess preparedness and academic background.</p>
-        
+        <div class="container">
         <form action = "/save_template" >
             
             <input type="hidden" name="course" value="<%= @course.id %>">
@@ -31,7 +31,7 @@
   
         <br>
 
-        <div class="container">
+        
             <% @course.questions.each do |question| %>
                 <div class="form-group required">
                     <p class="control-label"><%= question.question_text %></p>
