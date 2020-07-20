@@ -107,7 +107,7 @@ class CoursesController < ApplicationController
           j += 1 
         end
       end
-
+      j = 1
       if (!update)
         while (j < (params["number-choice-sec"].to_i) +1)
           sec = "section_number" + j.to_s
