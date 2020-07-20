@@ -5,7 +5,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function () {
-    document.getElementById("selected_action").style.visibility = "hidden";
+    // document.getElementById("selected_action").style.visibility = "hidden";
 
     var table = $('#myTable').DataTable( {
         columnDefs: [
