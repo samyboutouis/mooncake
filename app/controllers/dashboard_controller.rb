@@ -40,6 +40,20 @@ class DashboardController < ApplicationController
     redirect_to faculty_page_path
   end
 
+
+  def add_user
+    @course = Course.find(params[:course])
+  end
+
+  def add_user2
+    @course = Course.find(params[:course])
+    newuser = User.find_by(net_id: params[:netid])
+    newuser.courses << @course
+    redirect_to faculty_page_path
+  end
+
+
+  # Facreqview Controller
   def facreqview
     @course = Course.find(params[:course])
   end
