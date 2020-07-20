@@ -74,6 +74,23 @@ $(document).ready(function () {
         }
     } );
 
+    $('.selectall').on('change', function(e) {
+        var $inputs = $('.checkboxlist');
+        if(e.originalEvent === undefined) {
+            var allChecked = true;
+            $inputs.each(function(){
+                allChecked = allChecked && this.checked;
+            });
+            this.checked = allChecked;
+        } else {
+            $inputs.prop('checked', this.checked);
+        }
+    });
+    
+    $('.checkboxlist').on('change', function(){
+        $('.selectall').trigger('change');
+    });
+
 });
 
 function format ( d, table ) {
