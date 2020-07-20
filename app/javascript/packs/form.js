@@ -107,10 +107,6 @@ function getOptions2(element) {
         var k = num*(i+1)+j+1;
         $("#othersections").append("<label for= 'section_number"+k+"'> Section Number :</label>");
         $("#othersections").append('<input name= "section_number'+k+'" class="form-control" type="text" id="section_number'+k+'"><br>');
-        if (j == 0){
-          $("#othersections").append("<label for= 'course_capacity"+k+"'> Course Capacity :</label>");
-          $("#othersections").append('<input name= "course_capacity'+k+'" class="form-control" type="text" id="section_number'+k+'"><br>');
-        }
         $("#othersections").append("<label> Permission Numbers:</label>");
         $("#othersections").append('<div class="custom-file" id="section'+k+'" style="margin-bottom:20px;">');
         $("#othersections #section"+k).append('<input name= "file'+k+'" type="file" class="custom-file-input" id="customFile'+k+'">');
