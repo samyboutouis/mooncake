@@ -2,27 +2,28 @@
   <div class="row">
     <div class="col">
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
-      
-     
-      
+
+
+
       <div class="table_box">
-    
+
         <h1 class="title"> All Requests </h1>
         <div class="table-responsive">
         <form action = "/allmailselected">
             <table id="allrequestsTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
-              
-               <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0"> 
+
+               <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0">
                     <option value="">For Selected Requests</option>
                     <option value="email">Email</option>
                     <option value="accept">Accept</option>
                     <option value="deny">Deny</option>
                 </select>
-              
+
               <thead>
                     <tr style="text-align: center; vertical-align: middle;">
                     <th> <input type="checkbox" name="selected1" class="selectall"/> </th>
                     <th> Course </th>
+                    <th>Time of Request</th>
                     <th> Full name </th>
                     <th> Email </th>
                     <th> Graduation year</th>
@@ -31,15 +32,17 @@
                     </tr>
               </thead>
               <tbody>
-                
+
                     <% @user.courses.each do |course| %>
-                        
+
                         <% i = 0 %>
                         <% course.course_requests.each do |request| %>
                         <% i = 0 %>
+
                         <tr style="text-align: center; vertical-align: middle;">
                             <td> <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             <td> <b><%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%></b> </td>
+                            <td> <%= request.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%D %H:%M:%S')%> </td>
                             <% request.answers.each do |answer| %>
                                 <% if i < 4 %>
                                     <% if answer.question.question_type == "Checkbox"%>
@@ -51,10 +54,10 @@
                                     <% end %>
                                     <% i += 1 %>
                                 <% end %>
-                                
+
                             <% end %>
-                            
-                            <td> 
+
+                            <td>
                                 <% if request.status == "Under Review"%>
                                     <%= link_to "Accept", acceptview_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}?"}, class:"btn btn-success btn-sm accept"%>
                                     <%= link_to "Deny", denyview_path(request), data: {confirm: "Are you sure you want to deny #{request.answers.first.answer_text}?"}, class:"btn btn-danger btn-sm accept"%>
@@ -75,6 +78,7 @@
                         <tr style="text-align: center; vertical-align: middle;">
                             <td> <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             <td> <b><%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number%></b> </td>
+                            <td> <%= request.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%D %H:%M:%S')%> </td>
                             <% request.answers.each do |answer| %>
                                 <% if i < 4 %>
                                     <% if answer.question.question_type == "Checkbox"%>
@@ -86,10 +90,10 @@
                                     <% end %>
                                     <% i += 1 %>
                                 <% end %>
-                                
+
                             <% end %>
-                            
-                            <td> 
+
+                            <td>
                                 <% if request.status == "Under Review"%>
                                     <%= link_to "Accept", acceptview_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}?"}, class:"btn btn-success btn-sm accept"%>
                                     <%= link_to "Deny", denyview_path(request), data: {confirm: "Are you sure you want to deny #{request.answers.first.answer_text}?"}, class:"btn btn-danger btn-sm accept"%>
@@ -103,16 +107,16 @@
                             </tr>
                         <% end %>
                         <% end %>
-                        
+
                     <% end %>
-                    
+
 
               </tbody>
           </table>
-          
-          
+
+
           <br>
-          
+
           <button hidden id="email" type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
           <button hidden id = "accept" type="submit" class="btn btn-outline-success" formaction="/all_accept_selected"> Accept Selected</button>
           <button hidden id = "deny" type="submit" class="btn btn-outline-danger" formaction="/all_deny_selected"> Deny Selected</button>
@@ -124,7 +128,7 @@
               document.getElementById(act).click();
             }
           </script>
-        
+
         </div>
       </div>
     </div>
