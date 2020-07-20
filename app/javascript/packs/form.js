@@ -80,9 +80,6 @@ function getOptions(element) {
         $("#othercourses").append("<label for= 'course_number"+(i+1)+"'> Course Number:</label>");
         $("#othercourses").append('<input name= "course_number'+(i+1)+'" type="text" class="form-control" id="course_number'+(i+1)+'"><br>');
         
-        $("#othercourses").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
-        $("#othercourses").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
-        
         $("#othercourses").append("<label> Permission Numbers:</label>");
         $("#othercourses").append('<div class="custom-file" id="course'+(i+1)+'" style="margin-bottom:20px;">');
         $("#othercourses #course"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');
@@ -102,13 +99,14 @@ function getOptions2(element) {
   $("#othersections").empty();
   if (update){
     for (var i=0; i<selected; i++){
+      $("#othersections").append("<h3> Section " + (i+2) + "</h3>");
+      $("#othersections").append("<label for= 'section_capacity"+(i+1)+"'> Section Capacity :</label>");
+      $("#othersections").append('<input name= "section_capacity'+(i+1)+'" class="form-control" type="text" id="section_number'+k+'"><br>');
+      $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number :</label>");
+      $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+k+'"><br>');
       for (var j=0; j<=num-2; j++){
-        $("#othersections").append("<h3> Section " + (i+2) + " For Crosslisting Course "+(j+1)+ "</h3>");
+        $("#othersections").append("<h4> Section " + (i+2) + " For Crosslisting Course "+(j+1)+ "</h4>");
         var k = num*(i+1)+j+1;
-        $("#othersections").append("<label for= 'section_number"+k+"'> Section Number :</label>");
-        $("#othersections").append('<input name= "section_number'+k+'" class="form-control" type="text" id="section_number'+k+'"><br>');
-        $("#othersections").append("<label for= 'section_capacity"+k+"'> Section Capacity :</label>");
-        $("#othersections").append('<input name= "section_capacity'+k+'" class="form-control" type="text" id="section_number'+k+'"><br>');
         $("#othersections").append("<label> Permission Numbers:</label>");
         $("#othersections").append('<div class="custom-file" id="section'+k+'" style="margin-bottom:20px;">');
         $("#othersections #section"+k).append('<input name= "file'+k+'" type="file" class="custom-file-input" id="customFile'+k+'">');
@@ -123,7 +121,8 @@ function getOptions2(element) {
       
       $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
       $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
-
+      $("#othersections").append("<label for= 'section_capacity"+(i+1)+"'> Section Capacity :</label>");
+      $("#othersections").append('<input name= "section_capacity'+(i+1)+'" class="form-control" type="text" id="section_number'+k+'"><br>');
       $("#othersections").append("<label> Permission Numbers:</label>");
       $("#othersections").append('<div class="custom-file" id="section'+(i+1)+'" style="margin-bottom:20px;">');
       $("#othersections #section"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');

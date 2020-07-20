@@ -46,25 +46,21 @@ class CoursesController < ApplicationController
       
       j = 0 #????
       cl = Array.new
-      #byebug
       hasCrossList = false;
       numAdditionalCrossList = params["number-choice"].to_i
       numAdditionalSections = params["number-choice-sec"].to_i
-      #tmp = 0 #??
       if (numAdditionalCrossList>0)
-        #tmp = params["number-choice"].to_i
         hasCrossList = true 
       end  
 
-      currentCrossList = 1 #?
+      currentCrossList = 1
       if (hasCrossList)
         while (currentCrossList < numAdditionalCrossList +1)
           dep = "department" + currentCrossList.to_s
           num = "course_number" + currentCrossList.to_s
-          sec = "section_number" + currentCrossList.to_s
           file = "file" + currentCrossList.to_s
           Course.create(term: course.term, department: params[dep], course_number: params[num],
-          section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
+          section_number: course.section_number, primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
           cl.append(Course.last.id)
           Course.last.prereqs << course.prereqs
           file = params[file]
@@ -77,24 +73,22 @@ class CoursesController < ApplicationController
         while (j < (numAdditionalSections) +1)
           currentCrossList=1
           cl = Array.new
+          sec = "section_number" + j.to_s
+          capacity = "section_capacity" + j.to_s
           while (currentCrossList <= numAdditionalCrossList+1)
             if currentCrossList == 1
               # n = params["number-choice"].to_i
-              sec = "section_number" + (j*(numAdditionalCrossList+2)+currentCrossList).to_s
               file = "file" + (j*(numAdditionalCrossList+2)+currentCrossList).to_s
               course = Course.create(term: course.term, department: course.department, course_number: course.course_number,
-              section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [], published: false)
+              section_number: params[sec], primary: true, seats_taken: 0, capacity: params[capacity], cross_listing: [], published: false)
               User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
             else
               dep = "department" + (currentCrossList-1).to_s
               num = "course_number" + (currentCrossList-1).to_s
-              # n = params["number-choice"].to_i
-              a = j*(numAdditionalCrossList+2)+currentCrossList
-              sec = "section_number" + a.to_s
               b = j*(numAdditionalCrossList+2)+currentCrossList
               file = "file" + b.to_s
               Course.create(term: course.term, department: params[dep], course_number: params[num],
-              section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
+              section_number: params[sec], primary: false, seats_taken: 0, capacity: params[capacity], cross_listing: [course.id])
             end  
             if currentCrossList != 1
               cl.append(Course.last.id)
@@ -124,7 +118,7 @@ class CoursesController < ApplicationController
         end
       end  
       course = rec
-      UserMailer.with(user: @user, course: course).course_created.deliver_now
+      #UserMailer.with(user: @user, course: course).course_created.deliver_now
       redirect_to question_path(course), alert: "Course created successfully."
     else
       redirect_to faculty_page_url, alert: "Error creating course."
