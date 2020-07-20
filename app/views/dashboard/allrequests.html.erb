@@ -21,13 +21,13 @@
               
               <thead>
                     <tr style="text-align: center; vertical-align: middle;">
+                    <th> <input type="checkbox" name="selected1" class="selectall"/> </th>
                     <th> Course </th>
                     <th> Full name </th>
                     <th> Email </th>
                     <th> Graduation year</th>
                     <th> Major(s) </th>
                     <th> Accept/Deny Request </th>
-                    <th> Select </th>
                     </tr>
               </thead>
               <tbody>
@@ -38,6 +38,7 @@
                         <% course.course_requests.each do |request| %>
                         <% i = 0 %>
                         <tr style="text-align: center; vertical-align: middle;">
+                            <td> <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             <td> <b><%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%></b> </td>
                             <% request.answers.each do |answer| %>
                                 <% if i < 4 %>
@@ -64,7 +65,6 @@
                                     <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                                 <% end %>
                             </td>
-                            <td>  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             </tr>
                         <% end %>
 
@@ -73,10 +73,9 @@
                         <% Course.find(id).course_requests.each do |request| %>
                         <% i = 0 %>
                         <tr style="text-align: center; vertical-align: middle;">
+                            <td> <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             <td> <b><%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number%></b> </td>
                             <% request.answers.each do |answer| %>
-                                
-                                
                                 <% if i < 4 %>
                                     <% if answer.question.question_type == "Checkbox"%>
                                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -101,7 +100,6 @@
                                     <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                                 <% end %>
                             </td>
-                            <td>  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             </tr>
                         <% end %>
                         <% end %>
