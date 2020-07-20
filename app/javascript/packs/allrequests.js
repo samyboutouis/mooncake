@@ -1,10 +1,22 @@
 $(document).ready( function () {
-    $('#allrequestsTable').DataTable({"aLengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]]});
+
+    $('#allrequestsTable').DataTable({
+
+        "aLengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+        columnDefs: [
+            {
+                orderable: false,
+                targets: [0]
+            }],
+            order: [[ 1, 'asc' ]]
+  });
 
     $("#email-all").on('click', function() {
         $("#hidden-email-all").click();
     });
-    
+
+
+
     $('.selectall').on('change', function(e) {
         var $inputs = $('.checkboxlist');
         if(e.originalEvent === undefined) {
@@ -17,9 +29,9 @@ $(document).ready( function () {
             $inputs.prop('checked', this.checked);
         }
     });
-    
+
     $('.checkboxlist').on('change', function(){
         $('.selectall').trigger('change');
     });
-      
+
 });
