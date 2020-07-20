@@ -155,6 +155,30 @@
                     <% if number.used == false %>
                       <td>
                         <button type="button" class="btn btn-outline-dark assignbutt" data-toggle="modal" data-target="#exampleModal">Assign</button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Assign a number without a request</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <%= form_tag({action: :assign_num}) do %>
+                                  <%= select_tag "user_id", options_for_select(number.course.course_requests.collect{|request| [request.user.first_name + " " + request.user.last_name, request.user.id]}), prompt: "Select Student"%>
+                                  <%= hidden_field_tag "course", number.course.id %>
+                                  <%= hidden_field_tag "permnum", number.id %>
+                                  <%= submit_tag 'Submit' %>
+                                <% end %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </td>
                     <% else %>
                       <td>
