@@ -80,8 +80,8 @@ Rails.application.routes.draw do
   get '/questions/:course/new' => 'questions#new', as: "new_question"
   delete '/questions/:id,:course' => 'questions#delete', as: "delete_question"
   get '/options' => 'questions#options'
-  get '/save_template/:course' => 'questions#save_template', as: "save_template"
-  post '/load_template' => 'questions#load_template', as: "load_template"
+  get '/save_template' => 'questions#save_template', as: "save_template"
+  get '/load_template/:template/:course' => 'questions#load_template', as: "load_template"
 
   #student requests a permission number
   get '/search' => 'course_request#index', as: "search"

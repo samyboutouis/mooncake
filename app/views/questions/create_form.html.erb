@@ -11,16 +11,26 @@
         <p style = "margin: 0px 40px 20px 15px; font-size: 14px;"> This form is what will be displayed to students when they request a permission number from your course.
             Along with the default questions listed, you can add your own custom questions to the form. This form
             is only intended to assess preparedness and academic background.</p>
-
-        <%= link_to "Save Template", save_template_path(@course), class:"btn btn-outline-dark", style:"margin:10px 0px 10px; float: right" %> 
-
-        <%= form_tag({action: :load_template}, multipart: true) do %>
-            <%= file_field_tag 'file' %>
-            <%= hidden_field_tag "course", @course.id %>
-            <%= submit_tag 'Load Template' %>
-        <% end %>
-
+        
+        <form action = "/save_template" >
+            
+            <input type="hidden" name="course" value="<%= @course.id %>">
+            <input type="text" name="name" placeholder="template name" required >
+            <button type="submit" class="btn btn-secondary" >Save Template </button>
+            <div class="dropdown" style="float:right">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Load Template
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% @course.users.first.form_templates.each do |template| %>
+                    <%=link_to template.name, load_template_path(template, @course), class:"dropdown-item" %>
+                <% end %>
+            </div>
+        </div>
+        </form>
+  
         <br>
+
         <div class="container">
             <% @course.questions.each do |question| %>
                 <div class="form-group required">

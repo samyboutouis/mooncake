@@ -49,14 +49,21 @@ class QuestionsController < ApplicationController
         @course = Course.find(params[:course])
         questionids = @course.questions.pluck(:question_id)
         questionids = questionids.join("~")
-        send_data questionids, :filename => 'Template.txt'
+        if params[:name] == nil
+            name = @course.department.split("-").first + " "+ @course.course_number + " - " + @course.section_number + "template"
+        else
+            name = params[:name]
+        end
+        @user = User.find_by(net_id: session[:current_user]["net_id"])
+        @user.form_templates.create(name: name, questionids: questionids)
+        redirect_to question_path(@course)
     end
 
     def load_template
         @course = Course.find(params[:course])
-        file = params[:file]
-        file_data = file.read
-        for id in file_data.split("~")
+        @template = FormTemplate.find(params[:template])
+        
+        for id in @template.questionids.split("~")
             if @course.questions.pluck(:question_id).include? id.to_i
                 next
             else
