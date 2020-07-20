@@ -5,6 +5,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function () {
+    document.getElementById("selected_action").style.visibility = "hidden";
 
     var table = $('#myTable').DataTable( {
         columnDefs: [
@@ -85,10 +86,29 @@ $(document).ready(function () {
         } else {
             $inputs.prop('checked', this.checked);
         }
+        var ischecked =$('input[type=checkbox]:checked').length;
+        if(ischecked > 0) {
+            document.getElementById("selected_action").style.visibility = "visible";
+        } else {
+            document.getElementById("selected_action").style.visibility = "hidden";
+        }
+
     });
 
     $('.checkboxlist').on('change', function(){
         $('.selectall').trigger('change');
+    });
+
+    $('.checkboxlist').on('change', function(){
+        // console.log(document.getElementById("selected_action"))
+
+        var ischecked =$('input[type=checkbox]:checked').length;
+        if(ischecked > 0) {
+            document.getElementById("selected_action").style.visibility = "visible";
+        } else {
+            document.getElementById("selected_action").style.visibility = "hidden";
+        }
+
     });
 
 });
