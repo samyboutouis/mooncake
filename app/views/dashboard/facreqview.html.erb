@@ -16,7 +16,7 @@
         <div class="table-responsive">
         <form action = "/mailselected">
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
-              <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0"> 
+              <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0">
                 <option value="">For Selected Requests</option>
                 <option value="email">Email</option>
                 <option value="accept">Accept</option>
@@ -25,12 +25,13 @@
 
               <br>
 
-              
+
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
                   <th> <input type="checkbox" name="selected1" class="selectall"/> </th>
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
                   <th> Ranking Helper</th>
+                  <th>Time of Request</th>
                   <% @course.questions.each do |question| %>
                     <%if question.id <= 5 or question.question_text == "Which prerequisite(s) have you satisfied:" %>
                       <th> <%= question.question_text %><br><%= image_tag "eye.png", id: "hide",class:"eye"%></th>
@@ -38,16 +39,17 @@
                       <th> <%= question.question_text %></th>
                     <%end%>
                   <% end %>
-                  <th>  </th>
+                    <th> </th>
+
                   <th> Accept/Deny Request </th>
-                  
+
                 </tr>
               </thead>
               <tbody>
-                  
+
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
-                    <td> 
+                    <td>
                     <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id="<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
                     </td>
                     <td class="details-control"></td>
@@ -109,7 +111,7 @@
                         </div>
                         </td>
                       <% end %>
-                      
+                      <td> <%= request.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%D %H:%M:%S')%> </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -131,7 +133,7 @@
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
-                    
+
 
                   </tr>
                 <% end %>
@@ -140,7 +142,7 @@
                 <% @course.cross_listing.each do |id| %>
                   <% Course.find(id).course_requests.each do |request| %>
                     <tr style="text-align: center; vertical-align: middle;">
-                    <td> 
+                    <td>
                     <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" class="checkboxlist" id="<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
                     </td>
                     <td class="details-control"></td>
@@ -202,6 +204,7 @@
                         </div>
                         </td>
                       <% end %>
+                      <td> <%= request.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%D %H:%M:%S')%> </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -223,14 +226,14 @@
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
-                    
+
 
                   </tr>
-                  
+
                   <% end %>
                 <% end %>
-                
-                
+
+
 
               </tbody>
           </table>

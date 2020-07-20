@@ -5,7 +5,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function () {
-    
+
     var table = $('#myTable').DataTable( {
         columnDefs: [
             {
@@ -27,13 +27,13 @@ $(document).ready(function () {
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
-        if ((table.column(8).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
-            x = 8;
-            col = 8;
-        }
-        else {
+        if ((table.column(9).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
             x = 9;
             col = 9;
+        }
+        else {
+            x = 10;
+            col = 10;
         }
         for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
@@ -86,7 +86,7 @@ $(document).ready(function () {
             $inputs.prop('checked', this.checked);
         }
     });
-    
+
     $('.checkboxlist').on('change', function(){
         $('.selectall').trigger('change');
     });
@@ -97,11 +97,11 @@ function format ( d, table ) {
     // `d` is the original data object for the row
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
     let x = -1;
-    if ((table.column(8).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
-        x = 8;
+    if ((table.column(9).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
+        x = 9;
     }
     else {
-        x = 9;
+        x = 10;
     }
     for(let i = x; i < table.columns().count() - 1; i++){
         innards += '<tr>'+ '<td>'+$(table.column(i).header()).html()+'</td>'+ '<td>'+d[i]+'</td>'+'</tr>';
