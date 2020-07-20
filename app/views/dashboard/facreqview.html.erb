@@ -4,22 +4,34 @@
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
       <%= link_to "Email All", send_all_mailer_path(@course), class:"btn btn-outline-secondary allmailer" %>
       <div class="table_box">
-      
       <% info = "" %>
       <% @course.cross_listing.each do |id| %>
           <% coursec = Course.find(id) %>
           <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
       <% end %>
         <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1> <br>
+        <% if flash[:alert3] %>
+        <div class="alert1", style = "color: red"><%= flash[:alert3] %></div>
+        <% end %>
         <div class="table-responsive">
         <form action = "/mailselected">
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
+              <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0"> 
+                <option value="">For Selected Requests</option>
+                <option value="email">Email</option>
+                <option value="accept">Accept</option>
+                <option value="deny">Deny</option>
+              </select>
+
+              <br>
+
+              
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
                   <th> Ranking </th>
                   <% @course.questions.each do |question| %>
-                    <%if question.id <= 5 or question.question_text == "Which course(s) have you taken:" %>
+                    <%if question.id <= 5 or question.question_text == "Which prerequisite(s) have you satisfied:" %>
                       <th> <%= question.question_text %><br><%= image_tag "eye.png", id: "hide",class:"eye"%></th>
                     <%else%>
                       <th> <%= question.question_text %></th>
@@ -35,8 +47,10 @@
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
-                    <td>
+                    
                     <% if request.priority == nil %>
+                    <td>
+                    <p hidden> 3 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
@@ -47,8 +61,10 @@
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 1 %>
-                        <p class="yes" hidden style="color:green;"> Yes </p>
+                      <td>
+                        <p class="yes" hidden style="color:green;"> 1 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Yes
@@ -57,11 +73,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 2 %>
-                        <p class="maybe" hidden style="color:orange;"> Maybe </p>
+                      <td>
+                        <p class="maybe" hidden style="color:orange;"> 2 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Maybe
@@ -70,11 +87,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% else %>
-                        <p class="noo" hidden style="color:red;"> No </p>
+                      <td>
+                        <p class="noo" hidden style="color:red;"> 4 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             No
@@ -86,8 +104,9 @@
 
                           </div>
                         </div>
+                        </td>
                       <% end %>
-                      </td>
+                      
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -121,8 +140,9 @@
                   <% Course.find(id).course_requests.each do |request| %>
                     <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
+                    <% if request.priority == nil %>
                     <td>
-                      <% if request.priority == nil %>
+                    <p hidden> 3 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
@@ -133,8 +153,10 @@
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 1 %>
-                        <p class="yes" hidden style="color:green;"> Yes </p>
+                      <td>
+                        <p class="yes" hidden style="color:green;"> 1 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Yes
@@ -143,11 +165,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% elsif request.priority == 2 %>
-                        <p class="maybe" hidden style="color:orange;"> Maybe </p>
+                      <td>
+                        <p class="maybe" hidden style="color:orange;"> 2 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Maybe
@@ -156,11 +179,12 @@
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
+                      </td>
                       <% else %>
-                        <p class="noo" hidden style="color:red;"> No </p>
+                      <td>
+                        <p class="noo" hidden style="color:red;"> 4 </p>
                         <div class="dropdown">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             No
@@ -172,8 +196,8 @@
 
                           </div>
                         </div>
+                        </td>
                       <% end %>
-                    </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
                         <td><%= answer.answer_text.gsub("~", ", ") %></td>
@@ -210,7 +234,17 @@
           </table>
           <input type="hidden" name="courseid" value="<%= @course.id %>">
           <br>
-          <button type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
+          <button hidden id="email" type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
+          <button hidden id = "accept" type="submit" class="btn btn-outline-success" formaction="/accept_selected"> Accept Selected</button>
+          <button hidden id = "deny" type="submit" class="btn btn-outline-danger" formaction="/deny_selected"> Deny Selected</button>
+
+          <script>
+            function SelectAction() {
+              var act = document.getElementById("selected_action").value;
+              console.log(act)
+              document.getElementById(act).click();
+            }
+          </script>
         </div>
       </div>
     </div>

@@ -2,12 +2,23 @@
   <div class="row">
     <div class="col">
       <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
-      <%= link_to "Email All", send_allreq_mailer_path, class:"btn btn-outline-secondary allmailer" %>
+      
+     
+      
       <div class="table_box">
     
         <h1 class="title"> All Requests </h1>
         <div class="table-responsive">
+        <form action = "/allmailselected">
             <table id="allrequestsTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
+              
+               <select name="select_action" id="selected_action" class="btn btn-secondary" onchange="SelectAction()" style="float:right; margin: 0 0 20px 0"> 
+                    <option value="">For Selected Requests</option>
+                    <option value="email">Email</option>
+                    <option value="accept">Accept</option>
+                    <option value="deny">Deny</option>
+                </select>
+              
               <thead>
                     <tr style="text-align: center; vertical-align: middle;">
                     <th> Course </th>
@@ -16,7 +27,7 @@
                     <th> Graduation year</th>
                     <th> Major(s) </th>
                     <th> Accept/Deny Request </th>
-                    <th> Send Custom Email </th>
+                    <th> Select </th>
                     </tr>
               </thead>
               <tbody>
@@ -27,7 +38,7 @@
                         <% course.course_requests.each do |request| %>
                         <% i = 0 %>
                         <tr style="text-align: center; vertical-align: middle;">
-                            <td> <%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%> </td>
+                            <td> <b><%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%></b> </td>
                             <% request.answers.each do |answer| %>
                                 <% if i < 4 %>
                                     <% if answer.question.question_type == "Checkbox"%>
@@ -53,7 +64,7 @@
                                     <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                                 <% end %>
                             </td>
-                            <td>  <%= link_to "Email", send_mailer_path(request) %> </td>
+                            <td>  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             </tr>
                         <% end %>
 
@@ -62,7 +73,7 @@
                         <% Course.find(id).course_requests.each do |request| %>
                         <% i = 0 %>
                         <tr style="text-align: center; vertical-align: middle;">
-                            <td> <%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number%> </td>
+                            <td> <b><%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number%></b> </td>
                             <% request.answers.each do |answer| %>
                                 
                                 
@@ -90,7 +101,7 @@
                                     <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                                 <% end %>
                             </td>
-                            <td>  <%= link_to "Email", send_mailer_path(request) %> </td>
+                            <td>  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/> </td>
                             </tr>
                         <% end %>
                         <% end %>
@@ -100,6 +111,22 @@
 
               </tbody>
           </table>
+          
+          
+          <br>
+          
+          <button hidden id="email" type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
+          <button hidden id = "accept" type="submit" class="btn btn-outline-success" formaction="/all_accept_selected"> Accept Selected</button>
+          <button hidden id = "deny" type="submit" class="btn btn-outline-danger" formaction="/all_deny_selected"> Deny Selected</button>
+
+          <script>
+            function SelectAction() {
+              var act = document.getElementById("selected_action").value;
+              console.log(act)
+              document.getElementById(act).click();
+            }
+          </script>
+        
         </div>
       </div>
     </div>

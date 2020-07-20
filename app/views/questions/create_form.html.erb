@@ -8,7 +8,7 @@
             <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
         <% end %>
         <h1 class="title" style = "margin: 20px 40px 20px 15px">Create Form for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
-        <p style = "margin: 0px 40px 20px 15px; font-size: 14px;"> This form is what will be displayed to students when they request a permission number from your course. 
+        <p style = "margin: 0px 40px 20px 15px; font-size: 14px;"> This form is what will be displayed to students when they request a permission number from your course.
             Along with the default questions listed, you can add your own custom questions to the form. This form
             is only intended to assess preparedness and academic background.</p>
         <div class="container">
@@ -33,7 +33,7 @@
                         <input type= "text" class="form-control" id="reasons"  name="reasons" disabled>
                     <% end %>
 
-                    <%if question.id > 5 and question.question_text != "Which course(s) have you taken:" %>
+                    <%if question.id > 5 and question.question_text != "Which prerequisite(s) have you satisfied:" %>
                         <%= link_to "Delete", delete_question_path(question), method: :delete , class:"btn btn-outline-danger btn-sm", style:"margin:10px 0px 10px"%>
                     <%end%>
                 </div>
@@ -41,7 +41,7 @@
 
             <%= link_to "Add Question", new_question_path(@course), class:"btn btn-outline-dark", style:"margin:10px 0px 10px" %>
             <%= link_to "Save Form", faculty_page_path, class:"btn btn-outline-dark ", style:"margin:10px 0px 10px;" %>
-            <%= link_to "Publish Form", publish_page_path(@course), method: :get, class:"btn btn-dark", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%>
+            <b data-toggle="tooltip" data-placement="top" title="Your class will be visible for students to begin making requests"><%= link_to "Publish Form", publish_page_path(@course), method: :get, class:"btn btn-dark", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%></b>
 
         </div>
       </div>

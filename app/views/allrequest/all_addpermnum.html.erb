@@ -1,9 +1,9 @@
 <div class="col">
 <div class="box">
   <h1 class="title">Add Permission Numbers for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%></h1>
-  <%= form_tag({action: :addmore}, multipart: true) do %>
+  <%= form_tag({action: :all_add}, multipart: true) do %>
     <%= file_field_tag 'file' %>
-    <%= hidden_field_tag "course", @course.id %>
+    <%= hidden_field_tag "request", @request.id %>
     <%= submit_tag 'Submit' %>
  <% end %>
 

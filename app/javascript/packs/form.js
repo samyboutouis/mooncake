@@ -1,3 +1,5 @@
+var update = false;
+var num = 0;
 $(document).ready(function(){
   $(".listing").on('input', function() {
     getResponse($(this));
@@ -54,6 +56,8 @@ function getOptions(element) {
     success: function(result) {
       // departments = ["Select One", "AAAS - African & African Amer Studies", "AEROSCI - Aerospace Studies-AFROTC", "AMES - Asian & Middle Eastern Studies", "AMI - Arts of the Moving Image", "ARABIC - Arabic", "ARTHIST - Art History", "ARTS&SCI - Arts and Science IDEAS themes", "ARTSVIS - Visual Arts", "BALTFIN - Balto-Finnic", "BIOCHEM - Biochemistry", "BIOETHIC - Bioethics and Science Policy", "BIOLOGY - Biology", "BME - Biomedical Engineering", "BRAINSOC - Brain & Society", "CEE - Civil and Environmental Egr", "CELLBIO - Cell Biology", "CESC - Civic Engagement&Social Change", "CHEM - Chemistry", "CHILDPOL - Child Policy", "CHINESE - Chinese", "CLST - Classical Studies", "COMPSCI - Computer Science", "CREOLE - Creole", "CULANTH - Cultural Anthropology", "DANCE - Dance", "DECSCI - Decision Sciences Program", "DOCST - Documentary Studies", "ECE - Electrical & Computer Egr", "ECON - Economics", "EDUC - Education", "EGR - Engineering", "EHD - Education and Human Developmnt", "ENERGY - Energy", "ENGLISH - English", "ENRGYEGR - Energy Engineering", "ENVIRON - Environment", "EOS - Earth and Ocean Sciences", "ETHICS - Study of Ethics", "EVANTH - Evolutionary Anthropology", "FOCUS - Focus", "FRENCH - French", "GENOME - Genome Sciences Policy", "GEOADMIN - Global Education Admn Use Only", "GERMAN - German", "GLHLTH - Global ", "GREEK - Greek", "GSF - Gender Sexuality & Feminist", "St HEBREW - Hebrew", "HINDI - Hindi", "HISTORY - History", "HOUSECS - House Course", "HUMANDEV - Human Development", "I&E - Innovation & Entrepreneurship", "ICS - Internatl Comparative Studies", "IDS - Interdisciplinary Data Science", "IMMUNOL - Immunology", "ISS - Information Science + Studies", "ITALIAN - Italian", "IUSC_AMI - IUSC_AMI (Taught at USC)", "IUSC_PPS - IUSC_PPS (Taught at USC)", "IUSC_THT - IUSC_THT (Taught at USC)", "JEWISHST - Jewish Studies", "JPN - Japanese", "KICHE - K'iche' Maya ", "KOREAN - Korean", "LATAMER - Latin American Studies", "LATIN - Latin", "LINGUIST - Linguistics", "LIT - Literature", "LSGS - Latino Studies Global South", "MATH - Mathematics", "ME - Mechanical Engr/Materials Sci", "MEDREN - Medieval and Renaissance", "MGM - Molec Genetics & Microbiology", "MILITSCI - Military Science (Army ROTC) ", "MMS - Markets and Management Studies", "MUSIC - Music", "NAVALSCI - Naval Science (Navy ROTC)", "NEUROBIO - Neurobiology Neurobiology", "PATHOL - Pathology", "PERSIAN - Persian", "PHARM - Pharm and Cancer Biology", "PHIL - Philosophy", "PHYSEDU - Physical Education", "PHYSICS - Physics", "PJMS - Policy Journalism and Media St", "POE - Practice-Oriented Education", "POLISH - Polish", "POLSCI - Political Science", "PORTUGUE - Portuguese", "PSY - Psychology", "PUBPOL - Public Policy", "QUECHUA - Quechua", "REG - Registration", "RELIGION - Religion", "RIGHTS - Human Rights", "ROMANIAN - Romanian", "ROMST - Romance Studies", "RUSSIAN - Russian", "SANSKRIT - Sanskrit", "SCISOC - Science & Society", "SERBCRO - Serbian and Croatian", "SES - Slavic and Eurasian Studies", "SOCIOL - Sociology", "SPANISH - Spanish", "STA - Statistical Science", "SUSTAIN - Sustainability Engagement", "SXL - Study of Sexualities", "THEATRST - Theater Studies", "TIBETAN - Tibetan", "TURKISH - Turkish", "UKRAIN - Ukrainian", "URDU - Urdu", "UZBEK - Uzbek", "VMS - Visual and Media Studies", "WRITING - Writing"];
       let selected = element.val();
+      if (selected>0) update = true;
+      num = selected;
       $("#othercourses").empty();
       for(let i = 0; i < selected; i++) {
         $("#othercourses").append("<h3 style='margin: 10px 8px 10px 0px'> Cross-listed Course " + (i+2) + "</h3>");
@@ -94,19 +98,36 @@ function getOptions2(element) {
   // departments = ["Select One", "AAAS - African & African Amer Studies", "AEROSCI - Aerospace Studies-AFROTC", "AMES - Asian & Middle Eastern Studies", "AMI - Arts of the Moving Image", "ARABIC - Arabic", "ARTHIST - Art History", "ARTS&SCI - Arts and Science IDEAS themes", "ARTSVIS - Visual Arts", "BALTFIN - Balto-Finnic", "BIOCHEM - Biochemistry", "BIOETHIC - Bioethics and Science Policy", "BIOLOGY - Biology", "BME - Biomedical Engineering", "BRAINSOC - Brain & Society", "CEE - Civil and Environmental Egr", "CELLBIO - Cell Biology", "CESC - Civic Engagement&Social Change", "CHEM - Chemistry", "CHILDPOL - Child Policy", "CHINESE - Chinese", "CLST - Classical Studies", "COMPSCI - Computer Science", "CREOLE - Creole", "CULANTH - Cultural Anthropology", "DANCE - Dance", "DECSCI - Decision Sciences Program", "DOCST - Documentary Studies", "ECE - Electrical & Computer Egr", "ECON - Economics", "EDUC - Education", "EGR - Engineering", "EHD - Education and Human Developmnt", "ENERGY - Energy", "ENGLISH - English", "ENRGYEGR - Energy Engineering", "ENVIRON - Environment", "EOS - Earth and Ocean Sciences", "ETHICS - Study of Ethics", "EVANTH - Evolutionary Anthropology", "FOCUS - Focus", "FRENCH - French", "GENOME - Genome Sciences Policy", "GEOADMIN - Global Education Admn Use Only", "GERMAN - German", "GLHLTH - Global ", "GREEK - Greek", "GSF - Gender Sexuality & Feminist", "St HEBREW - Hebrew", "HINDI - Hindi", "HISTORY - History", "HOUSECS - House Course", "HUMANDEV - Human Development", "I&E - Innovation & Entrepreneurship", "ICS - Internatl Comparative Studies", "IDS - Interdisciplinary Data Science", "IMMUNOL - Immunology", "ISS - Information Science + Studies", "ITALIAN - Italian", "IUSC_AMI - IUSC_AMI (Taught at USC)", "IUSC_PPS - IUSC_PPS (Taught at USC)", "IUSC_THT - IUSC_THT (Taught at USC)", "JEWISHST - Jewish Studies", "JPN - Japanese", "KICHE - K'iche' Maya ", "KOREAN - Korean", "LATAMER - Latin American Studies", "LATIN - Latin", "LINGUIST - Linguistics", "LIT - Literature", "LSGS - Latino Studies Global South", "MATH - Mathematics", "ME - Mechanical Engr/Materials Sci", "MEDREN - Medieval and Renaissance", "MGM - Molec Genetics & Microbiology", "MILITSCI - Military Science (Army ROTC) ", "MMS - Markets and Management Studies", "MUSIC - Music", "NAVALSCI - Naval Science (Navy ROTC)", "NEUROBIO - Neurobiology Neurobiology", "PATHOL - Pathology", "PERSIAN - Persian", "PHARM - Pharm and Cancer Biology", "PHIL - Philosophy", "PHYSEDU - Physical Education", "PHYSICS - Physics", "PJMS - Policy Journalism and Media St", "POE - Practice-Oriented Education", "POLISH - Polish", "POLSCI - Political Science", "PORTUGUE - Portuguese", "PSY - Psychology", "PUBPOL - Public Policy", "QUECHUA - Quechua", "REG - Registration", "RELIGION - Religion", "RIGHTS - Human Rights", "ROMANIAN - Romanian", "ROMST - Romance Studies", "RUSSIAN - Russian", "SANSKRIT - Sanskrit", "SCISOC - Science & Society", "SERBCRO - Serbian and Croatian", "SES - Slavic and Eurasian Studies", "SOCIOL - Sociology", "SPANISH - Spanish", "STA - Statistical Science", "SUSTAIN - Sustainability Engagement", "SXL - Study of Sexualities", "THEATRST - Theater Studies", "TIBETAN - Tibetan", "TURKISH - Turkish", "UKRAIN - Ukrainian", "URDU - Urdu", "UZBEK - Uzbek", "VMS - Visual and Media Studies", "WRITING - Writing"];
   let selected = element.val();
   $("#othersections").empty();
-  for(let i = 0; i < selected; i++) {
-    $("#othersections").append("<h3> Section " + (i+2) + "</h3>");
-    
-    $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
-    $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="capacity'+(i+1)+'"><br>');
+  if (update){
+    num++;
+    num++;
+    for (var i=0; i<selected; i++){
+      for (var j=0; j<=num-2; j++){
+        $("#othersections").append("<h3> Section " + (i+2) + " For Crosslisting Course "+(j+1)+ "</h3>");
+        var k = num*(i+1)+j+1;
+        $("#othersections").append("<label for= 'section_number"+k+"'> Section Number :</label>");
+        $("#othersections").append('<input name= "section_number'+k+'" class="form-control" type="text" id="section_number'+k+'"><br>');
+  
+        $("#othersections").append("<label> Permission Numbers:</label>");
+        $("#othersections").append('<div class="custom-file" id="section'+k+'" style="margin-bottom:20px;">');
+        $("#othersections #section"+k).append('<input name= "file'+k+'" type="file" class="custom-file-input" id="customFile'+k+'">');
+        $("#othersections #section"+k).append('<label class="custom-file-label" for="customFile'+k+'">Upload Permission Numbers Excel File</label>');
+        $("#othersections").append('</div>');
+      }
+    }
+  }
+  else {
+    for(let i = 0; i < selected; i++) {
+      $("#othersections").append("<h3> Section " + (i+2) + "</h3>");
+      
+      $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
+      $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
 
-    $("#othersections").append("<label for= 'capacity"+(i+1)+"'> Capacity:</label>");
-    $("#othersections").append('<input name= "capacity'+(i+1)+'" class="form-control" type="number" id="capacity'+(i+1)+'"><br>');
-
-    $("#othersections").append("<label> Permission Numbers:</label>");
-    $("#othersections").append('<div class="custom-file" id="section'+(i+1)+'" style="margin-bottom:20px;">');
-    $("#othersections #section"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');
-    $("#othersections #section"+(i+1)).append('<label class="custom-file-label" for="customFile'+(i+1)+'">Upload Permission Numbers Excel File</label>');
-    $("#othersections").append('</div>');
+      $("#othersections").append("<label> Permission Numbers:</label>");
+      $("#othersections").append('<div class="custom-file" id="section'+(i+1)+'" style="margin-bottom:20px;">');
+      $("#othersections #section"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');
+      $("#othersections #section"+(i+1)).append('<label class="custom-file-label" for="customFile'+(i+1)+'">Upload Permission Numbers Excel File</label>');
+      $("#othersections").append('</div>');
+    }
   }
 }

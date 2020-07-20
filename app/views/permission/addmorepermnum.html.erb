@@ -1,0 +1,16 @@
+<div class="col">
+<div class="box">
+  <h1 class="title">Add Permission Numbers </h1>
+  <%= form_tag({action: :addmore}, multipart: true) do %>
+    <select name="course" id="course">
+    <% for id in @list %>
+    <% course = Course.find(id) %> 
+    <option value="<%= id %> "> <%= course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number %> </option>
+    <%end %>
+    </select>
+
+    <%= file_field_tag 'file' %>
+    <%= submit_tag 'Submit' %>
+  <% end %>
+
+</div>

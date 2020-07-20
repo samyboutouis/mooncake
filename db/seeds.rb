@@ -36,7 +36,7 @@ prereqsfirst = Course.first.prereqs.create([{name: "COMPSCI 50"}, {name: "COMPSC
 Course.first.questions << Question.find(1,2,3,4,5)
 #Course.second.questions << Question.find(1,2,3,4,5)
 #Course.last.questions << Question.find(1,2,3,4,5)
-firstcourse_questions = Course.first.questions.create([{question_type: "Checkbox", question_text: "Which course(s) have you taken:", option: ["COMPSCI 50", "COMPSCI 99"]}, {question_type: "Long Answer", question_text: "Why do you want to take this course?", option: []}, {question_type: "Radio", question_text: "What is your favorite dog?", option: ["Corgi", "Other"]}])
+firstcourse_questions = Course.first.questions.create([{question_type: "Checkbox", question_text: "Which prerequisite(s) have you satisfied:", option: ["COMPSCI 50", "COMPSCI 99"]}, {question_type: "Long Answer", question_text: "Why do you want to take this course?", option: []}, {question_type: "Radio", question_text: "What is your favorite dog?", option: ["Corgi", "Other"]}])
 #secondcourse_questions = Course.second.questions.create([{question_type: "Long Answer", question_text: "Why do you want to take this course?", option: []}])
 #send requests
 maryam_requests = User.first.course_requests.create([{course_id: 1, status: "Under Review"}])
