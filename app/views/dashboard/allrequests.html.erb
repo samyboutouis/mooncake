@@ -38,7 +38,7 @@
                         <% course.course_requests.each do |request| %>
                         <% i = 0 %>
                         <tr style="text-align: center; vertical-align: middle;">
-                            <td> <%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%> </td>
+                            <td> <b><%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%></b> </td>
                             <% request.answers.each do |answer| %>
                                 <% if i < 4 %>
                                     <% if answer.question.question_type == "Checkbox"%>
@@ -73,7 +73,7 @@
                         <% Course.find(id).course_requests.each do |request| %>
                         <% i = 0 %>
                         <tr style="text-align: center; vertical-align: middle;">
-                            <td> <%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number%> </td>
+                            <td> <b><%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number%></b> </td>
                             <% request.answers.each do |answer| %>
                                 
                                 

@@ -61,8 +61,11 @@ gem 'net-ldap'
 #roo gem
 gem "roo", "~> 2.8.0"
 
-#roo-xls gem 
+#roo-xls gem
 gem 'roo-xls'
 
 #httparty gem
 gem "httparty", "~> 0.18.1"
+
+#font awesome
+gem 'font-awesome-sass', '~> 5.13.0'

@@ -48,7 +48,6 @@ Rails.application.routes.draw do
   get "/addpermnum/:course" => "permission#addmorepermnum", as: "add_more_permnum"
   post "/addmore" => "permission#addmore", as: "add_more"
   get "/numbers/:course" => "permission#numbers", as: "numbers"
-  #post "/assign_number/:user" => "permission#assign_number", as: "assign_number"
   post "/assign_num" => "permission#assign_num", as: "assign_num"
   
 
