@@ -36,7 +36,11 @@ class PermissionController < ApplicationController
         request = CourseRequest.find_by(course_id: course, user_id: user)
         request.update(permission_number: permnum)
         permnum.update(used: true)
-        redirect_to numbers_path(course)
+        if course.primary
+            redirect_to numbers_path(course)
+        else
+            redirect_to numbers_path(Course.find(course.cross_listing.first))
+        end
     end
 
 end
