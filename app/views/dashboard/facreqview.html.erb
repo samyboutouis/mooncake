@@ -29,7 +29,8 @@
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
-                  <th> Ranking </th>
+                  <th> Select </th>
+                  <th> Ranking Helper</th>
                   <% @course.questions.each do |question| %>
                     <%if question.id <= 5 or question.question_text == "Which prerequisite(s) have you satisfied:" %>
                       <th> <%= question.question_text %><br><%= image_tag "eye.png", id: "hide",class:"eye"%></th>
@@ -39,7 +40,7 @@
                   <% end %>
                   <th>  </th>
                   <th> Accept/Deny Request </th>
-                  <th> Select </th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -47,6 +48,9 @@
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
+                    <td> 
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
+                    </td>
                     
                     <% if request.priority == nil %>
                     <td>
@@ -128,9 +132,7 @@
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
-                    <td> 
-                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
-                    </td>
+                    
 
                   </tr>
                 <% end %>
@@ -140,6 +142,9 @@
                   <% Course.find(id).course_requests.each do |request| %>
                     <tr style="text-align: center; vertical-align: middle;">
                     <td class="details-control"></td>
+                    <td> 
+                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
+                    </td>
                     <% if request.priority == nil %>
                     <td>
                     <p hidden> 3 </p>
@@ -219,9 +224,7 @@
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
-                    <td> 
-                    <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "selected[]" id= "<%= request.id %>" value= "<%= request.id %>" id = "cb"/>
-                    </td>
+                    
 
                   </tr>
                   
