@@ -58,6 +58,8 @@ function getOptions(element) {
       let selected = element.val();
       if (selected>0) update = true;
       num = selected;
+      num++;
+      num++;
       $("#othercourses").empty();
       for(let i = 0; i < selected; i++) {
         $("#othercourses").append("<h3 style='margin: 10px 8px 10px 0px'> Cross-listed Course " + (i+2) + "</h3>");
@@ -99,15 +101,12 @@ function getOptions2(element) {
   let selected = element.val();
   $("#othersections").empty();
   if (update){
-    num++;
-    num++;
     for (var i=0; i<selected; i++){
       for (var j=0; j<=num-2; j++){
         $("#othersections").append("<h3> Section " + (i+2) + " For Crosslisting Course "+(j+1)+ "</h3>");
         var k = num*(i+1)+j+1;
         $("#othersections").append("<label for= 'section_number"+k+"'> Section Number :</label>");
         $("#othersections").append('<input name= "section_number'+k+'" class="form-control" type="text" id="section_number'+k+'"><br>');
-  
         $("#othersections").append("<label> Permission Numbers:</label>");
         $("#othersections").append('<div class="custom-file" id="section'+k+'" style="margin-bottom:20px;">');
         $("#othersections #section"+k).append('<input name= "file'+k+'" type="file" class="custom-file-input" id="customFile'+k+'">');
