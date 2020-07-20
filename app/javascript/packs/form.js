@@ -26,8 +26,19 @@ function getResponse(element) {
   $("#othercourses").empty();
   $("#howmany").empty();
   if (selected === "Yes") {
-    $("#howmany").append("<label for= 'number-choice'>How many additional departments are cross-listed with this course?</label>");
-    $("#howmany").append('<input type="number" min=0 max=10 name= "number-choice" id="number-choice" class="form-control" maxlength= 2><br>');
+    $("#howmany").append($('<label/>', {
+      for: 'number-choice',
+      text: "How many additional departments are cross-listed with this course?"
+    }));
+    $("#howmany").append($('<input/>', {
+      type: "number",
+      min: "0",
+      max: "10",
+      name: "number-choice",
+      id: "number-choice",
+      class: "form-control"
+    }));
+    $("#howmany").append($('<br>'));
   }
   else {
     return;
@@ -39,8 +50,19 @@ function getResponse2(element) {
   $("#othersections").empty();
   $("#howmanysec").empty();
   if (selected === "Yes") {
-    $("#howmanysec").append("<label for= 'number-choice-sec'>How many additional sections?</label>");
-    $("#howmanysec").append('<input type="number" min=0 max=25 name= "number-choice-sec" id="number-choice-sec" class="form-control" maxlength= 2><br>');
+    $("#howmanysec").append($('<label/>', {
+      for: 'number-choice-sec',
+      text: "How many additional sections?"
+    }));
+    $("#howmanysec").append($('<input/>', {
+      type: "number",
+      min: "0",
+      max: "25",
+      name: "number-choice-sec",
+      id: "number-choice-sec",
+      class: "form-control"
+    }));
+    $("#howmanysec").append($('<br>'));
   }
   else {
     return;
@@ -60,29 +82,95 @@ function getOptions(element) {
       num++;
       $("#othercourses").empty();
       for(let i = 0; i < selected; i++) {
-        $("#othercourses").append("<h3 style='margin: 10px 8px 10px 0px'> Cross-listed Course " + (i+2) + "</h3>");
-        $("#othercourses").append("<label for= 'department"+(i+1)+"'> Department:</label>");
-        $("#othercourses").append($(document.createElement('select')).prop({
+        $("#othercourses").append($('<h3/>', {
+          style: "margin: 10px 8px 10px 0px",
+          text: "Cross-listed Course " + (i+2),
+        }));
+        $("#othercourses").append($('<div/>', {
+          class: "container-fluid",
+          id: "container" + (i+1)
+        }));
+        $("#container" + (i+1)).append($('<div/>', {
+          class: "row",
+          id: "row" + (i+1)
+        }));
+        $("#row" + (i+1)).append($('<div/>', {
+          class: "form-group col-sm-8",
+          id: "col1_"+(i+1),
+          style: "padding: 10px 20px 0px"
+        }))
+        $("#col1_"+(i+1)).append($('<label/>', {
+          for: 'department'+(i+1),
+          text: "Department:",
+        }));
+        // $("#othercourses").append($(document.createElement('select')).prop({
+        //   name: "department"+(i+1),
+        //   class: "form-control hasRow",
+        //   id: "department"+(i+1)
+        // }));
+        $("#col1_"+(i+1)).append($("<select/>", {
           name: "department"+(i+1),
           class: "form-control",
-          id: "department"+(i+1),
+          id: "department"+(i+1)
+        }))
+        $("#department"+(i+1)).append($('<option/>', {
+          value: '',
+          selected: true,
+          disabled: true,
+          text: 'Select One',
+          class: "selection"
         }));
-        $("#department"+(i+1)).append("<option value='' disabled selected> Select One </option>");
         for(let j = 0; j < result.length; j++){
-          $('#department'+(i+1)).append($(document.createElement('option')).prop({
+          $("#department"+(i+1)).append($("<option/>", {
             value: result[j],
-            text: result[j]
+            text: result[j],
+            class: "selection"
           }));
         }
-        $("#othercourses").append('</select><br>');
-        $("#othercourses").append("<label for= 'course_number"+(i+1)+"'> Course Number:</label>");
-        $("#othercourses").append('<input name= "course_number'+(i+1)+'" type="text" class="form-control" id="course_number'+(i+1)+'"><br>');
-        
-        $("#othercourses").append("<label> Permission Numbers:</label>");
-        $("#othercourses").append('<div class="custom-file" id="course'+(i+1)+'" style="margin-bottom:20px;">');
-        $("#othercourses #course"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');
-        $("#othercourses #course"+(i+1)).append('<label class="custom-file-label" for="customFile'+(i+1)+'">Upload Permission Numbers Excel File</label>');
-        $("#othercourses").append('</div>');
+        $("#row" + (i+1)).append($('<div/>', {
+          class: "form-group col-sm-4",
+          id: "col2_"+(i+1),
+          style: "padding: 10px 20px 0px"
+        }))
+        $("#col2_"+(i+1)).append($('<label/>', {
+          for: 'course_number'+(i+1),
+          text: "Course Number:",
+        }));
+        $("#col2_"+(i+1)).append($('<input/>', {
+          type: "text",
+          name: "course_number"+(i+1),
+          id: "course_number"+(i+1),
+          class: "form-control",
+          placeholder: "Ex: 101L"
+        }));
+        $("#container" + (i+1)).append($('<div/>', {
+          class: "row",
+          id: "row2_" + (i+1)
+        }));
+        $("#row2_" + (i+1)).append($('<div/>', {
+          class: "form-group col",
+          id: "col3_"+(i+1),
+          style: "padding: 10px 20px 0px"
+        }));
+        $("#col3_" + (i+1)).append($('<div/>', {
+          class: "custom-file",
+          id: "course"+(i+1),
+          style: "margin-bottom:20px;"
+        }));
+        $("#course"+(i+1)).append($('<label/>', {
+          text: "Permission Number:"
+        }));
+        $("#course"+(i+1)).append($('<input/>', {
+          type: "file",
+          name: "file"+(i+1),
+          id: "customFile"+(i+1),
+          class: "custom-file-input"
+        }));
+        $("#course"+(i+1)).append($('<label/>', {
+          text: "Upload Permission Numbers Excel File",
+          class: "custom-file-label",
+          for: "customFile"+(i+1)
+        }));
       }
     },
       error: function() {
