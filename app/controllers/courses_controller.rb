@@ -64,7 +64,7 @@ class CoursesController < ApplicationController
           cl.append(Course.last.id)
           Course.last.prereqs << course.prereqs
           file = params[file]
-          fileUpload(file, course)
+          fileUpload(file, Course.last)
           currentCrossList += 1
           course.update(cross_listing: cl)
         end
