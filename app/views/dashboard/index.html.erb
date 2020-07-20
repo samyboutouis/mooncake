@@ -3,7 +3,7 @@
     <div class="col">
       <div class="box">
         <div class="header">
-        <h1 class="title">Active Requests - <%= @user.first_name %></h1>
+        <h1 class="title"> <i class="fas fa-frog"></i> <i class="fas fa-kiwi-bird"></i> <i class="fas fa-fish"></i> Active Requests - <%= @user.first_name %></h1>
         <a href="<%= search_path %>"><button class="btn btn-dark" type="button">Request a permission number</button></a>
         </div>
         <%= no_request(@user)%>
@@ -19,8 +19,8 @@
                   <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
                     <p class="course">
                       <%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number %>
-                      <span class="fa fa-chevron-right pull-right expand-icon"> + </span>
-                      <span class = "fa fa-chevron-down pull-right expand-icon"> - </span>
+                      <span class="fa fa-chevron-right pull-right expand-icon"></span>
+                      <span class = "fa fa-chevron-down pull-right expand-icon"></span>
                     </p>
                   </a>
 
