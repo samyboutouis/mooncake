@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p> You have been added as a course manager for <%= @em %>  by  <%= @user.first_name%>  <%= @user.last_name %>. </p>
+    <p> Follow this url to view requests for this course: <%= @url %> </p>
+
+    <p> ==============================</p>
+    <p> This email was sent via Mooncake</p>
+  </body>
+</html>

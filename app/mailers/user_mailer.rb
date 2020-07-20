@@ -47,4 +47,13 @@ class UserMailer < ApplicationMailer
     @body = params[:body]
     mail(to: email, from: em, subject: subject)
   end 
+
+  def shared_course
+    course = Course.find(params[:course])
+    @em = course.department.split(" ").first + "-" + course.course_number + "-" + course.section_number 
+    @user = User.find(params[:user])
+    @url = root_url+ "/facreqview/" + course.id.to_s
+    email = params[:email]
+    mail(to: email, subject: 'You have been added to a course')
+  end 
 end
