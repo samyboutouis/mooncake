@@ -33,8 +33,6 @@ function getResponse(element) {
     return;
   }
 }
-
-
   
 function getResponse2(element) {
   let selected = element.val();

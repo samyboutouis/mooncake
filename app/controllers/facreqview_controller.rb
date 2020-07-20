@@ -7,7 +7,7 @@ class FacreqviewController < ApplicationController
         req = CourseRequest.find(params[:request])
         #checkexpire(course.id)
 
-        if (course.permission_numbers.where(used: false).count == 0) || (course.permission_numbers.where(expired: false).count == 0)
+        if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
           redirect_to add_permnum_path(req)
         else
           req.update(status: "Accepted")
@@ -151,70 +151,70 @@ class FacreqviewController < ApplicationController
 
 
 
-    # Custom Mailing
+  # Custom Mailing
 
-    def mailing
-        @course = CourseRequest.find(params[:request]).course
-        req = CourseRequest.find(params[:request])
-        @user = req.user
-    end
+  def mailing
+      @course = CourseRequest.find(params[:request]).course
+      req = CourseRequest.find(params[:request])
+      @user = req.user
+  end
 
-    def mailing2
-        course = Course.find(params[:course])
-        @sender = User.find_by(net_id: session[:current_user]["net_id"])
-        UserMailer.with(email: params[:email], subject: params[:subject], body: params[:body], sender: @sender, course: params[:course]).email_student.deliver_now
-        if course.primary == false
-        redirect_to requests_page_path(course.cross_listing[0])
-        else
-        redirect_to requests_page_path(course)
-        end
-    end
+  def mailing2
+      course = Course.find(params[:course])
+      @sender = User.find_by(net_id: session[:current_user]["net_id"])
+      UserMailer.with(email: params[:email], subject: params[:subject], body: params[:body], sender: @sender, course: params[:course]).email_student.deliver_now
+      if course.primary == false
+      redirect_to requests_page_path(course.cross_listing[0])
+      else
+      redirect_to requests_page_path(course)
+      end
+  end
 
-    def mailingall
-        @course = Course.find(params[:course])
-    end
+  def mailingall
+      @course = Course.find(params[:course])
+  end
 
-    def mailingall2
-        @course = Course.find(params[:courseid])
-        @sender = User.find_by(net_id: session[:current_user]["net_id"])
-        @course.course_requests.each  do |request|
-        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: params[:courseid]).email_student.deliver_now
-        end
-        @course.cross_listing.each do |id|
-        Course.find(id).course_requests.each do |request2|
-            UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
-        end
-        end
+  def mailingall2
+      @course = Course.find(params[:courseid])
+      @sender = User.find_by(net_id: session[:current_user]["net_id"])
+      @course.course_requests.each  do |request|
+      UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: params[:courseid]).email_student.deliver_now
+      end
+      @course.cross_listing.each do |id|
+      Course.find(id).course_requests.each do |request2|
+          UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
+      end
+      end
 
-        if @course.primary == false
-        redirect_to requests_page_path(@course.cross_listing[0])
-        else
-        redirect_to requests_page_path(@course)
-        end
-    end
+      if @course.primary == false
+      redirect_to requests_page_path(@course.cross_listing[0])
+      else
+      redirect_to requests_page_path(@course)
+      end
+  end
 
-    def mailselected
-        if params.include?("selected")
-        @selected = (params[:selected]).join("~")
-        course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
-        if course.primary == false
-            @course = Course.find(course.cross_listing[0])
-        else
-            @course = course
-        end
+  def mailselected
+      if params.include?("selected")
+      @selected = (params[:selected]).join("~")
+      course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+      if course.primary == false
+          @course = Course.find(course.cross_listing[0])
+      else
+          @course = course
+      end
 
-        else
-        redirect_to requests_page_path(params[:courseid])
-        end
+      else
+      redirect_to requests_page_path(params[:courseid])
+      end
 
-    end
+  end
 
-    def mailselected2
-        @course = Course.find(params[:courseid])
-        for req in (params[:selected]).split("~") do
-        request = CourseRequest.find(req)
-        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
-        end
-        redirect_to requests_page_path(@course)
-    end
+  def mailselected2
+      @course = Course.find(params[:courseid])
+      for req in (params[:selected]).split("~") do
+      request = CourseRequest.find(req)
+      UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+      end
+      redirect_to requests_page_path(@course)
+  end
 end
