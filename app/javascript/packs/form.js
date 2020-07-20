@@ -27,7 +27,7 @@ function getResponse(element) {
   $("#howmany").empty();
   if (selected === "Yes") {
     $("#howmany").append("<label for= 'number-choice'>How many additional departments are cross-listed with this course?</label>");
-    $("#howmany").append('<input type="number" max=10 name= "number-choice" id="number-choice" class="form-control" maxlength= 2><br>');
+    $("#howmany").append('<input type="number" min=0 max=10 name= "number-choice" id="number-choice" class="form-control" maxlength= 2><br>');
   }
   else {
     return;
@@ -42,7 +42,7 @@ function getResponse2(element) {
   $("#howmanysec").empty();
   if (selected === "Yes") {
     $("#howmanysec").append("<label for= 'number-choice-sec'>How many additional sections?</label>");
-    $("#howmanysec").append('<input type="number" max=25 name= "number-choice-sec" id="number-choice-sec" class="form-control" maxlength= 2><br>');
+    $("#howmanysec").append('<input type="number" min=0 max=25 name= "number-choice-sec" id="number-choice-sec" class="form-control" maxlength= 2><br>');
   }
   else {
     return;

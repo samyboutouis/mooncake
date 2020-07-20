@@ -8,32 +8,36 @@
     <div class="alert1", style = "color: red"><%= flash[:alert3] %></div>
   <% end %>
   <%= form_for @course do |f| %>
+    <div class="container-fluid" style="margin-bottom: 20px;">
+      <div class="row">
+        <div class="form-group col-sm-4" style="padding: 10px 20px 0px">
+          <%= f.label :term, "Semester: ", for: "formGroupExampleInput" %>
+          <%= f.select :term, options_for_select(@terms),{:prompt => "Select One"}, class:"form-control", id:"exampleFormControlSelect1 term", :required => true%>
+        </div>
 
-    <div class="form-group row" style="padding: 10px 20px 0px">
-      <%= f.label :term, "Semester: ", for: "formGroupExampleInput" %>
-      <%= f.select :term, options_for_select(@terms),{:prompt => "Select One"}, class:"form-control", id:"exampleFormControlSelect1 term", :required => true%>
+        <div class="form-group col-sm-8" style="padding: 10px 20px 0px">
+          <%= f.label :department, "Department: ", for: "formGroupExampleInput" %>
+          <%= f.select :department, options_for_select(@departments), {:prompt => "Select One"}, class:"form-control", id:"exampleFormControlSelect1 department", :required => true%>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find!">
+          <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
+          <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number", :required => true%>
+        </div>
+
+        <div class="form-group col-sm-4" style="padding: 10px 20px 0px">
+          <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
+          <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number", :required => true%>
+        </div>
+
+        <div class="form-group col-sm-4" style="padding: 10px 20px 0px">
+          <%= f.label :capacity, "Course Capacity: ", for: "formGroupExampleInput" %>
+          <%= f.number_field :capacity, min: 0, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity", :required => true%>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group row" style="padding: 10px 20px 0px">
-      <%= f.label :department, "Department: ", for: "formGroupExampleInput" %>
-      <%= f.select :department, options_for_select(@departments), {:prompt => "Select One"}, class:"form-control", id:"exampleFormControlSelect1 department", :required => true%>
-    </div>
-
-    <div class="form-group row" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find!">
-      <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
-      <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number", :required => true%>
-    </div>
-
-    <div class="form-group row" style="padding: 10px 20px 0px">
-      <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
-      <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number", :required => true%>
-    </div>
-
-    <div class="form-group row" style="padding: 10px 20px 0px">
-      <%= f.label :capacity, "Course Capacity: ", for: "formGroupExampleInput" %>
-      <%= f.text_field :capacity, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity", :required => true%>
-    </div>
-
     <div class="form-group row", style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Optional—leave empty if there are no pre-requisites">
       <%= f.fields_for :prereqs do |prereqs_form| %>
           <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>

@@ -51,8 +51,20 @@ function getQuestion(element) {
   $("#question-choice").empty();
   $("#question-options").empty();
   if (selected === "Checkbox" || selected === "Radio") {
-    $("#question-choice").append("<label>How many options would you like?</label>");
-    $("#question-choice").append('<input type="number" id="number-choice" max=20 class="form-control">');
+    let label = $('<label/>',
+    {
+      text: 'How many options would you like?'
+    });
+    let input = $('<input/>',
+    {
+      type: 'number',
+      id: "number-choice",
+      min: '0',
+      max: '20',
+      class: 'form-control'
+    });
+    $("#question-choice").append(label);
+    $("#question-choice").append(input);
   }
   else {
     return;
@@ -63,8 +75,22 @@ function getOptions(element) {
   let selected = element.val();
   $("#question-options").empty();
   for(let i = 0; i < selected; i++) {
-    $("#question-options").append("<label for= 'question_option[]'>Option " + (i + 1) + ":</label>");
-    $("#question-options").append('<input name= "question[option][]" type="text" class="form-control" id="question_option"><br>');
+    let label = $('<label/>',
+    {
+      for: "question_option[]",
+      text: "Option " + (i + 1) + ":"
+    });
+    let input = $('<input/>',
+    {
+      name: "question[option][]",
+      type: "text",
+      id: "question_option",
+      class: 'form-control'
+    });
+    let br = $('<br>');
+    $("#question-options").append(label);
+    $("#question-options").append(input);
+    $("#question-options").append(br);
   }
 }
 

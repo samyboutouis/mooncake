@@ -31,7 +31,6 @@ class CoursesController < ApplicationController
       rec = course
       courses = []
       courses.append(course.id)
-      session[:course] = course
       course.published = false
       course.primary = true
       course.seats_taken = 0
@@ -44,72 +43,74 @@ class CoursesController < ApplicationController
           prereqs = course.prereqs.create(name: name[1]["name"])
         end
       end
-
       
-      j = 0
+      j = 0 #????
       cl = Array.new
-      update = false;
-      tmp = 0
-      if (params["number-choice"].to_i>0)
-        tmp = params["number-choice"].to_i
-        update = true
+      #byebug
+      hasCrossList = false;
+      numAdditionalCrossList = params["number-choice"].to_i
+      numAdditionalSections = params["number-choice-sec"].to_i
+      #tmp = 0 #??
+      if (numAdditionalCrossList>0)
+        #tmp = params["number-choice"].to_i
+        hasCrossList = true 
       end  
 
-      i = 1
-      if (update)
-        while (i < (params["number-choice"].to_i) +1)
-          dep = "department" + i.to_s
-          num = "course_number" + i.to_s
-          sec = "section_number" + ((j*(params["number-choice"].to_i+2))+i).to_s
-          file = "file" + ((j*(params["number-choice"].to_i+2))+i).to_s
+      currentCrossList = 1 #?
+      if (hasCrossList)
+        while (currentCrossList < numAdditionalCrossList +1)
+          dep = "department" + currentCrossList.to_s
+          num = "course_number" + currentCrossList.to_s
+          sec = "section_number" + currentCrossList.to_s
+          file = "file" + currentCrossList.to_s
           Course.create(term: course.term, department: params[dep], course_number: params[num],
           section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
           cl.append(Course.last.id)
           Course.last.prereqs << course.prereqs
           file = params[file]
           fileUpload(file, course)
-          i += 1
+          currentCrossList += 1
           course.update(cross_listing: cl)
         end
 
         j = 1
-        while (j < (params["number-choice-sec"].to_i) +1)
-          i=1
+        while (j < (numAdditionalSections) +1)
+          currentCrossList=1
           cl = Array.new
-          while (i <= (params["number-choice"].to_i+1))
-            if i == 1
-              n = params["number-choice"].to_i
-              sec = "section_number" + (j*(n+2)+i).to_s
-              file = "file" + (j*(n+2)+i).to_s
+          while (currentCrossList <= numAdditionalCrossList+1)
+            if currentCrossList == 1
+              # n = params["number-choice"].to_i
+              sec = "section_number" + (j*(numAdditionalCrossList+2)+currentCrossList).to_s
+              file = "file" + (j*(numAdditionalCrossList+2)+currentCrossList).to_s
               course = Course.create(term: course.term, department: course.department, course_number: course.course_number,
               section_number: params[sec], primary: true, seats_taken: 0, capacity: course.capacity, cross_listing: [], published: false)
               User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
             else
-              dep = "department" + (i-1).to_s
-              num = "course_number" + (i-1).to_s
-              n = params["number-choice"].to_i
-              a = j*(n+2)+i
+              dep = "department" + (currentCrossList-1).to_s
+              num = "course_number" + (currentCrossList-1).to_s
+              # n = params["number-choice"].to_i
+              a = j*(numAdditionalCrossList+2)+currentCrossList
               sec = "section_number" + a.to_s
-              b = j*(n+2)+i
+              b = j*(numAdditionalCrossList+2)+currentCrossList
               file = "file" + b.to_s
               Course.create(term: course.term, department: params[dep], course_number: params[num],
               section_number: params[sec], primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
             end  
-            if i != 1
+            if currentCrossList != 1
               cl.append(Course.last.id)
             end  
             Course.last.prereqs << course.prereqs
             file = params[file]
             fileUpload(file, Course.last)
-            i += 1
+            currentCrossList += 1
             course.update(cross_listing: cl)
           end 
           j += 1 
         end
       end
       j = 1
-      if (!update)
-        while (j < (params["number-choice-sec"].to_i) +1)
+      if (!hasCrossList)
+        while (j < numAdditionalSections +1)
           sec = "section_number" + j.to_s
           file = "file" + j.to_s
           cap = "section_capacity" + j.to_s
