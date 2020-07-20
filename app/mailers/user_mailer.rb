@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
   def course_created
       @user = params[:user]
       @course = params[:course]
-      @url = root_url+ "/facreqview/" + @course.id.to_s
+      @url = root_url+ "facreqview/" + @course.id.to_s
       mail(to: @user.email, subject: 'New Course Created')
   end
 
@@ -20,7 +20,7 @@ class UserMailer < ApplicationMailer
     @request = params[:request]
     @course = @request.course
     @url = root_url
-    @url2 = root_url + "/requestform/" + @request.id.to_s
+    @url2 = root_url + "requestform/" + @request.id.to_s
     mail(to: @user.email, subject: 'Submitted Course Request')
   end
 
@@ -52,7 +52,7 @@ class UserMailer < ApplicationMailer
     course = Course.find(params[:course])
     @em = course.department.split(" ").first + "-" + course.course_number + "-" + course.section_number 
     @user = User.find(params[:user])
-    @url = root_url+ "/facreqview/" + course.id.to_s
+    @url = root_url+ "facreqview/" + course.id.to_s
     email = params[:email]
     mail(to: email, subject: 'You have been added to a course')
   end 
