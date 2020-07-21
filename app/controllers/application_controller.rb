@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
           numExists = true
         end
         course.cross_listing.each do |crossed|
-          if PermissionNumber.exists?(number: row[0].to_i, course: crossed) 
+          if crossed.permission_numbers.exists?(number: row[0].to_i, course: crossed) 
             numExists = true
           end
         end

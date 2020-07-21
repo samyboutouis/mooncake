@@ -62,7 +62,7 @@ class DashboardController < ApplicationController
     @user = User.find_by(net_id: session[:current_user]["net_id"])
     newuser.courses << @course
     redirect_to faculty_page_path
-    UserMailer.with(email: newuser.email, user: @user.id, course: @course.id).shared_course.deliver_now
+    #UserMailer.with(email: newuser.email, user: @user.id, course: @course.id).shared_course.deliver_now
   end
 
 
