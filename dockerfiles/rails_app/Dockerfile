@@ -22,7 +22,7 @@ RUN rails assets:precompile
 
 #run database
 RUN rails db:migrate
-RUN rails db:seed
+# RUN rails db:seed
 
 
 #fix openshift permissions

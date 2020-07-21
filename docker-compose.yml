@@ -2,6 +2,7 @@ version: "3.2"
 services:
   app:
     build: .
+    image: mooncake/app
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     ports:
       - 3000:3000
@@ -13,8 +14,41 @@ services:
       MOONCAKE_OAUTH_KEY: ${MOONCAKE_OAUTH_KEY}
       MOONCAKE_OAUTH_REDIRECT: ${MOONCAKE_OAUTH_REDIRECT}
       ACCESS_TOKEN: ${ACCESS_TOKEN}
+      MARIA_DB: development
+      MARIA_USER: local_user
+      MARIA_PASSWORD: local_password
+      MARIA_HOST: db
+
     volumes:
       - .:/webapp
       - /webapp/node_modules
       - type: tmpfs
         target: /webapp/tmp
+  webpacker:
+    image: mooncake/app
+    depends_on:
+      - app
+    command: /webapp/bin/webpack-dev-server
+    volumes:
+      - .:/webapp:cached
+      - /webapp/node_modules
+      - type: tmpfs
+        target: /webapp/tmp
+    ports:
+      - 3035:3035
+      
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_USER: local_user
+      MYSQL_PASSWORD: local_password
+      MYSQL_ROOT_PASSWORD: local_root_password
+      MYSQL_DATABASE: development
+    volumes:
+      - ./tmp/mariadb/initdb.d:/docker-entrypoint-initdb.d/
+      - ./tmp/mariadb/var:/var/lib/mysql
+    command:
+      'mysqld --innodb-flush-method=fsync'
+      

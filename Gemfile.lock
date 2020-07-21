@@ -110,6 +110,7 @@ GEM
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mysql2 (0.5.3)
     net-ldap (0.16.2)
     nio4r (2.5.2)
     nokogiri (1.10.9)
@@ -230,6 +231,7 @@ DEPENDENCIES
   httparty (~> 0.18.1)
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  mysql2
   net-ldap
   oauth2
   puma (~> 4.1)

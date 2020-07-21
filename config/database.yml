@@ -10,8 +10,17 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  adapter: mysql2
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= ENV.fetch("MARIA_DB") %>
+  username: <%= ENV.fetch("MARIA_USER") %>
+  password: <%= ENV.fetch("MARIA_PASSWORD") %>
+  host: <%= ENV.fetch("MARIA_HOST") %>
+  strict: false # <--- solves issue with Data is too long for column summary
+
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,5 +30,14 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= ENV.fetch("MARIA_DB") %>
+  username: <%= ENV.fetch("MARIA_USER") %>
+  password: <%= ENV.fetch("MARIA_PASSWORD") %>
+  host: <%= ENV.fetch("MARIA_HOST") %>
+  strict: false # <--- solves issue with Data is too long for column summary
+
+  
