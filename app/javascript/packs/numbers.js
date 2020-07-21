@@ -16,13 +16,5 @@ $(document).ready( function () {
       } );
     } ).draw();
 
-    $('#exampleModal').on('shown.bs.modal', function () {
-      $('.assignbutt').trigger('focus')
-    });
-
-    $(".student-name").on('change', function() {
-      assignNum($(this));
-    });
-
 });
 
