@@ -9,6 +9,7 @@ class CreatePermissionNumbers < ActiveRecord::Migration[6.0]
       t.boolean :capacity
       t.integer :bigint
       t.references :course, foreign_key: true
+      t.boolean :expired
       t.references :course_request, foreign_key: true
       t.timestamps
     end

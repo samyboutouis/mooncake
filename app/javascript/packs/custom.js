@@ -21,6 +21,11 @@ $(document).ready(function () {
   $('.help').click(function(){
   		$('#excelModal').modal('show')
 	});
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
 });
 
 $(function(){
@@ -72,7 +77,7 @@ function getNumber(element) {
     data: {department: department, term: term},
     success: function(result) {
       result.sort(function(a, b) {
-        return compareStrings(a.department, b.department);
+        return compareStrings(a.course_number, b.course_number);
       })
       console.log('Success');
       $(".number").append("<option value=''>Choose Course Number</option>");
@@ -101,7 +106,7 @@ function getSection(element) {
     data: {course_number: courseNumber, department: department, term: term},
     success: function(result) {
       result.sort(function(a, b) {
-        return compareStrings(a.department, b.department);
+        return compareStrings(a.section_number, b.section_number);
       })
       console.log('Success');
       $(".section").append("<option value=''>Choose Section Number</option>");

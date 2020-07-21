@@ -8,26 +8,51 @@ Rails.application.routes.draw do
   get "/add_user/:course" => "dashboard#add_user", as: "add_user"
   post "/add_user2" => "dashboard#add_user2"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
-  get "/mailing/:request" => "dashboard#mailing", as: "send_mailer"
-  get "/mailingall/:course" => "dashboard#mailingall", as: "send_all_mailer"
-  get "/mailing2" => "dashboard#mailing2"
-  get "/mailingall2" => "dashboard#mailingall2"
-  get "/reqmailingall" => "dashboard#reqmailingall", as: "send_allreq_mailer"
-  get "/reqmailingall2" => "dashboard#reqmailingall2"
-  get "/mailselected" => "dashboard#mailselected"
-  get "/mailselected2" => "dashboard#mailselected2"
-  get "/numbers/:course" => "dashboard#numbers", as: "numbers"
   get "/allrequests" => "dashboard#allrequests", as: "allrequests"
 
-  #Accept/Deny
-  get "/deny/:request" => "dashboard#deny", as: "deny"
-  get "/accept/:request" => "dashboard#accept", as: "accept"
-  get "/permnum/:req" => "dashboard#addpermnum", as: "add_permnum"
-  post "/add" => "dashboard#add", as: "add"
-  get "/denyview/:request" => "dashboard#denyview", as: "denyview"
-  get "/acceptview/:request" => "dashboard#acceptview", as: "acceptview"
-  get "/addpermnum/:course" => "dashboard#addmorepermnum", as: "add_more_permnum"
-  post "/addmore" => "dashboard#addmore", as: "add_more"
+  # Facreqview
+  get "/deny/:request" => "facreqview#deny", as: "deny"
+  get "/accept/:request" => "facreqview#accept", as: "accept"
+  get "/accept_selected"  => "facreqview#accept_selected", as: "accept_selected"
+  get "/deny_selected"  => "facreqview#deny_selected"
+  get "/permnum/:req" => "facreqview#addpermnum", as: "add_permnum"
+  post "/add" => "facreqview#add", as: "add"
+
+  get "/permnumselected/:selected, :courseid" => "facreqview#addpermnumselected", as: "add_permnum_selected"
+  post "/add_selected" => "facreqview#add_selected", as: "add_selected"
+
+  get "/mailing/:request" => "facreqview#mailing", as: "send_mailer"
+  get "/mailingall/:course" => "facreqview#mailingall", as: "send_all_mailer"
+  get "/mailing2" => "facreqview#mailing2"
+  get "/mailingall2" => "facreqview#mailingall2"
+  get "/mailselected" => "facreqview#mailselected"
+  get "/mailselected2" => "facreqview#mailselected2"
+
+  # AllRequests
+
+  get "/denyview/:request" => "allrequest#denyview", as: "denyview"
+  get "/acceptview/:request" => "allrequest#acceptview", as: "acceptview"
+  get "/allpermnum/:req" => "allrequest#all_addpermnum", as: "all_add_permnum"
+  post "/alladd" => "allrequest#all_add", as: "all_add"
+  get "/all_accept_selected"  => "allrequest#all_accept_selected"
+  get "/all_deny_selected"  => "allrequest#all_deny_selected"
+
+  get "/all_permnumselected/:selected" => "allrequest#all_addpermnumselected", as: "all_add_permnum_selected"
+  post "/all_add_selected" => "allrequest#all_add_selected", as: "all_add_selected"
+
+  get "/reqmailingall" => "allrequest#reqmailingall", as: "send_allreq_mailer"
+  get "/reqmailingall2" => "allrequest#reqmailingall2"
+  get "/allmailselected" => "allrequest#allmailselected"
+  get "/allmailselected2" => "allrequest#allmailselected2"
+
+  # Permission
+
+  get "/addpermnum/:course" => "permission#addmorepermnum", as: "add_more_permnum"
+  post "/addmore" => "permission#addmore", as: "add_more"
+  get "/numbers/:course" => "permission#numbers", as: "numbers"
+  post "/assign_num" => "permission#assign_num", as: "assign_num"
+  
+
 
   #Ranking
   get "/rank1/:request" => "dashboard#rank1", as: "rank1"
@@ -48,12 +73,17 @@ Rails.application.routes.draw do
   get '/form/:course_request'=> 'answer#form', as: "answer"
   get '/data'=> 'answer#data', as: "data"
 
+
+  get '/assignman' => 'permission#assignman', as: 'assignman'
+  
   #faculty creating questions routes
   get '/questions/:course'=> 'questions#create_form', as: "question"
   put '/questions/:course' => 'questions#create', as: "questions"
   get '/questions/:course/new' => 'questions#new', as: "new_question"
-  delete '/questions/:id' => 'questions#delete', as: "delete_question"
+  delete '/questions/:id,:course' => 'questions#delete', as: "delete_question"
   get '/options' => 'questions#options'
+  get '/save_template' => 'questions#save_template', as: "save_template"
+  get '/load_template/:template/:course' => 'questions#load_template', as: "load_template"
 
   #student requests a permission number
   get '/search' => 'course_request#index', as: "search"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_091413) do
+ActiveRecord::Schema.define(version: 2020_07_20_140230) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "answer_text"
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(version: 2020_06_22_091413) do
     t.bigint "course_id", null: false
   end
 
+  create_table "form_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "questionids"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_form_templates_on_user_id"
+  end
+
   create_table "permission_numbers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "number"
     t.string "expire_date"
@@ -71,6 +80,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_091413) do
     t.boolean "capacity"
     t.integer "bigint"
     t.bigint "course_id"
+    t.boolean "expired"
     t.bigint "course_request_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -109,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_091413) do
   add_foreign_key "answers", "questions"
   add_foreign_key "course_requests", "courses"
   add_foreign_key "course_requests", "users"
+  add_foreign_key "form_templates", "users"
   add_foreign_key "permission_numbers", "course_requests"
   add_foreign_key "permission_numbers", "courses"
 end

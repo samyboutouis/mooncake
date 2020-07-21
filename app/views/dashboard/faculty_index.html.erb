@@ -2,35 +2,72 @@
   <div class="row">
     <div class="col">
       <div class="box">
-      <div class="header">
-        <h1 class="title">My Courses - <%= @user.first_name %> INSTRUCTOR </h1>
-        <% if flash[:alert2] %>
-          <div class="alert1", style = "color: red"><%= flash[:alert2] %></div>
-        <% end %>
-        <a href="<%= new_course_path %>"><button class="btn btn-dark" type="button">Create a Course</button></a>
-        <% if @user.courses.count > 1 %>
-          <a href="<%= allrequests_path %>"><button class="btn btn-dark" type="button"> All Courses Requests</button></a>
-        <% end %> 
-        <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
-        <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+        <div class="header">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6 my-auto">
+                <h1 class="title">My Courses - <%= @user.first_name %> INSTRUCTOR </h1>
+                <% if flash[:alert2] %>
+                  <div class="alert1", style = "color: red"><%= flash[:alert2] %></div>
+                <% end %>
               </div>
-              <div class="modal-body">
-                <%= image_tag "factutorial.png", class: "factut"%>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
+              <% if @user.courses.count > 1 %>
+                <div class="col-sm-2 text-center my-auto">
+                  <a href="<%= new_course_path %>" ><button class="btn btn-dark " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
+                </div>
+                <div class="col-sm-2 text-center my-auto">
+                  <a href="<%= allrequests_path %>"><button class="btn btn-dark" type="button"> All Courses Requests</button></a>
+                </div>
+                <div class="col-sm-2 text-center my-auto">
+                  <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+                  <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <%= image_tag "factutorial.png", class: "factut"%>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% else %>
+                <div class="col-sm-3 text-center my-auto">
+                  <a href="<%= new_course_path %>" ><button class="btn btn-dark " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
+                </div>
+                <div class="col-sm-2 text-center my-auto">
+                  <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+                  <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <%= image_tag "factutorial.png", class: "factut"%>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
-      </div>
         <%= no_course(@user)%>
         <div class="container">
           <% i = 0 %>
@@ -55,8 +92,8 @@
                         <% requests += coursec.course_requests.length %>
                     <% end %>
                       <%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%> <%= info%>
-                      <span class="fa fa-chevron-right pull-right expand-icon"> + </span>
-                      <span class="fa fa-chevron-down pull-right expand-icon"> - </span>
+                      <span class="fa fa-chevron-right pull-right expand-icon"></span>
+                      <span class="fa fa-chevron-down pull-right expand-icon"></span>
                     </p>
                   </a>
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">

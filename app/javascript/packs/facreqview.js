@@ -1,6 +1,12 @@
 var col = 0;
 
+$(document).ready(function(){
+    $("#frm1").submit();
+});
+
 $(document).ready(function () {
+    // document.getElementById("selected_action").style.visibility = "hidden";
+
     var table = $('#myTable').DataTable( {
         columnDefs: [
             {
@@ -22,15 +28,15 @@ $(document).ready(function () {
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
-        if ((table.column(7).header().innerText).trim() != "Which course(s) have you taken:") {
-            x = 7;
-            col = 7;
+        if ((table.column(9).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
+            x = 9;
+            col = 9;
         }
         else {
-            x = 8;
-            col = 8;
+            x = 10;
+            col = 10;
         }
-        for (let i = x; i < num - 2; i++){
+        for (let i = x; i < num - 1; i++){
             table.column(i).visible(false);
         }
 
@@ -69,19 +75,55 @@ $(document).ready(function () {
         }
     } );
 
+    $('.selectall').on('change', function(e) {
+        var $inputs = $('.checkboxlist');
+        if(e.originalEvent === undefined) {
+            var allChecked = true;
+            $inputs.each(function(){
+                allChecked = allChecked && this.checked;
+            });
+            this.checked = allChecked;
+        } else {
+            $inputs.prop('checked', this.checked);
+        }
+        var ischecked =$('input[type=checkbox]:checked').length;
+        if(ischecked > 0) {
+            document.getElementById("selected_action").style.visibility = "visible";
+        } else {
+            document.getElementById("selected_action").style.visibility = "hidden";
+        }
+
+    });
+
+    $('.checkboxlist').on('change', function(){
+        $('.selectall').trigger('change');
+    });
+
+    $('.checkboxlist').on('change', function(){
+        // console.log(document.getElementById("selected_action"))
+
+        var ischecked =$('input[type=checkbox]:checked').length;
+        if(ischecked > 0) {
+            document.getElementById("selected_action").style.visibility = "visible";
+        } else {
+            document.getElementById("selected_action").style.visibility = "hidden";
+        }
+
+    });
+
 });
 
 function format ( d, table ) {
     // `d` is the original data object for the row
     let innards = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
     let x = -1;
-    if ((table.column(7).header().innerText).trim() != "Which course(s) have you taken:") {
-        x = 7;
+    if ((table.column(9).header().innerText).trim() != "Which prerequisite(s) have you satisfied:") {
+        x = 9;
     }
     else {
-        x = 8;
+        x = 10;
     }
-    for(let i = x; i < table.columns().count() - 2; i++){
+    for(let i = x; i < table.columns().count() - 1; i++){
         innards += '<tr>'+ '<td>'+$(table.column(i).header()).html()+'</td>'+ '<td>'+d[i]+'</td>'+'</tr>';
     }
     innards += '</table>';

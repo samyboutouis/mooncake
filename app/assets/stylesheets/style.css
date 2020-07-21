@@ -76,10 +76,6 @@ body {
     padding-left: 0%;
 }
 
-/* #view-request > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: #F3F2F1;
- } */
-
 #view-request > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
     background-color: white;
  }
@@ -129,6 +125,7 @@ body {
 }
 
 .expand-icon {
+    margin-top: 22px;
     margin-right: 5%;
     float: right;
 }
@@ -174,7 +171,7 @@ a[aria-expanded=false] .fa-chevron-down {
 /* Desktop only */
 @media only screen and (min-width: 1000px){
     .navbar {
-        height: 12vh;
+        height: 14vh;
     }
 }
 
@@ -221,17 +218,8 @@ a[aria-expanded=false] .fa-chevron-down {
     flex-grow: 1;
   }
 
-  .header button {
-    margin-left: 20px;
-  }
-
   .header {
     overflow: hidden;
-  }
-
-  .header button {
-    float: right;
-    margin-left: 20px;
   }
 
   .form-group.required .control-label:after {
