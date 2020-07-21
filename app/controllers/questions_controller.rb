@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
     # skip_before_action :student_check
     def question_params
-        params.require(:question).permit(:question_type, :question_text, :option => [])
+        defaults = {option: []}
+        params.require(:question).permit(:question_type, :question_text, :option => []).reverse_merge(defaults)
     end
 
     # initializing the course

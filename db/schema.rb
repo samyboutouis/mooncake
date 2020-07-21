@@ -70,9 +70,11 @@ ActiveRecord::Schema.define(version: 2020_06_22_091413) do
     t.boolean "reqs"
     t.boolean "capacity"
     t.integer "bigint"
+    t.bigint "course_id"
     t.bigint "course_request_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_permission_numbers_on_course_id"
     t.index ["course_request_id"], name: "index_permission_numbers_on_course_request_id"
   end
 
@@ -108,4 +110,5 @@ ActiveRecord::Schema.define(version: 2020_06_22_091413) do
   add_foreign_key "course_requests", "courses"
   add_foreign_key "course_requests", "users"
   add_foreign_key "permission_numbers", "course_requests"
+  add_foreign_key "permission_numbers", "courses"
 end

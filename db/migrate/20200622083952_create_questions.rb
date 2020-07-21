@@ -3,7 +3,7 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
     create_table :questions do |t|
       t.string :question_type
       t.string :question_text
-      t.text :option, default: [].to_yaml
+      t.text :option, array: true, default: [].to_yaml
 
       t.timestamps
     end

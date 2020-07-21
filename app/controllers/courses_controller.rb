@@ -27,7 +27,8 @@ class CoursesController < ApplicationController
     if @user.courses.where(term: params[:course][:term], department: params[:course][:department], course_number: params[:course][:course_number], section_number: params[:course][:section_number]).exists?
         flash[:alert2] = "The course you tried to create already exists. You can only create this course if the original one is deleted"
         redirect_to faculty_page_url and return
-    elsif course = Course.create(course_params)
+    elsif course = Course.create(cross_listing: [])
+      course.update(course_params)
       course.published = false
       course.primary = true
       course.seats_taken = 0

@@ -9,7 +9,7 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.string :term
       t.boolean :published
       t.boolean :primary
-      t.text :cross_listing, default: [].to_yaml
+      t.text :cross_listing, array: true, default: [].to_yaml
       t.timestamps
     end
   end
