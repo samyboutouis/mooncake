@@ -50,10 +50,10 @@ class QuestionsController < ApplicationController
         @course = Course.find(params[:course])
         questionids = @course.questions.pluck(:question_id)
         questionids = questionids.join("~")
-        if params[:name] == nil
+        if params[:template_name] == nil
             name = @course.department.split("-").first + " "+ @course.course_number + " - " + @course.section_number + "template"
         else
-            name = params[:name]
+            name = params[:template_name]
         end
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         @user.form_templates.create(name: name, questionids: questionids)

@@ -58,11 +58,17 @@ class DashboardController < ApplicationController
 
   def add_user2
     @course = Course.find(params[:course])
-    newuser = User.find_by(net_id: params[:netid])
-    @user = User.find_by(net_id: session[:current_user]["net_id"])
-    newuser.courses << @course
-    redirect_to faculty_page_path
-    #UserMailer.with(email: newuser.email, user: @user.id, course: @course.id).shared_course.deliver_now
+    if User.exists?(net_id: params[:netid])
+      newuser = User.find_by(net_id: params[:netid])
+      @user = User.find_by(net_id: session[:current_user]["net_id"])
+      newuser.courses << @course
+      newuser.user_type = "faculty"
+      redirect_to faculty_page_path
+      UserMailer.with(email: newuser.email, user: @user.id, course: @course.id).shared_course.deliver_now
+    else
+      flash[:alertnouser] = "The provided netid doesn't belong to a user. Please ask them to log in before assigning course."
+      redirect_to add_user_path(@course)
+    end
   end
 
 
