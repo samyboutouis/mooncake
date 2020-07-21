@@ -2,16 +2,16 @@ var update = false;
 var num = 0;
 $(document).ready(function(){
   $(".listing").on('input', function() {
-    getResponse($(this));
+    getCrossListingNum($(this));
     $("#number-choice").on('input', function() {
-      getOptions($(this));
+      getCrossListings($(this));
     })
   });
 
   $(".sec").on('input', function() {
-    getResponse2($(this));
+    getAdditionalSectionsNum($(this));
     $("#number-choice-sec").on('input', function() {
-      getOptions2($(this));
+      getAdditionalSections($(this));
     })
   });
 
@@ -21,7 +21,7 @@ $(document).ready(function(){
   });
 });
 
-function getResponse(element) {
+function getCrossListingNum(element) {
   let selected = element.val();
   $("#othercourses").empty();
   $("#howmany").empty();
@@ -45,7 +45,7 @@ function getResponse(element) {
   }
 }
   
-function getResponse2(element) {
+function getAdditionalSectionsNum(element) {
   let selected = element.val();
   $("#othersections").empty();
   $("#howmanysec").empty();
@@ -69,12 +69,11 @@ function getResponse2(element) {
   }
 }
 
-function getOptions(element) {
+function getCrossListings(element) {
   $.ajax('/dept', {
     type: 'GET',
     dataType: 'json',
     success: function(result) {
-      // departments = ["Select One", "AAAS - African & African Amer Studies", "AEROSCI - Aerospace Studies-AFROTC", "AMES - Asian & Middle Eastern Studies", "AMI - Arts of the Moving Image", "ARABIC - Arabic", "ARTHIST - Art History", "ARTS&SCI - Arts and Science IDEAS themes", "ARTSVIS - Visual Arts", "BALTFIN - Balto-Finnic", "BIOCHEM - Biochemistry", "BIOETHIC - Bioethics and Science Policy", "BIOLOGY - Biology", "BME - Biomedical Engineering", "BRAINSOC - Brain & Society", "CEE - Civil and Environmental Egr", "CELLBIO - Cell Biology", "CESC - Civic Engagement&Social Change", "CHEM - Chemistry", "CHILDPOL - Child Policy", "CHINESE - Chinese", "CLST - Classical Studies", "COMPSCI - Computer Science", "CREOLE - Creole", "CULANTH - Cultural Anthropology", "DANCE - Dance", "DECSCI - Decision Sciences Program", "DOCST - Documentary Studies", "ECE - Electrical & Computer Egr", "ECON - Economics", "EDUC - Education", "EGR - Engineering", "EHD - Education and Human Developmnt", "ENERGY - Energy", "ENGLISH - English", "ENRGYEGR - Energy Engineering", "ENVIRON - Environment", "EOS - Earth and Ocean Sciences", "ETHICS - Study of Ethics", "EVANTH - Evolutionary Anthropology", "FOCUS - Focus", "FRENCH - French", "GENOME - Genome Sciences Policy", "GEOADMIN - Global Education Admn Use Only", "GERMAN - German", "GLHLTH - Global ", "GREEK - Greek", "GSF - Gender Sexuality & Feminist", "St HEBREW - Hebrew", "HINDI - Hindi", "HISTORY - History", "HOUSECS - House Course", "HUMANDEV - Human Development", "I&E - Innovation & Entrepreneurship", "ICS - Internatl Comparative Studies", "IDS - Interdisciplinary Data Science", "IMMUNOL - Immunology", "ISS - Information Science + Studies", "ITALIAN - Italian", "IUSC_AMI - IUSC_AMI (Taught at USC)", "IUSC_PPS - IUSC_PPS (Taught at USC)", "IUSC_THT - IUSC_THT (Taught at USC)", "JEWISHST - Jewish Studies", "JPN - Japanese", "KICHE - K'iche' Maya ", "KOREAN - Korean", "LATAMER - Latin American Studies", "LATIN - Latin", "LINGUIST - Linguistics", "LIT - Literature", "LSGS - Latino Studies Global South", "MATH - Mathematics", "ME - Mechanical Engr/Materials Sci", "MEDREN - Medieval and Renaissance", "MGM - Molec Genetics & Microbiology", "MILITSCI - Military Science (Army ROTC) ", "MMS - Markets and Management Studies", "MUSIC - Music", "NAVALSCI - Naval Science (Navy ROTC)", "NEUROBIO - Neurobiology Neurobiology", "PATHOL - Pathology", "PERSIAN - Persian", "PHARM - Pharm and Cancer Biology", "PHIL - Philosophy", "PHYSEDU - Physical Education", "PHYSICS - Physics", "PJMS - Policy Journalism and Media St", "POE - Practice-Oriented Education", "POLISH - Polish", "POLSCI - Political Science", "PORTUGUE - Portuguese", "PSY - Psychology", "PUBPOL - Public Policy", "QUECHUA - Quechua", "REG - Registration", "RELIGION - Religion", "RIGHTS - Human Rights", "ROMANIAN - Romanian", "ROMST - Romance Studies", "RUSSIAN - Russian", "SANSKRIT - Sanskrit", "SCISOC - Science & Society", "SERBCRO - Serbian and Croatian", "SES - Slavic and Eurasian Studies", "SOCIOL - Sociology", "SPANISH - Spanish", "STA - Statistical Science", "SUSTAIN - Sustainability Engagement", "SXL - Study of Sexualities", "THEATRST - Theater Studies", "TIBETAN - Tibetan", "TURKISH - Turkish", "UKRAIN - Ukrainian", "URDU - Urdu", "UZBEK - Uzbek", "VMS - Visual and Media Studies", "WRITING - Writing"];
       let selected = element.val();
       if (selected>0) update = true;
       num = selected;
@@ -103,11 +102,6 @@ function getOptions(element) {
           for: 'department'+(i+1),
           text: "Department:",
         }));
-        // $("#othercourses").append($(document.createElement('select')).prop({
-        //   name: "department"+(i+1),
-        //   class: "form-control hasRow",
-        //   id: "department"+(i+1)
-        // }));
         $("#col1_"+(i+1)).append($("<select/>", {
           name: "department"+(i+1),
           class: "form-control",
@@ -152,13 +146,13 @@ function getOptions(element) {
           id: "col3_"+(i+1),
           style: "padding: 10px 20px 0px"
         }));
+        $("#col3_"+(i+1)).append($('<label/>', {
+          text: "Permission Number:"
+        }));
         $("#col3_" + (i+1)).append($('<div/>', {
-          class: "custom-file",
+          class: "custom-file form-group",
           id: "course"+(i+1),
           style: "margin-bottom:20px;"
-        }));
-        $("#course"+(i+1)).append($('<label/>', {
-          text: "Permission Number:"
         }));
         $("#course"+(i+1)).append($('<input/>', {
           type: "file",
@@ -179,41 +173,165 @@ function getOptions(element) {
   });
  }
 
-function getOptions2(element) {
-  // departments = ["Select One", "AAAS - African & African Amer Studies", "AEROSCI - Aerospace Studies-AFROTC", "AMES - Asian & Middle Eastern Studies", "AMI - Arts of the Moving Image", "ARABIC - Arabic", "ARTHIST - Art History", "ARTS&SCI - Arts and Science IDEAS themes", "ARTSVIS - Visual Arts", "BALTFIN - Balto-Finnic", "BIOCHEM - Biochemistry", "BIOETHIC - Bioethics and Science Policy", "BIOLOGY - Biology", "BME - Biomedical Engineering", "BRAINSOC - Brain & Society", "CEE - Civil and Environmental Egr", "CELLBIO - Cell Biology", "CESC - Civic Engagement&Social Change", "CHEM - Chemistry", "CHILDPOL - Child Policy", "CHINESE - Chinese", "CLST - Classical Studies", "COMPSCI - Computer Science", "CREOLE - Creole", "CULANTH - Cultural Anthropology", "DANCE - Dance", "DECSCI - Decision Sciences Program", "DOCST - Documentary Studies", "ECE - Electrical & Computer Egr", "ECON - Economics", "EDUC - Education", "EGR - Engineering", "EHD - Education and Human Developmnt", "ENERGY - Energy", "ENGLISH - English", "ENRGYEGR - Energy Engineering", "ENVIRON - Environment", "EOS - Earth and Ocean Sciences", "ETHICS - Study of Ethics", "EVANTH - Evolutionary Anthropology", "FOCUS - Focus", "FRENCH - French", "GENOME - Genome Sciences Policy", "GEOADMIN - Global Education Admn Use Only", "GERMAN - German", "GLHLTH - Global ", "GREEK - Greek", "GSF - Gender Sexuality & Feminist", "St HEBREW - Hebrew", "HINDI - Hindi", "HISTORY - History", "HOUSECS - House Course", "HUMANDEV - Human Development", "I&E - Innovation & Entrepreneurship", "ICS - Internatl Comparative Studies", "IDS - Interdisciplinary Data Science", "IMMUNOL - Immunology", "ISS - Information Science + Studies", "ITALIAN - Italian", "IUSC_AMI - IUSC_AMI (Taught at USC)", "IUSC_PPS - IUSC_PPS (Taught at USC)", "IUSC_THT - IUSC_THT (Taught at USC)", "JEWISHST - Jewish Studies", "JPN - Japanese", "KICHE - K'iche' Maya ", "KOREAN - Korean", "LATAMER - Latin American Studies", "LATIN - Latin", "LINGUIST - Linguistics", "LIT - Literature", "LSGS - Latino Studies Global South", "MATH - Mathematics", "ME - Mechanical Engr/Materials Sci", "MEDREN - Medieval and Renaissance", "MGM - Molec Genetics & Microbiology", "MILITSCI - Military Science (Army ROTC) ", "MMS - Markets and Management Studies", "MUSIC - Music", "NAVALSCI - Naval Science (Navy ROTC)", "NEUROBIO - Neurobiology Neurobiology", "PATHOL - Pathology", "PERSIAN - Persian", "PHARM - Pharm and Cancer Biology", "PHIL - Philosophy", "PHYSEDU - Physical Education", "PHYSICS - Physics", "PJMS - Policy Journalism and Media St", "POE - Practice-Oriented Education", "POLISH - Polish", "POLSCI - Political Science", "PORTUGUE - Portuguese", "PSY - Psychology", "PUBPOL - Public Policy", "QUECHUA - Quechua", "REG - Registration", "RELIGION - Religion", "RIGHTS - Human Rights", "ROMANIAN - Romanian", "ROMST - Romance Studies", "RUSSIAN - Russian", "SANSKRIT - Sanskrit", "SCISOC - Science & Society", "SERBCRO - Serbian and Croatian", "SES - Slavic and Eurasian Studies", "SOCIOL - Sociology", "SPANISH - Spanish", "STA - Statistical Science", "SUSTAIN - Sustainability Engagement", "SXL - Study of Sexualities", "THEATRST - Theater Studies", "TIBETAN - Tibetan", "TURKISH - Turkish", "UKRAIN - Ukrainian", "URDU - Urdu", "UZBEK - Uzbek", "VMS - Visual and Media Studies", "WRITING - Writing"];
+function getAdditionalSections(element) {
   let selected = element.val();
   $("#othersections").empty();
   if (update){
     for (var i=0; i<selected; i++){
-      $("#othersections").append("<h3> Section " + (i+2) + "</h3>");
-      $("#othersections").append("<label for= 'section_capacity"+(i+1)+"'> Section Capacity :</label>");
-      $("#othersections").append('<input name= "section_capacity'+(i+1)+'" class="form-control" type="text" id="section_number'+k+'"><br>');
-      $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number :</label>");
-      $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+k+'"><br>');
+      $("#othersections").append($('<h3/>', {
+        style: "margin: 10px 8px 10px 0px",
+        text: "Section " + (i+2),
+      }));
+      $("#othersections").append($('<div/>', {
+        class: "container-fluid",
+        id: "container2_" + (i+1)
+      }));
+      $("#container2_" + (i+1)).append($('<div/>', {
+        class: "row",
+        id: "row3_" + (i+1)
+      }));
+      $("#row3_" + (i+1)).append($('<div/>', {
+        class: "form-group col-sm-6",
+        id: "col4_"+(i+1),
+        style: "padding: 10px 20px 0px"
+      }));
+      $("#col4_"+(i+1)).append($('<label/>', {
+        for: 'section_number'+(i+1),
+        text: "Section Number:",
+      }));
+      $("#col4_"+(i+1)).append($('<input/>', {
+        type: "number",
+        name: "section_number"+(i+1),
+        id: "section_number"+k,
+        class: "form-control",
+        placeholder: "Ex: 30"
+      }));
+      $("#row3_" + (i+1)).append($('<div/>', {
+        class: "form-group col-sm-6",
+        id: "col5_"+(i+1),
+        style: "padding: 10px 20px 0px"
+      }));
+      $("#col5_"+(i+1)).append($('<label/>', {
+        for: 'section_capacity'+(i+1),
+        text: "Section Capacity:",
+      }));
+      $("#col5_"+(i+1)).append($('<input/>', {
+        type: "number",
+        name: "section_capacity"+(i+1),
+        id: "section_number"+k,
+        class: "form-control",
+        placeholder: "Ex: 01-LAB"
+      }));
       for (var j=0; j<=num-2; j++){
-        $("#othersections").append("<h4> Section " + (i+2) + " For Crosslisting Course "+(j+1)+ "</h4>");
         var k = num*(i+1)+j+1;
-        $("#othersections").append("<label> Permission Numbers:</label>");
-        $("#othersections").append('<div class="custom-file" id="section'+k+'" style="margin-bottom:20px;">');
-        $("#othersections #section"+k).append('<input name= "file'+k+'" type="file" class="custom-file-input" id="customFile'+k+'">');
-        $("#othersections #section"+k).append('<label class="custom-file-label" for="customFile'+k+'">Upload Permission Numbers Excel File</label>');
-        $("#othersections").append('</div>');
+        $("#container2_" + (i+1)).append($('<div/>', {
+          class: "row",
+          id: "row4_" + k
+        }));
+        $("#row4_" + k).append($('<div/>', {
+          class: "form-group col",
+          id: "col7_"+k,
+          style: "padding: 10px 20px 0px"
+        }));
+        $("#col7_"+ k).append($('<h4/>', {
+          text: "Section " + (i+2) + " For Cross-listed Course "+(j+1)
+        }));
+        $("#col7_"+k).append($('<label/>', {
+          text: "Permission Numbers:"
+        }));
+        $("#col7_" + k).append($('<div/>', {
+          class: "custom-file",
+          id: "section"+k,
+          style: "margin-bottom:20px;"
+        }));
+        $("#section"+k).append($('<input/>', {
+          type: "file",
+          name: "file"+k,
+          id: "customFile"+k,
+          class: "custom-file-input"
+        }));
+        $("#section"+k).append($('<label/>', {
+          text: "Upload Permission Numbers Excel File",
+          class: "custom-file-label",
+          for: "customFile"+k
+        }));
       }
     }
   }
   else {
     for(let i = 0; i < selected; i++) {
-      $("#othersections").append("<h3> Section " + (i+2) + "</h3>");
-      
-      $("#othersections").append("<label for= 'section_number"+(i+1)+"'> Section Number:</label>");
-      $("#othersections").append('<input name= "section_number'+(i+1)+'" class="form-control" type="text" id="section_number'+(i+1)+'"><br>');
-      $("#othersections").append("<label for= 'section_capacity"+(i+1)+"'> Section Capacity :</label>");
-      $("#othersections").append('<input name= "section_capacity'+(i+1)+'" class="form-control" type="text" id="section_number'+k+'"><br>');
-      $("#othersections").append("<label> Permission Numbers:</label>");
-      $("#othersections").append('<div class="custom-file" id="section'+(i+1)+'" style="margin-bottom:20px;">');
-      $("#othersections #section"+(i+1)).append('<input name= "file'+(i+1)+'" type="file" class="custom-file-input" id="customFile'+(i+1)+'">');
-      $("#othersections #section"+(i+1)).append('<label class="custom-file-label" for="customFile'+(i+1)+'">Upload Permission Numbers Excel File</label>');
-      $("#othersections").append('</div>');
+      $("#othersections").append($('<h3/>', {
+        style: "margin: 10px 8px 10px 0px",
+        text: "Section " + (i+2),
+      }));
+      $("#othersections").append($('<div/>', {
+        class: "container-fluid",
+        id: "container2_" + (i+1)
+      }));
+      $("#container2_" + (i+1)).append($('<div/>', {
+        class: "row",
+        id: "row3_" + (i+1)
+      }));
+      $("#row3_" + (i+1)).append($('<div/>', {
+        class: "form-group col-sm-6",
+        id: "col4_"+(i+1),
+        style: "padding: 10px 20px 0px"
+      }));
+      $("#col4_"+(i+1)).append($('<label/>', {
+        for: 'section_number'+(i+1),
+        text: "Section Number:",
+      }));
+      $("#col4_"+(i+1)).append($('<input/>', {
+        type: "number",
+        name: "section_number"+(i+1),
+        id: "section_number"+(i+1),
+        class: "form-control",
+        placeholder: "Ex: 30"
+      }));
+      $("#row3_" + (i+1)).append($('<div/>', {
+        class: "form-group col-sm-6",
+        id: "col5_"+(i+1),
+        style: "padding: 10px 20px 0px"
+      }));
+      $("#col5_"+(i+1)).append($('<label/>', {
+        for: 'section_capacity'+(i+1),
+        text: "Section Capacity:",
+      }));
+      $("#col5_"+(i+1)).append($('<input/>', {
+        type: "number",
+        name: "section_capacity"+(i+1),
+        id: "section_number"+k,
+        class: "form-control",
+        placeholder: "Ex: 01-LAB"
+      }));
+      $("#container2_" + (i+1)).append($('<div/>', {
+        class: "row",
+        id: "row4_" + (i+1)
+      }));
+      $("#row4_" + (i+1)).append($('<div/>', {
+        class: "form-group col",
+        id: "col6_"+(i+1),
+        style: "padding: 10px 20px 0px"
+      }));
+      $("#col6_" + (i+1)).append($('<div/>', {
+        class: "custom-file",
+        id: "section"+(i+1),
+        style: "margin-bottom:20px;"
+      }));
+      $("#section"+(i+1)).append($('<label/>', {
+        text: "Permission Numbers:"
+      }));
+      $("#section"+(i+1)).append($('<input/>', {
+        type: "file",
+        name: "file"+(i+1),
+        id: "customFile"+(i+1),
+        class: "custom-file-input"
+      }));
+      $("#section"+(i+1)).append($('<label/>', {
+        text: "Upload Permission Numbers Excel File",
+        class: "custom-file-label",
+        for: "customFile"+(i+1)
+      }));
     }
   }
 }
