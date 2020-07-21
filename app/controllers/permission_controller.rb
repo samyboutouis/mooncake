@@ -34,7 +34,7 @@ class PermissionController < ApplicationController
         permnum = PermissionNumber.find(permission_number)
         user = User.find(params[:user_id])
         request = CourseRequest.find_by(course_id: course, user_id: user)
-        request.update(permission_number: permnum)
+        request.update(permission_number: permnum, status: "Accepted")
         permnum.update(used: true)
         if course.primary
             redirect_to numbers_path(course)
