@@ -38,7 +38,7 @@ class DashboardController < ApplicationController
     #   end
     # end
     course1 = Course.find(params[:course])
-    for course in Course.where(department: course1.department, course_number: course1.course_number) do
+    for course in Course.where(term: course1.term, department: course1.department, course_number: course1.course_number) do
       course.update(published: true)
       for id in course.cross_listing do
         Course.find(id).update(published: true)
