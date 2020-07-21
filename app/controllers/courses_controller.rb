@@ -45,7 +45,7 @@ class CoursesController < ApplicationController
         end
       end
       
-      j = 0 #????
+      j = 0
       cl = Array.new
       hasCrossList = false;
       numAdditionalCrossList = params["number-choice"].to_i
@@ -150,38 +150,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  def makePermissionNums(row, course)
-    unless row[0] == nil
-      consent = false
-      reqs = false
-      capacity = false
-      if row[8] == "Y"
-        capacity = true
-      end
-      if row[9] == "Y"
-        reqs = true
-      end
-      if row[10] == "Y"
-        consent = true
-      end
-
-      numExists = false
-      if course.permission_numbers.exists?(number: row[0].to_i, course: course) 
-        numExists = true
-      end
-      course.cross_listing.each do |crossed|
-        if crossed.permission_numbers.exists?(number: row[0].to_i, course: crossed) 
-          numExists = true
-        end
-      end
-
-      if numExists == false
-        course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
-      else
-      end
-    end
-  end
-
   def fileUpload(file, course)
     extension = File.extname(file)
     if(extension == ".xlsx")
@@ -190,7 +158,7 @@ class CoursesController < ApplicationController
       z=0
       sheet.each do |row|
         if z>0
-          makePermissionNums(row, course)
+          makeFirstPermissionNums(row, course)
         end
         z += 1
       end
@@ -201,7 +169,7 @@ class CoursesController < ApplicationController
         z=0
         sheet.each do |row|
           if z>0
-            makePermissionNums(row, course)
+            makeFirstPermissionNums(row, course)
           end
           z += 1
         end
@@ -217,7 +185,7 @@ class CoursesController < ApplicationController
         end
         csv.close
         CSV.foreach("output.csv", :headers => true) do |row|
-          makePermissionNums(row, course)
+          makeFirstPermissionNums(row, course)
         end
         File.delete('output.csv')
       end
