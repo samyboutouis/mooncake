@@ -85,17 +85,6 @@ p {
     margin-left: 15px;
 }
 
-.request-box {
-   padding-left: 10%;
-   width: 93%;
-   margin-top: 20px;
-   background: #FFFFFF;
-   border-radius: 20px;
-   line-height: 61px;
-   margin-left: 3.5%;
-   margin-bottom: 30px;
-}
-
 .account {
     margin-top: 40px;
 }
@@ -328,8 +317,14 @@ a[aria-expanded=false] .fa-chevron-down {
 
 .bluebox p{
     color:#FFFFFF;
-    padding: 5px 0px 0px 80px;
+    padding: 10px 0px 0px 80px;
+    font-family: 'Roboto', sans-serif;
 }
+
+.blue-info{
+    font-weight: 300;
+}
+
 .graybtn {
     background-color: #6D6D6D;
     position: absolute;
