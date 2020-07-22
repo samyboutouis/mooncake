@@ -1,7 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 
 body {
     background-color: #F3F2F1;
+}
+
+#logo {
+    font-weight: 500;
+    font-size: 24px;
+    color: #00539B;
+}
+
+.nav-tabs {
+    color: #00539B;
+    font-size: 24px;
+    font-variant: small-caps;
+}
+
+.underline {
+    text-decoration: none;
+}
+
+.navbar-nav > a {
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .box {
@@ -206,7 +228,15 @@ a[aria-expanded=false] .fa-chevron-down {
          border-radius: 20px;
          line-height: 25px;
          margin-bottom: 30px;
-      }
+    }
+
+    #logo {
+        font-size: 16px;
+    }
+    
+    .nav-tabs {
+        font-size: 16px;
+    }
 }
 
 
