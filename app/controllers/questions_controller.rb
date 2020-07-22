@@ -63,6 +63,8 @@ class QuestionsController < ApplicationController
     def load_template
         @course = Course.find(params[:course])
         @template = FormTemplate.find(params[:template])
+
+        @course.questions.delete_all
         
         for id in @template.questionids.split("~")
             if @course.questions.pluck(:question_id).include? id.to_i
