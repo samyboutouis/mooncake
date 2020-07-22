@@ -1,17 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 
 body {
-    background-color: #F3F2F1;
+    background-color: F6F6F6;
+}
+
+#logo {
+    font-weight: 500;
+    font-size: 24px;
+    color: #00539B;
+}
+
+.logo {
+    height: 100px;
+}
+
+.nav-tabs {
+    color: #00539B;
+    font-size: 24px;
+    font-variant: small-caps;
+}
+
+.underline {
+    text-decoration: none;
+}
+
+.navbar-nav > a {
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .box {
     margin: 0 auto;
     margin-top: 2em;
     padding: 2em;
-    width: 90%;
-    background: #E2E6ED;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 35px;
+    width: 70%;
 }
 
 .table_box {
@@ -24,12 +47,31 @@ body {
     border-radius: 35px;
 }
 
+.hello {
+    font-family: 'Yeseva One';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+    color: #00539B;  
+}
+
 .title {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 35px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #6D6D6D;    
+}
+
+.no_request {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+
+    color: #6D6D6D;    
 }
 
 .subtitle {
@@ -120,10 +162,6 @@ body {
     background: #A1B70D;
 }
 
-.logo {
-    height: 12vh
-}
-
 .expand-icon {
     margin-top: 22px;
     margin-right: 5%;
@@ -206,7 +244,15 @@ a[aria-expanded=false] .fa-chevron-down {
          border-radius: 20px;
          line-height: 25px;
          margin-bottom: 30px;
-      }
+    }
+
+    #logo {
+        font-size: 20px;
+    }
+    
+    .nav-tabs {
+        font-size: 16px;
+    }
 }
 
 
@@ -254,4 +300,8 @@ a[aria-expanded=false] .fa-chevron-down {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.bluebox {
+    background: #00539B;
 }

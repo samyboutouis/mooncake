@@ -1,28 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(180deg, #012169 0%, #0577B1 100%), #0577B1;">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <% if session[:current_user]["user_type"] == "student"%>
-  <a class="navbar-brand" href="<%= root_path %>">
-    mooncake
-    <%= image_tag "mooncake_logo.png", class:"logo" %>
-  </a>
+    <a class="navbar-brand" href="<%= root_path %>">
+      <div class="container">
+        <div class="row">
+          <div class="col my-auto">
+            <%= image_tag "mooncake_logo.png", class:"logo" %>
+          </div>
+          <div class="col my-auto">
+            <span id="logo">MOONCAKE<span>
+          </div>
+        </div>
+      </div>
+    </a>
   <% else %>
-  <a class="navbar-brand" href="<%= faculty_page_path %>">
-    mooncake
-    <%= image_tag "mooncake_logo.png", class:"logo" %>
-  </a>
+    <a class="navbar-brand" href="<%= faculty_page_path %>">
+      <div class="container">
+        <div class="row">
+          <div class="col my-auto">
+            <%= image_tag "mooncake_logo.png", class:"logo" %>
+          </div>
+          <div class="col my-auto">
+            <span id="logo">MOONCAKE<span>
+          </div>
+        </div>
+      </div>
+    </a>
   <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav ml-auto">
       <% if session[:current_user]["user_type"] == "staff"%>
-        <a class="nav-item nav-link " href="<%= faculty_page_path %>">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link underline" style="text-decoration: none" href="<%= faculty_page_path %>"><span class="nav-tabs">Home</span><span class="sr-only">(current)</span></a>
       <% else %>
-        <a class="nav-item nav-link " href="<%= root_path %>">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link underline" href="<%= root_path %>"><span class="nav-tabs">Home</span><span class="sr-only">(current)</span></a>
       <% end %>
-      <a class="nav-item nav-link" href="<%= student_show_path %>">Account</a>
-      <a class="nav-item nav-link" href="<%= faq_path %>">FAQ</a>
-      <%= link_to 'Log Out', logout_path, class:"nav-item nav-link", method: :delete %>
+      <a class="nav-item nav-link underline" href="<%= student_show_path %>"><span class="nav-tabs">Account</span></a>
+      <a class="nav-item nav-link underline" href="<%= faq_path %>"><span class="nav-tabs">Faq</span></a>
+      <a class="nav-item nav-link underline" data-method="delete" rel="nofollow" href="<%= logout_path %>"><span class="nav-tabs">Logout</span></a>
     </div>
   </div>
 </nav>
