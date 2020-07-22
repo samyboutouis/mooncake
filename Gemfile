@@ -73,3 +73,6 @@ gem 'font-awesome-sass', '~> 5.13.0'
 
 #brakeman gem
 gem 'brakeman'
+
+#simplecov gem
+gem 'simplecov', require: false, group: :test
