@@ -57,11 +57,11 @@ function getQuestion(element) {
     });
     let input = $('<input/>',
     {
-      type: 'number',
       id: "number-choice",
       min: '0',
       max: '20',
-      class: 'form-control'
+      class: 'form-control',
+      maxLength: "2"
     });
     $("#question-choice").append(label);
     $("#question-choice").append(input);

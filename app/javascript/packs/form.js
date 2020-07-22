@@ -31,12 +31,12 @@ function getCrossListingNum(element) {
       text: "How many additional departments are cross-listed with this course?"
     }));
     $("#howmany").append($('<input/>', {
-      type: "number",
       min: "0",
       max: "10",
       name: "number-choice",
       id: "number-choice",
-      class: "form-control"
+      class: "form-control",
+      maxLength: "2"
     }));
     $("#howmany").append($('<br>'));
   }
@@ -55,12 +55,12 @@ function getAdditionalSectionsNum(element) {
       text: "How many additional sections?"
     }));
     $("#howmanysec").append($('<input/>', {
-      type: "number",
       min: "0",
       max: "25",
       name: "number-choice-sec",
       id: "number-choice-sec",
-      class: "form-control"
+      class: "form-control",
+      maxLength: "2"
     }));
     $("#howmanysec").append($('<br>'));
   }
