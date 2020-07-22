@@ -6,7 +6,9 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-8">
-                <h1 class="title"> Active Requests - <%= @user.first_name %></h1>
+                <h1 class="hello"> Hello <%= @user.first_name %>!</h1> <br>
+                <h1 class="title"> Your Requests</h1>
+                <%= no_request(@user)%>
               </div>
               <div class="col-sm-4">
                 <a href="<%= search_path %>"><button class="btn btn-dark" type="button">Request a permission number</button></a>
@@ -14,7 +16,6 @@
             </div>
           </div>
         </div>
-        <%= no_request(@user)%>
         <div class="container">
         <% i = 0 %>
         <% for request in @course_request do %>

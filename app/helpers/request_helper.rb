@@ -11,7 +11,7 @@ module RequestHelper
 
     def no_request(user)
         if user.course_requests.length() == 0
-            return '<p>You have no active permission number requests</p>'.html_safe
+            return '<p class="no_request">You have no active permission number requests</p>'.html_safe
         else
             return nil
         end

@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 
 body {
-    background-color: #F3F2F1;
+    background-color: #F6F6F6;
 }
 
 #logo {
@@ -30,10 +30,7 @@ body {
     margin: 0 auto;
     margin-top: 2em;
     padding: 2em;
-    width: 90%;
-    background: #E2E6ED;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 35px;
+    width: 70%;
 }
 
 .table_box {
@@ -46,12 +43,31 @@ body {
     border-radius: 35px;
 }
 
+.hello {
+    font-family: 'Yeseva One';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+    color: #00539B;  
+}
+
 .title {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 35px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #6D6D6D;    
+}
+
+.no_request {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+
+    color: #6D6D6D;    
 }
 
 .subtitle {
