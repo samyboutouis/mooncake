@@ -11,6 +11,10 @@ body {
     color: #00539B;
 }
 
+.logo {
+    height: 100px;
+}
+
 .nav-tabs {
     color: #00539B;
     font-size: 24px;
@@ -158,10 +162,6 @@ body {
     background: #A1B70D;
 }
 
-.logo {
-    height: 12vh
-}
-
 .expand-icon {
     margin-top: 22px;
     margin-right: 5%;
@@ -247,7 +247,7 @@ a[aria-expanded=false] .fa-chevron-down {
     }
 
     #logo {
-        font-size: 16px;
+        font-size: 20px;
     }
     
     .nav-tabs {
