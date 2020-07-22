@@ -317,17 +317,20 @@ a[aria-expanded=false] .fa-chevron-down {
 
 .bluebox p{
     color:#FFFFFF;
+<<<<<<< Updated upstream
     padding: 10px 0px 0px 80px;
     font-family: 'Roboto', sans-serif;
 }
 
 .blue-info{
     font-weight: 300;
+=======
+    padding: 5px 0px 0px 0px;
+>>>>>>> Stashed changes
 }
 
 .graybtn {
     background-color: #6D6D6D;
-    position: absolute;
     width: 220px;
     height: 66px;
 }
@@ -336,9 +339,8 @@ a[aria-expanded=false] .fa-chevron-down {
     color: #FFFFFF;
 }
 
-
-.bluebox a {
-    color: #FFFFFF;
+.collapse-content {
+    margin-left: 65px;
 }
 
 .item-a {
@@ -352,6 +354,10 @@ a[aria-expanded=false] .fa-chevron-down {
 }
 .item-d {
     grid-area: footer;
+}
+
+.btn {
+    margin-right: 20px;
 }
 
 .containernew {
