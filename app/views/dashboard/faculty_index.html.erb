@@ -1,6 +1,6 @@
 <div class="containernew">
   <div class="col-sm-8 item-a">
-    <h1 class="hello"> Hello <%= @user.first_name %>!</h1> <br>
+    <h1 class="hello"> Hello, <%= @user.first_name %>!</h1> <br>
     <h1 class="title"> Your Courses</h1>
     <%= no_course(@user)%>
   </div>
@@ -106,10 +106,10 @@
                 <% unless course.users.length == 1 %>
                   <p>Co-Managers: <% course.users.each do |user| %>
                       <% unless user == @user %>
-                        <% if course.user.last == user%>
-                          <%= user.name %>
+                        <% if course.users.last == user%>
+                          <%= user.first_name %> <%= user.last_name %>
                         <% else %>
-                          <%= user.name %>,
+                          <%= user.first_name %> <%= user.last_name %>,
                         <%end%>
                       <% end %>
                   <% end %></p>
