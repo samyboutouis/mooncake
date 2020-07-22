@@ -8,7 +8,7 @@ class AllrequestController < ApplicationController
         course = CourseRequest.find(params[:request]).course
         CourseRequest.find(params[:request]).update(status: "Denied")
         CourseRequest.find(params[:request]).permission_number = nil
-        #UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+        UserMailer.with(user: req.user, request: req).status_changed.deliver_now
         redirect_to allrequests_path
     end
 
@@ -20,7 +20,7 @@ class AllrequestController < ApplicationController
               course = req.course
               req.update(status: "Denied")
               req.permission_number = nil
-              #UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+              UserMailer.with(user: req.user, request: req).status_changed.deliver_now
             end
             redirect_to allrequests_path
         else
@@ -43,12 +43,12 @@ class AllrequestController < ApplicationController
           req.update(status: "Accepted")
           course.increment!(:seats_taken)
           if course.seats_taken >= course.capacity
-            #UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+            UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
           end
           perm = course.permission_numbers.where(used: false).last
           perm.course_request = req
           perm.update(used: true)
-          #UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+          UserMailer.with(user: req.user, request: req).status_changed.deliver_now
 
           redirect_to allrequests_path
         end
@@ -81,12 +81,12 @@ class AllrequestController < ApplicationController
               req.update(status: "Accepted")
               course.increment!(:seats_taken)
               if course.seats_taken >= course.capacity
-                #UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
+                UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
               end
               perm = course.permission_numbers.where(used: false).last
               perm.course_request = req
               perm.update(used: true)
-              #UserMailer.with(user: req.user, request: req).status_changed.deliver_now
+              UserMailer.with(user: req.user, request: req).status_changed.deliver_now
             end
             if reqlist.count == 0
               redirect_to allrequests_path
@@ -139,11 +139,11 @@ class AllrequestController < ApplicationController
           @user = User.find_by(net_id: session[:current_user]["net_id"])
           @user.courses.each do |course|
           course.course_requests.each  do |request|
-              #UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+              UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
               if course.primary == true
               course.cross_listing.each do |id|
                   Course.find(id).course_requests.each do |request2|
-                  #UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
+                  UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
                   end
               end
               end
@@ -174,7 +174,7 @@ class AllrequestController < ApplicationController
           @course = Course.find(params[:courseid])
           for req in (params[:selected]).split("~") do
           request = CourseRequest.find(req)
-          #UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+          UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
           end
           redirect_to allrequests_path
       end
