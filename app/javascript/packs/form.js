@@ -282,11 +282,11 @@ function getAdditionalSections(element) {
         text: "Section Number:",
       }));
       $("#col4_"+(i+1)).append($('<input/>', {
-        type: "number",
+        type: "text",
         name: "section_number"+(i+1),
         id: "section_number"+(i+1),
         class: "form-control",
-        placeholder: "Ex: 30"
+        placeholder: "Ex: 01-LAB"
       }));
       $("#row3_" + (i+1)).append($('<div/>', {
         class: "form-group col-sm-6",
@@ -300,9 +300,9 @@ function getAdditionalSections(element) {
       $("#col5_"+(i+1)).append($('<input/>', {
         type: "number",
         name: "section_capacity"+(i+1),
-        id: "section_number"+k,
+        id: "section_capacity"+k,
         class: "form-control",
-        placeholder: "Ex: 01-LAB"
+        placeholder: "Ex: 30"
       }));
       $("#container2_" + (i+1)).append($('<div/>', {
         class: "row",
