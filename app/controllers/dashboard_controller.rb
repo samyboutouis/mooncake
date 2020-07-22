@@ -58,19 +58,50 @@ class DashboardController < ApplicationController
 
   def add_user2
     @course = Course.find(params[:course])
-    if User.exists?(net_id: params[:netid])
-      newuser = User.find_by(net_id: params[:netid])
+    netid = params[:netid]
+
+    if User.exists?(net_id: netid)
+      newuser = User.find_by(net_id: netid)
       @user = User.find_by(net_id: session[:current_user]["net_id"])
       newuser.courses << @course
       newuser.user_type = "faculty"
       redirect_to faculty_page_path
       UserMailer.with(email: newuser.email, user: @user.id, course: @course.id).shared_course.deliver_now
     else
-      flash[:alertnouser] = "The provided netid doesn't belong to a user. Please ask them to log in before assigning course."
-      redirect_to add_user_path(@course)
+      @user = User.find_by(net_id: session[:current_user]["net_id"])
+      searchNetID(@course, netid)
+      new_user = User.find_by(net_id: netid)
+      redirect_to faculty_page_path
+      UserMailer.with(email: new_user.email, user: @user.id, course: @course.id).shared_course.deliver_now
     end
   end
 
+
+  def searchNetID(course, netid)
+    ldap = Net::LDAP.new
+    ldap.host = "ldap.duke.edu"
+    base = "dc=duke,dc=edu"
+    ldap.port = 389
+
+    filter = Net::LDAP::Filter.eq( "uid", netid )
+
+    result = ldap.search( :base => base, :filter => filter )
+    ldap.get_operation_result
+    information = result.pop
+    
+    affiliation = information["edupersonprimaryaffiliation"].join(' ')
+    grad_year = information["dupsexpgradtermc1"].join(' ')
+    email = information["edupersonprincipalname"].join(' ')
+    first_name = information["givenname"].join(" ")
+    last_name = information["sn"].join(' ')
+    unique_id = information['dudukeid'].join(' ')
+
+    newuser = User.create(first_name: first_name, last_name: last_name, net_id: netid, unique_id: unique_id, email: email, net_id: netid, grad_year: grad_year, user_type: affiliation)
+    
+    newuser.courses << course
+    newuser.user_type = "faculty"
+  
+  end
 
   # Facreqview Controller
   def facreqview

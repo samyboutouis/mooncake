@@ -113,15 +113,6 @@ p {
     margin-bottom: 30px;
  }
 
-.akioi {
-    width: 93%;
-    margin-top: 20px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    line-height: 25px;
-    margin-bottom: 30px;
- }
-
 .remove-padding {
     padding-left: 0%;
 }
@@ -370,4 +361,3 @@ a[aria-expanded=false] .fa-chevron-down {
     "main main . sidebar"
     "footer footer footer footer";
 }
-
