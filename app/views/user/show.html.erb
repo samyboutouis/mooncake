@@ -1,22 +1,37 @@
-<div class="container-fluid">
+<div class="container account">
   <div class="row">
     <div class="col">
-      <div class="box">
-        <h1 class="title">Account Info </h1>
-        <div class="row">
-            <div class="col">
-                <div class="request-box">
-                    <p> Name: <%= @user.first_name %> <%= @user.last_name %> </p>
-                    <p> Graduation Year: <%= @user.grad_year %> </p>
-                    <p> Net ID: <%= @user.net_id %> </p>
-                    <p> Unique ID: <%= @user.unique_id %> </p>
-                    <p> Email: <%= @user.email %> </p>
-                    <p> Affiliation: <%= @user.user_type %> </p>
-                </div>
-            </div>
-        </div>
-      </div>
+      <h1 class="title">Account Info </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="account-table">
+        <tr>
+          <td><p class="account-title">Name:</p></td>
+          <td><p><%= @user.first_name %> <%= @user.last_name %></p></td>
+        </tr>
+        <tr>
+          <td><p class="account-title">Graduation Term:</p></td>
+          <td><p><%= @user.grad_year %></p></td>
+        </tr>
+        <tr>
+          <td><p class="account-title">NetID:</p></td>
+          <td><p><%= @user.net_id %> </p></td>
+        </tr>
+        <tr>
+          <td><p class="account-title">Unique ID:</p></td>
+          <td><p><%= @user.unique_id %> </p></td>
+        </tr>
+        <tr>
+          <td><p class="account-title">Email:</p></td>
+          <td><p><%= @user.email %> </p></td>
+        </tr>
+        <tr>
+          <td><p class="account-title">Affiliation:</p></td>
+          <td><p><%= @user.user_type %> </p></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
-<p class="spacer"></p>

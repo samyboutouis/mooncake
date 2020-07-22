@@ -1,139 +1,137 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <div class="box">
-        <div class="header">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-6 my-auto">
-                <h1 class="hello"> Hello <%= @user.first_name %>!</h1> <br>
-                <h1 class="title"> Your Courses</h1>
-                <%= no_course(@user)%>
+<div class="containernew">
+  <div class="col-sm-8 item-a">
+    <h1 class="hello"> Hello <%= @user.first_name %>!</h1> <br>
+    <h1 class="title"> Your Courses</h1>
+    <%= no_course(@user)%>
+  </div>
+  <div class="item-c">
+    <% if @user.courses.count > 1 %>
+      <div class="text-center my-auto">
+        <a href="<%= new_course_path %>" ><button class="btn btn-dark " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
+      </div><br>
+      <div class="text-center my-auto">
+        <a href="<%= allrequests_path %>"><button class="btn btn-dark" type="button"> All Courses Requests</button></a>
+      </div><br>
+      <div class="text-center my-auto">
+        <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+        <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              <% if @user.courses.count > 1 %>
-                <div class="col-sm-2 text-center my-auto">
-                  <a href="<%= new_course_path %>" ><button class="btn btn-dark " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
-                </div>
-                <div class="col-sm-2 text-center my-auto">
-                  <a href="<%= allrequests_path %>"><button class="btn btn-dark" type="button"> All Courses Requests</button></a>
-                </div>
-                <div class="col-sm-2 text-center my-auto">
-                  <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
-                  <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <%= image_tag "factutorial.png", class: "factut"%>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% else %>
-                <div class="col-sm-3 text-center my-auto">
-                  <a href="<%= new_course_path %>" ><button class="btn btn-dark " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
-                </div>
-                <div class="col-sm-2 text-center my-auto">
-                  <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
-                  <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <%= image_tag "factutorial.png", class: "factut"%>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
+              <div class="modal-body">
+                <%= image_tag "factutorial.png", class: "factut"%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
-        <div class="container">
-          <% i = 0 %>
-          <% @courses.each do |course| %>
-            <div class="row">
-              <div class="col">
-                <div class="request-box">
-                  <%= course_status(course) %>
-
-                  <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
-                    <p class="course">
-                      <% if course.published == false %>
-                        <%="UNPUBLISHED:"%>
-                      <%end%>
-                    <% info = "" %>
-                    <% seats = 0 %>
-                    <% requests = 0 %>
-                    <% course.cross_listing.each do |id| %>
-                        <% coursec = Course.find(id) %>
-                        <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
-                        <% seats += coursec.seats_taken %>
-                        <% requests += coursec.course_requests.length %>
-                    <% end %>
-                      <%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%> <%= info%>
-                      <span class="fa fa-chevron-right pull-right expand-icon"></span>
-                      <span class="fa fa-chevron-down pull-right expand-icon"></span>
-                    </p>
-                  </a>
-                  <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
-                    <div >
-                      Term: <%= course.term %> <br>
-                      Permission Numbers Granted: <%= course.seats_taken + seats %> / <%= course.capacity %> <br>
-                      Number of Requests: <%= course.course_requests.length + requests %> <br>
-                      <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
-                      <% if course.prereqs.first == nil %>
-                        Prerequisites: N/A
-                      <% else%>
-                        Prerequisites: <% course.prereqs.each do |prereq| %>
-                          <% if course.prereqs.last == prereq%>
-                            <%= prereq.name %>
-                          <% else %>
-                            <%= prereq.name %>,
-                          <%end%>
-                        <% end %>
-                      <% end %>
-                      <br>
-                      <% if course.published == false %>
-                          <%= link_to "Edit Questions", question_path(course), method: :get, class:"btn btn-outline-primary" %>
-                          <%= link_to "Publish Form", publish_page_path(course), method: :get, class:"btn btn-outline-primary", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%>
-                          <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-outline-primary" %>
-                          <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
-                      <% else %>
-                          <%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %>
-                          <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-outline-primary" %>
-                          <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
-                          <%= link_to "Add Course Manager", add_user_path(course), method: :get, class:"btn btn-outline-primary" %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
+      </div><br>
+    <% else %>
+      <div class="text-center my-auto"><br>
+        <a href="<%= new_course_path %>" ><button class="btn btn-dark " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
+      </div>
+      <div class="text-center my-auto"><br>
+        <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+        <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="facModalLabel">Tutorial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= image_tag "factutorial.png", class: "factut"%>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
-            <% i += 1 %>
-          <% end %>
+          </div>
         </div>
-
+      </div><br>
+    <% end %>
+  </div>
+  <div class="item-b">
+    <% i = 0 %>
+    <% @courses.each do |course| %>
+      <div class="row">
+        <div class="col">
+          <div class="bluebox">
+            <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
+              <%= course_status(course) %>
+              <p class="course">
+                <% if course.published == false %>
+                  <%="UNPUBLISHED:"%>
+                <%end%>
+                <% info = "" %>
+                <% seats = 0 %>
+                <% requests = 0 %>
+                <% course.cross_listing.each do |id| %>
+                    <% coursec = Course.find(id) %>
+                    <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
+                    <% seats += coursec.seats_taken %>
+                    <% requests += coursec.course_requests.length %>
+                <% end %>
+                <%= course.department.split("-").first %> <%= course.course_number%> - <%= course.section_number%> <%= info%>
+                <span class="fa fa-chevron-right pull-right expand-icon"></span>
+                <span class="fa fa-chevron-down pull-right expand-icon"></span>
+              </p>
+            </a>
+            <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
+              <div class="blue-info">
+                <p> Term: <%= course.term %> </p>
+                <p> Permission Numbers Granted: <%= course.seats_taken + seats %> / <%= course.capacity %> </p>
+                <p> Number of Requests: <%= course.course_requests.length + requests %></p>
+                <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
+                <p> <% if course.prereqs.first == nil %> 
+                  Prerequisites: N/A
+                <% else%>
+                  Prerequisites: <% course.prereqs.each do |prereq| %>
+                    <% if course.prereqs.last == prereq%>
+                      <%= prereq.name %>
+                    <% else %>
+                      <%= prereq.name %>,
+                    <%end%>
+                  <% end %>
+                <% end %></p> 
+                <% unless course.users.length == 1 %>
+                  <p>Co-Managers: <% course.users.each do |user| %>
+                      <% unless user == @user %>
+                        <% if course.user.last == user%>
+                          <%= user.name %>
+                        <% else %>
+                          <%= user.name %>,
+                        <%end%>
+                      <% end %>
+                  <% end %></p>
+                <%end%>
+                <% if course.published == false %>
+                    <p><%= link_to "Edit Questions", question_path(course), method: :get, class:"btn btn-outline-primary" %>
+                    <%= link_to "Publish Form", publish_page_path(course), method: :get, class:"btn btn-outline-primary", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%>
+                    <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-outline-primary" %>
+                    <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %></p>
+                <% else %>
+                    <p><%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-outline-primary" %>
+                    <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-outline-primary" %>
+                    <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger" %>
+                    <%= link_to "Add Course Manager", add_user_path(course), method: :get, class:"btn btn-outline-primary" %></p>
+                <% end %>
+              </div>
+            </div>
+          <% i += 1 %>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
 <p class="spacer"></p>

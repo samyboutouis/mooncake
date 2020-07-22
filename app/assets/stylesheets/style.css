@@ -30,12 +30,16 @@ body {
     margin-right: 50px;
 }
 
-.box {
+p {
+    font-family: 'Roboto';
+}
+
+/* .box {
     margin: 0 auto;
     margin-top: 2em;
     padding: 2em;
     width: 70%;
-}
+} */
 
 .table_box {
     margin: 0 auto;
@@ -49,6 +53,10 @@ body {
 
 .hello {
     font-family: 'Yeseva One', cursive;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
     color: #00539B;  
 }
 
@@ -58,7 +66,6 @@ body {
     font-weight: 500;
     font-size: 24px;
     line-height: 28px;
-
     color: #6D6D6D;    
 }
 
@@ -66,7 +73,6 @@ body {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;
-
     color: #6D6D6D;    
 }
 
@@ -79,15 +85,21 @@ body {
     margin-left: 15px;
 }
 
-.request-box {
-   padding-left: 10%;
-   width: 93%;
-   margin-top: 20px;
-   background: #FFFFFF;
-   border-radius: 20px;
-   line-height: 61px;
-   margin-left: 3.5%;
-   margin-bottom: 30px;
+.account {
+    margin-top: 40px;
+}
+
+.account > div {
+    margin-bottom: 30px;
+}
+
+.account-title {
+    font-weight: bold;
+    color: #00539B;
+}
+
+.account-table * td {
+    padding-right: 30px;
 }
 
 .faq-box {
@@ -141,9 +153,8 @@ body {
     height: 25px;
     width: 25px;
     float: left;
-    margin-left: -7%;
+    margin-top: 5px;
     margin-right: 7%;
-    margin-top: 17px;
 }
 
 .persimmon{
@@ -159,7 +170,7 @@ body {
 }
 
 .expand-icon {
-    margin-top: 22px;
+    margin-top: 5px;
     margin-right: 5%;
     float: right;
 }
@@ -300,4 +311,57 @@ a[aria-expanded=false] .fa-chevron-down {
 
 .bluebox {
     background: #00539B;
+    padding: 20px 20px 10px 20px;
+    margin: 20px 20px;
 }
+
+.bluebox p{
+    color:#FFFFFF;
+    padding: 10px 0px 0px 80px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.blue-info{
+    font-weight: 300;
+}
+
+.graybtn {
+    background-color: #6D6D6D;
+    position: absolute;
+    width: 220px;
+    height: 66px;
+}
+
+.graybtn button {
+    color: #FFFFFF;
+}
+
+
+.bluebox a {
+    color: #FFFFFF;
+}
+
+.item-a {
+    grid-area: header;
+}
+.item-b {
+    grid-area: main;
+}
+.item-c {
+    grid-area: sidebar;
+}
+.item-d {
+    grid-area: footer;
+}
+
+.containernew {
+    margin: 40px 80px;
+    display: grid;
+    grid-template-columns: 20% 50% 10% 20%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "header header header header"
+    "main main . sidebar"
+    "footer footer footer footer";
+}
+
