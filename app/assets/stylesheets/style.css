@@ -3,7 +3,6 @@
 
 body {
     background-color: F6F6F6;
-    color: #FFFFFF;
 }
 
 #logo {
@@ -146,7 +145,7 @@ body {
     height: 25px;
     width: 25px;
     float: left;
-
+    margin-top: 5px;
     margin-right: 7%;
 
 }
@@ -164,7 +163,7 @@ body {
 }
 
 .expand-icon {
-    margin-top: 22px;
+    margin-top: 5px;
     margin-right: 5%;
     float: right;
 }
@@ -309,6 +308,22 @@ a[aria-expanded=false] .fa-chevron-down {
     margin: 20px 20px;
 }
 
+.bluebox p{
+    color:#FFFFFF;
+    padding: 5px 0px 0px 80px;
+}
+.graybtn {
+    background-color: #6D6D6D;
+    position: absolute;
+    width: 220px;
+    height: 66px;
+}
+
+.graybtn button {
+    color: #FFFFFF;
+}
+
+
 .bluebox a {
     color: #FFFFFF;
 }
@@ -329,7 +344,7 @@ a[aria-expanded=false] .fa-chevron-down {
 .containernew {
     margin: 40px 80px;
     display: grid;
-    grid-template-columns: 20% 50% 15% 15%;
+    grid-template-columns: 20% 50% 10% 20%;
     grid-template-rows: auto;
     grid-template-areas: 
     "header header header header"
