@@ -48,11 +48,7 @@ body {
 }
 
 .hello {
-    font-family: 'Yeseva One';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 35px;
+    font-family: 'Yeseva One', cursive;
     color: #00539B;  
 }
 
