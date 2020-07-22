@@ -30,12 +30,12 @@ body {
     margin-right: 50px;
 }
 
-.box {
+/* .box {
     margin: 0 auto;
     margin-top: 2em;
     padding: 2em;
     width: 70%;
-}
+} */
 
 .table_box {
     margin: 0 auto;
@@ -48,7 +48,7 @@ body {
 }
 
 .hello {
-    font-family: 'Yeseva One';
+    font-family: 'Yeseva One', cursive;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
