@@ -70,3 +70,6 @@ gem "httparty", "~> 0.18.1"
 
 #font awesome
 gem 'font-awesome-sass', '~> 5.13.0'
+
+#brakeman gem
+gem 'brakeman'

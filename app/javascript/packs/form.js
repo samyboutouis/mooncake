@@ -218,7 +218,7 @@ function getAdditionalSections(element) {
       $("#col5_"+(i+1)).append($('<input/>', {
         type: "number",
         name: "section_capacity"+(i+1),
-        id: "section_number"+k,
+        id: "section_capacity"+k,
         class: "form-control",
         placeholder: "Ex: 30"
       }));
