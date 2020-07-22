@@ -22,7 +22,7 @@
       </div>
 
       <div class="row">
-        <div class="form-group col-sm-4" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find!">
+        <div class="form-group col-sm-4" style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find.">
           <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
           <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number", :required => true%>
         </div>
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="form-group row", style="padding: 10px 20px 0px" data-toggle="tooltip" data-placement="top" title="Optional—leave empty if there are no pre-requisites">
+    <div class="form-group row", style="padding: 10px 20px 0px data-toggle="tooltip" data-placement="top" title="Optional—leave empty if there are no pre-requisites"">
       <%= f.fields_for :prereqs do |prereqs_form| %>
           <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
           <div class="form-inline">
@@ -51,8 +51,9 @@
     </div>
 
     <div class="form-group row", style="padding: 10px 20px 0px">
-      <label> Permission Numbers:</label>
-        <%= image_tag "help.png", class:"help", style: "height: 25px" %>
+      <label> Permission Numbers:   <a class="help" style="color: #00539B">show me how</a></label> 
+
+
       <div class="modal fade" id="excelModal">
       	<div class="modal-dialog">
       		<div class="modal-content">
@@ -92,7 +93,7 @@
     <div id="othercourses" style="margin-bottom: 0px">
     </div>
 
-    <div class="form-group" style="padding: 10px 6px 0px"  data-toggle="tooltip" data-placement="left" title="Fill this out to create multiple meeting sections at once!">
+    <div class="form-group" style="padding: 10px 6px 0px"  data-toggle="tooltip" data-placement="left" title="Fill this out to create multiple course sections at once.">
       <label for="sections">Does this course have additional sections?</label><br>
       <input type="radio" class="sec" id="sections" name="sections" value="Yes"> Yes<br>
       <input type="radio" class="sec" id="sections" name="sections" value = "No" checked> No<br>
