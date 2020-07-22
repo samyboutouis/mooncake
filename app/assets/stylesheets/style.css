@@ -113,15 +113,6 @@ p {
     margin-bottom: 30px;
  }
 
-.akioi {
-    width: 93%;
-    margin-top: 20px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    line-height: 25px;
-    margin-bottom: 30px;
- }
-
 .remove-padding {
     padding-left: 0%;
 }
@@ -317,17 +308,20 @@ a[aria-expanded=false] .fa-chevron-down {
 
 .bluebox p{
     color:#FFFFFF;
+<<<<<<< Updated upstream
     padding: 10px 0px 0px 80px;
     font-family: 'Roboto', sans-serif;
 }
 
 .blue-info{
     font-weight: 300;
+=======
+    padding: 5px 0px 0px 0px;
+>>>>>>> Stashed changes
 }
 
 .graybtn {
     background-color: #6D6D6D;
-    position: absolute;
     width: 220px;
     height: 66px;
 }
@@ -336,9 +330,8 @@ a[aria-expanded=false] .fa-chevron-down {
     color: #FFFFFF;
 }
 
-
-.bluebox a {
-    color: #FFFFFF;
+.collapse-content {
+    margin-left: 65px;
 }
 
 .item-a {
@@ -354,6 +347,10 @@ a[aria-expanded=false] .fa-chevron-down {
     grid-area: footer;
 }
 
+.btn {
+    margin-right: 20px;
+}
+
 .containernew {
     margin: 40px 80px;
     display: grid;
@@ -364,4 +361,3 @@ a[aria-expanded=false] .fa-chevron-down {
     "main main . sidebar"
     "footer footer footer footer";
 }
-
