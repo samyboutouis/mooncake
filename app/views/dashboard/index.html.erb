@@ -2,6 +2,7 @@
         <div class="col-sm-8 item-a">
           <h1 class="hello"> Hello <%= @user.first_name %>!</h1> <br>
           <h1 class="title"> Your Requests</h1>
+          <%= no_request(@user)%>
           
         </div>
 
@@ -10,7 +11,6 @@
         </div>
 
         <div class="item-b">
-          <%= no_request(@user)%>
           <% i = 0 %>
           <% for request in @course_request do %>
             <div class="row">
@@ -25,7 +25,7 @@
                     </p>
                   </a>
                   <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
-                      <div>
+                      <div class='blue-info'>
                         <p> Status: <%= request.status %> </p> 
                           <% if request.permission_number != nil %>
                             <p> PermNo: <%= request.permission_number.number %> (expires on <%=request.permission_number.expire_date%>) </p>
