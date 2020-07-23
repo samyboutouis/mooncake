@@ -1,15 +1,14 @@
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 20px">
   <div class="row">
     <div class="col">
-      <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
-      <%= link_to "Email All", send_all_mailer_path(@course), class:"btn btn-outline-secondary allmailer" %>
-      <div class="table_box">
       <% info = "" %>
+      <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
+      <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 0px 5px;"> Back to Courses</button></a>
+      <%= link_to "Email All", send_all_mailer_path(@course), class:"btn btn-outline-secondary allmailer" %>
       <% @course.cross_listing.each do |id| %>
           <% coursec = Course.find(id) %>
           <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
       <% end %>
-        <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1> <br>
         <% if flash[:alert3] %>
         <div class="alert1", style = "color: red"><%= flash[:alert3] %></div>
         <% end %>
@@ -22,10 +21,7 @@
                 <option value="accept">Accept</option>
                 <option value="deny">Deny</option>
               </select>
-
               <br>
-
-
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
                   <th> <input type="checkbox" name="selected1" class="selectall"/> </th>
@@ -40,13 +36,10 @@
                     <%end%>
                   <% end %>
                     <th> </th>
-
                   <th> Accept/Deny Request </th>
-
                 </tr>
               </thead>
               <tbody>
-
                 <% @course.course_requests.each do |request| %>
                   <tr style="text-align: center; vertical-align: middle;">
                     <td>
@@ -57,7 +50,7 @@
                     <td>
                     <p hidden> 3 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -71,7 +64,7 @@
                       <td>
                         <p class="yes" hidden style="color:green;"> 1 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Yes
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -85,7 +78,7 @@
                       <td>
                         <p class="maybe" hidden style="color:orange;"> 2 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Maybe
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -99,14 +92,13 @@
                       <td>
                         <p class="noo" hidden style="color:red;"> 4 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             No
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
                         </td>
@@ -133,12 +125,8 @@
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
-
-
                   </tr>
                 <% end %>
-
-
                 <% @course.cross_listing.each do |id| %>
                   <% Course.find(id).course_requests.each do |request| %>
                     <tr style="text-align: center; vertical-align: middle;">
@@ -150,7 +138,7 @@
                     <td>
                     <p hidden> 3 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -164,7 +152,7 @@
                       <td>
                         <p class="yes" hidden style="color:green;"> 1 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Yes
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -178,7 +166,7 @@
                       <td>
                         <p class="maybe" hidden style="color:orange;"> 2 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Maybe
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -192,14 +180,13 @@
                       <td>
                         <p class="noo" hidden style="color:red;"> 4 </p>
                         <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             No
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <%=link_to "Yes", rank1_path(request), class:"dropdown-item" %>
                             <%=link_to "Maybe", rank2_path(request), class:"dropdown-item" %>
                             <%=link_to "No", rank3_path(request), class:"dropdown-item" %>
-
                           </div>
                         </div>
                         </td>
@@ -226,15 +213,9 @@
                         <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
-
-
                   </tr>
-
                   <% end %>
                 <% end %>
-
-
-
               </tbody>
           </table>
           <input type="hidden" name="courseid" value="<%= @course.id %>">
@@ -251,8 +232,6 @@
             }
           </script>
         </div>
-      </div>
     </div>
   </div>
 </div>
-<p class="spacer"></p>
