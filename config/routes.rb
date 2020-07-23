@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "dashboard#index"
   get "/faculty" => "dashboard#faculty_index", as: "faculty_page"
   get "/publish/:course" => "dashboard#publish", as: "publish_page"
-  get "/add_user/:course" => "dashboard#add_user", as: "add_user"
+  get "/add_user/:course" => "dashboard#add_user", as: "add_user" 
   post "/add_user2" => "dashboard#add_user2"
   get "/facreqview/:course" => "dashboard#facreqview", as: "requests_page"
   get "/allrequests" => "dashboard#allrequests", as: "allrequests"

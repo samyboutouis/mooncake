@@ -1,11 +1,14 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <div class="box">
+<div class="container">
+  <div class="table_box2">
         <h1 class="title">Email Selected Students </h1> <br>
         <form action="/allmailselected2">
         <input type="hidden" name="selected" value="<%= @selected%>">
         <input type="hidden" name="courseid" value="<%= @course.id%>">
+
+        <div class="form-group">
+            <label for= "To"> To: 
+            <textarea rows="1" name="To" cols="80" disabled> <%= @names %> </textarea>
+          </div>
 
           <div class="form-group"> 
             <label for= "subject"> Subject: 
@@ -22,10 +25,8 @@
               <button type="submit" class="btn btn-dark">Send</button>
           </div>
 
-          </div>
+
         </form>
-      </div>
-    </div>
-  </div>
+ </div>
 </div>
 <p class="spacer"></p>

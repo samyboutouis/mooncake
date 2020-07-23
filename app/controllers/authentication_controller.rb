@@ -35,6 +35,7 @@ class AuthenticationController < ApplicationController
         UserMailer.with(email: user_info["email"]).welcome_email.deliver_now
       end  
       session[:current_user] = User.find_by(net_id: session[:user_id])
+      
       redirect_to ldap_path
       #redirect_to root_url
       # redirect_to 'http://localhost:3000/oauth/logout' 
@@ -63,6 +64,7 @@ class AuthenticationController < ApplicationController
       affiliation = information["edupersonprimaryaffiliation"].join(' ')
       session[:current_user]["grad_year"] = information["dupsexpgradtermc1"].join(' ')
       session[:current_user]["email"] = information["edupersonprincipalname"].join(' ')
+      
       User.find_by(net_id: netid).update(grad_year: session[:current_user]['grad_year'], user_type: affiliation)
       # User.find_by(net_id: session[:current_user]["net_id"]).update(email: session[:current_user]["email"])
       if affiliation.include? 'staff' 

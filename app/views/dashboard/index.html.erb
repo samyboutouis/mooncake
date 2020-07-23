@@ -1,55 +1,41 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col">
-      <div class="box">
-        <div class="header">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-8">
-                <h1 class="title"> Active Requests - <%= @user.first_name %></h1>
-              </div>
-              <div class="col-sm-4">
-                <a href="<%= search_path %>"><button class="btn btn-dark" type="button">Request a permission number</button></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <%= no_request(@user)%>
-        <div class="container">
-        <% i = 0 %>
-        <% for request in @course_request do %>
-          <div class="row">
-            <div class="col">
-              <div class="request-box">
-                <%= active_request(request) %>
-                <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
-                  <p class="course">
-                    <%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number %>
-                    <span class="fa fa-chevron-right pull-right expand-icon"></span>
-                    <span class="fa fa-chevron-down pull-right expand-icon"></span>
-                  </p>
-                </a>
-                <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
-                  <div >
-                    Status: <%= request.status %> <br>
-                      <% if request.permission_number != nil %>
-                        PermNo: <%= request.permission_number.number %> (expires on <%=request.permission_number.expire_date%>) <br>
-                      <% end %>
-                      <%= link_to "View request form", request_form_path(request), method: :get, class:"btn btn-outline-primary" %>
-                      <% if request.status == "Under Review" %>
-                        <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-danger"%>
-                      <% end %>
-                      <p class="spacer"></p>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <% i += 1 %>
-          <% end %>
-        </div>
-      </div>
+      <h1 class="title"> Hello, <%= @user.first_name %>!</h1> <br>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4 order-md-last text-center dash-button">
+      <a href="<%= search_path %>"><button class="btn btn-secondary" style="float: right">Request Permission Number</button></a>
+    </div>
+    <div class="col-md-8 order-md-first">
+      <h1 class="subtitle"> Your Requests</h1>
+      <%= no_request(@user)%>
+      <% i = 0 %>
+      <% for request in @course_request do %>
+        <div class="bluebox">
+          <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample<%= i %>" role="button" aria-expanded="false" aria-controls="multiCollapseExample<%= i %>">
+            <%= active_request(request) %>
+            <p>
+              <%= request.course.department.split("-").first %> <%= request.course.course_number%> - <%= request.course.section_number %>
+              <span class="fa fa-chevron-right pull-right expand-icon"></span>
+              <span class="fa fa-chevron-down pull-right expand-icon"></span>
+            </p>
+          </a>
+          <div class="collapse multi-collapse" id="multiCollapseExample<%= i %>">
+              <div class='blue-info'>
+                <p> Status: <%= request.status %> </p>
+                  <% if request.permission_number != nil %>
+                    <p> PermNo: <%= request.permission_number.number %> (expires on <%=request.permission_number.expire_date%>) </p>
+                  <% end %>
+                  <p><%= link_to "View request form", request_form_path(request), method: :get, class:"btn btn-light" %>
+                  <% if request.status == "Under Review" %>
+                    <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-light btn-outline-danger"%>
+                  <% end %></p>
+              </div>
+          </div>
+          <% i += 1 %>
+        </div>
+      <% end %>
+    </div>
 </div>
-<p class="spacer"></p>

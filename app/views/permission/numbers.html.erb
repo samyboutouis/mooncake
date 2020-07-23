@@ -1,15 +1,16 @@
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 20px">
   <div class="row">
     <div class="col">
-      <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
-      <a href="<%= add_more_permnum_path(@course) %>"><button class="btn btn-outline-secondary" type="button" style= "margin: 20px 10px 5px;"> Upload More Permission Numbers</button></a>
-      <div class="table_box">
       <% info = "" %>
       <% @course.cross_listing.each do |id| %>
           <% coursec = Course.find(id) %>
           <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
       <% end %>
         <h1 class="title"> All Uploaded Permission Numbers for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
+        
+        <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 0px 5px;"> Back to Courses</button></a>
+        <a href="<%= add_more_permnum_path(@course) %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Upload More Permission Numbers</button></a>
+        <p class="spacer"></p>
         <div class="table-responsive">
             <table id="numTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
               <thead>
@@ -178,7 +179,6 @@
                               </div>
                             </div>
                           </div>
-                        </div>
                       </td>
                     <% else %>
                       <td>
@@ -188,13 +188,8 @@
                   <% i += 1 %>
                   <% end %>
                 <% end %>
-
-
-
               </tbody>
           </table>
-        </div>
-      </div>
     </div>
   </div>
 </div>

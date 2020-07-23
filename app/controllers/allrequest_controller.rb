@@ -132,46 +132,29 @@ class AllrequestController < ApplicationController
 
 
     # Custom Mailing
-      def reqmailingall
-      end
-
-      def reqmailingall2
-          @user = User.find_by(net_id: session[:current_user]["net_id"])
-          @user.courses.each do |course|
-          course.course_requests.each  do |request|
-              UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
-              if course.primary == true
-              course.cross_listing.each do |id|
-                  Course.find(id).course_requests.each do |request2|
-                  UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
-                  end
-              end
-              end
-          end
-          end
-          redirect_to allrequests_path
-      end
-
-
-
       def allmailselected
           if params.include?("selected")
-          @selected = (params[:selected]).join("~")
-          course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
-          if course.primary == false
-              @course = Course.find(course.cross_listing[0])
-          else
-              @course = course
-          end
-
+            @selected = (params[:selected]).join("~")
+            course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+            if course.primary == false
+                @course = Course.find(course.cross_listing[0])
+            else
+                @course = course
+            end
+            @names = []
+            for req in (params[:selected]) do
+              request = CourseRequest.find(req)
+              @names.append(request.user.first_name + " " + request.user.last_name)
+            end
+            @names = @names.join(", ")
           else
               redirect_to allrequests_path
           end
-
       end
 
       def allmailselected2
           @course = Course.find(params[:courseid])
+          @sender = User.find_by(net_id: session[:current_user]["net_id"]).id
           for req in (params[:selected]).split("~") do
           request = CourseRequest.find(req)
           UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now

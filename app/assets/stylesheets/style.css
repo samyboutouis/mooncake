@@ -1,18 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 
 body {
-    background-color: #F3F2F1;
+    background-color: F6F6F6;
 }
 
-.box {
+#logo {
+    font-weight: 500;
+    font-size: 24px;
+    color: #00539B;
+}
+
+.logo {
+    height: 100px;
+}
+
+.nav-tabs {
+    color: #00539B;
+    font-size: 24px;
+}
+
+.underline {
+    text-decoration: none;
+}
+
+.navbar-nav > a {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+p {
+    font-family: 'Roboto';
+}
+
+.btn.btn-secondary {
+  background-color: #292b2c; 
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin:auto;
+  height: 68px;
+  width: 200px;
+}
+
+.btn.btn-secondary:hover {
+  background-color: #4E4E4E; /* Green */
+  color: white;
+}
+
+.btn.btn-light {
+  background-color: white; /* Green */
+  color: #00539B;
+  padding: 10px 15px;
+  text-decoration: none;
+  text-align: center;
+  text-decoration: none;
+  margin: .5em .5em .5em 0em;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn.btn-light:hover {
+  background-color: #d3d3d3; /* Green */
+  color: #00539B;
+  text-decoration: none;
+}
+
+.btn.btn-outline-danger {
+  border-color: red;
+  color: red;
+}
+.btn.btn-outline-danger:hover {
+  color: red;
+}
+
+.btn.btn-primary {
+    background-color: #00539B;
+}
+
+.btn.btn-primary:hover {
+    background-color: #00539bde;
+}
+
+/* .box {
     margin: 0 auto;
     margin-top: 2em;
     padding: 2em;
-    width: 90%;
-    background: #E2E6ED;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 35px;
-}
+    width: 70%;
+} */
 
 .table_box {
     margin: 0 auto;
@@ -24,53 +102,80 @@ body {
     border-radius: 35px;
 }
 
-.title {
-    font-family: 'Roboto', sans-serif;
+.table_box2 {
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em;
+    width: 99%;
+   
+}
+
+.table_box2 form {
+    padding-left: 18%;
+}
+
+.heading {
+    font-family: 'Yeseva One', cursive;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 28px;
+    color: #00539B;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hello {
+    font-family: 'Yeseva One', cursive;
+    font-style: normal;
+    font-weight: normal;
     font-size: 30px;
     line-height: 35px;
+    color: #00539B;
+}
+
+.title {
+    font-family: 'Yeseva One', cursive;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+    color: #00539B;
 }
 
 .subtitle {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: rgb(78, 78, 78);
+}
+
+.no_request {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    padding-top: 20px;
+    color: #6D6D6D;
+}
+
+.account {
+    margin-top: 40px;
+}
+
+.account > div {
+    margin-bottom: 30px;
+}
+
+.account-title {
     font-weight: bold;
-    font-size: 25px;
-    line-height: 35px;
-    margin-left: 15px;
+    color: #00539B;
 }
 
-.request-box {
-   padding-left: 10%;
-   width: 93%;
-   margin-top: 20px;
-   background: #FFFFFF;
-   border-radius: 20px;
-   line-height: 61px;
-   margin-left: 3.5%;
-   margin-bottom: 30px;
+.account-table * td {
+    padding-right: 30px;
 }
-
-.faq-box {
-    padding-left: 10%;
-    width: 93%;
-    margin-top: 20px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    line-height: 61px;
-    margin-left: 3.5%;
-    margin-bottom: 30px;
- }
-
-.akioi {
-    width: 93%;
-    margin-top: 20px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    line-height: 25px;
-    margin-bottom: 30px;
- }
 
 .remove-padding {
     padding-left: 0%;
@@ -78,15 +183,6 @@ body {
 
 #view-request > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
     background-color: white;
- }
-
-.course-box{
-    margin-bottom:30px;
-    margin-top:20px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    text-align: center;
-    line-height: 50px;
 }
 
 .create-question{
@@ -103,9 +199,7 @@ body {
     height: 25px;
     width: 25px;
     float: left;
-    margin-left: -7%;
     margin-right: 7%;
-    margin-top: 17px;
 }
 
 .persimmon{
@@ -120,12 +214,8 @@ body {
     background: #A1B70D;
 }
 
-.logo {
-    height: 12vh
-}
-
 .expand-icon {
-    margin-top: 22px;
+    margin-top: 5px;
     margin-right: 5%;
     float: right;
 }
@@ -168,82 +258,26 @@ a[aria-expanded=false] .fa-chevron-down {
     background-color: rgba(255, 0, 0, 0.1) !important;
 }
 
-/* Desktop only */
-@media only screen and (min-width: 1000px){
-    .navbar {
-        height: 14vh;
-    }
-}
-
-/* Mobile only */
-@media only screen and (max-width: 1000px){
-    .request-box {
-        padding-left: 10%;
-        width: 100%;
-        margin-top: 20px;
-        background: #FFFFFF;
-        border-radius: 20px;
-        line-height: 61px;
-        margin-left: 3.5%;
-        margin-bottom: 30px;
-     }
-
-     .faq-box {
-         padding-left: 10%;
-         width: 100%;
-         margin-top: 20px;
-         background: #FFFFFF;
-         border-radius: 20px;
-         line-height: 61px;
-         margin-left: 3.5%;
-         margin-bottom: 30px;
-      }
-
-     .akioi {
-         width: 100%;
-         margin-top: 20px;
-         background: #FFFFFF;
-         border-radius: 20px;
-         line-height: 25px;
-         margin-bottom: 30px;
-      }
-}
-
-
 .header {
     display: flex;
-  }
+}
 
-  .header h1 {
+.header h1 {
     flex-grow: 1;
-  }
+}
 
-  .header {
+.header {
     overflow: hidden;
-  }
+}
 
-  .form-group.required .control-label:after {
+.form-group.required .control-label:after {
     content:" *";
     color:red;
- }
-
-
- .allmailer {
-    margin: 20px 10px 5px;
- }
-
- @media screen and (min-width: 768px) {
-    .modal-dialog {
-      width: 700px; /* New width for default modal */
-    }
-    .modal-sm {
-      width: 350px; /* New width for small modal */
-    }
 }
-@media screen and (min-width: 1000px) {
-    .modal-lg {
-      width: 1000px; /* New width for large modal */
-    }
+
+
+.allmailer {
+    margin: 20px 10px 5px;
 }
 
 .help {
@@ -254,4 +288,150 @@ a[aria-expanded=false] .fa-chevron-down {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.bluebox {
+    background: #00539B;
+    padding: 20px 20px 7px 20px;
+    margin: 20px 20px 40px 0px;
+    width: 100%
+}
+.bluebox:hover {
+    background: #00539bef;
+}
+
+.bluebox p{
+    color:#FFFFFF;
+    padding: 2px 0px 0px 80px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.blue-info{
+    font-weight: 300;
+    padding: 5px 0px 0px 0px;
+}
+
+.faq-box {
+    background: #00539B;
+    padding: 20px 20px 7px 20px;
+    margin: 20px 20px;
+}
+
+.faq-box p{
+    color:#FFFFFF;
+    padding: 2px 20px 0px 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.graybtn {
+    background-color: #6D6D6D;
+    width: 220px;
+    height: 66px;
+}
+
+.graybtn button {
+    color: #FFFFFF;
+}
+
+.collapse-content {
+    margin-left: 65px;
+}
+
+.btn {
+    margin-right: 20px;
+}
+
+.containernew {
+    margin: 40px 80px;
+}
+
+.container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.card, .btn, .form-control, .custom-file-label {
+    border-radius: 5px;
+}
+.btn-outline-primary {
+    border-color: #00539B;
+    color: #00539B;
+}
+
+.btn-outline-primary:hover {
+    border-color: #00539B;
+    color: #00539B;
+    background-color: #eeeeee;
+}
+
+.dash-button {
+    padding-top:20px;
+}
+
+.fac-space {
+    margin: 0px 20px 20px 0px;
+}
+
+@media screen and (min-width: 768px) {
+    .modal-dialog {
+      width: 700px; /* New width for default modal */
+    }
+    .modal-sm {
+      width: 350px; /* New width for small modal */
+    }
+}
+
+/* Desktop only */
+@media only screen and (min-width: 1000px){
+    .navbar {
+        height: 14vh;
+    }
+
+    .modal-lg {
+        width: 1000px; /* New width for large modal */
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .btn.btn-secondary {
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+/* Mobile only */
+@media only screen and (max-width: 1000px){
+    #logo {
+        font-size: 20px;
+    }
+
+    .nav-tabs {
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .bluebox {
+        background: #00539B;
+        padding: 20px 20px 7px 20px;
+        margin: 20px 0px 40px 0px;
+    }
+
+    .dash-button {
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+    .bluebox p{
+        padding: 2px 0px 0px 40px;
+    }
+}
+.status {
+    font-weight: 300;
+}
+
+.perm {
+    float: right;
+    font-style: italic;
+    font-weight: 400;
 }

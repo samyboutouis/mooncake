@@ -82,6 +82,7 @@ function getCrossListings(element) {
       $("#othercourses").empty();
       for(let i = 0; i < selected; i++) {
         $("#othercourses").append($('<h3/>', {
+          class: "subtitle",
           style: "margin: 10px 8px 10px 0px",
           text: "Cross-listed Course " + (i+2),
         }));
@@ -91,12 +92,13 @@ function getCrossListings(element) {
         }));
         $("#container" + (i+1)).append($('<div/>', {
           class: "row",
-          id: "row" + (i+1)
+          id: "row" + (i+1),
+          style: "padding-left:0"
         }));
         $("#row" + (i+1)).append($('<div/>', {
           class: "form-group col-sm-8",
           id: "col1_"+(i+1),
-          style: "padding: 10px 20px 0px"
+          style: "padding: 10px 0 0px"
         }))
         $("#col1_"+(i+1)).append($('<label/>', {
           for: 'department'+(i+1),
@@ -104,7 +106,7 @@ function getCrossListings(element) {
         }));
         $("#col1_"+(i+1)).append($("<select/>", {
           name: "department"+(i+1),
-          class: "form-control",
+          class: "form-control courseDept" + (i+2),
           required: true,
           id: "department"+(i+1)
         }))
@@ -125,7 +127,7 @@ function getCrossListings(element) {
         $("#row" + (i+1)).append($('<div/>', {
           class: "form-group col-sm-4",
           id: "col2_"+(i+1),
-          style: "padding: 10px 20px 0px"
+          style: "padding: 10px 0 0px 20px"
         }))
         $("#col2_"+(i+1)).append($('<label/>', {
           for: 'course_number'+(i+1),
@@ -146,7 +148,7 @@ function getCrossListings(element) {
         $("#row2_" + (i+1)).append($('<div/>', {
           class: "form-group col",
           id: "col3_"+(i+1),
-          style: "padding: 10px 20px 0px"
+          style: "padding: 10px 0 0px"
         }));
         $("#col3_"+(i+1)).append($('<label/>', {
           text: "Permission Number:"
@@ -182,6 +184,7 @@ function getAdditionalSections(element) {
   if (update){
     for (var i=0; i<selected; i++){
       $("#othersections").append($('<h3/>', {
+        class: "subtitle",
         style: "margin: 10px 8px 10px 0px",
         text: "Section " + (i+2),
       }));
@@ -196,7 +199,7 @@ function getAdditionalSections(element) {
       $("#row3_" + (i+1)).append($('<div/>', {
         class: "form-group col-sm-6",
         id: "col4_"+(i+1),
-        style: "padding: 10px 20px 0px"
+        style: "padding: 10px 0 0px"
       }));
       $("#col4_"+(i+1)).append($('<label/>', {
         for: 'section_number'+(i+1),
@@ -213,7 +216,7 @@ function getAdditionalSections(element) {
       $("#row3_" + (i+1)).append($('<div/>', {
         class: "form-group col-sm-6",
         id: "col5_"+(i+1),
-        style: "padding: 10px 20px 0px"
+        style: "padding: 10px 0 0px"
       }));
       $("#col5_"+(i+1)).append($('<label/>', {
         for: 'section_capacity'+(i+1),
@@ -227,6 +230,7 @@ function getAdditionalSections(element) {
         class: "form-control",
         placeholder: "Ex: 30"
       }));
+      let dept = 1;
       for (var j=0; j<=num-2; j++){
         var k = num*(i+1)+j+1;
         $("#container2_" + (i+1)).append($('<div/>', {
@@ -236,10 +240,11 @@ function getAdditionalSections(element) {
         $("#row4_" + k).append($('<div/>', {
           class: "form-group col",
           id: "col7_"+k,
-          style: "padding: 10px 20px 0px"
+          style: "padding: 10px 0 0px"
         }));
         $("#col7_"+ k).append($('<h4/>', {
-          text: "Section " + (i+2) + " For Cross-listed Course "+(j+1)
+          class: "subtitle",
+          text: "Section " + (i+2) + " For " + $(".courseDept" + dept).val() + " Course"
         }));
         $("#col7_"+k).append($('<label/>', {
           text: "Permission Numbers:"
@@ -261,12 +266,14 @@ function getAdditionalSections(element) {
           class: "custom-file-label",
           for: "customFile"+k
         }));
+        dept += 1;
       }
     }
   }
   else {
     for(let i = 0; i < selected; i++) {
       $("#othersections").append($('<h3/>', {
+        class: "subtitle",
         style: "margin: 10px 8px 10px 0px",
         text: "Section " + (i+2),
       }));
@@ -281,7 +288,7 @@ function getAdditionalSections(element) {
       $("#row3_" + (i+1)).append($('<div/>', {
         class: "form-group col-sm-6",
         id: "col4_"+(i+1),
-        style: "padding: 10px 20px 0px"
+        style: "padding: 10px 0 0px"
       }));
       $("#col4_"+(i+1)).append($('<label/>', {
         for: 'section_number'+(i+1),
@@ -298,7 +305,7 @@ function getAdditionalSections(element) {
       $("#row3_" + (i+1)).append($('<div/>', {
         class: "form-group col-sm-6",
         id: "col5_"+(i+1),
-        style: "padding: 10px 20px 0px"
+        style: "padding: 10px 0 0px 20px"
       }));
       $("#col5_"+(i+1)).append($('<label/>', {
         for: 'section_capacity'+(i+1),
@@ -319,7 +326,7 @@ function getAdditionalSections(element) {
       $("#row4_" + (i+1)).append($('<div/>', {
         class: "form-group col",
         id: "col6_"+(i+1),
-        style: "padding: 10px 20px 0px"
+        style: "padding: 10px 0 0px"
       }));
       $("#col6_" + (i+1)).append($('<div/>', {
         class: "custom-file",

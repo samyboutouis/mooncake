@@ -1,33 +1,29 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col">
-      <div class="box">
-        <h1 class="title"> Request form for <%= @course_request.course.department.split("-").first + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h1>
-        <div class="container" style="padding-top: 20px">
-          <div class="row">
-            <div class="col">
-              <% for answer in @course_request.answers %>
-                  <p style = "font-weight: bold"><%= answer.question.question_text %><p>
-                <% if answer.question.question_type == "Checkbox" %>
-                      <% for option in answer.question.option do %>
-                        <% if answer.answer_text.split("~").include? option %>
-                            <input type="checkbox" checked disabled><%= option %> <br>
-                        <% else%>
-                            <input type="checkbox" disabled> <%= option %> <br>
-                        <% end %>
-                      <% end %>   
-                <% elsif answer.question.question_type == "Long Answer" %>
-                  <textarea class="form-control" rows=5 disabled><%= answer.answer_text %></textarea>
-                <% else %>
-                  <textarea class="form-control" rows=1 style="margin-bottom: 15px" disabled><%= answer.answer_text %></textarea>
-                <% end %>
+      <h1 class="title" style="margin-left: 15px"> Request form for <%= @course_request.course.department.split("-").first + " " + @course_request.course.course_number + " " + @course_request.course.section_number%> </h1>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <% for answer in @course_request.answers %>
+                <p style = "font-weight: bold"><%= answer.question.question_text %><p>
+              <% if answer.question.question_type == "Checkbox" %>
+                    <% for option in answer.question.option do %>
+                      <% if answer.answer_text.split("~").include? option %>
+                          <input type="checkbox" checked disabled><%= option %> <br>
+                      <% else%>
+                          <input type="checkbox" disabled> <%= option %> <br>
+                      <% end %>
+                    <% end %>   
+              <% elsif answer.question.question_type == "Long Answer" %>
+                <textarea class="form-control" rows=5 disabled><%= answer.answer_text %></textarea>
+              <% else %>
+                <textarea class="form-control" rows=1 style="margin-bottom: 15px" disabled><%= answer.answer_text %></textarea>
               <% end %>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<p class="spacer"></p>

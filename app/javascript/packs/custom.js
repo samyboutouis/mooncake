@@ -27,6 +27,10 @@ $(document).ready(function () {
   })
 
 });
+$('input[type=text]').tooltip({
+   placement: "right",
+   trigger: "focus"
+});
 
 $(function(){
     var current = location.pathname;
@@ -42,13 +46,11 @@ $(function(){
 function getDepartment(element) {
   let selected = element.val();
   $(".department").empty();
-  console.log
   $.ajax('/term', {
     type: 'GET',
     dataType: 'json',
     data: {term: selected},
     success: function(result) {
-      console.log('Success');
       result.sort(function(a, b) {
         return compareStrings(a.department, b.department);
       })
@@ -79,7 +81,6 @@ function getNumber(element) {
       result.sort(function(a, b) {
         return compareStrings(a.course_number, b.course_number);
       })
-      console.log('Success');
       $(".number").append("<option value=''>Choose Course Number</option>");
       let used = [];
       for (var i = 0; i < result.length; i++) {
@@ -108,7 +109,6 @@ function getSection(element) {
       result.sort(function(a, b) {
         return compareStrings(a.section_number, b.section_number);
       })
-      console.log('Success');
       $(".section").append("<option value=''>Choose Section Number</option>");
       for (var i = 0; i < result.length; i++) {
         $(".section").append("<option>" + result[i].section_number + "</option>");
