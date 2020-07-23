@@ -115,14 +115,14 @@
                   <% end %></p>
                 <%end%>
                 <% if course.published == false %>
-                    <p><%= link_to "Edit Questions", question_path(course), method: :get, class:"btn btn-light" %>
-                    <%= link_to "Publish Form", publish_page_path(course), method: :get, class:"btn btn-light", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%>
-                    <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-light" %>
+                    <p><%= link_to "Edit Questions", question_path(course), method: :get, class:"btn btn-light btn-outline-primary" %>
+                    <%= link_to "Publish Form", publish_page_path(course), method: :get, class:"btn btn-light btn-outline-primary", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%>
+                    <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-light btn-outline-primary" %>
                     <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-light btn-outline-danger" %></p>
                 <% else %>
-                    <p><%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-light" %>
-                    <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-light" %>
-                    <%= link_to "Add Course Manager", add_user_path(course), method: :get, class:"btn btn-light" %>
+                    <p><%= link_to "View Requests", requests_page_path(course), method: :get, class:"btn btn-light btn-outline-primary" %>
+                    <%= link_to "View Uploaded Numbers", numbers_path(course), method: :get, class:"btn btn-light btn-outline-primary" %>
+                    <%= link_to "Add Course Manager", add_user_path(course), method: :get, class:"btn btn-light btn-outline-primary" %>
                     <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-light btn-outline-danger" %></p>
                 <% end %>
               </div>
