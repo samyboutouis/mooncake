@@ -10,13 +10,13 @@
     <div class="col-md-5 order-md-last text-center dash-button">
       <% if @user.courses.count > 1 %>
         <div class="text-center my-auto">
-          <a href="<%= new_course_path %>" ><button class="btn btn-secondary " type="button" data-toggle="tooltip" data-placement="top" title="Add a course for a student to start requesting numbers!">Add Course</button></a>
+          <a href="<%= new_course_path %>" ><button class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto" margin-right: auto" type="button" data-toggle="tooltip" data-placement="top" title="Add a course for a student to start requesting numbers!">Add Course</button></a>
         </div><br>
         <div class="text-center my-auto">
-          <a href="<%= allrequests_path %>"><button class="btn btn-secondary" type="button"> All Courses Requests</button></a>
+          <a href="<%= allrequests_path %>"><button class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto" margin-right: auto" type="button"> All Courses Requests</button></a>
         </div><br>
         <div class="text-center my-auto">
-          <a><button type="button" class="greysquarebutton" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+          <a><button type="button" class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
           <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
               <div class="modal-content">
@@ -38,10 +38,10 @@
         </div><br>
       <% else %>
         <div class="text-center my-auto"><br>
-          <a href="<%= new_course_path %>" ><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create Course</button></a>
+          <a href="<%= new_course_path %>" ><button type="button" class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create Course</button></a>
         </div>
         <div class="text-center my-auto"><br>
-          <a><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+          <a><button type="button" class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
           <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
               <div class="modal-content">

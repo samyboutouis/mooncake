@@ -44,6 +44,7 @@ p {
   font-size: 16px;
   margin:auto;
   height: 66px;
+  width: 200px;
 }
 
 .btn.btn-secondary:hover {
@@ -313,6 +314,7 @@ a[aria-expanded=false] .fa-chevron-down {
 .container {
     margin-top: 5%
 }
+
 .card, .btn, .form-control, .custom-file-label {
     border-radius: 0;
 }
@@ -329,6 +331,10 @@ a[aria-expanded=false] .fa-chevron-down {
 
 .dash-button {
     padding-top:20px;
+}
+
+.fac-space {
+    margin: 0px 20px 20px 0px;
 }
 
 @media screen and (min-width: 768px) {
