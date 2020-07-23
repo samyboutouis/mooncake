@@ -12,8 +12,8 @@
         <div class="table-responsive">
         <form action = "/allmailselected">
             <table id="allrequestsTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
-              
-              <select name="select_action" id="selected_action" class="btn btn-primary" onchange="SelectAction()" style="visibility: hidden;margin: 0 0 20px 0"> 
+
+              <select name="select_action" id="selected_action" class="btn btn-primary" onchange="SelectAction()" style="visibility: hidden;margin: 0 0 20px 0">
                     <option value="">For Selected Requests</option>
                     <option value="email">Email</option>
                     <option value="accept">Accept</option>
@@ -60,8 +60,8 @@
 
                             <td>
                                 <% if request.status == "Under Review"%>
-                                    <%= link_to "Accept", acceptview_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}?"}, class:"btn btn-success btn-sm accept"%>
-                                    <%= link_to "Deny", denyview_path(request), data: {confirm: "Are you sure you want to deny #{request.answers.first.answer_text}?"}, class:"btn btn-danger btn-sm accept"%>
+                                    <%= link_to "Accept", acceptview_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}? An email will be sent alerting them of a request status change."}, class:"btn btn-success btn-sm accept"%>
+                                    <%= link_to "Deny", denyview_path(request), data: {confirm: "Are you sure you want to deny #{request.answers.first.answer_text}? An email will be sent alerting them of a request status change."}, class:"btn btn-danger btn-sm accept"%>
                                 <% elsif request.status == "Denied"%>
                                     <p style="color:red;"> Denied </p>
                                 <% else %>
@@ -96,8 +96,8 @@
 
                             <td>
                                 <% if request.status == "Under Review"%>
-                                    <%= link_to "Accept", acceptview_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}?"}, class:"btn btn-success btn-sm accept"%>
-                                    <%= link_to "Deny", denyview_path(request), data: {confirm: "Are you sure you want to deny #{request.answers.first.answer_text}?"}, class:"btn btn-danger btn-sm accept"%>
+                                    <%= link_to "Accept", acceptview_path(request), data: {confirm: "Are you sure you want to accept #{request.answers.first.answer_text}? An email will be sent alerting them of a request status change."}, class:"btn btn-success btn-sm accept"%>
+                                    <%= link_to "Deny", denyview_path(request), data: {confirm: "Are you sure you want to deny #{request.answers.first.answer_text}? An email will be sent alerting them of a request status change."}, class:"btn btn-danger btn-sm accept"%>
                                 <% elsif request.status == "Denied"%>
                                     <p style="color:red;"> Denied </p>
                                 <% else %>
