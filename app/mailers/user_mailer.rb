@@ -41,11 +41,11 @@ class UserMailer < ApplicationMailer
   def email_student
     course = Course.find(params[:course])
     em = course.department.split(" ").first + "-" + course.course_number + "-" + course.section_number + "@duke.edu"
-    @sender = params[:sender]
+    @sender = User.find(params[:sender])
     email = params[:email]
     subject = params[:subject]
     @body = params[:body]
-    mail(to: email, from: em, subject: subject)
+    mail(to: email, from: em, cc: @sender.email, subject: subject)
   end 
 
   def shared_course
