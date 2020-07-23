@@ -374,6 +374,9 @@ a[aria-expanded=false] .fa-chevron-down {
     "footer footer footer footer";
 }
 
+.container {
+    margin-top: 5%
+}
 .card, .btn, .form-control, .custom-file-label {
     border-radius: 0;
 }
