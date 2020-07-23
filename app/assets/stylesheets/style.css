@@ -43,7 +43,6 @@ p {
   display: inline-block;
   font-size: 16px;
   margin:auto;
-  width: 15vw;
   height: 66px;
 }
 
@@ -117,6 +116,7 @@ p {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;
+    padding-top: 20px;
     color: #6D6D6D;
 }
 
@@ -227,70 +227,26 @@ a[aria-expanded=false] .fa-chevron-down {
     background-color: rgba(255, 0, 0, 0.1) !important;
 }
 
-/* Desktop only */
-@media only screen and (min-width: 1000px){
-    .navbar {
-        height: 14vh;
-    }
-}
-
-/* Mobile only */
-@media only screen and (max-width: 1000px){
-    .request-box {
-        padding-left: 10%;
-        width: 100%;
-        margin-top: 20px;
-        background: #FFFFFF;
-        border-radius: 20px;
-        line-height: 61px;
-        margin-left: 3.5%;
-        margin-bottom: 30px;
-     }
-
-    #logo {
-        font-size: 20px;
-    }
-
-    .nav-tabs {
-        font-size: 16px;
-    }
-}
-
-
 .header {
     display: flex;
-  }
+}
 
-  .header h1 {
+.header h1 {
     flex-grow: 1;
-  }
+}
 
-  .header {
+.header {
     overflow: hidden;
-  }
+}
 
-  .form-group.required .control-label:after {
+.form-group.required .control-label:after {
     content:" *";
     color:red;
- }
-
-
- .allmailer {
-    margin: 20px 10px 5px;
- }
-
- @media screen and (min-width: 768px) {
-    .modal-dialog {
-      width: 700px; /* New width for default modal */
-    }
-    .modal-sm {
-      width: 350px; /* New width for small modal */
-    }
 }
-@media screen and (min-width: 1000px) {
-    .modal-lg {
-      width: 1000px; /* New width for large modal */
-    }
+
+
+.allmailer {
+    margin: 20px 10px 5px;
 }
 
 .help {
@@ -306,7 +262,7 @@ a[aria-expanded=false] .fa-chevron-down {
 .bluebox {
     background: #00539B;
     padding: 20px 20px 7px 20px;
-    margin: 20px 20px;
+    margin: 20px 20px 40px 0px;
 }
 
 .bluebox p{
@@ -346,32 +302,12 @@ a[aria-expanded=false] .fa-chevron-down {
     margin-left: 65px;
 }
 
-.item-a {
-    grid-area: header;
-}
-.item-b {
-    grid-area: main;
-}
-.item-c {
-    grid-area: sidebar;
-}
-.item-d {
-    grid-area: footer;
-}
-
 .btn {
     margin-right: 20px;
 }
 
 .containernew {
     margin: 40px 80px;
-    display: grid;
-    grid-template-columns: 20% 50% 10% 20%;
-    grid-template-rows: auto;
-    grid-template-areas:
-    "header header header header"
-    "main main . sidebar"
-    "footer footer footer footer";
 }
 
 .card, .btn, .form-control {
@@ -386,4 +322,58 @@ a[aria-expanded=false] .fa-chevron-down {
     border-color: #00539B;
     color: #00539B;
     background-color: #eeeeee;
+}
+
+.dash-button {
+    padding-top:20px;
+}
+
+@media screen and (min-width: 768px) {
+    .modal-dialog {
+      width: 700px; /* New width for default modal */
+    }
+    .modal-sm {
+      width: 350px; /* New width for small modal */
+    }
+}
+
+/* Desktop only */
+@media only screen and (min-width: 1000px){
+    .navbar {
+        height: 14vh;
+    }
+
+    .modal-lg {
+        width: 1000px; /* New width for large modal */
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .btn.btn-secondary {
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+/* Mobile only */
+@media only screen and (max-width: 1000px){
+    #logo {
+        font-size: 20px;
+    }
+
+    .nav-tabs {
+        font-size: 16px;
+    }
+
+    .bluebox {
+        background: #00539B;
+        padding: 20px 20px 7px 20px;
+        margin: 20px 0px 40px 0px;
+    }
+
+    .dash-button {
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
 }
