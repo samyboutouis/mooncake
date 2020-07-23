@@ -172,6 +172,16 @@ class FacreqviewController < ApplicationController
 
   def mailingall
       @course = Course.find(params[:course])
+      @names = []
+      @course.course_requests.each  do |request|
+        @names.append(request.user.first_name + " " + request.user.last_name)
+      end
+      @course.cross_listing.each do |id|
+        Course.find(id).course_requests.each do |request2|
+          @names.append(request2.user.first_name + " " + request2.user.last_name)
+        end
+      end
+      @names = @names.join(", ")
   end
 
   def mailingall2
@@ -195,16 +205,22 @@ class FacreqviewController < ApplicationController
 
   def mailselected
       if params.include?("selected")
-      @selected = (params[:selected]).join("~")
-      course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
-      if course.primary == false
-          @course = Course.find(course.cross_listing[0])
-      else
-          @course = course
-      end
+        @selected = (params[:selected]).join("~")
+        course = Course.find(CourseRequest.find(params[:selected][0]).course.id)
+        if course.primary == false
+            @course = Course.find(course.cross_listing[0])
+        else
+            @course = course
+        end
+        @names = []
+        for req in (params[:selected]) do
+          request = CourseRequest.find(req)
+          @names.append(request.user.first_name + " " + request.user.last_name)
+        end
+        @names = @names.join(", ")
 
       else
-      redirect_to requests_page_path(params[:courseid])
+        redirect_to requests_page_path(params[:courseid])
       end
 
   end
