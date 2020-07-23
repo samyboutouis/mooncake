@@ -34,7 +34,7 @@ p {
     font-family: 'Roboto';
 }
 
-.greysquarebutton {
+.btn.btn-secondary {
   background-color: #6D6D6D; /* Green */
   border: none;
   color: white;
@@ -47,14 +47,13 @@ p {
   height: 66px;
 }
 
-.greysquarebutton:hover {
+.btn.btn-secondary:hover {
   background-color: #4E4E4E; /* Green */
   color: white;
 }
 
-.whitesquarebutton {
+.btn.btn-light {
   background-color: white; /* Green */
-  border: none;
   color: #00539B;
   padding: 10px 15px;
   text-decoration: none;
@@ -65,10 +64,18 @@ p {
   font-size: 16px;
 }
 
-.whitesquarebutton:hover {
+.btn.btn-light:hover {
   background-color: #d3d3d3; /* Green */
   color: #00539B;
   text-decoration: none;
+}
+
+.btn.btn-outline-danger {
+  border-color: red;
+  color: red;
+}
+.btn.btn-outline-danger:hover {
+  color: red;
 }
 
 /* .box {
@@ -113,15 +120,6 @@ p {
     color: #6D6D6D;
 }
 
-/* .subtitle {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 25px;
-    line-height: 35px;
-    margin-left: 15px;
-} */
-
 .account {
     margin-top: 40px;
 }
@@ -138,17 +136,6 @@ p {
 .account-table * td {
     padding-right: 30px;
 }
-
-.faq-box {
-    padding-left: 10%;
-    width: 93%;
-    margin-top: 20px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    line-height: 61px;
-    margin-left: 3.5%;
-    margin-bottom: 30px;
- }
 
 .remove-padding {
     padding-left: 0%;
@@ -260,26 +247,6 @@ a[aria-expanded=false] .fa-chevron-down {
         margin-bottom: 30px;
      }
 
-     .faq-box {
-         padding-left: 10%;
-         width: 100%;
-         margin-top: 20px;
-         background: #FFFFFF;
-         border-radius: 20px;
-         line-height: 61px;
-         margin-left: 3.5%;
-         margin-bottom: 30px;
-      }
-
-     .akioi {
-         width: 100%;
-         margin-top: 20px;
-         background: #FFFFFF;
-         border-radius: 20px;
-         line-height: 25px;
-         margin-bottom: 30px;
-    }
-
     #logo {
         font-size: 20px;
     }
@@ -353,6 +320,18 @@ a[aria-expanded=false] .fa-chevron-down {
     padding: 5px 0px 0px 0px;
 }
 
+.faq-box {
+    background: #00539B;
+    padding: 20px 20px 7px 20px;
+    margin: 20px 20px;
+}
+
+.faq-box p{
+    color:#FFFFFF;
+    padding: 2px 20px 0px 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
 .graybtn {
     background-color: #6D6D6D;
     width: 220px;
@@ -401,4 +380,10 @@ a[aria-expanded=false] .fa-chevron-down {
 .btn-outline-primary {
     border-color: #00539B;
     color: #00539B;
+}
+
+.btn-outline-primary:hover {
+    border-color: #00539B;
+    color: #00539B;
+    background-color: #eeeeee;
 }

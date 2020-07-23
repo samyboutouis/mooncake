@@ -7,6 +7,11 @@
         <input type="hidden" name="selected" value="<%= @selected%>">
         <input type="hidden" name="courseid" value="<%= @course.id%>">
 
+        <div class="form-group">
+            <label for= "To"> To: 
+            <textarea rows="1" name="To" cols="80" disabled> <%= @names %> </textarea>
+          </div>
+
           <div class="form-group"> 
             <label for= "subject"> Subject: 
             <input type="text" name="subject">
