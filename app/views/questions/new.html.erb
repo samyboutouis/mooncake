@@ -1,40 +1,40 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col">
-      <div class="box">
-        <h1 class="title">Create a Question</h1>
-        <%= form_for @question, url: questions_url(@course), html: { method: :put } do |f| %>
-          <div class="form-row">
-            <div class="form-group col-md-4" style="padding: 10px 20px 0px">
-              <label for="question_question_type">Question type: </label>
-              <select name="question[question_type]" id="question_question_type" class="form-control">
-                  <option value="">Select One</option>
-                  <option value="Short Answer">Short Answer</option>
-                  <option value="Long Answer">Long Answer</option>
-                  <option value="Checkbox">Choice: Multiple Answer</option>
-                  <option value="Radio">Choice: Single Answer</option>
-              </select>
-            </div>
-            <div class="form-group col-md-8" style="padding: 10px 20px 0px">
-              <%= f.label :question_text, "Question: " %>
-              <%= f.text_field :question_text, class: "form-control" %>
-            </div>
+      <h1 class="title" style="margin-bottom: 30px">Create a Question</h1>
+      <%= form_for @question, url: questions_url(@course), html: { method: :put } do |f| %>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="question_question_type">Question type: </label>
+            <select name="question[question_type]" id="question_question_type" class="form-control">
+                <option value="">Select One</option>
+                <option value="Short Answer">Short Answer</option>
+                <option value="Long Answer">Long Answer</option>
+                <option value="Checkbox">Choice: Multiple Answer</option>
+                <option value="Radio">Choice: Single Answer</option>
+            </select>
           </div>
-          <div class="form-row" style="padding: 10px 20px 0px">
-            <div class="form-group col">
-              <div id="question-choice"></div>
-            </div>
+          <div class="form-group col-md-8">
+            <%= f.label :question_text, "Question: " %>
+            <%= f.text_field :question_text, class: "form-control" %>
           </div>
-          <div class="form-group row" style="padding: 10px 20px 0px">
-            <div class="form-group col-4">
-              <div id="question-options"></div>
-            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+            <div id="question-choice"></div>
           </div>
-          <div class="create-question">
+        </div>
+        <div class="form-group row">
+          <div class="form-group col-4">
+            <div id="question-options"></div>
+          </div>
+        </div>
+        <div class=" form-group row create-question">
+          <div class="form-group col-4">
             <%= f.submit class:"btn btn-dark " "Create" %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
