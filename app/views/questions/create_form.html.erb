@@ -1,7 +1,6 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col">
-      <div class="box">
         <% info = "" %>
         <% @course.cross_listing.each do |id| %>
             <% coursec = Course.find(id) %>
@@ -13,7 +12,6 @@
             is only intended to assess preparedness and academic background.</p>
         <div class="container">
         <form action = "/save_template" >
-            
             <input type="hidden" name="course" value="<%= @course.id %>">
             <input type="text" name="template_name" placeholder="template name" required >
             <button type="submit" class="btn btn-secondary" >Save Template </button>
@@ -28,10 +26,7 @@
             </div>
         </div>
         </form>
-  
         <br>
-
-        
             <% @course.questions.each do |question| %>
                 <div class="form-group required">
                     <p class="control-label"><%= question.question_text %></p>
@@ -50,22 +45,18 @@
                     <% elsif question.question_type == "Long Answer" %>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="reasons" disabled></textarea>
                     <% else %>
-                        <input type= "text" class="form-control" id="reasons"  name="reasons" disabled>
+                        <input type= "text" class="form-control" name="reasons" disabled>
                     <% end %>
-
                     <%if question.id > 5 and question.question_text != "Which prerequisite(s) have you satisfied:" %>
                         <%= link_to "Delete", delete_question_path(question,@course.id), method: :delete , class:"btn btn-outline-danger btn-sm", style:"margin:10px 0px 10px"%>
                     <%end%>
                 </div>
             <% end %>
-
             <%= link_to "Add Question", new_question_path(@course), class:"btn btn-outline-dark", style:"margin:10px 0px 10px" %>
             <%= link_to "Save Form", faculty_page_path, class:"btn btn-outline-dark ", style:"margin:10px 0px 10px;" %>
             <b data-toggle="tooltip" data-placement="top" title="Your class will be visible for students to begin making requests"><%= link_to "Publish Form", publish_page_path(@course), method: :get, class:"btn btn-dark", data: { confirm:"Are you sure you want to publish the form? You will not be able to make changes to form after you publish." }%></b>
-
         </div>
       </div>
     </div>
   </div>
 </div>
-<p class="spacer"></p>

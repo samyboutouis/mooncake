@@ -34,7 +34,7 @@ p {
     font-family: 'Roboto';
 }
 
-.greysquarebutton {
+.btn.btn-secondary {
   background-color: #6D6D6D; /* Green */
   border: none;
   color: white;
@@ -47,14 +47,13 @@ p {
   height: 66px;
 }
 
-.greysquarebutton:hover {
+.btn.btn-secondary:hover {
   background-color: #4E4E4E; /* Green */
   color: white;
 }
 
-.whitesquarebutton {
+.btn.btn-light {
   background-color: white; /* Green */
-  border: none;
   color: #00539B;
   padding: 10px 15px;
   text-decoration: none;
@@ -65,10 +64,18 @@ p {
   font-size: 16px;
 }
 
-.whitesquarebutton:hover {
+.btn.btn-light:hover {
   background-color: #d3d3d3; /* Green */
   color: #00539B;
   text-decoration: none;
+}
+
+.btn.btn-outline-danger {
+  border-color: red;
+  color: red;
+}
+.btn.btn-outline-danger:hover {
+  color: red;
 }
 
 /* .box {
@@ -112,15 +119,6 @@ p {
     font-weight: 500;
     color: #6D6D6D;
 }
-
-/* .subtitle {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 25px;
-    line-height: 35px;
-    margin-left: 15px;
-} */
 
 .account {
     margin-top: 40px;
@@ -401,4 +399,10 @@ a[aria-expanded=false] .fa-chevron-down {
 .btn-outline-primary {
     border-color: #00539B;
     color: #00539B;
+}
+
+.btn-outline-primary:hover {
+    border-color: #00539B;
+    color: #00539B;
+    background-color: #eeeeee;
 }
