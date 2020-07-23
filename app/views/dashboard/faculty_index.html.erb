@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col">
       <h1 class="title"> Hello, <%= @user.first_name %>!</h1> <br>
-      <%= no_course(@user)%>
     </div>
   </div>
   <div class="row">
@@ -24,6 +23,7 @@
       <h1 class="subtitle"> Your Courses</h1>
       <div class="row">
         <div class="col">
+          <%= no_course(@user)%>
           <% i = 0 %>
           <% @courses.each do |course| %>
             <div class="bluebox">
