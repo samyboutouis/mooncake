@@ -77,6 +77,14 @@ p {
   color: red;
 }
 
+.btn.btn-primary {
+    background-color: #00539B;
+}
+
+.btn.btn-primary:hover {
+    background-color: #00539bde;
+}
+
 /* .box {
     margin: 0 auto;
     margin-top: 2em;
@@ -289,7 +297,7 @@ a[aria-expanded=false] .fa-chevron-down {
     width: 100%
 }
 .bluebox:hover {
-    background: #004d91;
+    background: #00539bef;
 }
 
 .bluebox p{
