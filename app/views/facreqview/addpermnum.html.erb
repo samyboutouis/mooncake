@@ -1,5 +1,4 @@
-<div class="col">
-<div class="box">
+<div class="container">
   <h1 class="title">More Permission Numbers Required for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%></h1>
   <p>Oh no! You have run out of permission numbers for this course. Please upload another excel file from DukeHub.</p>
   <%= form_tag({action: :add}, multipart: true) do %>
