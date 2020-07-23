@@ -14,6 +14,7 @@ $(document).ready(function () {
                 targets: [0]
             }],
         order: [[ 1, 'asc' ]],
+        stateSave: true,
 
 
         "fnDrawCallback": function(){

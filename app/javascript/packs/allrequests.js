@@ -8,7 +8,8 @@ $(document).ready( function () {
                 orderable: false,
                 targets: [0]
             }],
-            order: [[ 1, 'asc' ]]
+            order: [[ 1, 'asc' ]],
+            stateSave: true,
   });
 
     $("#email-all").on('click', function() {
