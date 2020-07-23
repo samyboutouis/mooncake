@@ -8,7 +8,7 @@
       <% end %>
         <h1 class="title"> All Uploaded Permission Numbers for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
         
-        <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Back to Courses</button></a>
+        <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 0px 5px;"> Back to Courses</button></a>
         <a href="<%= add_more_permnum_path(@course) %>"><button class="btn btn-dark" type="button" style= "margin: 20px 10px 5px;"> Upload More Permission Numbers</button></a>
         <p class="spacer"></p>
         <div class="table-responsive">

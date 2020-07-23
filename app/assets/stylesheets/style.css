@@ -127,12 +127,10 @@ p {
 }
 
 .title {
-    font-family: 'Roboto', sans-serif;
-    font-size: smaller;
-    text-transform: uppercase;
+    font-family: 'Yeseva One', cursive;
     font-style: normal;
     font-weight: normal;
-    font-size: 27px;
+    font-size: 30px;
     line-height: 35px;
     color: #00539B;
 }
@@ -289,6 +287,9 @@ a[aria-expanded=false] .fa-chevron-down {
     padding: 20px 20px 7px 20px;
     margin: 20px 20px 40px 0px;
     width: 100%
+}
+.bluebox:hover {
+    background: #004d91;
 }
 
 .bluebox p{
