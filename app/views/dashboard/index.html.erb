@@ -1,7 +1,7 @@
 <div class="containernew">         
   <div class="col-sm-8 item-a">
-    <h1 class="hello"> Hello, <%= @user.first_name %>!</h1> <br>
-    <h1 class="title"> Your Requests</h1>
+    <h1 class="title"> Hello, <%= @user.first_name %>!</h1> <br>
+    <h1 class="subtitle"> Your Requests</h1>
     <%= no_request(@user)%>
   </div>
   <div class="col-sm-4 item-c">
@@ -29,7 +29,7 @@
                     <% end %>
                     <p><%= link_to "View request form", request_form_path(request), method: :get, class:"btn btn-light" %>
                     <% if request.status == "Under Review" %>
-                      <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-light"%>
+                      <%= link_to "Withdraw Request", withdraw_request_path(request), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-light btn-outline-danger"%>
                     <% end %></p>
                 </div>
             </div>
