@@ -8,10 +8,9 @@
             <input type="hidden" name="department" value="<%= @course.department %>">
             <input type="hidden" name="course_number" value="<%= @course.course_number %>">
             <input type="hidden" name="section_number" value="<%= @course.section_number %>">
-            
+            <% z=1 %>
+            <% w=-1 %>
             <% for question in @course.questions %>
-              <% z=1000 %>
-              <% w=-1000 %>
               <div class="form-group required" style="margin: 15px;">
                 <p style="font-family: 'Roboto', sans-serif;font-size: 18px;" class="control-label"><%= question.question_text %></p>
                 <% if question.question_type == "Checkbox" %>
@@ -31,7 +30,7 @@
                           <label for="<%= option %><%= w %>">
                           <%= option %>
                           </label>
-                          <% w = w+1 %>
+                          <% w = w-1 %>
                       </div>
                   <% end %>
                 <% elsif question.question_type == "Long Answer" %>
