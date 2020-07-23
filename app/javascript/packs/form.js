@@ -266,6 +266,7 @@ function getAdditionalSections(element) {
   else {
     for(let i = 0; i < selected; i++) {
       $("#othersections").append($('<h3/>', {
+        class: "subtitle",
         style: "margin: 10px 8px 10px 0px",
         text: "Section " + (i+2),
       }));
