@@ -104,7 +104,7 @@ function getCrossListings(element) {
         }));
         $("#col1_"+(i+1)).append($("<select/>", {
           name: "department"+(i+1),
-          class: "form-control",
+          class: "form-control courseDept" + (i+2),
           id: "department"+(i+1)
         }))
         $("#department"+(i+1)).append($('<option/>', {
@@ -222,6 +222,7 @@ function getAdditionalSections(element) {
         class: "form-control",
         placeholder: "Ex: 30"
       }));
+      let dept = 1;
       for (var j=0; j<=num-2; j++){
         var k = num*(i+1)+j+1;
         $("#container2_" + (i+1)).append($('<div/>', {
@@ -234,7 +235,7 @@ function getAdditionalSections(element) {
           style: "padding: 10px 20px 0px"
         }));
         $("#col7_"+ k).append($('<h4/>', {
-          text: "Section " + (i+2) + " For Cross-listed Course "+(j+1)
+          text: "Section " + (i+2) + " For " + $(".courseDept" + dept).val() + " Course"
         }));
         $("#col7_"+k).append($('<label/>', {
           text: "Permission Numbers:"
@@ -255,6 +256,7 @@ function getAdditionalSections(element) {
           class: "custom-file-label",
           for: "customFile"+k
         }));
+        dept += 1;
       }
     }
   }
