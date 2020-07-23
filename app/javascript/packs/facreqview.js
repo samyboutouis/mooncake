@@ -15,6 +15,7 @@ $(document).ready(function () {
             }],
         order: [[ 1, 'asc' ]],
 
+
         "fnDrawCallback": function(){
           let yes = $(".yes").closest("tr")
           yes.addClass('greens')
@@ -25,6 +26,7 @@ $(document).ready(function () {
         }
 
     } );
+
     if ($("#myTable").length > 0) {
         let num = table.columns().count();
         let x = -1;
@@ -112,7 +114,7 @@ $(document).ready(function () {
     });
 
     $('#myTable').on( 'draw.dt', function () {
-        
+
         $('.selectall').on('change', function(e) {
             var $inputs = $('.checkboxlist');
             if(e.originalEvent === undefined) {
@@ -130,28 +132,28 @@ $(document).ready(function () {
             } else {
                 document.getElementById("selected_action").style.visibility = "hidden";
             }
-    
+
         });
-    
+
         $('.checkboxlist').on('change', function(){
             $('.selectall').trigger('change');
         });
-    
+
         $('.checkboxlist').on('change', function(){
             // console.log(document.getElementById("selected_action"))
-    
+
             var ischecked =$('input[type=checkbox]:checked').length;
             if(ischecked > 0) {
                 document.getElementById("selected_action").style.visibility = "visible";
             } else {
                 document.getElementById("selected_action").style.visibility = "hidden";
             }
-    
+
         });
     } );
 
 
-    
+
 
 });
 
@@ -160,7 +162,7 @@ $(document).ready(function () {
 //     console.log(act)
 //     document.getElementById(act).click();
 // }
-     
+
 
 function format ( d, table ) {
     // `d` is the original data object for the row

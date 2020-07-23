@@ -26,7 +26,7 @@
                       <div>
                           <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %><%= z %>" id = "cb"/>
                           <label id="<%= z %>" for="<%= option %><%= z %>">
-                          <%= option %> <%= w %>
+                          <%= option %> 
                           </label>
                           <% z += 1 %>
                       </div>
@@ -36,7 +36,7 @@
                       <div>
                           <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %><%= w %>" id = "rb"/>
                           <label id="<%= w %>" for="<%= option %><%= w %>">
-                          <%= option %> <%= w %>
+                          <%= option %>
                           </label>
                           <% w += 1 %>
                       </div>
