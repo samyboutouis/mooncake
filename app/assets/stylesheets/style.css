@@ -38,11 +38,13 @@ p {
   background-color: #6D6D6D; /* Green */
   border: none;
   color: white;
-  padding: 30px 40px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  margin:auto;
+  width: 15vw;
+  height: 66px;
 }
 
 .greysquarebutton:hover {
@@ -335,19 +337,19 @@ a[aria-expanded=false] .fa-chevron-down {
 
 .bluebox {
     background: #00539B;
-    padding: 20px 20px 10px 20px;
+    padding: 20px 20px 7px 20px;
     margin: 20px 20px;
 }
 
 .bluebox p{
     color:#FFFFFF;
-    padding: 10px 0px 0px 80px;
+    padding: 2px 0px 0px 80px;
     font-family: 'Roboto', sans-serif;
 }
 
 .blue-info{
     font-weight: 300;
-    /* padding: 5px 0px 0px 0px; */
+    padding: 5px 0px 0px 0px;
 }
 
 .graybtn {
@@ -390,4 +392,12 @@ a[aria-expanded=false] .fa-chevron-down {
     "header header header header"
     "main main . sidebar"
     "footer footer footer footer";
+}
+
+.card, .btn, .form-control {
+    border-radius: 0;
+}
+.btn-outline-primary {
+    border-color: #00539B;
+    color: #00539B;
 }
