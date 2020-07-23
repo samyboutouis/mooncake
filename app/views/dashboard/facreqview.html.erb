@@ -3,7 +3,21 @@
     <div class="col">
       <% info = "" %>
       <h1 class="title"> Course Requests for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%> <%= info%> </h1>
-      <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button" style= "margin: 20px 0px 5px;"> Back to Courses</button></a>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class="col">
+        <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button"> Back to Courses</button></a>
+        <select name="select_action" id="selected_action" class="btn btn-primary" onchange="SelectAction()" style="visibility: hidden; padding: 8px">
+            <option value="">For Selected Requests</option>
+            <option value="email">Email</option>
+            <option value="accept">Accept</option>
+            <option value="deny">Deny</option>
+        </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <% @course.cross_listing.each do |id| %>
           <% coursec = Course.find(id) %>
           <% info +=  " / " + coursec.department.split("-").first + " "+ coursec.course_number + " - " + coursec.section_number %>
@@ -14,12 +28,6 @@
         <div class="table-responsive">
         <form action = "/mailselected">
             <table id="myTable" cellspacing="0" width="100%" class="display table table-striped", style="background-color:white;">
-              <select name="select_action" id="selected_action" class="btn btn-primary" onchange="SelectAction()" style="visibility: hidden;margin: 0 0 20px 0">
-                <option value="">For Selected Requests</option>
-                <option value="email">Email</option>
-                <option value="accept">Accept</option>
-                <option value="deny">Deny</option>
-              </select>
               <br>
               <thead>
                 <tr style="text-align: center; vertical-align: middle;">
@@ -107,14 +115,14 @@
           <button hidden id="email" type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
           <button hidden id = "accept" type="submit" class="btn btn-outline-success" formaction="/accept_selected"> Accept Selected</button>
           <button hidden id = "deny" type="submit" class="btn btn-outline-danger" formaction="/deny_selected"> Deny Selected</button>
-
-          <script>
-            function SelectAction() {
-              var act = document.getElementById("selected_action").value;
-              document.getElementById(act).click();
-            }
-          </script>
         </div>
     </div>
   </div>
 </div>
+
+<script>
+  function SelectAction() {
+    var act = document.getElementById("selected_action").value;
+    document.getElementById(act).click();
+  }
+</script>
