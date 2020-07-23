@@ -105,6 +105,7 @@ function getCrossListings(element) {
         $("#col1_"+(i+1)).append($("<select/>", {
           name: "department"+(i+1),
           class: "form-control",
+          required: true,
           id: "department"+(i+1)
         }))
         $("#department"+(i+1)).append($('<option/>', {
@@ -134,6 +135,7 @@ function getCrossListings(element) {
           type: "text",
           name: "course_number"+(i+1),
           id: "course_number"+(i+1),
+          required: true,
           class: "form-control",
           placeholder: "Ex: 101L"
         }));
@@ -158,6 +160,7 @@ function getCrossListings(element) {
           type: "file",
           name: "file"+(i+1),
           id: "customFile"+(i+1),
+          required: true,
           class: "custom-file-input"
         }));
         $("#course"+(i+1)).append($('<label/>', {
@@ -203,6 +206,7 @@ function getAdditionalSections(element) {
         type: "text",
         name: "section_number"+(i+1),
         id: "section_number"+k,
+        required: true,
         class: "form-control",
         placeholder: "Ex: 01-LAB"
       }));
@@ -219,6 +223,7 @@ function getAdditionalSections(element) {
         type: "number",
         name: "section_capacity"+(i+1),
         id: "section_capacity"+k,
+        required: true,
         class: "form-control",
         placeholder: "Ex: 30"
       }));
@@ -247,6 +252,7 @@ function getAdditionalSections(element) {
         $("#section"+k).append($('<input/>', {
           type: "file",
           name: "file"+k,
+          required: true,
           id: "customFile"+k,
           class: "custom-file-input"
         }));
@@ -285,6 +291,7 @@ function getAdditionalSections(element) {
         type: "text",
         name: "section_number"+(i+1),
         id: "section_number"+(i+1),
+        required: true,
         class: "form-control",
         placeholder: "Ex: 01-LAB"
       }));
@@ -301,6 +308,7 @@ function getAdditionalSections(element) {
         type: "number",
         name: "section_capacity"+(i+1),
         id: "section_capacity"+k,
+        required: true,
         class: "form-control",
         placeholder: "Ex: 30"
       }));
@@ -325,6 +333,7 @@ function getAdditionalSections(element) {
         type: "file",
         name: "file"+(i+1),
         id: "customFile"+(i+1),
+        required: true,
         class: "custom-file-input"
       }));
       $("#section"+(i+1)).append($('<label/>', {
