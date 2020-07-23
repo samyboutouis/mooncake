@@ -82,6 +82,7 @@ function getCrossListings(element) {
       $("#othercourses").empty();
       for(let i = 0; i < selected; i++) {
         $("#othercourses").append($('<h3/>', {
+          class: "subtitle",
           style: "margin: 10px 8px 10px 0px",
           text: "Cross-listed Course " + (i+2),
         }));
@@ -179,6 +180,7 @@ function getAdditionalSections(element) {
   if (update){
     for (var i=0; i<selected; i++){
       $("#othersections").append($('<h3/>', {
+        class: "subtitle",
         style: "margin: 10px 8px 10px 0px",
         text: "Section " + (i+2),
       }));
@@ -235,6 +237,7 @@ function getAdditionalSections(element) {
           style: "padding: 10px 20px 0px"
         }));
         $("#col7_"+ k).append($('<h4/>', {
+          class: "subtitle",
           text: "Section " + (i+2) + " For " + $(".courseDept" + dept).val() + " Course"
         }));
         $("#col7_"+k).append($('<label/>', {

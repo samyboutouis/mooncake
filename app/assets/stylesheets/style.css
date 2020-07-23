@@ -34,6 +34,42 @@ p {
     font-family: 'Roboto';
 }
 
+.greysquarebutton {
+  background-color: #6D6D6D; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin:auto;
+  width: 15vw;
+  height: 66px;
+}
+
+.greysquarebutton:hover {
+  background-color: #4E4E4E; /* Green */
+  color: white;
+}
+
+.whitesquarebutton {
+  background-color: white; /* Green */
+  border: none;
+  color: #00539B;
+  padding: 10px 15px;
+  text-decoration: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.whitesquarebutton:hover {
+  background-color: #d3d3d3; /* Green */
+  color: #00539B;
+  text-decoration: none;
+}
+
 /* .box {
     margin: 0 auto;
     margin-top: 2em;
@@ -51,39 +87,39 @@ p {
     border-radius: 35px;
 }
 
-.hello {
+.title {
     font-family: 'Yeseva One', cursive;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
     line-height: 35px;
-    color: #00539B;  
+    color: #00539B;
 }
 
-.title {
+.subtitle {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
     line-height: 28px;
-    color: #6D6D6D;    
+    color: #6D6D6D;
 }
 
 .no_request {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;
-    color: #6D6D6D;    
+    color: #6D6D6D;
 }
 
-.subtitle {
+/* .subtitle {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 25px;
     line-height: 35px;
     margin-left: 15px;
-}
+} */
 
 .account {
     margin-top: 40px;
@@ -246,7 +282,7 @@ a[aria-expanded=false] .fa-chevron-down {
     #logo {
         font-size: 20px;
     }
-    
+
     .nav-tabs {
         font-size: 16px;
     }
@@ -301,12 +337,13 @@ a[aria-expanded=false] .fa-chevron-down {
 
 .bluebox {
     background: #00539B;
-    padding: 20px 20px 10px 20px;
+    padding: 20px 20px 7px 20px;
     margin: 20px 20px;
 }
 
 .bluebox p{
     color:#FFFFFF;
+    padding: 2px 0px 0px 80px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -351,8 +388,16 @@ a[aria-expanded=false] .fa-chevron-down {
     display: grid;
     grid-template-columns: 20% 50% 10% 20%;
     grid-template-rows: auto;
-    grid-template-areas: 
+    grid-template-areas:
     "header header header header"
     "main main . sidebar"
     "footer footer footer footer";
+}
+
+.card, .btn, .form-control {
+    border-radius: 0;
+}
+.btn-outline-primary {
+    border-color: #00539B;
+    color: #00539B;
 }
