@@ -29,8 +29,10 @@ class AnswerController < ApplicationController
                 name += " / " + c.department.split("-").first + " "+ c.course_number + " - " + c.section_number
             end
         end
+        puts total
         if total%10 == 0
-            email = course1.user.email
+            email = course1.users.first.email
+            puts email
             UserMailer.with(email: email, coursename: name, total: total, course: course1.id).many_requests.deliver_now
         end
         for question in @course_request.course.questions

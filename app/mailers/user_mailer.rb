@@ -58,11 +58,11 @@ class UserMailer < ApplicationMailer
   end 
 
   def many_requests
-    @coursename =(params[:coursename])
+    @coursename =params[:coursename]
     @total = params[:total]
     course = Course.find(params[:course])
     @url = root_url+ "facreqview/" + course.id.to_s
     email = params[:email]
-    mail(to: email, subject: 'Your course has #{total} requests')
+    mail(to: email, subject: 'Your course has ' + @total.to_s + ' requests!')
   end 
 end
