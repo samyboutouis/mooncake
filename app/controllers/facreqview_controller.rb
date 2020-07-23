@@ -170,38 +170,6 @@ class FacreqviewController < ApplicationController
       end
   end
 
-  def mailingall
-      @course = Course.find(params[:course])
-      @names = []
-      @course.course_requests.each  do |request|
-        @names.append(request.user.first_name + " " + request.user.last_name)
-      end
-      @course.cross_listing.each do |id|
-        Course.find(id).course_requests.each do |request2|
-          @names.append(request2.user.first_name + " " + request2.user.last_name)
-        end
-      end
-      @names = @names.join(", ")
-  end
-
-  def mailingall2
-      @course = Course.find(params[:courseid])
-      @sender = User.find_by(net_id: session[:current_user]["net_id"])
-      @course.course_requests.each  do |request|
-      #UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: params[:courseid]).email_student.deliver_now
-      end
-      @course.cross_listing.each do |id|
-      Course.find(id).course_requests.each do |request2|
-          #UserMailer.with(email: request2.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request2.course.id).email_student.deliver_now
-      end
-      end
-
-      if @course.primary == false
-      redirect_to requests_page_path(@course.cross_listing[0])
-      else
-      redirect_to requests_page_path(@course)
-      end
-  end
 
   def mailselected
       if params.include?("selected")

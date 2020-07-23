@@ -1,5 +1,6 @@
 <div class="container">
-        <h1 class="title">Email Selected Students </h1> <br>
+  <div class="table_box2">
+        <h1 class="heading">Email Selected Students </h1> <br>
         <form action="/mailselected2">
         <input type="hidden" name="selected" value="<%= @selected%>">
         <input type="hidden" name="courseid" value="<%= @course.id%>">
@@ -26,5 +27,6 @@
 
         </form>
 
+  </div>
 </div>
 <p class="spacer"></p>

@@ -36,7 +36,7 @@ p {
 .btn.btn-secondary {
   background-color: #6D6D6D; /* Green */
   border: none;
-  border-radius: 15px;
+  border-radius: 5px;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -95,11 +95,45 @@ p {
     border-radius: 35px;
 }
 
-.title {
+.table_box2 {
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em;
+    width: 99%;
+   
+}
+
+.table_box2 form {
+    padding-left: 18%;
+}
+
+.heading {
+    font-family: 'Yeseva One', cursive;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 28px;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hello {
     font-family: 'Yeseva One', cursive;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
+    line-height: 35px;
+    color: #00539B;
+}
+
+.title {
+    font-family: 'Roboto', sans-serif;
+    font-size: smaller;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 27px;
     line-height: 35px;
     color: #00539B;
 }
@@ -309,7 +343,7 @@ a[aria-expanded=false] .fa-chevron-down {
 }
 
 .card, .btn, .form-control, .custom-file-label {
-    border-radius: 0;
+    border-radius: 5px;
 }
 .btn-outline-primary {
     border-color: #00539B;
