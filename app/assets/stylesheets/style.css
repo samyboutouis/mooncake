@@ -254,7 +254,7 @@ a[aria-expanded=false] .fa-chevron-down {
 .bluebox {
     background: #00539B;
     padding: 20px 20px 5px 20px;
-    margin: 20px 20px;
+    margin: 20px 0px 43px 0px;
 }
 
 .bluebox p{
@@ -364,6 +364,7 @@ a[aria-expanded=false] .fa-chevron-down {
 
     .nav-tabs {
         font-size: 16px;
+        font-family: 'Roboto', sans-serif;
     }
 
     .bluebox {
