@@ -1,13 +1,13 @@
 <div class="containernew">
   <div class="col-sm-8 item-a">
-    <h1 class="hello"> Hello, <%= @user.first_name %>!</h1> <br>
-    <h1 class="title"> Your Courses</h1>
+    <h1 class="title"> Hello, <%= @user.first_name %>!</h1> <br>
+    <h1 class="subtitle"> Your Courses</h1>
     <%= no_course(@user)%>
   </div>
   <div class="item-c">
     <% if @user.courses.count > 1 %>
       <div class="text-center my-auto">
-        <a href="<%= new_course_path %>" ><button class="graybtn btn btn-secondary " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
+        <a href="<%= new_course_path %>" ><button class="graybtn btn btn-secondary " type="button" data-toggle="tooltip" data-placement="top" title="Add a course for a student to start requesting numbers!">Add a Course</button></a>
       </div><br>
       <div class="text-center my-auto">
         <a href="<%= allrequests_path %>"><button class="graybtn btn btn-secondary" type="button"> All Courses Requests</button></a>
