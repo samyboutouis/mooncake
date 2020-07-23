@@ -386,7 +386,7 @@ a[aria-expanded=false] .fa-chevron-down {
     "footer footer footer footer";
 }
 
-.card, .btn, .form-control {
+.card, .btn, .form-control, .custom-file-label {
     border-radius: 0;
 }
 .btn-outline-primary {
