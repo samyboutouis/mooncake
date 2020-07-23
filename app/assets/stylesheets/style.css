@@ -52,6 +52,22 @@ p {
   color: white;
 }
 
+.whitesquarebutton {
+  background-color: white; /* Green */
+  border: none;
+  color: white;
+  padding: 18px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.whitesquarebutton:hover {
+  background-color: #d3d3d3; /* Green */
+  color: white;
+}
+
 /* .box {
     margin: 0 auto;
     margin-top: 2em;
