@@ -47,7 +47,7 @@ class DashboardController < ApplicationController
       if course.questions.length == 0
         course.questions << course1.questions
       end
-    end      
+    end
     redirect_to faculty_page_path
   end
 
@@ -88,7 +88,7 @@ class DashboardController < ApplicationController
     result = ldap.search( :base => base, :filter => filter )
     ldap.get_operation_result
     information = result.pop
-    
+
     affiliation = information["edupersonprimaryaffiliation"].join(' ')
     grad_year = information["dupsexpgradtermc1"].join(' ')
     email = information["edupersonprincipalname"].join(' ')
@@ -97,10 +97,10 @@ class DashboardController < ApplicationController
     unique_id = information['dudukeid'].join(' ')
 
     newuser = User.create(first_name: first_name, last_name: last_name, net_id: netid, unique_id: unique_id, email: email, net_id: netid, grad_year: grad_year, user_type: affiliation)
-    
+
     newuser.courses << course
     newuser.user_type = "faculty"
-  
+
   end
 
   # Facreqview Controller
@@ -113,44 +113,5 @@ class DashboardController < ApplicationController
     @user = User.find_by(net_id: session[:current_user]["net_id"])
   end
 
-  
-  #Ranking
-  def rank1
-    @user = User.find_by(net_id: session[:current_user]["net_id"])
-    course = CourseRequest.find(params[:request]).course
-    req = CourseRequest.find(params[:request])
-    req.update(priority: 1)
-    puts req.priority
-    if course.primary == false
-      redirect_to requests_page_path(course.cross_listing[0])
-    else
-      redirect_to requests_page_path(course)
-    end
-
-  end
-
-  def rank2
-    @user = User.find_by(net_id: session[:current_user]["net_id"])
-    course = CourseRequest.find(params[:request]).course
-    req = CourseRequest.find(params[:request])
-    req.update(priority: 2)
-    if course.primary == false
-      redirect_to requests_page_path(course.cross_listing[0])
-    else
-      redirect_to requests_page_path(course)
-    end
-  end
-
-  def rank3
-    @user = User.find_by(net_id: session[:current_user]["net_id"])
-    course = CourseRequest.find(params[:request]).course
-    req = CourseRequest.find(params[:request])
-    req.update(priority: 3)
-    if course.primary == false
-      redirect_to requests_page_path(course.cross_listing[0])
-    else
-      redirect_to requests_page_path(course)
-    end
-  end
 
 end
