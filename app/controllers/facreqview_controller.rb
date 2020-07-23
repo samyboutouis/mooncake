@@ -227,9 +227,10 @@ class FacreqviewController < ApplicationController
 
   def mailselected2
       @course = Course.find(params[:courseid])
+      @sender = User.find_by(net_id: session[:current_user]["net_id"]).id
       for req in (params[:selected]).split("~") do
-      request = CourseRequest.find(req)
-      #UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+        request = CourseRequest.find(req)
+        UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
       end
       redirect_to requests_page_path(@course)
   end
