@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4 order-md-last text-center dash-button">
+    <div class="col-md-3 order-md-last text-center dash-button">
       <% if @user.courses.count > 1 %>
         <div class="text-center my-auto">
           <a href="<%= new_course_path %>" ><button class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto; float: right" type="button" data-toggle="tooltip" data-placement="top" title="Add a course for a student to start requesting numbers!">Add Course</button></a>
@@ -20,7 +20,7 @@
         </div>
       <% end %>
     </div>
-    <div class="col-md-8 order-md-first">
+    <div class="col-md-9 order-md-first">
       <h1 class="subtitle"> Your Courses</h1>
       <div class="row">
         <div class="col">
