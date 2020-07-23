@@ -21,6 +21,8 @@ RUN yarn install --check-files
 RUN rails assets:precompile
 
 #run database
+# RUN rails db:drop
+# RUN rails db:create
 RUN rails db:migrate
 # RUN rails db:seed
 
