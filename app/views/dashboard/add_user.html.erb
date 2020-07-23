@@ -1,14 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1 class="title"> Add Another Course Manager for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%></h1>
-      <p> An assisstant/TA/faculty member to manage course requests</p>
-
-      <%= form_tag({action: :add_user2}, multipart: true) do %>
-        <%= text_field_tag 'netid', nil, placeholder:'Enter NetID'%>
-        <%= hidden_field_tag "course", @course.id %>
-        <%= submit_tag 'Submit' %>
-      <% end %>
+      <i><a href="<%= faculty_page_path %>"><button class="btn btn-dark fa fa-arrow-left" type="button" style= "margin: 20px 0px 5px;"></button></a></i>
+        <p class="spacer"></p>
+        <h1 class="title"> Add Another Course Manager for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%></h1>
+        <p> An assisstant/TA/faculty member to manage course requests</p>
+        <%= form_tag({action: :add_user2}, multipart: true) do %>
+          <%= text_field_tag 'netid', nil, placeholder:'Enter NetID'%>
+          <%= hidden_field_tag "course", @course.id %>
+          <%= submit_tag 'Submit' %>
+        <% end %>
+      </div>
     </div>
   <div>
 </div>
