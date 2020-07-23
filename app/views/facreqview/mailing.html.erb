@@ -1,7 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-        <h1 class="title">Email <%= @user.first_name%> <%= @user.last_name%> </h1> <br>
+  <div class="table_box2">
+        <h1 class="heading">Email <%= @user.first_name%> <%= @user.last_name%> </h1> <br>
         <form action="/mailing2">
           <input type="hidden" name="course" value="<%= @course.id %>">
             <div class="form-group">
@@ -25,7 +24,5 @@
                 <button type="submit" class="btn btn-dark">Send</button>
             </div>
         </form>
-      </div>
     </div>
   </div>
-</div>

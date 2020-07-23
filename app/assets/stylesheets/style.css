@@ -95,6 +95,29 @@ p {
     border-radius: 35px;
 }
 
+.table_box2 {
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em;
+    width: 99%;
+   
+}
+
+.table_box2 form {
+    padding-left: 18%;
+}
+
+.heading {
+    font-family: 'Yeseva One', cursive;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 28px;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .title {
     font-family: 'Yeseva One', cursive;
     font-style: normal;
