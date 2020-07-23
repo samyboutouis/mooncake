@@ -11,7 +11,7 @@ class AnswerController < ApplicationController
         @course = Course.find_by(department: params[:department], course_number: params[:course_number], section_number: params[:section_number])
         @course_request = CourseRequest.create(status: "Under Review", course: @course, user: @user)
         if @course.primary == false
-            course1 = @course.cross_listing[0]
+            course1 = Course.find(@course.cross_listing[0])
             total = course1.course_requests.count
             name = course1.department.split("-").first + " "+ course1.course_number + " - " + course1.section_number
             for id in course1.cross_listing 
