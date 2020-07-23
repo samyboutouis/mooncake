@@ -8,37 +8,37 @@
             <input type="hidden" name="department" value="<%= @course.department %>">
             <input type="hidden" name="course_number" value="<%= @course.course_number %>">
             <input type="hidden" name="section_number" value="<%= @course.section_number %>">
-            
+            <% z=1000 %>
+            <% w=270 %>
             <% for question in @course.questions %>
-              <% z=1000 %>
-              <% w=-1000 %>
+
               <div class="form-group required" style="margin: 15px;">
                 <p style="font-family: 'Roboto', sans-serif;font-size: 18px;" class="control-label"><%= question.question_text %></p>
-                
+
                 <% if question.id == 1 %>
                   <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type= "text" class="form-control" id="reasons" value="<%= @user.first_name %> <%= @user.last_name %>" name="<%= question.question_text %>" readonly>
                 <% elsif question.id == 2 %>
                   <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type= "text" class="form-control" id="reasons" value="<%= @user.email %>" name="<%= question.question_text %>" readonly>
                 <% elsif question.id == 3 %>
-                  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type= "text" class="form-control" id="reasons" value="<%= @user.grad_year %>" name="<%= question.question_text %>" readonly>                
+                  <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type= "text" class="form-control" id="reasons" value="<%= @user.grad_year %>" name="<%= question.question_text %>" readonly>
                 <% elsif question.question_type == "Checkbox" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %>" id = "cb"/>
-                          <label for="<%= option %><%= z %>">
-                          <%= option %>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %><%= z %>" id = "cb"/>
+                          <label id="<%= z %>" for="<%= option %><%= z %>">
+                          <%= option %> <%= w %>
                           </label>
-                          <% z = z+1 %>
+                          <% z += 1 %>
                       </div>
                   <% end %>
                 <% elsif question.question_type == "Radio" %>
                   <% question.option.each do |option| %>
                       <div>
-                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %>" id = "rb"/>
-                          <label for="<%= option %><%= w %>">
-                          <%= option %>
+                          <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %><%= w %>" id = "rb"/>
+                          <label id="<%= w %>" for="<%= option %><%= w %>">
+                          <%= option %> <%= w %>
                           </label>
-                          <% w = w+1 %>
+                          <% w += 1 %>
                       </div>
                   <% end %>
                 <% elsif question.question_type == "Long Answer" %>
