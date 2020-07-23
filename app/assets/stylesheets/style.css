@@ -113,15 +113,6 @@ p {
     color: #6D6D6D;
 }
 
-/* .subtitle {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 25px;
-    line-height: 35px;
-    margin-left: 15px;
-} */
-
 .account {
     margin-top: 40px;
 }
@@ -401,4 +392,10 @@ a[aria-expanded=false] .fa-chevron-down {
 .btn-outline-primary {
     border-color: #00539B;
     color: #00539B;
+}
+
+.btn-outline-primary:hover {
+    border-color: #00539B;
+    color: #00539B;
+    background-color: #eeeeee;
 }
