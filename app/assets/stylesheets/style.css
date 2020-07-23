@@ -144,15 +144,6 @@ p {
 
 #view-request > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
     background-color: white;
- }
-
-.course-box{
-    margin-bottom:30px;
-    margin-top:20px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    text-align: center;
-    line-height: 50px;
 }
 
 .create-question{
@@ -384,5 +375,9 @@ a[aria-expanded=false] .fa-chevron-down {
     .dash-button {
         padding-top: 30px;
         padding-bottom: 20px;
+    }
+
+    .bluebox p{
+        padding: 2px 0px 0px 40px;
     }
 }
