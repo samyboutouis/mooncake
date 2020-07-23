@@ -53,8 +53,9 @@ p {
 .whitesquarebutton {
   background-color: white; /* Green */
   border: none;
-  color: white;
-  padding: 18px 25px;
+  color: #00539B;
+  padding: 10px 15px;
+  text-decoration: none;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -63,7 +64,8 @@ p {
 
 .whitesquarebutton:hover {
   background-color: #d3d3d3; /* Green */
-  color: white;
+  color: #00539B;
+  text-decoration: none;
 }
 
 /* .box {
