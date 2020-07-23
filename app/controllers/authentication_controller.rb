@@ -9,18 +9,7 @@ class AuthenticationController < ApplicationController
         ENV["MOONCAKE_OAUTH_KEY"],
         :site => "https://oauth.oit.duke.edu/oidc",
         :authorize_url =>  "/oidc/authorize",
-        :token_url =>  "/oidc/token",
-        # :oauth_token_life => 60,
-        # :access_token_lifetime => 10,
-        # :refresh_token_lifetime => 30,
-        # :max_session_lifetime => 30
-        # 'oauth_token_expiry' => 0,
-        # 'oauth_token_life' => 60,
-        # 'oauth2' => [
-        #   'access_token_lifetime' => 10,
-        #   'refresh_token_lifetime' => 30,
-        #   'max_session_lifetime' => 30
-        # ]
+        :token_url =>  "/oidc/token"
       )
       redirect_to client.auth_code.authorize_url(:redirect_uri => ENV["MOONCAKE_OAUTH_REDIRECT"])
 
