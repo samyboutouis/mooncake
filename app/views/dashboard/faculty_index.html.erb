@@ -7,6 +7,7 @@
   <div class="item-c">
     <% if @user.courses.count > 1 %>
       <div class="text-center my-auto">
+<<<<<<< Updated upstream
         <a href="<%= new_course_path %>" ><button class="graybtn btn btn-secondary " type="button" data-toggle="tooltip" data-placement="top" title="Add a course for a student to start requesting numbers!">Add a Course</button></a>
       </div><br>
       <div class="text-center my-auto">
@@ -14,6 +15,15 @@
       </div><br>
       <div class="text-center my-auto">
         <a><button type="button" class="graybtn btn btn-secondary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+=======
+        <a href="<%= new_course_path %>"><button class="greysquarebutton" type="button">Create Course</button></a>
+      </div><br>
+      <div class="text-center my-auto">
+        <a href="<%= allrequests_path %>"><button class="greysquarebutton" type="button"> All Courses Requests</button></a>
+      </div><br>
+      <div class="text-center my-auto">
+        <a><button class="greysquarebutton" type="button" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+>>>>>>> Stashed changes
         <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
@@ -35,10 +45,10 @@
       </div><br>
     <% else %>
       <div class="text-center my-auto"><br>
-        <a href="<%= new_course_path %>" ><button class="btn btn-dark " type="button" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create a Course</button></a>
+        <a href="<%= new_course_path %>" ><button type="button" class="greysquarebutton" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create Course</button></a>
       </div>
       <div class="text-center my-auto"><br>
-        <a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
+        <a><button type="button" class="greysquarebutton" data-toggle="modal" data-target="#facModal" id="factut">View Tutorial</button></a>
         <div class="modal fade" id="facModal" tabindex="-1" role="dialog" aria-labelledby="facModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
             <div class="modal-content">
@@ -92,7 +102,7 @@
                 <p> Permission Numbers Granted: <%= course.seats_taken + seats %> / <%= course.capacity %> </p>
                 <p> Number of Requests: <%= course.course_requests.length + requests %></p>
                 <!-- Permission Numbers: <%= course.permission_numbers %> <br> -->
-                <p> <% if course.prereqs.first == nil %> 
+                <p> <% if course.prereqs.first == nil %>
                   Prerequisites: N/A
                 <% else%>
                   Prerequisites: <% course.prereqs.each do |prereq| %>
@@ -102,7 +112,7 @@
                       <%= prereq.name %>,
                     <%end%>
                   <% end %>
-                <% end %></p> 
+                <% end %></p>
                 <% unless course.users.length == 1 %>
                   <p>Co-Managers: <% course.users.each do |user| %>
                       <% unless user == @user %>

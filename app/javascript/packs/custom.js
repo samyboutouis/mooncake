@@ -27,6 +27,10 @@ $(document).ready(function () {
   })
 
 });
+$('input[type=text]').tooltip({
+   placement: "right",
+   trigger: "focus"
+});
 
 $(function(){
     var current = location.pathname;
