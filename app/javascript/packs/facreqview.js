@@ -111,7 +111,56 @@ $(document).ready(function () {
 
     });
 
+    $('#myTable').on( 'draw.dt', function () {
+        
+        $('.selectall').on('change', function(e) {
+            var $inputs = $('.checkboxlist');
+            if(e.originalEvent === undefined) {
+                var allChecked = true;
+                $inputs.each(function(){
+                    allChecked = allChecked && this.checked;
+                });
+                this.checked = allChecked;
+            } else {
+                $inputs.prop('checked', this.checked);
+            }
+            var ischecked =$('input[type=checkbox]:checked').length;
+            if(ischecked > 0) {
+                document.getElementById("selected_action").style.visibility = "visible";
+            } else {
+                document.getElementById("selected_action").style.visibility = "hidden";
+            }
+    
+        });
+    
+        $('.checkboxlist').on('change', function(){
+            $('.selectall').trigger('change');
+        });
+    
+        $('.checkboxlist').on('change', function(){
+            // console.log(document.getElementById("selected_action"))
+    
+            var ischecked =$('input[type=checkbox]:checked').length;
+            if(ischecked > 0) {
+                document.getElementById("selected_action").style.visibility = "visible";
+            } else {
+                document.getElementById("selected_action").style.visibility = "hidden";
+            }
+    
+        });
+    } );
+
+
+    
+
 });
+
+// function SelectAction() {
+//     var act = document.getElementById("selected_action").value;
+//     console.log(act)
+//     document.getElementById(act).click();
+// }
+     
 
 function format ( d, table ) {
     // `d` is the original data object for the row
