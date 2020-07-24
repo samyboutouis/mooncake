@@ -157,7 +157,7 @@ class AllrequestController < ApplicationController
           @sender = User.find_by(net_id: session[:current_user]["net_id"]).id
           for req in (params[:selected]).split("~") do
           request = CourseRequest.find(req)
-          UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender, course: request.course.id).email_student.deliver_now
+          UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender.id, course: request.course.id).email_student.deliver_now
           end
           redirect_to allrequests_path
       end
