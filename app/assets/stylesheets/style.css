@@ -485,3 +485,8 @@ label {
   .dropdown a:hover {background-color: #ddd;}
   
   .show {display: block;}
+
+
+.qform {
+    color: black;
+}

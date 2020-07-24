@@ -527,3 +527,7 @@ a[aria-expanded=false] .fa-chevron-down {
   .dropdown a:hover {background-color: #ddd;}
   
   .show {display: block;}
+
+.qform {
+    color: white;
+}
