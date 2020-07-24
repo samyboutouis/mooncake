@@ -351,6 +351,10 @@ a[aria-expanded=false] .fa-chevron-down {
     margin-bottom: 30px;
 }
 
+label {
+    color: black;
+}
+
 .card, .btn, .form-control, .custom-file-label {
     border-radius: 5px;
 }
