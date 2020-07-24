@@ -7,7 +7,7 @@ $(document).ready(function(){
 $(document).ready(function () {
     // document.getElementById("selected_action").style.visibility = "hidden";
 
-    var table = $('#myTable').DataTable({"aLengthMenu": [[2, 20, 50, 100, -1], [2, 20, 50, 100, "All"]],
+    var table = $('#myTable').DataTable({"aLengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
         columnDefs: [
             {
                 orderable: false,

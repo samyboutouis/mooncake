@@ -7,6 +7,7 @@
     <%= file_field_tag 'file', class:"btn btn-dark" %>
     <%= hidden_field_tag "request", @request.id %>
     <%= submit_tag 'Submit', class:"btn btn-dark" %>
+    <%= link_to "Cancel", allrequests_path, class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
  <% end %>
 
 </div>
