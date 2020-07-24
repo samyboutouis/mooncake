@@ -12,13 +12,17 @@
             is only intended to assess preparedness and academic background.</p>
         <div class="container-fluid" style="padding-left:0">
         
-        <button data-toggle="tooltip" data-placement="top" title="Load previously saved form template" class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                Load Template
-        </button>
+            <div class="dropdown">
+                <button class="btn btn-dark">Load Template</button>
+                <div class="dropdown-content">
+                    <% @course.users.first.form_templates.each do |template| %>
+                        <%=link_to template.name, load_template_path(template, @course), class:"dropdown-item" %>
+                    <% end %>
+                </div>
+            </div>
+
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                <% @course.users.first.form_templates.each do |template| %>
-                    <%=link_to template.name, load_template_path(template, @course), class:"dropdown-item" %>
-                <% end %>
+                
             </div>
         </div>
         <br>
@@ -43,7 +47,7 @@
                         <input type= "text" class="form-control" name="reasons" disabled>
                     <% end %>
                     <%if question.id > 5 and question.question_text != "Which prerequisite(s) have you satisfied:" %>
-                        <%= link_to "Delete", delete_question_path(question,@course.id), method: :delete , class:"btn btn-outline-danger btn-sm", style:"margin:10px 0px 10px"%>
+                        <%= link_to "Delete", delete_question_path(question, @course.id), method: :delete , class:"btn btn-outline-danger btn-sm", style:"margin:10px 0px 10px"%>
                     <%end%>
                 </div>
             <% end %>
