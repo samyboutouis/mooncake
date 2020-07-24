@@ -13,6 +13,7 @@ body {
 
 .logo {
     height: 100px;
+    filter: invert(51%) sepia(12%) saturate(1960%) hue-rotate(130deg) brightness(104%) contrast(87%);
 }
 
 .nav-tabs {
@@ -31,10 +32,15 @@ body {
 
 p {
     font-family: 'Roboto';
+    color: white;
+}
+
+label {
+    color: white;
 }
 
 .btn.btn-secondary {
-  background-color: #292b2c; 
+  background-color: black; 
   border: none;
   color: white;
   text-align: center;
@@ -53,7 +59,7 @@ p {
 
 .btn.btn-light {
   background-color: white; /* Green */
-  color: #00539B;
+  color: #33A09E;
   padding: 10px 15px;
   text-decoration: none;
   text-align: center;
@@ -65,7 +71,7 @@ p {
 
 .btn.btn-light:hover {
   background-color: #d3d3d3; /* Green */
-  color: #00539B;
+  color: #33A09E;
   text-decoration: none;
 }
 
@@ -78,11 +84,11 @@ p {
 }
 
 .btn.btn-primary {
-    background-color: #00539B;
+    background-color: #33A09E;
 }
 
 .btn.btn-primary:hover {
-    background-color: #00539bde;
+    background-color: #33A09Ede;
 }
 
 /* .box {
@@ -354,14 +360,19 @@ a[aria-expanded=false] .fa-chevron-down {
     border-radius: 5px;
 }
 .btn-outline-primary {
-    border-color: #00539B;
-    color: #00539B;
+    border-color: #33A09E;
+    color: #33A09E;
 }
 
 .btn-outline-primary:hover {
-    border-color: #00539B;
-    color: #00539B;
+    border-color: #33A09E;
+    color: #33A09E;
     background-color: #eeeeee;
+}
+
+.btn.btn-outline-dark {
+    border-color: gray;
+    color: gray;
 }
 
 .dash-button {
