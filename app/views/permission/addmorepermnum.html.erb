@@ -1,16 +1,18 @@
 <div class="container">
 <div class="table_box">
   <h1 class="title">Add Permission Numbers </h1>
+  <br>
   <%= form_tag({action: :addmore}, multipart: true) do %>
-    <select name="course" id="course">
+    <select name="course" id="course" class="btn btn-dark">
     <% for id in @list %>
     <% course = Course.find(id) %> 
-    <option value="<%= id %> "> <%= course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number %> </option>
+    <option  value="<%= id %>"> <%= course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number %> </option>
     <%end %>
     </select>
-
-    <%= file_field_tag 'file' %>
-    <%= submit_tag 'Submit' %>
+  
+    <%= file_field_tag 'file'%>
+    <%= submit_tag 'Submit', class:"btn btn-dark"%>
+    
   <% end %>
   </div>
 </div>

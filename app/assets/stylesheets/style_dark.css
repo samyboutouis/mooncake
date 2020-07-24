@@ -107,6 +107,29 @@ label {
     box-shadow: none;
 }
 
+.table_box #file {
+    color: white;
+}
+
+.btn-file {
+    position: relative;
+    
+}
+
+.btn-file input[type=file] {
+    
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: purple;
+    cursor: inherit;
+    display: block;
+}
+
+
+
 
 .table_box2 {
     margin: 0 auto;
