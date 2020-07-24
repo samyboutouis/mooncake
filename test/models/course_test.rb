@@ -18,6 +18,7 @@ class CourseTest < ActiveSupport::TestCase
 
   test "course has many permission numbers" do
     user = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
+    
     course = Course.create(course_number: "101")
     req = CourseRequest.create(status: "under review", user: user, course: course)
     pn1 = PermissionNumber.create(number: "010115", expire_date: "09/30/2020", course: course, course_request: req)
@@ -27,8 +28,10 @@ class CourseTest < ActiveSupport::TestCase
   end  
 
   test "course has and belongs many users" do
-    user1 = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
-    user2 = User.create(first_name: "Danai", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
+    # user1 = User.create(first_name: "Corgi", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
+    user1 = users(:one)
+    # user2 = User.create(first_name: "Danai", last_name: "Adkisson", grad_year: 2020, major: "Computer Science", user_type: "doggo")
+    user2 = users(:two)
     course1 = Course.create(course_number: "101")
     course2 = Course.create(course_number: "201")
     user1.courses << [course1, course2]
