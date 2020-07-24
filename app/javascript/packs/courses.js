@@ -61,7 +61,8 @@ function getQuestion(element) {
       min: '0',
       max: '20',
       class: 'form-control',
-      maxLength: "2"
+      maxLength: "2",
+      required: true
     });
     $("#question-choice").append(label);
     $("#question-choice").append(input);
@@ -85,7 +86,8 @@ function getOptions(element) {
       name: "question[option][]",
       type: "text",
       id: "question_option",
-      class: 'form-control'
+      class: 'form-control',
+      required: true
     });
     let br = $('<br>');
     $("#question-options").append(label);

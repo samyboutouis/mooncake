@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container form">
   <div class="row">
     <div class="col">
         <% info = "" %>
@@ -32,13 +32,13 @@
                     <% if question.question_type == "Checkbox" %>
                         <% question.option.each do |option| %>
                             <div>
-                                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb" disabled/> <%= option %>
+                                <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb" disabled/> <span class="qform"> <%= option %> </span>
                             </div>
                         <% end %>
                     <% elsif question.question_type == "Radio" %>
                         <% question.option.each do |option| %>
                             <div>
-                                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb" disabled/> <%= option %>
+                                <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb" disabled/> <span class="qform"> <%= option %> </span>
                             </div>
                         <% end %>
                     <% elsif question.question_type == "Long Answer" %>
