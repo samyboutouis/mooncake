@@ -8,7 +8,7 @@ body {
 #logo {
     font-weight: 500;
     font-size: 24px;
-    color: #00539B;
+    color: white;
 }
 
 .logo {
@@ -16,7 +16,7 @@ body {
 }
 
 .nav-tabs {
-    color: #00539B;
+    color: white;
     font-size: 24px;
 }
 
@@ -120,7 +120,7 @@ p {
     font-weight: 500;
     font-size: 28px;
     line-height: 28px;
-    color: #00539B;
+    color: #33A09E;
     text-align: center;
     margin-bottom: 30px;
 }
@@ -131,7 +131,7 @@ p {
     font-weight: normal;
     font-size: 30px;
     line-height: 35px;
-    color: #00539B;
+    color: #33A09E;
 }
 
 .title {
@@ -140,7 +140,7 @@ p {
     font-weight: normal;
     font-size: 30px;
     line-height: 35px;
-    color: #00539B;
+    color: #33A09E;
 }
 
 .subtitle {
@@ -149,7 +149,7 @@ p {
     font-weight: 500;
     font-size: 24px;
     line-height: 28px;
-    color: rgb(78, 78, 78);
+    color: white;
 }
 
 .no_request {
@@ -170,7 +170,7 @@ p {
 
 .account-title {
     font-weight: bold;
-    color: #00539B;
+    color: #33A09E;
 }
 
 .account-table * td {
@@ -291,13 +291,13 @@ a[aria-expanded=false] .fa-chevron-down {
 }
 
 .bluebox {
-    background: #00539B;
+    background: #33A09E;
     padding: 20px 20px 7px 20px;
     margin: 20px 20px 40px 0px;
     width: 100%
 }
 .bluebox:hover {
-    background: #00539bef;
+    background: #206867;
 }
 
 .bluebox p{
@@ -312,7 +312,7 @@ a[aria-expanded=false] .fa-chevron-down {
 }
 
 .faq-box {
-    background: #00539B;
+    background: #33A09E;
     padding: 20px 20px 7px 20px;
     margin: 20px 20px;
 }
@@ -412,7 +412,7 @@ a[aria-expanded=false] .fa-chevron-down {
     }
 
     .bluebox {
-        background: #00539B;
+        background: #33A09E;
         padding: 20px 20px 7px 20px;
         margin: 20px 0px 40px 0px;
     }
