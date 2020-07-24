@@ -87,6 +87,15 @@ p {
     background-color: #00539bde;
 }
 
+.btn.btn-dark {
+    background-color: #2f353d;
+}
+
+.btn.btn-dark:hover {
+    background-color: #1c1e21;
+    color: white;
+}
+
 /* .box {
     margin: 0 auto;
     margin-top: 2em;
