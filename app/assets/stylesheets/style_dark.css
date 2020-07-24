@@ -397,6 +397,11 @@ a[aria-expanded=false] .fa-chevron-down {
     color: gray;
 }
 
+.btn.btn-dark {
+    border-color: white;
+    background-color: black;
+}
+
 .dash-button {
     padding-top:20px;
 }
