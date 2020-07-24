@@ -82,8 +82,8 @@
                       <% elsif request.status == "Denied"%>
                         <p style="color:red;"> Denied </p>
                       <% else %>
-                        <p style="color:green;"> Accepted </p>
-                        <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
+                        <p class="light-green"> Accepted </p>
+                        <p class="light-green"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
                   </tr>
@@ -113,8 +113,8 @@
                       <% elsif request.status == "Denied"%>
                         <p style="color:red;"> Denied </p>
                       <% else %>
-                        <p style="color:green;"> Accepted </p>
-                        <p style="color:green;"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
+                        <p class="light-green"> Accepted </p>
+                        <p class="light-green"> Granted: <%= request.permission_number.number %> <br> for <%= request.course.department.split("-").first %> <%= request.course.course_number %> - <%= request.course.section_number %> <br> Expires on: <%=request.permission_number.expire_date%> </p>
                       <% end %>
                     </td>
                   </tr>
