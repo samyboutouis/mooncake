@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
-
+@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
 body {
     background-color: white;
 }
@@ -32,6 +32,7 @@ body {
 
 p {
     font-family: 'Roboto';
+    color: black;
 }
 
 .btn.btn-secondary {
@@ -349,6 +350,10 @@ a[aria-expanded=false] .fa-chevron-down {
 .container {
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+label {
+    color: black;
 }
 
 .card, .btn, .form-control, .custom-file-label {
