@@ -46,7 +46,7 @@ Rails.application.configure do
     domain:               'duke.edu'
   }
 
-  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  Rails.application.routes.default_url_options[:host] = 'https://dev.mooncake.colab.duke.edu'
 
 
   # Print deprecation notices to the Rails logger.
