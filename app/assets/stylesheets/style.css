@@ -378,6 +378,14 @@ label {
     margin: 0px 20px 20px 0px;
 }
 
+.blue {
+    color:#00539B;
+}
+
+.light-green {
+    color:green;
+}
+
 @media screen and (min-width: 768px) {
     .modal-dialog {
       width: 700px; /* New width for default modal */

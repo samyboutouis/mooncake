@@ -9,8 +9,10 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <% if cookies[:moon] %>
       <%= stylesheet_link_tag 'style_dark', media: 'all' %>
+      <%= stylesheet_link_tag 'facreqview_dark', media: 'all' %>
     <% else %>
       <%= stylesheet_link_tag 'style', media: 'all' %>
+      <%= stylesheet_link_tag 'facreqview', media: 'all' %>
     <% end %>
     <%= javascript_pack_tag 'application' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

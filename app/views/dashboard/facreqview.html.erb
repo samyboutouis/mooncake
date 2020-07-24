@@ -33,7 +33,7 @@
                 <tr style="text-align: center; vertical-align: middle;">
                   <th> <input type="checkbox" name="selected1" class="selectall"/> </th>
                   <th class="no sort"> <br><%= image_tag "eye_open.png", id: "unhide",class:"eye"%></th>
-                  <th>Time of Request</th>
+                  <th>Time of Request:</th>
                   <% @course.questions.each do |question| %>
                     <%if question.id <= 5 or question.question_text == "Which prerequisite(s) have you satisfied:" %>
                       <th> <%= question.question_text %><br><%= image_tag "eye.png", id: "hide",class:"eye"%></th>
