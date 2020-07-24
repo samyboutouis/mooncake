@@ -17,6 +17,16 @@ class QuestionsController < ApplicationController
                 @course.questions.create(question_type:  "Checkbox", question_text: "Which prerequisite(s) have you satisfied:", option: @course.prereqs.pluck(:name))
             end
         end
+        for crse in Course.where(term: @course.term, department: @course.department, course_number: @course.course_number) do
+            if crse.id != @course.id
+                if crse.questions.count == 0
+                    crse.questions << Question.find(1,2,3,4,5)
+                    if crse.prereqs.first != nil
+                        crse.questions.create(question_type:  "Checkbox", question_text: "Which prerequisite(s) have you satisfied:", option: crse.prereqs.pluck(:name))
+                    end
+                end
+            end
+        end
         @question = @course.questions
     end
 
@@ -26,6 +36,12 @@ class QuestionsController < ApplicationController
             redirect_to faculty_page_path
         end
         @course.questions.create(question_params)
+        for crse in Course.where(term: @course.term, department: @course.department, course_number: @course.course_number) do
+            if crse.id != @course.id
+                crse.questions << @course.questions.last
+            end
+        end
+
         redirect_to question_path(@course)
     end
 
@@ -43,6 +59,11 @@ class QuestionsController < ApplicationController
         @question = Question.find(params[:id])
         @course = Course.find(params[:course])
         @course.questions.delete(params[:id])
+        for crse in Course.where(term: @course.term, department: @course.department, course_number: @course.course_number) do
+            if crse.id != @course.id
+                crse.questions.delete(params[:id])
+            end
+        end
         redirect_to question_path(@course)
     end
 
@@ -71,6 +92,11 @@ class QuestionsController < ApplicationController
                 next
             else
                 @course.questions << Question.find(id)
+                for crse in Course.where(term: @course.term, department: @course.department, course_number: @course.course_number) do
+                    if crse.id != @course.id
+                        crse.questions << Question.find(id)
+                    end
+                end
             end
         end
         redirect_to question_path(@course)
