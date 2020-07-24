@@ -65,7 +65,7 @@
                   <% unless course.users.length == 1 %>
                     <p>Co-Managers: <% course.users.each do |user| %>
                         <% unless user == @user %>
-                          <% if course.users.last == user%>
+                          <% if course.users.second_to_last == user%>
                             <%= user.first_name %> <%= user.last_name %>
                           <% else %>
                             <%= user.first_name %> <%= user.last_name %>,
