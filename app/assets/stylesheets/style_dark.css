@@ -108,7 +108,7 @@ label {
 }
 
 .table_box #file {
-    color: gray;
+    color: white;
 }
 
 .btn-file {
@@ -127,6 +127,8 @@ label {
     cursor: inherit;
     display: block;
 }
+
+
 
 
 .table_box2 {
