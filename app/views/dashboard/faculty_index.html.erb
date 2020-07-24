@@ -5,25 +5,23 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3 order-md-last text-center dash-button">
+    <div class="col-md-4 order-md-last text-center dash-button">
       <% if @user.courses.count > 1 %>
         <div class="text-center my-auto">
           <a href="<%= new_course_path %>" ><button class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto; float: right" type="button" data-toggle="tooltip" data-placement="top" title="Add a course for a student to start requesting numbers!">Add Course</button></a>
-        </div><br>
+        </div>
         <div class="text-center my-auto">
           <a href="<%= allrequests_path %>"><button class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto; float: right;"  type="button"> All Courses Requests</button></a>
-        </div><br>
+        </div>
       <% else %>
-        <div class="text-center my-auto"><br>
+        <div class="text-center my-auto">
           <a href="<%= new_course_path %>" ><button type="button" class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto; float: right" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create Course</button></a>
         </div>
       <% end %>
     </div>
-    <div class="col-md-9 order-md-first">
+    <div class="col-md-8 order-md-first">
       <h1 class="subtitle"> Your Courses</h1>
-      <div class="row">
-        <div class="col">
-          <%= no_course(@user)%>
+      <%= no_course(@user)%>
           <% i = 0 %>
           <% @courses.each do |course| %>
             <div class="bluebox">
@@ -91,8 +89,6 @@
             </div>
             <% i += 1 %>
           <% end %>
-        </div>
-      </div>
     </div>
   </div>
 </div>
