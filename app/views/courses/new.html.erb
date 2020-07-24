@@ -56,9 +56,13 @@
         </div>
 
         <div class="form-group row", style="padding: 10px 20px 0px; margin-left: 0px; margin-right: 0px; padding-left:0">
-          <label> Permission Numbers: <a class="help" style="color: #00539B">Show Me How</a></label>
-
-
+          
+          <% if cookies[:moon] %>
+            <label> Permission Numbers: <a class="help" style="color: #2679ff">Show Me How</a></label>
+          <% else %>
+            <label> Permission Numbers: <a class="help" style="color: #00539B;font-weight: 500;">Show Me How</a></label>
+          <% end %>
+          
           <div class="modal fade" id="excelModal">
             <div class="modal-dialog">
               <div class="modal-content">
