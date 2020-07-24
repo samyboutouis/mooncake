@@ -14,7 +14,7 @@
         
         <button data-toggle="tooltip" data-placement="top" title="Load previously saved form template" class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                 Load Template
-            </button>
+        </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                 <% @course.users.first.form_templates.each do |template| %>
                     <%=link_to template.name, load_template_path(template, @course), class:"dropdown-item" %>
