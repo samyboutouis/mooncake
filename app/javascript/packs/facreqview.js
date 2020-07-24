@@ -78,18 +78,16 @@ $(document).ready(function () {
         }
     } );
 
-    $('.selectall').on('change', function(e) {
-        var $inputs = $('.checkboxlist');
-        if(e.originalEvent === undefined) {
-            var allChecked = true;
-            $inputs.each(function(){
-                allChecked = allChecked && this.checked;
-            });
-            this.checked = allChecked;
+    var allPages = table.cells( ).nodes( );
+    $('.selectall').on('click', function(e) {
+        if ($(this).hasClass('checkboxlist')) {
+            $('input[type="checkbox"]', allPages).prop('checked', false);
         } else {
-            $inputs.prop('checked', this.checked);
+            $('input[type="checkbox"]', allPages).prop('checked', true);
         }
-        var ischecked =$('input[type=checkbox]:checked').length;
+        $(this).toggleClass('checkboxlist');
+
+        var ischecked =$('input[type=checkbox]:checked', allPages).length;
         if(ischecked > 0) {
             document.getElementById("selected_action").style.visibility = "visible";
         } else {
@@ -105,7 +103,7 @@ $(document).ready(function () {
     $('.checkboxlist').on('change', function(){
         // console.log(document.getElementById("selected_action"))
 
-        var ischecked =$('input[type=checkbox]:checked').length;
+        var ischecked =$('input[type=checkbox]:checked', allPages).length;
         if(ischecked > 0) {
             document.getElementById("selected_action").style.visibility = "visible";
         } else {
@@ -116,23 +114,20 @@ $(document).ready(function () {
 
     $('#myTable').on( 'draw.dt', function () {
 
-        $('.selectall').on('change', function(e) {
-            var $inputs = $('.checkboxlist');
-            if(e.originalEvent === undefined) {
-                var allChecked = true;
-                $inputs.each(function(){
-                    allChecked = allChecked && this.checked;
-                });
-                this.checked = allChecked;
-            } else {
-                $inputs.prop('checked', this.checked);
-            }
-            var ischecked =$('input[type=checkbox]:checked').length;
-            if(ischecked > 0) {
-                document.getElementById("selected_action").style.visibility = "visible";
-            } else {
-                document.getElementById("selected_action").style.visibility = "hidden";
-            }
+        $('.selectall').on('click', function(e) {
+          if ($(this).hasClass('checkboxlist')) {
+              $('input[type="checkbox"]', allPages).prop('checked', false);
+          } else {
+              $('input[type="checkbox"]', allPages).prop('checked', true);
+          }
+          $(this).toggleClass('checkboxlist');
+
+          var ischecked =$('input[type=checkbox]:checked').length;
+          if(ischecked > 0) {
+              document.getElementById("selected_action").style.visibility = "visible";
+          } else {
+              document.getElementById("selected_action").style.visibility = "hidden";
+          }
 
         });
 
@@ -143,7 +138,7 @@ $(document).ready(function () {
         $('.checkboxlist').on('change', function(){
             // console.log(document.getElementById("selected_action"))
 
-            var ischecked =$('input[type=checkbox]:checked').length;
+            var ischecked =$('input[type=checkbox]:checked', allPages).length;
             if(ischecked > 0) {
                 document.getElementById("selected_action").style.visibility = "visible";
             } else {
