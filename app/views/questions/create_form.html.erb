@@ -13,7 +13,7 @@
         <div class="container-fluid" style="padding-left:0">
         
             <div class="dropdown">
-            <b data-toggle="tooltip" data-placement="top" title="Load previously saved question forms"><button onclick="myFunction()" class="dropbtn btn btn-dark">Dropdown</button></b>
+            <b data-toggle="tooltip" data-placement="top" title="Load previously saved question forms"><button onclick="myFunction()" class="dropbtn btn btn-dark">Load Template</button></b>
                     <div id="myDropdown" class="dropdown-content">
                     <% @course.users.first.form_templates.each do |template| %>
                         <%=link_to template.name, load_template_path(template, @course), class:"dropdown-item" %>
