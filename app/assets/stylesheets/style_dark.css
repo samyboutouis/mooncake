@@ -481,6 +481,14 @@ a[aria-expanded=false] .fa-chevron-down {
     font-weight: 400;
 }
 
+.blue {
+    color:#33A09E;
+}
+
+.light-green {
+    color:rgb(175, 255, 168);
+}
+
 .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
     color: gray !important;
 }
