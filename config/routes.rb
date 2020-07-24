@@ -101,4 +101,8 @@ Rails.application.routes.draw do
 
   #faq
   get '/faq' => "faq#show", as: "faq"
+
+  #dark mode
+  get '/moon', to: 'application#moon', as: 'moon'
+  get '/sun', to: 'application#sun', as: 'sun'
 end

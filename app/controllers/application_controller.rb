@@ -8,6 +8,18 @@ class ApplicationController < ActionController::Base
     # before_action :faculty_check
     # before_action :student_check
 
+    def moon
+      cookies[:moon] = {
+        value: 'dark mode on'
+      }
+      redirect_to student_show_path
+    end
+
+    def sun
+      cookies.delete(:moon)
+      redirect_to student_show_path
+    end
+
     private
 
     def require_login
