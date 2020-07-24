@@ -21,7 +21,7 @@
                 <%else%>
                   <%= link_to "Cancel", requests_page_path(@course), class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
                 <%end %>
-                <button type="submit" class="btn btn-dark">Send</button>
+                 <input type="submit" value="Send" class="btn btn-dark" onclick="return confirm('Are you sure you want to send this email?')" />
             </div>
         </form>
     </div>
