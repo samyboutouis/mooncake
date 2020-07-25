@@ -490,3 +490,7 @@ label {
 .qform {
     color: black;
 }
+
+.table-color {
+    background-color: white;
+}
