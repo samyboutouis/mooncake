@@ -28,8 +28,7 @@ class CoursesController < ApplicationController
         flash[:alert2] = "The course you tried to create already exists. You can only create this course if the original one is deleted"
         redirect_to faculty_page_url and return
     elsif course = Course.create(cross_listing: [])
-      course.update(course_params)
-      rec = course
+      course.update(course_params) 
       courses = []
       courses.append(course.id)
       course.published = false
@@ -44,6 +43,7 @@ class CoursesController < ApplicationController
           prereqs = course.prereqs.create(name: name[1]["name"])
         end
       end
+      rec = course
       
       j = 0
       cl = Array.new
@@ -63,6 +63,7 @@ class CoursesController < ApplicationController
           Course.create(term: course.term, department: params[dep], course_number: params[num],
           section_number: course.section_number, primary: false, seats_taken: 0, capacity: course.capacity, cross_listing: [course.id])
           cl.append(Course.last.id)
+          puts course.prereqs.pluck(:name)
           Course.last.prereqs << course.prereqs
           file = params[file]
           fileUpload(file, Course.last)
@@ -80,8 +81,9 @@ class CoursesController < ApplicationController
             if currentCrossList == 1
               # n = params["number-choice"].to_i
               file = "file" + (j*(numAdditionalCrossList+2)+currentCrossList).to_s
-              course = Course.create(term: course.term, department: course.department, course_number: course.course_number,
+              course2 = Course.create(term: course.term, department: course.department, course_number: course.course_number,
               section_number: params[sec], primary: true, seats_taken: 0, capacity: params[capacity], cross_listing: [], published: false)
+              Course.last.prereqs << course.prereqs
               User.find_by(net_id: session[:current_user]["net_id"]).courses << Course.last
             else
               dep = "department" + (currentCrossList-1).to_s
@@ -90,15 +92,16 @@ class CoursesController < ApplicationController
               file = "file" + b.to_s
               Course.create(term: course.term, department: params[dep], course_number: params[num],
               section_number: params[sec], primary: false, seats_taken: 0, capacity: params[capacity], cross_listing: [course.id])
+              Course.last.prereqs << course.prereqs
             end  
             if currentCrossList != 1
               cl.append(Course.last.id)
             end  
-            Course.last.prereqs << course.prereqs
+  
             file = params[file]
             fileUpload(file, Course.last)
             currentCrossList += 1
-            course.update(cross_listing: cl)
+            course2.update(cross_listing: cl)
           end 
           j += 1 
         end
