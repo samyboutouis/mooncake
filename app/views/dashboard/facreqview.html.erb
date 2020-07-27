@@ -67,7 +67,9 @@
                     <td> <%= request.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%D %H:%M:%S')%> </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
-                        <td><%= answer.answer_text.gsub("~", ", ") %></td>
+                        <td><%= answer.answer_text.gsub("~", ", ")[0...-3] %></td>
+                      <% elsif answer.question.question_type == "Radio"%>
+                        <td><%= answer.answer_text[0...-3] %></td>
                       <% elsif answer.question.question_type == "Long Answer"%>
                         <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div></td>
                       <% else %>
@@ -98,7 +100,9 @@
                     <td> <%= request.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%D %H:%M:%S')%> </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
-                        <td><%= answer.answer_text.gsub("~", ", ") %></td>
+                        <td><%= answer.answer_text.gsub("~", ", ")[0...-3] %></td>
+                      <% elsif answer.question.question_type == "Radio"%>
+                        <td><%= answer.answer_text[0...-3] %></td>
                       <% elsif answer.question.question_type == "Long Answer"%>
                         <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div></td>
                       <% else %>

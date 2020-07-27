@@ -7,8 +7,8 @@
           <input type="hidden" name="department" value="<%= @course.department %>">
           <input type="hidden" name="course_number" value="<%= @course.course_number %>">
           <input type="hidden" name="section_number" value="<%= @course.section_number %>">
-          <% z=1000 %>
-          <% w=270 %>
+          <% z=501 %>
+          <% w=100 %>
           <% for question in @course.questions %>
             <div class="form-group required" style="margin: 15px;">
               <p style="font-family: 'Roboto', sans-serif;font-size: 18px;" class="control-label"><%= question.question_text %></p>
@@ -21,8 +21,8 @@
               <% elsif question.question_type == "Checkbox" %>
                 <% question.option.each do |option| %>
                     <div>
-                        <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %><% z %>" id = "cb"/>
-                        <label id="<%= z %>" for="<%= option %><% z %>">
+                        <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="checkbox" name= "<%=question.question_text%>[]" id= "<%= option %><%= z %>" value= "<%= option %><%= z %>" id = "cb"/>
+                        <label id="<%= z %>" for="<%= option %><%= z %>">
                         <%= option %>
                         </label>
 
@@ -32,8 +32,8 @@
               <% elsif question.question_type == "Radio" %>
                 <% question.option.each do |option| %>
                     <div>
-                        <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %><% w %>" id = "rb"/>
-                        <label id="<%= w %>" for="<%= option %><% w %>">
+                        <input style="font-family: 'Roboto', sans-serif;font-size: 15px;" type="radio" name= "<%=question.question_text%>" id= "<%= option %><%= w %>" value= "<%= option %><%= w %>" id = "rb"/>
+                        <label id="<%= w %>" for="<%= option %><%= w %>">
                         <%= option %>
                         </label>
 
