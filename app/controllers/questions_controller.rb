@@ -69,7 +69,12 @@ class QuestionsController < ApplicationController
 
     def save_template
         @course = Course.find(params[:course])
-        questionids = @course.questions.pluck(:question_id)
+        if @course.prereqs.first != nil
+           n = 6
+        else
+            n = 5
+        end
+        questionids = @course.questions.pluck(:question_id).slice(n, @course.questions.count+1)
         questionids = questionids.join("~")
         if params[:template_name] == nil
             name = @course.department.split("-").first + " "+ @course.course_number + " - " + @course.section_number + "template"
@@ -84,8 +89,13 @@ class QuestionsController < ApplicationController
     def load_template
         @course = Course.find(params[:course])
         @template = FormTemplate.find(params[:template])
-
-        @course.questions.delete_all
+        for question in @course.questions
+            if question.id  < 6 || question.question_text == "Which prerequisite(s) have you satisfied:"
+                next
+            else
+                @course.questions.delete(question.id)
+            end
+        end
         
         for id in @template.questionids.split("~")
             if @course.questions.pluck(:question_id).include? id.to_i
