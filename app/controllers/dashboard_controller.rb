@@ -113,5 +113,8 @@ class DashboardController < ApplicationController
     @user = User.find_by(net_id: session[:current_user]["net_id"])
   end
 
+  def secret
+  end
+
 
 end
