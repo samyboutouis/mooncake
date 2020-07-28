@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <% if @user.net_id == 'vkp3'%>
+      <% if @user.net_id == 'vkp3' || @user.net_id == 'eyz3' || @user.net_id == 'sb590' || @user.net_id == 'sl616' || @user.net_id == 'ms858' || @user.net_id == 'zs93'%>
         <a href='/secret'><h1 class="title"><%= image_tag "mooncake_logo.png", class:"logo" %>Hello, <%= @user.first_name %>!</h1></a>
       <% else %>
         <h1 class="title"> Hello, <%= @user.first_name %>!</h1>
