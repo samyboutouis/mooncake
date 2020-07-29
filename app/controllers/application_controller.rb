@@ -8,16 +8,27 @@ class ApplicationController < ActionController::Base
     before_action :faculty_check
     before_action :student_check
 
+    skip_before_action :faculty_check, only: [:moon, :sun]
+    skip_before_action :student_check, only: [:moon, :sun]
+
     def moon
       cookies[:moon] = {
         value: 'dark mode on'
       }
-      redirect_back(fallback_location: root_path)
+      if session[:current_user]["user_type"] == "student" 
+        redirect_back(fallback_location: root_path)
+      elsif session[:current_user]["user_type"] == "faculty" || session[:current_user]["user_type"] == "staff"
+        redirect_back(fallback_location: faculty_page_path)
+      end
     end
 
     def sun
       cookies.delete(:moon)
-      redirect_back(fallback_location: root_path)
+      if session[:current_user]["user_type"] == "student" 
+        redirect_back(fallback_location: root_path)
+      elsif session[:current_user]["user_type"] == "faculty" || session[:current_user]["user_type"] == "staff"
+        redirect_back(fallback_location: faculty_page_path)
+      end
     end
 
     private
