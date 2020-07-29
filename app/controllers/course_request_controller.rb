@@ -1,15 +1,5 @@
 class CourseRequestController < ApplicationController
     skip_before_action :faculty_check
-    # def expand
-    #     term = params[:term]
-    #     department = params[:department]
-    #     number = params[:number]
-    #     @course = Course.where(term:term, department: department, course_number: number)
-    #     @course_request = CourseRequest.where(user: session[:current_user], course: @course)
-    #     respond_to do |format|
-    #         format.json {render json: @course_request}
-    #     end
-    # end
 
     def index
         @course = Course.where(published: true)

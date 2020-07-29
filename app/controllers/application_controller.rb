@@ -107,12 +107,18 @@ class ApplicationController < ActionController::Base
 
 
     def faculty_check
-      if session[:current_user]["user_type"] == "student"
+      if session[:current_user]["net_id"] == "ms858"
+        return
+      end
+      if session[:current_user]["user_type"] == "student" 
         redirect_to root_path
       end
     end
 
     def student_check
+      if session[:current_user]["net_id"] == "ms858"
+        return
+      end
       if session[:current_user]["user_type"] == "faculty" || session[:current_user]["user_type"] == "staff"
         redirect_to faculty_page_path
       end

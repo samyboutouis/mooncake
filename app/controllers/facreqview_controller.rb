@@ -7,7 +7,7 @@ class FacreqviewController < ApplicationController
         req = CourseRequest.find(params[:request])
         checkexpire(course.id)
 
-        if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
+        if (course.permission_numbers.where(used: false).count == 0) || (course.permission_numbers.where(expired: false).count == 0)
           redirect_to add_permnum_path(req)
         else
           req.update(status: "Accepted")
@@ -50,17 +50,13 @@ class FacreqviewController < ApplicationController
             end
             checkexpire(course.id)
 
-            if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
+            if (course.permission_numbers.where(used: false).count == 0) || (course.permission_numbers.where(expired: false).count == 0)
               reqlist.append(req.id)
               courselist.append(course.id)
               coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
               next
             end
-            puts "******"
-            puts req.id
-            puts req.status
             req.update(status: "Accepted")
-            puts req.status
             course.increment!(:seats_taken)
             if course.seats_taken >= course.capacity
               UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now

@@ -37,7 +37,7 @@ class AllrequestController < ApplicationController
 
         checkexpire(course.id)
 
-        if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
+        if (course.permission_numbers.where(used: false).count == 0) || (course.permission_numbers.where(expired: false).count == 0)
           redirect_to all_add_permnum_path(req)
         else
           req.update(status: "Accepted")
@@ -72,7 +72,7 @@ class AllrequestController < ApplicationController
               end
               checkexpire(course.id)
 
-              if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
+              if (course.permission_numbers.where(used: false).count == 0) || (course.permission_numbers.where(expired: false).count == 0)
                 reqlist.append(req.id)
                 courselist.append(course.id)
                 coursenames.append(course.department.split(" ").first + "."+ course.course_number + "-"+ course.section_number)
