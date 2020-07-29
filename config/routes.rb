@@ -105,4 +105,8 @@ Rails.application.routes.draw do
   #dark mode
   get '/moon', to: 'application#moon', as: 'moon'
   get '/sun', to: 'application#sun', as: 'sun'
+
+
+  #secret 
+  get '/secret' => 'dashboard#secret'
 end

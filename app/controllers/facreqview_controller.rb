@@ -5,7 +5,7 @@ class FacreqviewController < ApplicationController
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         course = CourseRequest.find(params[:request]).course
         req = CourseRequest.find(params[:request])
-        #checkexpire(course.id)
+        checkexpire(course.id)
 
         if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
           redirect_to add_permnum_path(req)
@@ -48,7 +48,7 @@ class FacreqviewController < ApplicationController
             if req.permission_number != nil
               next
             end
-            #checkexpire(course.id)
+            checkexpire(course.id)
 
             if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
               reqlist.append(req.id)

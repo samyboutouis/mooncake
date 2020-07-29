@@ -2,7 +2,7 @@ require "roo"
 require "roo-xls"
 require "httparty"
 class CoursesController < ApplicationController
-  # skip_before_action :student_check
+  skip_before_action :student_check
   def course_params
     params.require(:course).permit(:term, :department, :course_number, :section_number, :capacity, prereqs_attributes: [:name])
   end
@@ -28,13 +28,13 @@ class CoursesController < ApplicationController
         flash[:alert2] = "The course you tried to create already exists. You can only create this course if the original one is deleted"
         redirect_to faculty_page_url and return
     elsif course = Course.create(cross_listing: [])
-      course.update(course_params) 
+      course.update(course_params)
       courses = []
       courses.append(course.id)
       course.published = false
       course.primary = true
       course.seats_taken = 0
-      @user.courses << course  
+      @user.courses << course
       file = params[:course][:file]
       fileUpload(file, course)
       prereqs_attributes = params["prereq_attributes"]
@@ -44,15 +44,15 @@ class CoursesController < ApplicationController
         end
       end
       rec = course
-      
+
       j = 0
       cl = Array.new
       hasCrossList = false;
       numAdditionalCrossList = params["number-choice"].to_i
       numAdditionalSections = params["number-choice-sec"].to_i
       if (numAdditionalCrossList>0)
-        hasCrossList = true 
-      end  
+        hasCrossList = true
+      end
 
       currentCrossList = 1
       if (hasCrossList)
@@ -93,17 +93,17 @@ class CoursesController < ApplicationController
               Course.create(term: course.term, department: params[dep], course_number: params[num],
               section_number: params[sec], primary: false, seats_taken: 0, capacity: params[capacity], cross_listing: [course.id])
               Course.last.prereqs << course.prereqs
-            end  
+            end
             if currentCrossList != 1
               cl.append(Course.last.id)
-            end  
-  
+            end
+
             file = params[file]
             fileUpload(file, Course.last)
             currentCrossList += 1
             course2.update(cross_listing: cl)
-          end 
-          j += 1 
+          end
+          j += 1
         end
       end
       j = 1
@@ -120,7 +120,7 @@ class CoursesController < ApplicationController
           fileUpload(file, Course.last)
           j += 1
         end
-      end  
+      end
       course = rec
       UserMailer.with(user: @user, course: course).course_created.deliver_now
       redirect_to question_path(course), alert: "Course created successfully."
