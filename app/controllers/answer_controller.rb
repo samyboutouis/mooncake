@@ -1,5 +1,5 @@
 class AnswerController < ApplicationController
-    # skip_before_action :faculty_check
+    skip_before_action :faculty_check
     def form 
         @user = User.find_by(net_id: session[:current_user]["net_id"])
         @course = Course.find(params[:course_request])
@@ -14,7 +14,7 @@ class AnswerController < ApplicationController
             course1 = Course.find(@course.cross_listing[0])
             total = course1.course_requests.count
             name = course1.department.split("-").first + " "+ course1.course_number + " - " + course1.section_number
-            for id in course1.cross_listing 
+            for id in course1.cross_listing
                 c = Course.find(id)
                 total += c.course_requests.count
                 name += " / " + c.department.split("-").first + " "+ c.course_number + " - " + c.section_number
@@ -23,7 +23,7 @@ class AnswerController < ApplicationController
             course1 = @course
             total = course1.course_requests.count
             name = course1.department.split("-").first + " "+ course1.course_number + " - " + course1.section_number
-            for id in course1.cross_listing 
+            for id in course1.cross_listing
                 c = Course.find(id)
                 total += c.course_requests.count
                 name += " / " + c.department.split("-").first + " "+ c.course_number + " - " + c.section_number
@@ -53,5 +53,3 @@ class AnswerController < ApplicationController
     end
 
 end
-
-

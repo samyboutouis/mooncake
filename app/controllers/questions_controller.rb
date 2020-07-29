@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-    # skip_before_action :student_check
+    skip_before_action :student_check
     def question_params
         defaults = {option: []}
         params.require(:question).permit(:question_type, :question_text, :option => []).reverse_merge(defaults)
@@ -96,7 +96,7 @@ class QuestionsController < ApplicationController
                 @course.questions.delete(question.id)
             end
         end
-        
+
         for id in @template.questionids.split("~")
             if @course.questions.pluck(:question_id).include? id.to_i
                 next
@@ -113,4 +113,3 @@ class QuestionsController < ApplicationController
     end
 
 end
-

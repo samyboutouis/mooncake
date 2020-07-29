@@ -5,8 +5,8 @@ require "roo-xls"
 class ApplicationController < ActionController::Base
     before_action :require_login
     add_flash_types :req
-    # before_action :faculty_check
-    # before_action :student_check
+    before_action :faculty_check
+    before_action :student_check
 
     def moon
       cookies[:moon] = {
@@ -106,17 +106,17 @@ class ApplicationController < ActionController::Base
     end
 
 
-    # def faculty_check
-    #   if session[:current_user]["user_type"] == "student"
-    #     redirect_to root_path
-    #   end
-    # end
+    def faculty_check
+      if session[:current_user]["user_type"] == "student"
+        redirect_to root_path
+      end
+    end
 
-    # def student_check
-    #   if session[:current_user]["user_type"] == "faculty" || session[:current_user]["user_type"] == "staff"
-    #     redirect_to faculty_page_path
-    #   end
-    # end
+    def student_check
+      if session[:current_user]["user_type"] == "faculty" || session[:current_user]["user_type"] == "staff"
+        redirect_to faculty_page_path
+      end
+    end
 
     def checkexpire(yo)
       heyy = Course.find(yo)
