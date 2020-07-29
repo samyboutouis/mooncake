@@ -35,7 +35,7 @@ class AllrequestController < ApplicationController
         req = CourseRequest.find(params[:request])
 
 
-        #checkexpire(course.id)
+        checkexpire(course.id)
 
         if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
           redirect_to all_add_permnum_path(req)
@@ -70,8 +70,8 @@ class AllrequestController < ApplicationController
               if req.permission_number != nil
                 next
               end
-              # checkexpire(course.id)
-              
+              checkexpire(course.id)
+
               if (course.permission_numbers.where(used: false).count == 0) #|| (course.permission_numbers.where(expired: false).count == 0)
                 reqlist.append(req.id)
                 courselist.append(course.id)
