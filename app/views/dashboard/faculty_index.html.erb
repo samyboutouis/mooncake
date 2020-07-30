@@ -26,6 +26,9 @@
     <div class="col-md-8 order-md-first">
       <h1 class="subtitle"> Your Courses</h1>
       <%= no_course(@user)%>
+      <% if flash[:alert2] %>
+          <div class="alert1", style = "color: red"><%= flash[:alert2] %></div>
+      <% end %>
           <% i = 0 %>
           <% @courses.each do |course| %>
             <div class="bluebox">
