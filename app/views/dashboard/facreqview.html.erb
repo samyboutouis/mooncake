@@ -67,7 +67,11 @@
                     <td> <%= request.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('%D %H:%M:%S')%> </td>
                     <% request.answers.each do |answer| %>
                       <% if answer.question.question_type == "Checkbox"%>
-                        <td><%= answer.answer_text.gsub("~", ", ")[0...-3] %></td>
+                        <%= answerss = [] %>
+                        <% for ahh in answer.answer_text.gsub("~", ", ").split(",") %>
+                          <%= answerss.append(ahh[0...-3]) %>
+                        <%end%>
+                        <td><%= answerss.join(', ') %></td>
                       <% elsif answer.question.question_type == "Radio"%>
                         <td><%= answer.answer_text[0...-3] %></td>
                       <% elsif answer.question.question_type == "Long Answer"%>
