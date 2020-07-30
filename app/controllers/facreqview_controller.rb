@@ -15,7 +15,7 @@ class FacreqviewController < ApplicationController
           if course.seats_taken >= course.capacity
             UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
           end
-          perm = course.permission_numbers.where(used: false).last
+          perm = course.permission_numbers.where(used: false, expired: false).last
           perm.course_request = req
           perm.update(used: true)
           UserMailer.with(user: req.user, request: req).status_changed.deliver_now
@@ -61,7 +61,7 @@ class FacreqviewController < ApplicationController
             if course.seats_taken >= course.capacity
               UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
             end
-            perm = course.permission_numbers.where(used: false).last
+            perm = course.permission_numbers.where(used: false, expired: false).last
             perm.course_request = req
             perm.update(used: true)
             UserMailer.with(user: req.user, request: req).status_changed.deliver_now
@@ -191,7 +191,7 @@ class FacreqviewController < ApplicationController
 
   def mailselected2
       @course = Course.find(params[:courseid])
-      @sender = User.find_by(net_id: session[:current_user]["net_id"]).id
+      @sender = User.find_by(net_id: session[:current_user]["net_id"])
       for req in (params[:selected]).split("~") do
         request = CourseRequest.find(req)
         UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender.id, course: request.course.id).email_student.deliver_now

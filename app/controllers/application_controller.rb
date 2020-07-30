@@ -5,8 +5,9 @@ require "roo-xls"
 class ApplicationController < ActionController::Base
     before_action :require_login
     add_flash_types :req
-    before_action :faculty_check
-    before_action :student_check
+    before_action :faculty_check, except: [:index, :withdraw, :view, :form, :data, :secret]
+    before_action :student_check, only: [:index, :withdraw, :view, :form, :data, :secret]
+
 
     skip_before_action :faculty_check, only: [:moon, :sun]
     skip_before_action :student_check, only: [:moon, :sun]
@@ -112,22 +113,27 @@ class ApplicationController < ActionController::Base
 
         if numExists == false
           course.permission_numbers.create(number: row[0].to_i, expire_date: row[7], used: false, consent: consent, capacity: capacity, reqs: reqs)
+          if Date.today >= Date.strptime(course.permission_numbers.last.expire_date)
+            course.permission_numbers.last.update(expired: true)
+          else
+            course.permission_numbers.last.update(expired: false)
+          end
         end
       end
     end
 
 
     def faculty_check
-      unless session[:user_id] == "vkp3" || session[:user_id] == "eyz3" ||session[:user_id] == "sl616" || session[:user_id] == "sb590" || session[:user_id] == "ms858" || session[:user_id] == "zs93"
-        if session[:current_user]["user_type"] == "student" 
+      unless session[:user_id] == "vkp3" || session[:user_id] == "eyz3" ||session[:user_id] == "sl616" || session[:user_id] == "sb590" || session[:user_id] == "zs93"
+        if User.first.user_type == "student" 
           redirect_back(fallback_location: root_path)
         end
       end
     end
 
     def student_check
-      unless session[:user_id] == "vkp3" || session[:user_id] == "eyz3" ||session[:user_id] == "sl616" || session[:user_id] == "sb590" || session[:user_id] == "ms858" || session[:user_id] == "zs93"
-        if session[:current_user]["user_type"] == "faculty" || session[:current_user]["user_type"] == "staff"
+      unless session[:user_id] == "vkp3" || session[:user_id] == "eyz3" ||session[:user_id] == "sl616" || session[:user_id] == "sb590" ||  session[:user_id] == "zs93"
+        if User.first.user_type == "faculty" || session[:current_user]["user_type"] == "staff"
           redirect_back(fallback_location: faculty_page_path)
         end
       end

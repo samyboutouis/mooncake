@@ -45,7 +45,7 @@ class AllrequestController < ApplicationController
           if course.seats_taken >= course.capacity
             UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
           end
-          perm = course.permission_numbers.where(used: false).last
+          perm = course.permission_numbers.where(used: false, expired: false).last
           perm.course_request = req
           perm.update(used: true)
           UserMailer.with(user: req.user, request: req).status_changed.deliver_now
@@ -71,7 +71,6 @@ class AllrequestController < ApplicationController
                 next
               end
               checkexpire(course.id)
-
               if (course.permission_numbers.where(used: false).count == 0) || (course.permission_numbers.where(expired: false).count == 0)
                 reqlist.append(req.id)
                 courselist.append(course.id)
@@ -83,7 +82,7 @@ class AllrequestController < ApplicationController
               if course.seats_taken >= course.capacity
                 UserMailer.with(user: req.user, course: course).capacity_reached.deliver_now
               end
-              perm = course.permission_numbers.where(used: false).last
+              perm = course.permission_numbers.where(used: false, expired: false).last
               perm.course_request = req
               perm.update(used: true)
               UserMailer.with(user: req.user, request: req).status_changed.deliver_now
@@ -126,7 +125,7 @@ class AllrequestController < ApplicationController
       course = CourseRequest.find(params[:request]).course
       file = params[:file]
       file_upload(file, course.id)
-      redirect_to allrequests_path
+      redirect_to acceptview_path(params[:request])
   end
 
 
@@ -154,7 +153,7 @@ class AllrequestController < ApplicationController
 
       def allmailselected2
           @course = Course.find(params[:courseid])
-          @sender = User.find_by(net_id: session[:current_user]["net_id"]).id
+          @sender = User.find_by(net_id: session[:current_user]["net_id"])
           for req in (params[:selected]).split("~") do
           request = CourseRequest.find(req)
           UserMailer.with(email: request.user.email, subject: params[:subject], body: params[:body], sender: @sender.id, course: request.course.id).email_student.deliver_now
