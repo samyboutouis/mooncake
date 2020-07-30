@@ -75,7 +75,7 @@
                     <% while m <= len%>
                       <p>Co-Managers: <% course.users.each do |user| %>
                         <% unless user == @user %>
-                          <% if m == len %>
+                          <% if m == len%>
                             <%= user.first_name + " " + user.last_name %>
                           <% else %>
                             <%= user.first_name + " " + user.last_name + " || "%>
