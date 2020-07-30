@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   skip_before_action :faculty_check, only: [:index, :withdraw, :view, :secret]
-  skip_before_action :student_check, only: [:faculty_index, :facreqview, :deny, :addpermnum, :accept, :add, :secret]
+  skip_before_action :student_check, only: [:faculty_index, :facreqview, :deny, :addpermnum, :accept, :add, :secret, :publish, :add_user, :add_user2, :allrequests, :searchNetID]#last one?
   def index
     @user = User.find_by(net_id: session[:current_user]["net_id"])
     @course_request = @user.course_requests
