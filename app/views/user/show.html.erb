@@ -6,16 +6,18 @@
   </div>
   <div class="row">
     <div class="col">
-    <% if session[:current_user]["user_type"] == "student" %>
       <table class="account-table">
         <tr>
           <td><p class="account-title">Name:</p></td>
           <td><p><%= @user.first_name %> <%= @user.last_name %></p></td>
         </tr>
-        <tr>
-          <td><p class="account-title">Graduation Term:</p></td>
-          <td><p><%= @user.grad_year %></p></td>
-        </tr>
+        <% if session[:current_user]["user_type"] == "student"%>
+          <tr>
+            <td><p class="account-title">Graduation Term:</p></td>
+            <td><p><%= @user.grad_year %></p></td>
+          </tr>
+        <%else%>
+        <%end%>
         <tr>
           <td><p class="account-title">NetID:</p></td>
           <td><p><%= @user.net_id %> </p></td>
@@ -33,30 +35,6 @@
           <td><p><%= @user.user_type %> </p></td>
         </tr>
       </table>
-    <% else %>
-      <table class="account-table">
-        <tr>
-          <td><p class="account-title">Name:</p></td>
-          <td><p><%= @user.first_name %> <%= @user.last_name %></p></td>
-        </tr>
-        <tr>
-          <td><p class="account-title">NetID:</p></td>
-          <td><p><%= @user.net_id %> </p></td>
-        </tr>
-        <tr>
-          <td><p class="account-title">Unique ID:</p></td>
-          <td><p><%= @user.unique_id %> </p></td>
-        </tr>
-        <tr>
-          <td><p class="account-title">Email:</p></td>
-          <td><p><%= @user.email %> </p></td>
-        </tr>
-        <tr>
-          <td><p class="account-title">Affiliation:</p></td>
-          <td><p><%= @user.user_type %> </p></td>
-        </tr>
-      </table>
-    <% end %>
     </div>
   </div>
 </div>
