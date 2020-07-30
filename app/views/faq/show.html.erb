@@ -7,6 +7,55 @@
   <div class="row">
     <div class="col faq">
       <div class="faq-box">
+      <% if session[:current_user]["user_type"] == "student"%>
+      <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample">
+          <p>
+            Q: Why mooncake?
+            <span class="fa fa-chevron-right pull-right expand-icon"></span>
+            <span class = "fa fa-chevron-down pull-right expand-icon"></span>
+          </p>
+        </a>
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+          <p>We provide a way to streamline the permission number granting process to make it easier for students and faculty to organize and keep track of permission numbers through a web application separate from DukeHub.</p>
+        </div>
+      </div>
+       <div class="faq-box">
+        <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample">
+          <p>
+            Q: How do students make requests?
+            <span class="fa fa-chevron-right pull-right expand-icon"></span>
+            <span class = "fa fa-chevron-down pull-right expand-icon"></span>
+          </p>
+        </a>
+        <div class="collapse multi-collapse" id="multiCollapseExample2">
+          <p>Click the "Request Permission Number" button on the home page and search for the course you would like a permission number from. If the course is crosslisted, please make sure to select the correct department you would like the permission number from.</p>
+        </div>
+      </div>
+      <div class="faq-box">
+        <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample">
+          <p>
+            Q: How will students receive permission numbers?
+            <span class="fa fa-chevron-right pull-right expand-icon"></span>
+            <span class = "fa fa-chevron-down pull-right expand-icon"></span>
+          </p>
+        </a>
+        <div class="collapse multi-collapse" id="multiCollapseExample3">
+          <p>Once the faculty accepts/denies the permission number request, an email will be sent out to the student notifying them of a status change. They can then view their status on their home page and if the request is accepted, the permission number will be displayed.</p>
+        </div>
+      </div>
+      <div class="faq-box">
+        <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample4" role="button" aria-expanded="false" aria-controls="multiCollapseExample">
+          <p>
+            Q: Can students make multiple requests?
+            <span class="fa fa-chevron-right pull-right expand-icon"></span>
+            <span class = "fa fa-chevron-down pull-right expand-icon"></span>
+          </p>
+        </a>
+        <div class="collapse multi-collapse" id="multiCollapseExample4">
+          <p>Students may only submit one request per course. However, they can withdraw the request while it is still under review and submit another one.</p>
+        </div>
+      </div>
+      <% else %>
         <a class="collapse-button" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample">
           <p>
             Q: Why mooncake?
@@ -78,6 +127,7 @@
           <p>On DukeHub, when generating permission numbers for your course, you should be able to download an Excel file with a list of permission numbers that would be scanned by our application. When creating a course, there is a short tutorial available to assist with this action. Make sure to generate as many permission numbers as there are students in course (i.e. if you have a course capacity of 30, generate 30 permission numbers).</p>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
