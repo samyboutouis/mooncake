@@ -6,28 +6,28 @@
       <% else %>
         <h1 class="title"> Hello, <%= @user.first_name %>!</h1>
       <% end %>
-    </div>
-  </div>
+    </div> 
+  </div> 
   <div class="row">
     <div class="col-md-4 order-md-last text-center dash-button">
       <% if @user.courses.count > 1 %>
         <div class="text-center my-auto">
           <a href="<%= new_course_path %>" ><button class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto; float: right" type="button" data-toggle="tooltip" data-placement="top" title="Add a course for a student to start requesting numbers!">Add Course</button></a>
-        </div>
+        </div> 
         <div class="text-center my-auto">
           <a href="<%= allrequests_path %>"><button class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto; float: right;"  type="button"> All Courses Requests</button></a>
-        </div>
+        </div> 
       <% else %>
         <div class="text-center my-auto">
           <a href="<%= new_course_path %>" ><button type="button" class="btn btn-secondary" style="margin: 0px 20px 20px 0px; margin-right: auto; float: right" data-toggle="tooltip" data-placement="top" title="Create a course for a student to start requesting numbers!">Create Course</button></a>
-        </div>
+        </div> 
       <% end %>
-    </div>
+    </div> 
     <div class="col-md-8 order-md-first">
       <h1 class="subtitle"> Your Courses</h1>
       <%= no_course(@user)%>
       <% if flash[:alert2] %>
-          <div class="alert1", style = "color: red"><%= flash[:alert2] %></div>
+          <div class="alert1", style = "color: red"><%= flash[:alert2] %></div> 
       <% end %>
           <% i = 0 %>
           <% @courses.each do |course| %>
@@ -96,11 +96,11 @@
                       <%= link_to "Add Course Manager", add_user_path(course), method: :get, class:"btn btn-light" %>
                       <%= link_to "Delete Course", delete_course_path(course), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-light btn-outline-danger" %></p>
                   <% end %>
-                </div>
-              </div>
-            </div>
+                </div> 
+              </div> 
+            </div> 
             <% i += 1 %>
           <% end %>
-    </div>
-  </div>
-</div>
+    </div> 
+  </div> 
+</div> 

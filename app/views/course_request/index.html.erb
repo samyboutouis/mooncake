@@ -4,7 +4,7 @@
             <h1 class="title">Find Courses</h1>
             <form action= '/courserequests' method="get" id="courseform">
             <% if flash[:alert1] %>
-            <div class="alert1", style = "color: red"><%= flash[:alert1] %></div>
+            <div class="alert1", style = "color: red"><%= flash[:alert1] %></div> 
             <% end %>
             <div class="form-group row">
                 <select class="custom-select my-1 mr-sm-2 term" id="inlineFormCustomSelectPref" form="courseform" name="term" style="margin-left:15px;" required>
@@ -14,29 +14,29 @@
                         <option name = 'term'><%= term %></option>
                     <% end %>
                 </select>
-            </div>
+            </div> 
             <div class="form-group row">
                 <select class="custom-select my-1 mr-sm-2 department" id="inlineFormCustomSelectPref" form="courseform" name="department" style="margin-left:15px;" required>
                     <option value="">Choose Department</option>
                 </select>
-            </div>
+            </div> 
             <div class="form-group row">
                 <select class="custom-select my-1 mr-sm-2 number" id="inlineFormCustomSelectPref" form="courseform" name="course_number" style="margin-left:15px;" required>
                     <option value="">Choose Course Number</option>
                 </select>
-            </div>
+            </div> 
             <div class="form-group row">
                 <select class="custom-select my-1 mr-sm-2 section" id="inlineFormCustomSelectPref" form="courseform" name="section_number" style="margin-left:15px;" required>
                     <option value="">Choose Section Number</option>
                 </select>
-            </div>
+            </div> 
             <div class="form-group row">
                 <div class="col-sm-10">
                 <%= link_to "Cancel", root_path, class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
                 <button type="submit" class="btn btn-dark">Request</button>
-                </div>
-            </div>
+                </div> 
+            </div> 
             </form>
-        </div>
-    </div>
-</div>
+        </div> 
+    </div> 
+</div> 

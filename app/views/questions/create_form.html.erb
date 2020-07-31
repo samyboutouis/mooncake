@@ -18,13 +18,13 @@
                     <% @course.users.first.form_templates.each do |template| %>
                         <%=link_to template.name, load_template_path(template, @course), class:"dropdown-item" %>
                     <% end %>
-                </div>
-            </div>
+                </div> 
+            </div> 
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                 
-            </div>
-        </div>
+            </div> 
+        </div> 
         <br>
             <% @course.questions.each do |question| %>
                 <div class="form-group required">
@@ -33,13 +33,13 @@
                         <% question.option.each do |option| %>
                             <div>
                                 <input type="checkbox" name= "<%= option %>" id= "<%= option %>" value= "<%= option %>" id = "cb" disabled/> <span class="qform"> <%= option %> </span>
-                            </div>
+                            </div> 
                         <% end %>
                     <% elsif question.question_type == "Radio" %>
                         <% question.option.each do |option| %>
                             <div>
                                 <input type="radio" name= "radio" id= "<%= option %>" value= "<%= option %>" id = "rb" disabled/> <span class="qform"> <%= option %> </span>
-                            </div>
+                            </div> 
                         <% end %>
                     <% elsif question.question_type == "Long Answer" %>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="reasons" disabled></textarea>
@@ -49,7 +49,7 @@
                     <%if question.id > 5 and question.question_text != "Which prerequisite(s) have you satisfied:" %>
                         <%= link_to "Delete", delete_question_path(question, @course.id), method: :delete , class:"btn btn-outline-danger btn-sm", style:"margin:10px 0px 10px"%>
                     <%end%>
-                </div>
+                </div> 
             <% end %>
             
             <%= link_to "Add Question", new_question_path(@course), class:"btn btn-outline-dark", style:"margin:10px 0px 10px" %>
@@ -64,13 +64,13 @@
                     <div class="dropdown">
                 </form>
             <%end%>
-            </div>
+            </div> 
         </b>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        </div> 
+      </div> 
+    </div> 
+  </div> 
+</div> 
 
 
 <script>

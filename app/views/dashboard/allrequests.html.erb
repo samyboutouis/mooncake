@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col">
             <h1 class="title"> All Requests </h1>
-        </div>
-    </div>
+        </div> 
+    </div> 
     <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
         <div class="col">
             <a href="<%= faculty_page_path %>"><button class="btn btn-dark" type="button"> Back to Courses</button></a>
@@ -13,8 +13,8 @@
                 <option value="accept">Accept</option>
                 <option value="deny">Deny</option>
             </select>
-        </div>
-    </div>
+        </div> 
+    </div> 
     <div class="row">
         <div class="col">
             <div class="table-responsive">
@@ -46,7 +46,7 @@
                                         <% if answer.question.question_type == "Checkbox"%>
                                             <td><%= answer.answer_text.gsub("~", ", ") %></td>
                                         <% elsif answer.question.question_type == "Long Answer"%>
-                                            <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div></td>
+                                            <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div> </td>
                                         <% else %>
                                             <td><%= answer.answer_text %></td>
                                         <% end %>
@@ -79,7 +79,7 @@
                                         <% if answer.question.question_type == "Checkbox"%>
                                             <td><%= answer.answer_text.gsub("~", ", ") %></td>
                                         <% elsif answer.question.question_type == "Long Answer"%>
-                                            <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div></td>
+                                            <td><div style="width:100%; max-height:200px; overflow:auto"><%= answer.answer_text %></div> </td>
                                         <% else %>
                                             <td><%= answer.answer_text %></td>
                                         <% end %>
@@ -107,10 +107,10 @@
                 <button hidden id="email" type="submit" class="btn btn-outline-secondary" style="float: right">Email Selected</button>
                 <button hidden id = "accept" type="submit" class="btn btn-outline-success" formaction="/all_accept_selected"> Accept Selected</button>
                 <button hidden id = "deny" type="submit" class="btn btn-outline-danger" formaction="/all_deny_selected"> Deny Selected</button>
-            </div>
-        </div>
-    </div>
-</div>
+            </div> 
+        </div> 
+    </div> 
+</div> 
 
 <script>
     function SelectAction() {
