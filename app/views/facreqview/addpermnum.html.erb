@@ -7,7 +7,11 @@
     <%= file_field_tag 'file', class:"btn btn-dark" %>
     <%= hidden_field_tag "request", @request.id %>
     <%= submit_tag 'Submit', class:"btn btn-dark" %>
-    <%= link_to "Cancel", requests_page_path(@course), class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
+    <%if @course.primary == false %>
+      <%= link_to "Cancel", requests_page_path(@course.cross_listing[0]), class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
+    <%else%>
+      <%= link_to "Cancel", requests_page_path(@course), class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
+    <%end %>
  <% end %>
 
 </div> 
