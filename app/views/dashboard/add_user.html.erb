@@ -5,6 +5,9 @@
         <p class="spacer"></p>
         <h1 class="title"> Add Another Course Manager for <%= @course.department.split("-").first %> <%= @course.course_number%> - <%= @course.section_number%></h1>
         <p> An assisstant/TA/faculty member to manage course requests</p>
+        <% if flash[:no_netid] %>
+          <div class="alert1", style = "color: red"><%= flash[:no_netid] %></div> 
+        <% end %>
         <%= form_tag({action: :add_user2}, multipart: true) do %>
           <%= text_field_tag 'netid', nil, placeholder:'Enter NetID'%>
           <%= hidden_field_tag "course", @course.id %>

@@ -57,9 +57,14 @@ class DashboardController < ApplicationController
     else
       @user = User.find_by(net_id: session[:current_user]["net_id"])
       searchNetID(@course, netid)
-      new_user = User.find_by(net_id: netid)
-      redirect_to faculty_page_path
-      UserMailer.with(email: new_user.email, user: @user.id, course: @course.id).shared_course.deliver_now
+      if User.exists?(net_id: netid)
+        new_user = User.find_by(net_id: netid)
+        redirect_to faculty_page_path
+        UserMailer.with(email: new_user.email, user: @user.id, course: @course.id).shared_course.deliver_now
+      else
+        flash[:no_netid] = "This NetID does not belong to anyone. Enter a valid NetID"
+        redirect_to add_user_path(@course.id)
+      end
     end
   end
 
@@ -75,18 +80,20 @@ class DashboardController < ApplicationController
     result = ldap.search( :base => base, :filter => filter )
     ldap.get_operation_result
     information = result.pop
+    if information == nil 
+      return
+    else
+      affiliation = information["edupersonprimaryaffiliation"].join(' ')
+      grad_year = information["dupsexpgradtermc1"].join(' ')
+      email = information["edupersonprincipalname"].join(' ')
+      first_name = information["givenname"].join(" ")
+      last_name = information["sn"].join(' ')
+      unique_id = information['dudukeid'].join(' ')
 
-    affiliation = information["edupersonprimaryaffiliation"].join(' ')
-    grad_year = information["dupsexpgradtermc1"].join(' ')
-    email = information["edupersonprincipalname"].join(' ')
-    first_name = information["givenname"].join(" ")
-    last_name = information["sn"].join(' ')
-    unique_id = information['dudukeid'].join(' ')
-
-    newuser = User.create(first_name: first_name, last_name: last_name, net_id: netid, unique_id: unique_id, email: email, net_id: netid, grad_year: grad_year, user_type: affiliation)
-
-    newuser.courses << course
-    newuser.user_type = "faculty"
+      newuser = User.create(first_name: first_name, last_name: last_name, net_id: netid, unique_id: unique_id, email: email, net_id: netid, grad_year: grad_year, user_type: affiliation)
+      newuser.courses << course
+      newuser.user_type = "faculty"
+    end
 
   end
 
