@@ -113,6 +113,11 @@ p {
     border-radius: 35px;
 }
 
+.table_box #file {
+    color: black;
+
+}
+
 .table_box2 {
     margin: 0 auto;
     margin-top: 1em;
