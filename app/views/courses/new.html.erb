@@ -2,18 +2,18 @@
   <div class="row">
     <div class="col">
       <h1 class="title" style="margin-left: 5px">Create A Course</h1>
-    </div> 
-  </div> 
+    </div>
+  </div>
   <div class="row">
     <div class="col">
       <p style = "margin: 0px 5px 20px 5px; font-size: 14px;"> This is the page where you will add your course that
         students will request permission numbers for. Enter all information as seen on DukeHub. You also have the ability to
         create crosslisted courses (i.e. CS 250/ECE 250) or multi-section courses (i.e. CHEM 101L 01, CHEM 101L 02).</p>
       <% if flash[:alert3] %>
-        <div class="alert1", style = "color: red"><%= flash[:alert3] %></div> 
+        <div class="alert1", style = "color: red"><%= flash[:alert3] %></div>
       <% end %>
-    </div> 
-  </div> 
+    </div>
+  </div>
   <div class="row">
     <div class="col">
       <%= form_for @course do |f| %>
@@ -22,47 +22,47 @@
             <div class="form-group col-sm-4">
               <%= f.label :term, "Semester: ", for: "formGroupExampleInput" %>
               <%= f.select :term, options_for_select(@terms),{:prompt => "Select One"}, class:"form-control", id:"exampleFormControlSelect1 term", :required => true%>
-            </div> 
+            </div>
             <div class="form-group col-sm-8" style="padding-right: 25px;">
               <%= f.label :department, "Department: ", for: "formGroupExampleInput" %>
               <%= f.select :department, options_for_select(@departments), {:prompt => "Select One"}, class:"form-control courseDept1", id:"exampleFormControlSelect1 department", :required => true%>
-            </div> 
-          </div> 
+            </div>
+          </div>
           <div class="row">
             <div class="form-group col-sm-4" style="margin-left: 0px; margin-right: 0px;" data-toggle="tooltip" data-placement="top" title="Staying consistent with DukeHub will make your course easier to find.">
               <%= f.label :course_number, "Course Number: ", for: "formGroupExampleInput" %>
               <%= f.text_field :course_number, placeholder: "Ex: 101L", class:"form-control", id:"formGroupExampleInput course_number", :required => true%>
-            </div> 
+            </div>
             <div class="form-group col-sm-4" style="margin-left: 0px; margin-right: 0px;">
               <%= f.label :section_number, "Section Number: ", for: "formGroupExampleInput" %>
               <%= f.text_field :section_number, placeholder: "Ex: 001-LAB", class:"form-control", id:"formGroupExampleInput section_number", :required => true%>
-            </div> 
+            </div>
             <div class="form-group col-sm-4" style="padding-right: 25px;">
               <%= f.label :capacity, "Course Capacity: ", for: "formGroupExampleInput" %>
               <%= f.number_field :capacity, min: 0, placeholder: "Ex: 30", class:"form-control", id:"formGroupExampleInput capacity", :required => true%>
-            </div> 
-          </div> 
-        </div> 
-        <div class="form-group row", style="padding: 10px 20px 0px; margin-left: 0px; margin-right: 0px;padding-left:0" data-toggle="tooltip" data-placement="right" title="Optional—leave empty if there are no pre-requisites">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row", style="padding: 10px 20px 0px; margin-left: 0px; margin-right: 0px;padding-left:0" data-toggle="tooltip" data-placement="left" title="Optional—leave empty if there are no pre-requisites">
           <%= f.fields_for :prereqs do |prereqs_form| %>
               <%= prereqs_form.label :name, "Course Prerequisites: ", for: "formGroupExampleInput " %>
               <div class="form-inline">
                 <div class="addNew">
                   <input name="prereq_attributes[0]name" type="text" placeholder="Ex: COMPSCI 101" class="form-control prereqfield" id="formGroupExampleInput prereq", style="margin: 0px 0px 10px 5px"/>
-                </div> 
+                </div>
                 <button type="button" class="btn btn-dark add", id="add-prereq" style="margin: 0px 0px 10px 5px"> + </button>
-              </div> 
+              </div>
           <% end %>
-        </div> 
+        </div>
 
         <div class="form-group row", style="padding: 10px 20px 0px; margin-left: 0px; margin-right: 0px; padding-left:0">
-          
+
           <% if cookies[:moon] %>
             <label> Permission Numbers: <a class="help" style="color: #2679ff">Show Me How</a></label>
           <% else %>
             <label> Permission Numbers: <a class="help" style="color: #00539B;font-weight: 500;">Show Me How</a></label>
           <% end %>
-          
+
           <div class="modal fade" id="excelModal">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -71,56 +71,56 @@
                     Generating Excel Files
                   </h4>
                   <button type="button" class="close" data-dismiss="modal">×</button>
-                </div> 
+                </div>
                 <div class="modal-body">
                   <p>You need to generate at least as many permission numbers on DukeHub as there are seats in the course and download
                   the corresponding excel file. If you run out of permission numbers, you can upload additional files later.<br><br>Download from DukeHub: </p>
                   <%= image_tag "exceltut.png", class:"exceltut" %>
-                </div> 
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div> 
-              </div> 
-            </div> 
-          </div> 
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="form-group custom-file" style= "margin: 0px 0px 10px 0px;">
             <%= f.label :file, "Upload Permission Numbers Excel File", class:"custom-file-label", for:"customFile" %>
             <%= f.file_field :file, class:"custom-file-input form-control", id:"customFile", required: true %>
-          </div> 
-        </div> 
+          </div>
+        </div>
 
         <div class="form-group" style="padding: 10px 6px 0px" data-toggle="tooltip" data-placement="left" title="Fill out this section if your course is listed under multiple departments.">
           <label for="crosslisting">Is this course cross-listed?</label><br>
           <label><input type="radio" class="listing" id="crosslisting" name="crosslisting" value="Yes"> Yes</label><br>
           <label><input type="radio" class="listing" id="crosslisting" name="crosslisting" value = "No" checked> No</label><br>
-        </div> 
+        </div>
 
         <div class="form-group row" id="howmany" style="padding: 10px 20px 0px">
-        </div> 
+        </div>
 
         <div id="othercourses" style="margin-bottom: 0px">
-        </div> 
+        </div>
 
         <div class="form-group" style="padding: 10px 6px 0px"  data-toggle="tooltip" data-placement="left" title="Fill this out to create multiple course sections at once.">
           <label for="sections">Does this course have additional sections?</label><br>
           <label><input type="radio" class="sec" id="sections" name="sections" value="Yes"> Yes</label><br>
           <label><input type="radio" class="sec" id="sections" name="sections" value = "No" checked> No</label><br>
-        </div> 
+        </div>
 
         <div class="form-group row" id="howmanysec" style="padding: 10px 20px 0px">
-        </div> 
+        </div>
 
         <div id="othersections">
-        </div> 
+        </div>
 
         <div class="form-group row" style="padding: 10px 6px 0px">
           <div class="col-sm-10">
             <%= link_to "Cancel", faculty_page_url, class:"btn btn-outline-danger", style:"margin:10px 0px 10px" %>
             <%= f.submit "Create", class: "btn btn-dark" %>
-          </div> 
-        </div> 
+          </div>
+        </div>
       <% end %>
-    </div> 
-  </div> 
-</div> 
+    </div>
+  </div>
+</div>
