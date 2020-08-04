@@ -1,61 +1,59 @@
-# README
+# Mooncake
 
+[Mooncake](mooncake.colab.duke.edu) is a web application created during my Code+ 2020 Summer Internship that aims to streamline the course registration process at Duke University. It creates a single platform where students and faculty interact and are able to request permission numbers to enroll in capacity-capped courses.
 
-### App Setup up
+## Getting Started
 
-* Install docker
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* Build docker container
+### Requirements
+```
+Ruby version >= 2.6.6
+```
 
-`docker-compose build`
+### Clone the repository
+```shell
+git clone git@github.com:samyboutouis/mooncake.git
+cd project
+```
 
-* Start docker container and server
+### Check your Ruby version
 
-`docker-compose up`
+```shell
+ruby -v
+```
 
-* Start docker container and run server in the background
+The ouput should start with something like `ruby 2.6.6`
 
-`docker-compose up -d`
+If not, install the right ruby version using [rbenv](https://github.com/rbenv/rbenv):
 
-* Open web application on browser
+```shell
+rbenv install 2.6.6
+```
 
-`localhost:3000` in web browser
+### Install dependencies
 
-* Stop docker container and server
+Using [Bundler](https://github.com/bundler/bundler) and [Yarn](https://github.com/yarnpkg/yarn):
 
-`docker-compose down`
+```shell
+bundle && yarn
+```
 
-* Run terminal to work in the container
+### Initialize the database
 
-`docker-compose exec app bash`
+```shell
+rails db:create db:migrate db:seed
+```
 
+## Serve
 
-### Git housekeeping
+```shell
+rails s
+```
 
-* Push code to development branch only
+## Acknowledgments
 
-`git fetch && git checkout development`
-
-`git push origin development`
-
-* Switch to specific branch
-
-`git checkout [branch_name]`
-
-* Push to specific branch 
-
-`git push origin [branch_name]`
-
-
-### DB
-* Drop existing the database
-
-`rails db:drop`
-
-* Migrate the database
-
-
-
-### Deployment
-* Generate new secret file(only use as last resort)
-`EDITOR="vim" bin/rails encrypted:edit config/new.cred.yml --key master.key.new`
+Thank you to... :D
+* My 5 other team members
+* My team leads Michael and Danai
+* Duke SISS office and Office of the University Registrar
