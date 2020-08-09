@@ -1,6 +1,6 @@
 # Mooncake
 
-[Mooncake](mooncake.colab.duke.edu) is a web application created during my Code+ 2020 Summer Internship that aims to streamline the course registration process at Duke University. It creates a single platform where students and faculty interact and are able to request permission numbers to enroll in capacity-capped courses.
+[Mooncake](https://mooncake.colab.duke.edu) is a web application created during my Code+ 2020 Summer Internship that aims to streamline the course registration process at Duke University. It creates a single platform where students and faculty interact and are able to request permission numbers to enroll in capped-capacity courses.
 
 ## Getting Started
 
